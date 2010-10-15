@@ -21,5 +21,9 @@ mapped to it and will add that thumbnail to the post/page.
 1. Select Dashboard's Settings -> FPW Category Thumbnails and build category/thumbnail mapping
 
 == Changelog ==
+= 1.0.1 =
+* Added: check if current theme supports post thumbnails
+* Updated: translations
+
 = 1.0 =
 * Initial release.
