@@ -11,7 +11,9 @@ the post is created or updated.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+This plugin allows assigning thumbnails to post categories. When configured it 
+will check on create/update of the post/page if selected category has thumbnail 
+mapped to it and will add that thumbnail to the post/page.
 
 == Installation ==
 1. Upload `fpw-category-thumbnails` folder to the `/wp-content/plugins/` directory
