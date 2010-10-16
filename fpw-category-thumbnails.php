@@ -2,7 +2,8 @@
 /*
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
-Version: 1.0
+Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
+Version: 1.0.1
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -23,9 +24,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*
-
+	-------------------------------------------------
 	Administration - load text domain for translation
-	
+	-------------------------------------------------
 */
 add_action('init', 'fpw_category_thumbnails_init', 1);
 
@@ -113,7 +114,14 @@ function fpw_cat_thumbs_options() {
 	echo '<div class="wrap">' . PHP_EOL;
 	echo '	<h2>' . __( 'FPW Category Thumbnails - Settings', 'fpw-category-thumbnails' ) . '</h2>' . PHP_EOL;
 
-    /*	display message about update status */
+    /*	display warning if current theme doesn't support post thumbnails */
+    if ( !current_theme_supports( 'post-thumbnails') )
+    	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;">' . 
+				__( '<strong>WARNING</strong>: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . ' ' . 
+				__( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ) . 
+				'</div>' . PHP_EOL;
+	
+	/*	display message about update status */
 	if ( $_POST['fpw_cat_thmb_submit'] )
 		if ( $updateok ) {
 			echo '	<div id="message" class="updated fade">' . __( 'Settings updated successfully.', 'fpw-category-thumbnails' ) . '</div>' . PHP_EOL;
