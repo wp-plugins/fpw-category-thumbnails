@@ -21,12 +21,19 @@ mapped to it and will add that thumbnail to the post/page.
 1. Select Dashboard's Settings -> FPW Category Thumbnails and build category/thumbnail mapping
 
 == Frequently Asked Questions ==
+
 = I've entered ID of a picture from NextGen Gallery and thumbnail doesn't show. =
 IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230.
 
 == Changelog ==
+
+= 1.0.2 =
+* Added: link to Settings into plugin's action links
+* Updated: translations
+
 = 1.0.1 =
 * Added: check if current theme supports post thumbnails
 * Updated: translations
+
 = 1.0 =
 * Initial release.

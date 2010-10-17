@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.0.1
+Version: 1.0.2
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -23,21 +23,19 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-/*
-	-------------------------------------------------
-	Administration - load text domain for translation
-	-------------------------------------------------
-*/
+/*	--------------------------------
+	Load text domain for translation
+	----------------------------- */
+
 add_action('init', 'fpw_category_thumbnails_init', 1);
 
 function fpw_category_thumbnails_init(){
 	load_plugin_textdomain( 'fpw-category-thumbnails', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
 }	
-/*	
-	--------------------------------------------------
-	Adimistration - register plugin's menu in Settings
-	--------------------------------------------------
-*/
+
+/*	----------------------------------
+	Register plugin's menu in Settings
+	------------------------------- */
 
 add_action('admin_menu', 'fpw_cat_thumbs_settings_menu');
 
@@ -47,11 +45,23 @@ function fpw_cat_thumbs_settings_menu() {
 	add_options_page( $page_title, $menu_title, 'administrator', 'fpw-category-thumbnails', 'fpw_cat_thumbs_options');
 }
 
-/*
-	---------------------------------------
-	Administration - plugin's settings page
-	---------------------------------------	
-*/
+/*	-------------------------
+	Register plugin's filters
+	---------------------- */
+
+add_filter('plugin_action_links', 'fpw_cat_thumbs_plugin_links', 10, 2);
+
+function fpw_cat_thumbs_plugin_links($links, $file) {
+	if ($file == plugin_basename(__FILE__)){
+    	$settings_link = '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">'.__("Settings", "fpw-category-thumbnails").'</a>';
+        array_unshift($links, $settings_link);
+    }
+    return $links;
+}
+
+/*	----------------------
+	Plugin's settings page
+	------------------- */
 
 function fpw_cat_thumbs_options() {
 	/* this set of arguments will give you a list of all post categories */
@@ -106,11 +116,10 @@ function fpw_cat_thumbs_options() {
 		}
 	}
 
-/*
-	---------------------------------
-	Administration - assignments page
-	---------------------------------
-*/
+/*	-------------------------
+	Settings page starts here
+	---------------------- */
+	
 	echo '<div class="wrap">' . PHP_EOL;
 	echo '	<h2>' . __( 'FPW Category Thumbnails - Settings', 'fpw-category-thumbnails' ) . '</h2>' . PHP_EOL;
 
@@ -185,12 +194,12 @@ function fpw_cat_thumbs_options() {
 	echo '</div>' . PHP_EOL;
 }
 
-/*
-	----------------------------------------------------------------------
+/*	----------------------------------------------------------------------
 	Main action - sets the value of post's _thumbnail_id based on category
 	assignments
-	----------------------------------------------------------------------
-*/
+	------------------------------------------------------------------- */
+
+add_action( 'save_post', 'fpw_update_category_thumbnail_id', 10, 2 );
 	
 function fpw_update_category_thumbnail_id($post_id, $post) {
 	$opt = get_option( 'fpw_category_thumb_ids' );
@@ -203,5 +212,4 @@ function fpw_update_category_thumbnail_id($post_id, $post) {
   		}
 	}
 }	
-add_action( 'save_post', 'fpw_update_category_thumbnail_id', 10, 2 );
 ?>
