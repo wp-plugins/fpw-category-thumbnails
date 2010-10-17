@@ -16,6 +16,7 @@ will check on create/update of the post/page if selected category has thumbnail
 mapped to it and will add that thumbnail to the post/page.
 
 == Installation ==
+
 1. Upload `fpw-category-thumbnails` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Select Dashboard's Settings -> FPW Category Thumbnails and build category/thumbnail mapping
