@@ -24,6 +24,7 @@ mapped to it and will add that thumbnail to the post/page.
 == Frequently Asked Questions ==
 
 = I've entered ID of a picture from NextGen Gallery and thumbnail doesn't show. =
+
 IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230.
 
 == Changelog ==
