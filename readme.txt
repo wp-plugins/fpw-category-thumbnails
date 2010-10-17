@@ -1,7 +1,7 @@
 === FPW Category Thumbnails ===
 Contributors: frankpw
 Donate link: 
-Tags: category, thumbnail, 'FPW Category Thumbnails'
+Tags: category, thumbnail, FPW Category Thumbnails
 Requires at least: 2.9.0
 Tested up to: 3.0.1
 Stable tag: trunk
