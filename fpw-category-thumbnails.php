@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.0.2
+Version: 1.0.1
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -82,10 +82,13 @@ function fpw_cat_thumbs_options() {
 		update_option function */
 	$azeroes = $assignments;
 	
+	/*	read cleanup flag */
+	$do_cleanup = get_option( 'fpw_category_thumb_del' );
+	
 	/*	check if changes were submitted */
-	if ($_POST['fpw_cat_thmb_submit']) {    
+	if ( $_POST['fpw_cat_thmb_submit'] ) {    
 		$i = 0;
-		
+		$do_cleanup = ( $_POST['cleanup'] == 'yes' );
 		/*	inserting posted values into $assignments array */ 
         while ( strlen( key( $assignments ) ) ) {
         	$assignments[key( $assignments )] = $_POST['val'.$i];
@@ -100,7 +103,7 @@ function fpw_cat_thumbs_options() {
 		check_admin_referer('fpw_cat_thumbs_options_', 'updates');
 		
 		/*	database update */
-		$updateok = update_option( 'fpw_category_thumb_ids', $option );
+		$updateok = ( update_option( 'fpw_category_thumb_ids', $option ) ) || ( update_option( 'fpw_category_thumb_del', $do_cleanup ) );
 	}
 	
 	/*	get assignments from database */
@@ -147,6 +150,7 @@ function fpw_cat_thumbs_options() {
 	echo '	<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
 	echo '	<p>' . __( 'Enter <strong>IDs</strong> of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
 	echo '	' . __( 'Enter <strong>0</strong> for categories without assignment.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+	echo '<p>&nbsp;</p>' . PHP_EOL;
 	
 	/*	the form starts here */
 	echo '	<p>' . PHP_EOL;
@@ -158,6 +162,12 @@ function fpw_cat_thumbs_options() {
 	if ( function_exists('wp_nonce_field') ) 
 		wp_nonce_field('fpw_cat_thumbs_options_', 'updates'); 
 
+	/*	cleanup checkbox */
+	echo '			<input type="checkbox" name="cleanup" value="yes"';
+	if ( $do_cleanup ) echo ' checked';
+	echo "> " . __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . "<br /><br />" . PHP_EOL;
+
+	/* start of the table */
 	echo '			<table class="widefat">' . PHP_EOL;
 	echo '				<tr>' . PHP_EOL;
 	echo '					<th width="25%" style="text-align: left;">' . __( 'Category', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
@@ -182,7 +192,7 @@ function fpw_cat_thumbs_options() {
 		next($assignments);
 	}
 	
-	/*	end of table */
+	/*	end of the table */
 	echo '			</table>' . PHP_EOL;
 	
 	/*	submit button */
