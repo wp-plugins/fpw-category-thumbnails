@@ -4,7 +4,7 @@ Donate link:
 Tags: category, thumbnail
 Requires at least: 2.9.0
 Tested up to: 3.0.1
-Stable tag: 1.0.1
+Stable tag: trunk
 
 Assigns a thumbnail based on category/thumbnail mapping to a post/page when
 the post is created or updated.
