@@ -11,11 +11,12 @@ the post is created or updated.
 
 == Description ==
 
-This plugin allows assigning thumbnails to post categories. When configured it 
+*FPW Category Thumbnails* allows assigning thumbnails to post categories. When configured it 
 will check on create/update of the post/page if selected category has thumbnail 
 mapped to it and will add that thumbnail to the post/page.
 
 == Installation ==
+
 1. Upload `fpw-category-thumbnails` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Select Dashboard's Settings -> FPW Category Thumbnails and build category/thumbnail mapping
@@ -28,13 +29,16 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 == Changelog ==
 
 = 1.0.2 =
+
 * Added: link to Settings into plugin's action links
 * Added: database cleanup on uninstall
 * Updated: translations
 
 = 1.0.1 =
+
 * Added: check if current theme supports post thumbnails
 * Updated: translations
 
 = 1.0 =
+
 * Initial release.
