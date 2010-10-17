@@ -2,7 +2,8 @@
 /*
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
-Version: 1.0
+Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
+Version: 1.0.1
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -22,21 +23,19 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-/*
+/*	--------------------------------
+	Load text domain for translation
+	----------------------------- */
 
-	Administration - load text domain for translation
-	
-*/
 add_action('init', 'fpw_category_thumbnails_init', 1);
 
 function fpw_category_thumbnails_init(){
 	load_plugin_textdomain( 'fpw-category-thumbnails', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
 }	
-/*	
-	--------------------------------------------------
-	Adimistration - register plugin's menu in Settings
-	--------------------------------------------------
-*/
+
+/*	----------------------------------
+	Register plugin's menu in Settings
+	------------------------------- */
 
 add_action('admin_menu', 'fpw_cat_thumbs_settings_menu');
 
@@ -46,11 +45,23 @@ function fpw_cat_thumbs_settings_menu() {
 	add_options_page( $page_title, $menu_title, 'administrator', 'fpw-category-thumbnails', 'fpw_cat_thumbs_options');
 }
 
-/*
-	---------------------------------------
-	Administration - plugin's settings page
-	---------------------------------------	
-*/
+/*	-------------------------
+	Register plugin's filters
+	---------------------- */
+
+add_filter('plugin_action_links', 'fpw_cat_thumbs_plugin_links', 10, 2);
+
+function fpw_cat_thumbs_plugin_links($links, $file) {
+	if ($file == plugin_basename(__FILE__)){
+    	$settings_link = '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">'.__("Settings", "fpw-category-thumbnails").'</a>';
+        array_unshift($links, $settings_link);
+    }
+    return $links;
+}
+
+/*	----------------------
+	Plugin's settings page
+	------------------- */
 
 function fpw_cat_thumbs_options() {
 	/* this set of arguments will give you a list of all post categories */
@@ -71,10 +82,13 @@ function fpw_cat_thumbs_options() {
 		update_option function */
 	$azeroes = $assignments;
 	
+	/*	read cleanup flag */
+	$do_cleanup = get_option( 'fpw_category_thumb_del' );
+	
 	/*	check if changes were submitted */
-	if ($_POST['fpw_cat_thmb_submit']) {    
+	if ( $_POST['fpw_cat_thmb_submit'] ) {    
 		$i = 0;
-		
+		$do_cleanup = ( $_POST['cleanup'] == 'yes' );
 		/*	inserting posted values into $assignments array */ 
         while ( strlen( key( $assignments ) ) ) {
         	$assignments[key( $assignments )] = $_POST['val'.$i];
@@ -89,7 +103,7 @@ function fpw_cat_thumbs_options() {
 		check_admin_referer('fpw_cat_thumbs_options_', 'updates');
 		
 		/*	database update */
-		$updateok = update_option( 'fpw_category_thumb_ids', $option );
+		$updateok = ( update_option( 'fpw_category_thumb_ids', $option ) ) || ( update_option( 'fpw_category_thumb_del', $do_cleanup ) );
 	}
 	
 	/*	get assignments from database */
@@ -105,15 +119,21 @@ function fpw_cat_thumbs_options() {
 		}
 	}
 
-/*
-	---------------------------------
-	Administration - assignments page
-	---------------------------------
-*/
+/*	-------------------------
+	Settings page starts here
+	---------------------- */
+	
 	echo '<div class="wrap">' . PHP_EOL;
 	echo '	<h2>' . __( 'FPW Category Thumbnails - Settings', 'fpw-category-thumbnails' ) . '</h2>' . PHP_EOL;
 
-    /*	display message about update status */
+    /*	display warning if current theme doesn't support post thumbnails */
+    if ( !current_theme_supports( 'post-thumbnails') )
+    	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;">' . 
+				__( '<strong>WARNING</strong>: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . ' ' . 
+				__( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ) . 
+				'</div>' . PHP_EOL;
+	
+	/*	display message about update status */
 	if ( $_POST['fpw_cat_thmb_submit'] )
 		if ( $updateok ) {
 			echo '	<div id="message" class="updated fade">' . __( 'Settings updated successfully.', 'fpw-category-thumbnails' ) . '</div>' . PHP_EOL;
@@ -130,6 +150,7 @@ function fpw_cat_thumbs_options() {
 	echo '	<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
 	echo '	<p>' . __( 'Enter <strong>IDs</strong> of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
 	echo '	' . __( 'Enter <strong>0</strong> for categories without assignment.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+	echo '<p>&nbsp;</p>' . PHP_EOL;
 	
 	/*	the form starts here */
 	echo '	<p>' . PHP_EOL;
@@ -141,6 +162,12 @@ function fpw_cat_thumbs_options() {
 	if ( function_exists('wp_nonce_field') ) 
 		wp_nonce_field('fpw_cat_thumbs_options_', 'updates'); 
 
+	/*	cleanup checkbox */
+	echo '			<input type="checkbox" name="cleanup" value="yes"';
+	if ( $do_cleanup ) echo ' checked';
+	echo "> " . __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . "<br /><br />" . PHP_EOL;
+
+	/* start of the table */
 	echo '			<table class="widefat">' . PHP_EOL;
 	echo '				<tr>' . PHP_EOL;
 	echo '					<th width="25%" style="text-align: left;">' . __( 'Category', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
@@ -165,7 +192,7 @@ function fpw_cat_thumbs_options() {
 		next($assignments);
 	}
 	
-	/*	end of table */
+	/*	end of the table */
 	echo '			</table>' . PHP_EOL;
 	
 	/*	submit button */
@@ -177,12 +204,12 @@ function fpw_cat_thumbs_options() {
 	echo '</div>' . PHP_EOL;
 }
 
-/*
-	----------------------------------------------------------------------
+/*	----------------------------------------------------------------------
 	Main action - sets the value of post's _thumbnail_id based on category
 	assignments
-	----------------------------------------------------------------------
-*/
+	------------------------------------------------------------------- */
+
+add_action( 'save_post', 'fpw_update_category_thumbnail_id', 10, 2 );
 	
 function fpw_update_category_thumbnail_id($post_id, $post) {
 	$opt = get_option( 'fpw_category_thumb_ids' );
@@ -195,5 +222,4 @@ function fpw_update_category_thumbnail_id($post_id, $post) {
   		}
 	}
 }	
-add_action( 'save_post', 'fpw_update_category_thumbnail_id', 10, 2 );
 ?>
