@@ -28,13 +28,16 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 == Changelog ==
 
 = 1.0.2 =
+
 * Added: link to Settings into plugin's action links
 * Added: database cleanup on uninstall
 * Updated: translations
 
 = 1.0.1 =
+
 * Added: check if current theme supports post thumbnails
 * Updated: translations
 
 = 1.0 =
+
 * Initial release.
