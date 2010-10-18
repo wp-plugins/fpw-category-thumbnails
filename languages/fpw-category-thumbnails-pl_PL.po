@@ -24,78 +24,78 @@ msgstr ""
 msgid "FPW Category Thumbnails"
 msgstr "FPW Miniaturki Kategorii"
 
-#: fpw-category-thumbnails.php:145
+#: fpw-category-thumbnails.php:158
 #@ fpw-category-thumbnails
 msgid "Description"
 msgstr "Opis"
 
-#: fpw-category-thumbnails.php:147
+#: fpw-category-thumbnails.php:160
 #@ fpw-category-thumbnails
 msgid "Note"
 msgstr "Uwaga"
 
-#: fpw-category-thumbnails.php:150
+#: fpw-category-thumbnails.php:163
 #@ fpw-category-thumbnails
 msgid "Instructions"
 msgstr "Instrukcje"
 
 #: fpw-category-thumbnails.php:43
-#: fpw-category-thumbnails.php:127
+#: fpw-category-thumbnails.php:140
 #@ fpw-category-thumbnails
 msgid "FPW Category Thumbnails - Settings"
 msgstr "FPW Miniaturki Kategorii - Ustawienia"
 
-#: fpw-category-thumbnails.php:139
+#: fpw-category-thumbnails.php:152
 #@ fpw-category-thumbnails
 msgid "Settings updated successfully."
 msgstr "Aktualizacja ustawień zakończyła się pomyślnie."
 
-#: fpw-category-thumbnails.php:141
+#: fpw-category-thumbnails.php:154
 #@ fpw-category-thumbnails
 msgid "No changes detected. Nothing to update."
 msgstr "Nie wykryto żadnych zmian. Nie ma nic do aktualizacji."
 
-#: fpw-category-thumbnails.php:173
+#: fpw-category-thumbnails.php:191
 #@ fpw-category-thumbnails
 msgid "Category"
 msgstr "Kategoria"
 
-#: fpw-category-thumbnails.php:174
+#: fpw-category-thumbnails.php:192
 #@ fpw-category-thumbnails
 msgid "Image ID"
 msgstr "ID Obrazka"
 
-#: fpw-category-thumbnails.php:199
+#: fpw-category-thumbnails.php:217
 #@ fpw-category-thumbnails
 msgid "Update"
 msgstr "Aktualizuj"
 
-#: fpw-category-thumbnails.php:147
+#: fpw-category-thumbnails.php:160
 #@ fpw-category-thumbnails
 msgid "please remember that your theme must support post thumbnails."
 msgstr "proszę pamiętać, że Twój motyw musi wspomagać miniaturki wpisów."
 
-#: fpw-category-thumbnails.php:151
+#: fpw-category-thumbnails.php:164
 #@ fpw-category-thumbnails
 msgid "Enter <strong>IDs</strong> of thumbnail images for corresponding categories."
 msgstr "Wprowadź <strong>identyfikatory miniaturek</strong> dla odpowiadających im kategorii."
 
-#: fpw-category-thumbnails.php:152
+#: fpw-category-thumbnails.php:165
 #@ fpw-category-thumbnails
 msgid "Enter <strong>0</strong> for categories without assignment."
 msgstr "Wprowadź <strong>0</strong> dla kategorii bez przydziału."
 
-#: fpw-category-thumbnails.php:146
+#: fpw-category-thumbnails.php:159
 #@ fpw-category-thumbnails
 msgid "This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated."
 msgstr "Ta wtyczka wstawia miniaturkę, na podstawie relacji kategoria / miniaturka, podczas tworzenia lub aktualizacji wpisu / strony."
 
-#: fpw-category-thumbnails.php:133
+#: fpw-category-thumbnails.php:146
 #@ fpw-category-thumbnails
 msgid "You can continue with <em>Settings</em> but until you add <code>add_theme_support( 'post-thumbnails' );</code> to the theme's functions.php you will not be able to display thumbnails."
 msgstr "Możesz kontynuować <em>Ustawienia</em>, jednakże do czasu wprowadzenia <code>add_theme_support( 'post-thumbnails' );</code> do functions.php motywu, wyświetlanie miniaturek nie będzie możliwe."
 
-#: fpw-category-thumbnails.php:132
+#: fpw-category-thumbnails.php:145
 #@ fpw-category-thumbnails
 msgid "<strong>WARNING</strong>: Your theme has no support for <em>post thumbnails</em>!"
 msgstr "<strong>OSTRZEŻENIE</strong>: Twój motyw nie ma wsparcia dla <em>miniaturek wpisów</em>!"
@@ -105,8 +105,13 @@ msgstr "<strong>OSTRZEŻENIE</strong>: Twój motyw nie ma wsparcia dla <em>minia
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: fpw-category-thumbnails.php:168
+#: fpw-category-thumbnails.php:186
 #@ fpw-category-thumbnails
 msgid "Remove plugin's data from database on uninstall"
 msgstr "Podczas usuwania wtyczki, usuń jej informacje z bazy danych"
+
+#: fpw-category-thumbnails.php:181
+#@ fpw-category-thumbnails
+msgid "Do not overwrite if post/page has thumbnail assigned allready"
+msgstr "Nie dokonuj zmiany, jeśli wpis/strona ma już przydzieloną miniaturkę"
 
