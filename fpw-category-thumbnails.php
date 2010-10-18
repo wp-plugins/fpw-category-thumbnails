@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.0.2
+Version: 1.0.3
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -42,7 +42,7 @@ add_action('admin_menu', 'fpw_cat_thumbs_settings_menu');
 function fpw_cat_thumbs_settings_menu() {
 	$page_title = __('FPW Category Thumbnails - Settings', 'fpw-category-thumbnails');
 	$menu_title = __('FPW Category Thumbnails', 'fpw-category-thumbnails');
-	add_options_page( $page_title, $menu_title, 'administrator', 'fpw-category-thumbnails', 'fpw_cat_thumbs_options');
+	add_options_page( $page_title, $menu_title, 'administrator', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
 }
 
 /*	-------------------------
@@ -63,7 +63,12 @@ function fpw_cat_thumbs_plugin_links($links, $file) {
 	Plugin's settings page
 	------------------- */
 
-function fpw_cat_thumbs_options() {
+function fpw_cat_thumbs_settings() {
+	/* initialize options array */
+	$fpw_options = get_option( 'fpw_category_thumb_opt' );
+	if ( !is_array( $fpw_options ) )
+		$fpw_options = array( 'clean' => FALSE, 'donotover' => FALSE );
+	
 	/* this set of arguments will give you a list of all post categories */
 	$arg = array('hide_empty' => 0,'pad_counts' => 0,'type' => 'post');
 	
@@ -83,12 +88,18 @@ function fpw_cat_thumbs_options() {
 	$azeroes = $assignments;
 	
 	/*	read cleanup flag */
-	$do_cleanup = get_option( 'fpw_category_thumb_del' );
+	$do_cleanup = get_option( 'fpw_category_thumb_opt' );
+	if ( is_array( $do_cleanup ) ) {
+		$do_cleanup = $do_cleanup[ 'clean' ];
+	} else {
+		$do_cleanup = false;
+	}
 	
 	/*	check if changes were submitted */
 	if ( $_POST['fpw_cat_thmb_submit'] ) {    
 		$i = 0;
-		$do_cleanup = ( $_POST['cleanup'] == 'yes' );
+		$do_cleanup = ( $_POST[ 'cleanup' ] == 'yes' );
+		$do_notover = ( $_POST[ 'donotover' ] == 'yes' );
 		/*	inserting posted values into $assignments array */ 
         while ( strlen( key( $assignments ) ) ) {
         	$assignments[key( $assignments )] = $_POST['val'.$i];
@@ -103,11 +114,13 @@ function fpw_cat_thumbs_options() {
 		check_admin_referer('fpw_cat_thumbs_options_', 'updates');
 		
 		/*	database update */
-		$updateok = ( update_option( 'fpw_category_thumb_ids', $option ) ) || ( update_option( 'fpw_category_thumb_del', $do_cleanup ) );
+		$fpw_options[ 'clean' ] = $do_cleanup;
+		$fpw_options[ 'donotover' ] = $do_notover;
+		$updateok = ( update_option( 'fpw_category_thumb_map', $option ) ) || ( update_option( 'fpw_category_thumb_opt', $fpw_options ) );
 	}
 	
 	/*	get assignments from database */
-	$opt = get_option( 'fpw_category_thumb_ids' );
+	$opt = get_option( 'fpw_category_thumb_map' );
 	
 	/* update $assignments array with values from database */
 	if ( $opt ) {
@@ -162,6 +175,11 @@ function fpw_cat_thumbs_options() {
 	if ( function_exists('wp_nonce_field') ) 
 		wp_nonce_field('fpw_cat_thumbs_options_', 'updates'); 
 
+	/*	do not overwrite checkbox */
+	echo '			<input type="checkbox" name="donotover" value="yes"';
+	if ( $fpw_options[ 'donotover' ] ) echo ' checked';
+	echo "> " . __( "Do not overwrite if post/page has thumbnail assigned allready", 'fpw-category-thumbnails' ) . "<br />" . PHP_EOL;
+
 	/*	cleanup checkbox */
 	echo '			<input type="checkbox" name="cleanup" value="yes"';
 	if ( $do_cleanup ) echo ' checked';
@@ -212,13 +230,16 @@ function fpw_cat_thumbs_options() {
 add_action( 'save_post', 'fpw_update_category_thumbnail_id', 10, 2 );
 	
 function fpw_update_category_thumbnail_id($post_id, $post) {
-	$opt = get_option( 'fpw_category_thumb_ids' );
-	if ( $opt ) {
+	$thumb_id = get_post_meta( $post_id, '_thumbnail_id', TRUE );
+	$do_notover = get_option( 'fpw_category_thumb_opt' );
+	if ( $do_notover )
+		$do_notover = $do_notover[ 'donotover' ]; 
+	$map = get_option( 'fpw_category_thumb_map' );
+	if ( $map ) {
 		$cat = get_the_category( $post_id );
 		foreach ( $cat as $c ) {
-			if ( array_key_exists( $c->name, $opt ) ) {
-				update_post_meta( $post_id, '_thumbnail_id', $opt[$c->name] );
-			}
+			if ( ( array_key_exists( $c->name, $map ) ) && ( ( '' == $thumb_id ) || !( $do_notover ) ) )
+				update_post_meta( $post_id, '_thumbnail_id', $map[$c->name] );
   		}
 	}
 }	
