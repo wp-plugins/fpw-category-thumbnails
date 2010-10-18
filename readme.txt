@@ -29,6 +29,11 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.0.3 =
+ 
+* Added: option to prevent overwriting if post/page has thumbnail allready
+* Updated: translations
+
 = 1.0.2 =
  
 * Added: link to Settings into plugin's action links
