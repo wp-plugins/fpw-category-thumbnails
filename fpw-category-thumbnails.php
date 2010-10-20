@@ -64,6 +64,9 @@ function fpw_cat_thumbs_plugin_links($links, $file) {
 	------------------- */
 
 function fpw_cat_thumbs_settings() {
+	/* base name for uninstall file */
+	$uninstall = dirname( plugin_basename( __FILE__ ) ) . '/uninstall.';
+	
 	/* initialize options array */
 	$fpw_options = get_option( 'fpw_category_thumb_opt' );
 	if ( !is_array( $fpw_options ) )
@@ -117,6 +120,16 @@ function fpw_cat_thumbs_settings() {
 		$fpw_options[ 'clean' ] = $do_cleanup;
 		$fpw_options[ 'donotover' ] = $do_notover;
 		$updateok = ( update_option( 'fpw_category_thumb_map', $option ) ) || ( update_option( 'fpw_category_thumb_opt', $fpw_options ) );
+		
+		/* if cleanup requested make uninstall.php otherwise make uninstall.txt */
+		if ( $updateok )
+			if ( $fpw_options[ 'clean' ] ) {
+				if ( file_exists( $uninstall . 'txt' ) )
+					rename( $uninstall . 'txt', $uninstall . 'php' );
+			} else {
+				if ( file_exists( $uninstall . 'php' ) )
+					rename( $uninstall . 'php', $uninstall . 'txt' );
+			}
 	}
 	
 	/*	get assignments from database */
