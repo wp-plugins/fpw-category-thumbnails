@@ -176,7 +176,6 @@ function fpw_cat_thumbs_settings() {
 	echo '	<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
 	echo '	<p>' . __( 'Enter <strong>IDs</strong> of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
 	echo '	' . __( 'Enter <strong>0</strong> for categories without assignment.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
-	echo $uninstall . PHP_EOL;
 	echo '<p>&nbsp;</p>' . PHP_EOL;
 	
 	/*	the form starts here */
