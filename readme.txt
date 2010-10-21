@@ -12,8 +12,8 @@ the post is created or updated.
 == Description ==
 
 **FPW Category Thumbnails** allows assigning thumbnails to post categories. When configured 
-it will check on create/update of the post/page if selected category has thumbnail mapped to
-it and will add that thumbnail to the post/page.
+it will check on create/update of the post/page if selected category has thumbnail mapped
+to it and will add that thumbnail to the post/page.
 
 == Installation ==
 
