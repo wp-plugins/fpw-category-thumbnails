@@ -30,7 +30,7 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 == Changelog ==
 
 = 1.0.4 =
-Added: change name of uninstall file based on cleanup flag
+* Added: change name of uninstall file based on cleanup flag
 
 = 1.0.3 =
  
