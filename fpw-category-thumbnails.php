@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.0.4
+Version: 1.1.0
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -72,17 +72,39 @@ function fpw_cat_thumbs_settings() {
 	if ( !is_array( $fpw_options ) )
 		$fpw_options = array( 'clean' => FALSE, 'donotover' => FALSE );
 	
-	/* this set of arguments will give you a list of all post categories */
-	$arg = array('hide_empty' => 0,'pad_counts' => 0,'type' => 'post');
-	
 	/* get all categories */
-	$cats = get_categories($arg);
+	$categories = array();
+
+	$cats0 = get_categories('hide_empty=0&orderby=name&parent=0');
+	foreach ( $cats0 as $cats00 ) {
+    	array_push( $categories, array(0,$cats00) );
+    	$cats1 = get_categories('hide_empty=0&orderby=name&parent='.$cats00->cat_ID);
+    	foreach ( $cats1 as $cats10 ) {
+        	array_push( $categories, array(1,$cats10) );
+        	$cats2 = get_categories('hide_empty=0&orderby=name&parent='.$cats10->cat_ID);
+        	foreach ( $cats2 as $cats20 ) {
+            	array_push( $categories, array(2,$cats20) );
+            	$cats3 = get_categories('hide_empty=0&orderby=name&parent='.$cats20->cat_ID);
+            	foreach ( $cats3 as $cats30 ) {
+                	array_push( $categories, array(3,$cats30) );
+                	$cats4 = get_categories('hide_empty=0&orderby=name&parent='.$cats30->cat_ID);
+                	foreach ( $cats4 as $cats40 ) {
+                    	array_push( $categories, array(4,$cats40) );
+                    	$cats5 = get_categories('hide_empty=0&orderby=name&parent='.$cats40->cat_ID);
+                    	foreach ( $cats5 as $cats50 ) {
+                        	array_push( $categories, array(5,$cats50) );
+                    	}
+                	}
+            	}
+        	}
+    	}
+	}
 	
-	/*	build initial associative array(category_name => thumbnail_id)
+	/*	build initial associative array(category_id => thumbnail_id)
 		where all values are 0 */
 	$assignments = array();
-	foreach ( $cats as $category ) {
-		$assignments[$category->name] = 0;
+	foreach ( $categories as $category ) {
+		$assignments[$category[1]->cat_ID] = 0;
 	}
 	
 	/*	create a copy of above array which will be used to strip
@@ -100,13 +122,12 @@ function fpw_cat_thumbs_settings() {
 	
 	/*	check if changes were submitted */
 	if ( $_POST['fpw_cat_thmb_submit'] ) {    
-		$i = 0;
 		$do_cleanup = ( $_POST[ 'cleanup' ] == 'yes' );
 		$do_notover = ( $_POST[ 'donotover' ] == 'yes' );
 		/*	inserting posted values into $assignments array */ 
-        while ( strlen( key( $assignments ) ) ) {
-        	$assignments[key( $assignments )] = $_POST['val'.$i];
-        	$i++;
+        reset($assignments);
+		while ( strlen( key( $assignments ) ) ) {
+        	$assignments[key( $assignments )] = $_POST['val'.key( $assignments )];
 			next($assignments);
 		}
 		
@@ -137,6 +158,7 @@ function fpw_cat_thumbs_settings() {
 	
 	/* update $assignments array with values from database */
 	if ( $opt ) {
+	    reset($assignments);
 		while ( strlen( key( $assignments ) ) ) {
 			if ( array_key_exists( key( $assignments ), $opt ) ) {
 				$assignments[key( $assignments )] = $opt[key( $assignments )];	
@@ -201,26 +223,29 @@ function fpw_cat_thumbs_settings() {
 	/* start of the table */
 	echo '			<table class="widefat">' . PHP_EOL;
 	echo '				<tr>' . PHP_EOL;
-	echo '					<th width="25%" style="text-align: left;">' . __( 'Category', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '					<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '					<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '				</tr>' . PHP_EOL;
 
 	/*	build form's input fields */
 	reset( $assignments );
+	reset($categories);
 	$i = 0;
 	while ( strlen( key( $assignments ) ) ) {
 		echo '				<tr>' . PHP_EOL;
 		echo '					<td>'; 
-		echo key($assignments); 
+		$indent = str_repeat('&nbsp;', $categories[key($categories)][0] * 4);
+		echo $indent.$categories[key($categories)][1]->cat_name.' ('.$categories[key($categories)][1]->cat_ID.')'; 
 		echo '</td>' . PHP_EOL;
 		echo '					<td><input type="text" size="10" maxlength="10" name="val';
-		echo $i; 
+		echo key($assignments); 
 		echo '" value="';
 		echo $assignments[key($assignments)]; 
 		echo '" /></td>' . PHP_EOL;
 		echo '				</tr>' . PHP_EOL;
 		$i++;
 		next($assignments);
+		next($categories);
 	}
 	
 	/*	end of the table */
@@ -251,8 +276,8 @@ function fpw_update_category_thumbnail_id($post_id, $post) {
 	if ( $map ) {
 		$cat = get_the_category( $post_id );
 		foreach ( $cat as $c ) {
-			if ( ( array_key_exists( $c->name, $map ) ) && ( ( '' == $thumb_id ) || !( $do_notover ) ) )
-				update_post_meta( $post_id, '_thumbnail_id', $map[$c->name] );
+			if ( ( array_key_exists( $c->cat_ID, $map ) ) && ( ( '' == $thumb_id ) || !( $do_notover ) ) )
+				update_post_meta( $post_id, '_thumbnail_id', $map[$c->cat_ID] );
   		}
 	}
 }	
