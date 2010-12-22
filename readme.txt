@@ -32,7 +32,7 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 = 1.1.0 =
 * Changed: changed thumbnails to category names mapping to thumbnails to category ids
-* Changed: category listing shows category names and ids reflecting chierarchy of categories 
+* Changed: category listing shows category names and ids reflecting hierarchy of categories 
 
 = 1.0.4 =
 * Added: change name of uninstall file based on cleanup flag
