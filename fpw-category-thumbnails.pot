@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FPW Category Thumbnails 1.1.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
-"POT-Creation-Date: 2010-12-24 02:30:02+00:00\n"
+"POT-Creation-Date: 2010-12-24 02:54:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -88,14 +88,14 @@ msgstr ""
 
 #: fpw-category-thumbnails.php:227
 msgid ""
-"Click on <strong></strong> to immediately apply mappings to existing posts/"
-"pages."
+"Click on <strong>Apply to all existing posts/pages</strong> to immediately "
+"apply mappings to existing posts/pages."
 msgstr ""
 
 #: fpw-category-thumbnails.php:228
 msgid ""
-"Click on <strong></strong> to immediately remove thumbnails from existing "
-"posts/pages."
+"Click on <strong>Remove all thumbnails from existing posts/pages</strong> to "
+"immediately remove thumbnails from existing posts/pages."
 msgstr ""
 
 #: fpw-category-thumbnails.php:244
