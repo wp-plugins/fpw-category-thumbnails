@@ -21,7 +21,7 @@ post/page.
 1. Upload `fpw-category-thumbnails` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Select Dashboard's Settings -> FPW Category Thumbnails and build category/thumbnail mapping
-1. **WARNING:** please write down your current assignments! This update will destroy previous assignments 
+1. **UPDATE:** If you update from versions prior to 1.1.0 please write down your current assignments! Update will destroy previous assignments 
 
 == Frequently Asked Questions ==
 
