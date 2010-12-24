@@ -4,23 +4,24 @@ Donate link:
 Tags: category, thumbnail
 Requires at least: 2.9.0
 Tested up to: 3.0.1
-Stable tag: 1.1.0
+Stable tag: trunk
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
 the post is created or updated.
 
 == Description ==
 
-**FPW Category Thumbnails** allows assigning thumbnails to post categories. When configured 
-it will check on create/update of the post/page if selected category has thumbnail mapped
-to it and will add that thumbnail to the post/page.
+**FPW Category Thumbnails** allows assigning thumbnails to post categories.
+When configured it will check on create/update of the post/page if selected
+category has thumbnail mapped to it and will add that thumbnail to the 
+post/page.
 
 == Installation ==
 
 1. Upload `fpw-category-thumbnails` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Select Dashboard's Settings -> FPW Category Thumbnails and build category/thumbnail mapping
-1. **WARNING:** please write down your current assignments! This update will destroy previous assignments 
+1. **UPDATE:** If you update from versions prior to 1.1.0 please write down your current assignments! Update will destroy previous assignments 
 
 == Frequently Asked Questions ==
 

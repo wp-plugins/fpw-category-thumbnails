@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.1.0
+Version: 1.1.1
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -120,6 +120,24 @@ function fpw_cat_thumbs_settings() {
 		$do_cleanup = false;
 	}
 	
+	/*	check if apply or remove button was pressed */
+	if ( ( $_POST['fpw_cat_thmb_submit_apply'] ) || ( $_POST['fpw_cat_thmb_submit_remove'] ) ) {
+		$parg = array(
+			numberofposts=>-1,
+			nopaging=>true,
+			orderby=>'category',
+			post_type=>'any');
+		$posts = get_posts($parg);
+		foreach ( $posts as $post ) {
+			$post_id = $post->ID;
+			if ( $_POST['fpw_cat_thmb_submit_remove'] ) {
+				delete_post_meta($post_id,'_thumbnail_id');
+			} else {
+				fpw_update_category_thumbnail_id($post_id, $post);
+			}
+		}
+	}
+	
 	/*	check if changes were submitted */
 	if ( $_POST['fpw_cat_thmb_submit'] ) {    
 		$do_cleanup = ( $_POST[ 'cleanup' ] == 'yes' );
@@ -189,6 +207,14 @@ function fpw_cat_thumbs_settings() {
 			echo '	<div id="message" class="updated fade">' . __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' ) . '</div>' . PHP_EOL;
 		}
 	
+	/*	display message about apply status */
+	if ( $_POST['fpw_cat_thmb_submit_apply'] )
+		echo '	<div id="message" class="updated fade">' . __( 'Applied to existing posts/pages successfully.', 'fpw-category-thumbnails' ) . '</div>' . PHP_EOL;
+		
+	/*	display message about remove status */
+	if ( $_POST['fpw_cat_thmb_submit_remove'] )
+		echo '	<div id="message" class="updated fade">' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</div>' . PHP_EOL;
+			
 	/*	display description block */
 	echo '	<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
 	echo '	<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
@@ -253,7 +279,8 @@ function fpw_cat_thumbs_settings() {
 	
 	/*	submit button */
 	echo '			<p class="submit"><input type="submit" name="fpw_cat_thmb_submit" value="' . __( 'Update', 'fpw-category-thumbnails' ) . '" /> ' .
-		 '<input type="submit" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '" /></p>' . PHP_EOL;
+		 '<input type="submit" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '" /> ' .
+		 '<input type="submit" name="fpw_cat_thmb_submit_remove" value="' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '" /></p>' . PHP_EOL;
 	
 	/*	end of form */
 	echo '		</form>' . PHP_EOL;
