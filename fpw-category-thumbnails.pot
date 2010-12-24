@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the FPW Category Thumbnails package.
 msgid ""
 msgstr ""
-"Project-Id-Version: FPW Category Thumbnails 1.1.0\n"
+"Project-Id-Version: FPW Category Thumbnails 1.1.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
-"POT-Creation-Date: 2010-12-22 01:55:02+00:00\n"
+"POT-Creation-Date: 2010-12-24 02:30:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,11 +12,11 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: fpw-category-thumbnails.php:43 fpw-category-thumbnails.php:175
+#: fpw-category-thumbnails.php:43 fpw-category-thumbnails.php:193
 msgid "FPW Category Thumbnails - Settings"
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.1.0)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.1.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: fpw-category-thumbnails.php:44
 msgid "FPW Category Thumbnails"
@@ -26,76 +26,104 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: fpw-category-thumbnails.php:180
+#: fpw-category-thumbnails.php:198
 msgid ""
 "<strong>WARNING</strong>: Your theme has no support for <em>post thumbnails</"
 "em>!"
 msgstr ""
 
-#: fpw-category-thumbnails.php:181
+#: fpw-category-thumbnails.php:199
 msgid ""
 "You can continue with <em>Settings</em> but until you add "
 "<code>add_theme_support( 'post-thumbnails' );</code> to the theme's "
 "functions.php you will not be able to display thumbnails."
 msgstr ""
 
-#: fpw-category-thumbnails.php:187
+#: fpw-category-thumbnails.php:205
 msgid "Settings updated successfully."
 msgstr ""
 
-#: fpw-category-thumbnails.php:189
+#: fpw-category-thumbnails.php:207
 msgid "No changes detected. Nothing to update."
 msgstr ""
 
-#: fpw-category-thumbnails.php:193
+#: fpw-category-thumbnails.php:212
+msgid "Applied to existing posts/pages successfully."
+msgstr ""
+
+#: fpw-category-thumbnails.php:216
+msgid "All thumbnails removed successfully."
+msgstr ""
+
+#: fpw-category-thumbnails.php:219
 msgid "Description"
 msgstr ""
 
-#: fpw-category-thumbnails.php:194
+#: fpw-category-thumbnails.php:220
 msgid ""
 "This plugin inserts a thumbnail based on category / thumbnail mapping while "
 "post / page is being created or updated."
 msgstr ""
 
-#: fpw-category-thumbnails.php:195
+#: fpw-category-thumbnails.php:221
 msgid "Note"
 msgstr ""
 
-#: fpw-category-thumbnails.php:195
+#: fpw-category-thumbnails.php:221
 msgid "please remember that your theme must support post thumbnails."
 msgstr ""
 
-#: fpw-category-thumbnails.php:198
+#: fpw-category-thumbnails.php:224
 msgid "Instructions"
 msgstr ""
 
-#: fpw-category-thumbnails.php:199
+#: fpw-category-thumbnails.php:225
 msgid ""
 "Enter <strong>IDs</strong> of thumbnail images for corresponding categories."
 msgstr ""
 
-#: fpw-category-thumbnails.php:200
+#: fpw-category-thumbnails.php:226
 msgid "Enter <strong>0</strong> for categories without assignment."
 msgstr ""
 
-#: fpw-category-thumbnails.php:216
+#: fpw-category-thumbnails.php:227
+msgid ""
+"Click on <strong></strong> to immediately apply mappings to existing posts/"
+"pages."
+msgstr ""
+
+#: fpw-category-thumbnails.php:228
+msgid ""
+"Click on <strong></strong> to immediately remove thumbnails from existing "
+"posts/pages."
+msgstr ""
+
+#: fpw-category-thumbnails.php:244
 msgid "Do not overwrite if post/page has thumbnail assigned allready"
 msgstr ""
 
-#: fpw-category-thumbnails.php:221
+#: fpw-category-thumbnails.php:249
 msgid "Remove plugin's data from database on uninstall"
 msgstr ""
 
-#: fpw-category-thumbnails.php:226
+#: fpw-category-thumbnails.php:254
 msgid "Category (ID)"
 msgstr ""
 
-#: fpw-category-thumbnails.php:227
+#: fpw-category-thumbnails.php:255
 msgid "Image ID"
 msgstr ""
 
-#: fpw-category-thumbnails.php:255
+#: fpw-category-thumbnails.php:283
 msgid "Update"
+msgstr ""
+
+#: fpw-category-thumbnails.php:284
+msgid "Apply to all existing posts/pages"
+msgstr ""
+
+#: fpw-category-thumbnails.php:285
+msgid "Remove all thumbnails from existing posts/pages"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
