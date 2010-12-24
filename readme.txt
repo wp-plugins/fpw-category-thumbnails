@@ -3,7 +3,7 @@ Contributors: frankpw
 Donate link: 
 Tags: category, thumbnail
 Requires at least: 2.9.0
-Tested up to: 3.0.1
+Tested up to: 3.0.3
 Stable tag: 1.1.0
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
@@ -31,8 +31,12 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.1.1 =
+* Added: immediate action to apply all mappings to existing posts/pages
+* Added: immediate action to unconditionally remove thumbnails from existing posts/pages
+
 = 1.1.0 =
-* Changed: changed thumbnails to category names mapping to thumbnails to category ids
+* Changed: changed from thumbnails to category names mapping to thumbnails to category ids mapping
 * Changed: category listing shows category names and ids reflecting hierarchy of categories 
 
 = 1.0.4 =
