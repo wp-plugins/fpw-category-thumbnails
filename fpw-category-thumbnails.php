@@ -59,6 +59,24 @@ function fpw_cat_thumbs_plugin_links($links, $file) {
     return $links;
 }
 
+add_action('plugin_row_meta', 'fpw_add_plugin_meta', 10, 2);
+
+function fpw_add_plugin_meta($links, $file) {
+	static $this_plugin;
+	if (!$this_plugin) $this_plugin = plugin_basename(__FILE__);
+
+	if ($file == $this_plugin ){
+		$current = get_transient('update_plugins');
+		if (!isset($current->response[$file])) return false;
+
+		$url = "http://fw2s.com/update.txt";
+		$update = wp_remote_fopen($url);
+		echo '<td colspan="3">';
+		echo $update;
+		echo '</td>';
+	}
+}
+
 /*	----------------------
 	Plugin's settings page
 	------------------- */
