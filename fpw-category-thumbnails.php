@@ -59,7 +59,7 @@ function fpw_cat_thumbs_plugin_links($links, $file) {
     return $links;
 }
 
-add_action('plugin_row_meta', 'fpw_add_plugin_meta', 10, 2);
+add_filter('plugin_row_meta', 'fpw_add_plugin_meta', 10, 2);
 
 function fpw_add_plugin_meta($links, $file) {
 	static $this_plugin;
