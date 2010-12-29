@@ -72,7 +72,7 @@ function fpw_add_after_plugin_meta($file) {
 
 		$url = "http://fw2s.com/update.txt";
 		$update = wp_remote_fopen($url);
-		echo '<tr class="plugin-update-tr"><td colspan="3" class="plugin-update"><div class="update-message">'.$update.'</div></td></tr>';
+		echo '<tr class="plugin-update-tr"><td></td><td></td><td class="plugin-update"><div class="update-message">'.$update.'</div></td></tr>';
 	}
 }
 
