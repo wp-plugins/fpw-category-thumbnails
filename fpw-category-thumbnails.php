@@ -67,7 +67,7 @@ function fpw_add_after_plugin_meta($file) {
 	if (!$this_plugin) 
 		$this_plugin = plugin_basename(__FILE__);
 	if ($file == $this_plugin ){
-		$current = get_site_transient('pdate_plugins');
+		$current = get_site_transient('update_plugins');
 		if (!isset($current->response[$file])) return false;
 
 		$url = "http://fw2s.com/fpwcatthumbsupdate.txt";
