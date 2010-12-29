@@ -59,21 +59,14 @@ function fpw_cat_thumbs_plugin_links($links, $file) {
     return $links;
 }
 
-add_action('after_plugin_row', 'fpw_add_after_plugin_meta', 10, 2);
+add_action('after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.php', 'fpw_add_after_plugin_meta', 10, 2);
 
-function fpw_add_after_plugin_meta($file) {
-	static $this_plugin;
-	
-	if (!$this_plugin) 
-		$this_plugin = plugin_basename(__FILE__);
-	if ($file == $this_plugin ){
-		$current = get_site_transient('update_plugins');
-		if (!isset($current->response[$file])) return false;
-
-		$url = "http://fw2s.com/fpwcatthumbsupdate.txt";
-		$update = wp_remote_fopen($url);
-		echo '<tr class="plugin-update-tr"><td></td><td></td><td class="plugin-update"><div class="update-message">'.$update.'</div></td></tr>';
-	}
+function fpw_add_after_plugin_meta($file,$plugin_data) {
+	$current = get_site_transient('update_plugins');
+	if (!isset($current->response[$file])) return false;
+	$url = "http://fw2s.com/fpwcatthumbsupdate.txt";
+	$update = wp_remote_fopen($url);
+	echo '<tr class="plugin-update-tr"><td></td><td></td><td class="plugin-update"><div class="update-message">'.$update.'</div></td></tr>';
 }
 
 /*	----------------------
