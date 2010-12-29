@@ -67,10 +67,10 @@ function fpw_add_after_plugin_meta($file) {
 	if (!$this_plugin) 
 		$this_plugin = plugin_basename(__FILE__);
 	if ($file == $this_plugin ){
-		$current = get_site_transient('update_plugins');
+		$current = get_site_transient('pdate_plugins');
 		if (!isset($current->response[$file])) return false;
 
-		$url = "http://fw2s.com/update.txt";
+		$url = "http://fw2s.com/fpwcatthumbsupdate.txt";
 		$update = wp_remote_fopen($url);
 		echo '<tr class="plugin-update-tr"><td></td><td></td><td class="plugin-update"><div class="update-message">'.$update.'</div></td></tr>';
 	}
