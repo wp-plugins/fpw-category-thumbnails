@@ -31,6 +31,10 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.1.3 =
+* Plugin code optimization
+* Minor fixes
+
 = 1.1.2 =
 * Added: update information line to plugin's meta block which shows only when update is detected
 

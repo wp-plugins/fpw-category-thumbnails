@@ -45,17 +45,15 @@ function fpw_cat_thumbs_settings_menu() {
 	add_options_page( $page_title, $menu_title, 'administrator', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
 }
 
-/*	-------------------------
-	Register plugin's filters
-	---------------------- */
+/*	-------------------------------------
+	Register plugin's filters and actions
+	---------------------------------- */
 
-add_filter('plugin_action_links', 'fpw_cat_thumbs_plugin_links', 10, 2);
+add_filter('plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', 'fpw_cat_thumbs_plugin_links', 10, 2);
 
 function fpw_cat_thumbs_plugin_links($links, $file) {
-	if ($file == plugin_basename(__FILE__)){
-    	$settings_link = '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">'.__("Settings", "fpw-category-thumbnails").'</a>';
-        array_unshift($links, $settings_link);
-    }
+   	$settings_link = '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">'.__("Settings", "fpw-category-thumbnails").'</a>';
+	array_unshift($links, $settings_link);
     return $links;
 }
 
