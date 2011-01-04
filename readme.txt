@@ -1,6 +1,6 @@
 === FPW Category Thumbnails ===
 Contributors: frankpw
-Donate link: 
+Donate link:
 Tags: category, thumbnail
 Requires at least: 2.9.0
 Tested up to: 3.0.4
