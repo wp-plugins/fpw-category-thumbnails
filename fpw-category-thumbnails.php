@@ -7,7 +7,7 @@ Version: 1.1.4
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
-Copyright 2010 Frank P. Walentynowicz (email : frankpw@fw2s.com)
+Copyright 2011 Frank P. Walentynowicz (email : frankpw@fw2s.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
