@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.1.3
+Version: 1.1.4
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -48,6 +48,27 @@ function fpw_cat_thumbs_settings_menu() {
 /*	-------------------------------------
 	Register plugin's filters and actions
 	---------------------------------- */
+
+register_activation_hook( __FILE__, 'fpw_category_thumbnails_activate' );
+
+function fpw_category_thumbnails_activate() {
+	/*	base name for uninstall file */
+	$uninstall = ABSPATH . PLUGINDIR . '/' . dirname( plugin_basename( __FILE__ ) ) . '/uninstall.';
+	
+	/*	get options array */
+	$fpw_options = get_option( 'fpw_category_thumb_opt' );
+	if ( is_array( $fpw_options ) ) {
+
+		/* if cleanup requested make uninstall.php otherwise make uninstall.txt */
+		if ( $fpw_options[ 'clean' ] ) {
+			if ( file_exists( $uninstall . 'txt' ) )
+				rename( $uninstall . 'txt', $uninstall . 'php' );
+		} else {
+			if ( file_exists( $uninstall . 'php' ) )
+				rename( $uninstall . 'php', $uninstall . 'txt' );
+		}
+	}
+}	
 
 add_filter('plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', 'fpw_cat_thumbs_plugin_links', 10, 2);
 
@@ -169,14 +190,7 @@ function fpw_cat_thumbs_settings() {
 		$updateok = ( update_option( 'fpw_category_thumb_map', $option ) ) || ( update_option( 'fpw_category_thumb_opt', $fpw_options ) );
 		
 		/* if cleanup requested make uninstall.php otherwise make uninstall.txt */
-		if ( $updateok )
-			if ( $fpw_options[ 'clean' ] ) {
-				if ( file_exists( $uninstall . 'txt' ) )
-					rename( $uninstall . 'txt', $uninstall . 'php' );
-			} else {
-				if ( file_exists( $uninstall . 'php' ) )
-					rename( $uninstall . 'php', $uninstall . 'txt' );
-			}
+		if ( $updateok ) fpw_category_thumbnails_activate();
 	}
 	
 	/*	get assignments from database */
