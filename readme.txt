@@ -29,6 +29,10 @@ post/page.
 
 IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230.
 
+== Screenshots ==
+
+1. Settings Page
+
 == Changelog ==
 
 = 1.1.4 =
