@@ -216,27 +216,27 @@ function fpw_cat_thumbs_settings() {
 
     /*	display warning if current theme doesn't support post thumbnails */
     if ( !current_theme_supports( 'post-thumbnails') )
-    	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;">' . 
-				__( '<strong>WARNING</strong>: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . ' ' . 
+    	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;"><p><strong>' . 
+				__( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . ' ' . 
 				__( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ) . 
-				'</div>' . PHP_EOL;
+				'</strong></p></div>' . PHP_EOL;
 	
 	/*	display message about update status */
 	if ( $_POST['fpw_cat_thmb_submit'] )
 		if ( $updateok ) {
-			echo '	<div id="message" class="updated fade">' . __( 'Settings updated successfully.', 'fpw-category-thumbnails' ) . '</div>' . PHP_EOL;
+			echo '	<div id="message" class="updated fade"><p><strong>' . __( 'Settings updated successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
 		} else {
-			echo '	<div id="message" class="updated fade">' . __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' ) . '</div>' . PHP_EOL;
+			echo '	<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
 		}
 	
 	/*	display message about apply status */
 	if ( $_POST['fpw_cat_thmb_submit_apply'] )
-		echo '	<div id="message" class="updated fade">' . __( 'Applied to existing posts/pages successfully.', 'fpw-category-thumbnails' ) . '</div>' . PHP_EOL;
+		echo '	<div id="message" class="updated fade"><p><strong>' . __( 'Applied to existing posts/pages successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
 		
 	/*	display message about remove status */
 	if ( $_POST['fpw_cat_thmb_submit_remove'] )
-		echo '	<div id="message" class="updated fade">' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</div>' . PHP_EOL;
-			
+		echo '	<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
+
 	/*	display description block */
 	echo '	<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
 	echo '	<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
@@ -308,6 +308,41 @@ function fpw_cat_thumbs_settings() {
 	
 	/*	end of form */
 	echo '		</form>' . PHP_EOL;
+	echo '	</p>' . PHP_EOL;
+	echo '	<h3>' . __( 'Available images', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
+	echo '	<p>' . PHP_EOL;
+
+	/*	start of images table */
+	echo '		<table class="widefat">' . PHP_EOL;
+	echo '			<tr>' . PHP_EOL;
+	echo '				<th width="25%" style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '				<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '			</tr>' . PHP_EOL;
+
+	/*	get available images from media library */
+	$args = array(
+		'post_type' => 'attachment',
+		'post_mime_type' => 'image/jpeg,image/png,image/gif',
+		'numberposts' => -1,
+		'post_status' => null,
+		'orderby' => 'ID',
+		'post_parent' => $post->ID
+	);
+	
+	$attachments = get_posts($args);
+	
+	if ($attachments) {
+		foreach ($attachments as $attachment) {
+			echo '			<tr>' . PHP_EOL;
+			echo '				<td><img src="' . wp_get_attachment_url($attachment->ID) . '" width="64" /></td>' . PHP_EOL;
+			echo '				<td>' . $attachment->ID . '</td>' . PHP_EOL;
+			echo '			</tr>' . PHP_EOL;
+		}
+	}
+	
+	/*	end of images table */
+	echo '		</table>' . PHP_EOL;
+	
 	echo '	</p>' . PHP_EOL;
 	echo '</div>' . PHP_EOL;
 }
