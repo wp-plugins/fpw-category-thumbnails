@@ -35,6 +35,9 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.1.5 =
+* Added table of available images
+
 = 1.1.4 =
 * Added plugin activation action to apply proper extension to uninstall(.txt/.php) file based on option setting in database
 
