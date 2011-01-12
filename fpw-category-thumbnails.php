@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.1.5
+Version: 1.1.6
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -40,9 +40,10 @@ function fpw_category_thumbnails_init(){
 add_action('admin_menu', 'fpw_cat_thumbs_settings_menu');
 
 function fpw_cat_thumbs_settings_menu() {
+	global $fpw_cat_thumbs_hook;
 	$page_title = __('FPW Category Thumbnails - Settings', 'fpw-category-thumbnails');
 	$menu_title = __('FPW Category Thumbnails', 'fpw-category-thumbnails');
-	add_options_page( $page_title, $menu_title, 'administrator', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
+	$fpw_cat_thumbs_hook = add_options_page( $page_title, $menu_title, 'administrator', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
 }
 
 /*	-------------------------------------
@@ -88,11 +89,34 @@ function fpw_add_after_plugin_meta($file,$plugin_data) {
 	echo '<tr class="plugin-update-tr"><td></td><td></td><td class="plugin-update"><div class="update-message">'.$update.'</div></td></tr>';
 }
 
+add_filter('contextual_help', 'fpw_cat_thumbs_help', 10, 3);
+
+function fpw_cat_thumbs_help($contextual_help, $screen_id, $screen) {
+	global $fpw_cat_thumbs_hook;
+	
+	if ($screen_id == $fpw_cat_thumbs_hook) {
+		
+		/*	display description block */
+		echo '	<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
+		echo '	<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+		echo '	<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+
+		/*	display instructions block */
+		echo '	<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
+		echo '	<p>' . __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'IDs', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+		echo '	' . __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>0</strong> ' . __( 'for categories without assignment.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+		echo '	' . __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately apply mappings to existing posts/pages.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+		echo '	' . __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+	}
+}
+
 /*	----------------------
 	Plugin's settings page
 	------------------- */
 
 function fpw_cat_thumbs_settings() {
+	$plugin_version = '1.1.6';
+	
 	/* base name for uninstall file */
 	$uninstall = ABSPATH . PLUGINDIR . '/' . dirname( plugin_basename( __FILE__ ) ) . '/uninstall.';
 	
@@ -212,14 +236,15 @@ function fpw_cat_thumbs_settings() {
 	---------------------- */
 	
 	echo '<div class="wrap">' . PHP_EOL;
-	echo '	<h2>' . __( 'FPW Category Thumbnails - Settings', 'fpw-category-thumbnails' ) . '</h2>' . PHP_EOL;
+	echo '	<h2>' . __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) . ' (' . $plugin_version . ') - ' . __( 'Settings', 'fpw-category-thumbnails' ) . '</h2>' . PHP_EOL;
 
     /*	display warning if current theme doesn't support post thumbnails */
-    if ( !current_theme_supports( 'post-thumbnails') )
-    	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;"><p><strong>' . 
-				__( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . ' ' . 
-				__( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ) . 
-				'</strong></p></div>' . PHP_EOL;
+    if ( !current_theme_supports( 'post-thumbnails') ) {
+    	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;"><p><strong>';
+		echo __( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . ' '; 
+		echo __( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ); 
+		echo '</strong></p></div>' . PHP_EOL;
+	}
 	
 	/*	display message about update status */
 	if ( $_POST['fpw_cat_thmb_submit'] )
@@ -237,19 +262,9 @@ function fpw_cat_thumbs_settings() {
 	if ( $_POST['fpw_cat_thmb_submit_remove'] )
 		echo '	<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
 
-	/*	display description block */
-	echo '	<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-	echo '	<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-	echo '	<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
-	
-	/*	display instructions block */
-	echo '	<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-	echo '	<p>' . __( 'Enter <strong>IDs</strong> of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-	echo '	' . __( 'Enter <strong>0</strong> for categories without assignment.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-	echo '	' . __( 'Click on <strong>Apply to all existing posts/pages</strong> to immediately apply mappings to existing posts/pages.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-	echo '	' . __( 'Click on <strong>Remove all thumbnails from existing posts/pages</strong> to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
-	echo '<p>&nbsp;</p>' . PHP_EOL;
-	
+	/*	about instructions */
+	echo	'	<p class="alignright">' . __( 'For instructions click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Help', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'above', 'fpw-category-thumbnails' ) . '.</p>' . PHP_EOL;
+
 	/*	the form starts here */
 	echo '	<p>' . PHP_EOL;
 	echo '		<form name="fpw_cat_thmb_form" action="';
@@ -302,9 +317,9 @@ function fpw_cat_thumbs_settings() {
 	echo '			</table>' . PHP_EOL;
 	
 	/*	submit button */
-	echo '			<p class="submit"><input type="submit" name="fpw_cat_thmb_submit" value="' . __( 'Update', 'fpw-category-thumbnails' ) . '" /> ' .
-		 '<input type="submit" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '" /> ' .
-		 '<input type="submit" name="fpw_cat_thmb_submit_remove" value="' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '" /></p>' . PHP_EOL;
+	echo '			<p class="submit"><input type="submit" name="fpw_cat_thmb_submit" value="' . __( 'Update', 'fpw-category-thumbnails' ) . '" /> ';
+	echo '<input type="submit" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '" /> ';
+	echo '<input type="submit" name="fpw_cat_thmb_submit_remove" value="' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '" /></p>' . PHP_EOL;
 	
 	/*	end of form */
 	echo '		</form>' . PHP_EOL;
