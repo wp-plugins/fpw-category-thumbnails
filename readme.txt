@@ -35,6 +35,9 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.1.6 =
+* Moved Description and Instructions blocks to contextual help
+
 = 1.1.5 =
 * Added table of available images
 
