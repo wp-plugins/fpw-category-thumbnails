@@ -41,7 +41,7 @@ add_action('admin_menu', 'fpw_cat_thumbs_settings_menu');
 
 function fpw_cat_thumbs_settings_menu() {
 	global $fpw_cat_thumbs_hook;
-	$page_title = __('FPW Category Thumbnails (1.1.7) - Settings', 'fpw-category-thumbnails');
+	$page_title = __('FPW Category Thumbnails (1.1.8) - Settings', 'fpw-category-thumbnails');
 	$menu_title = __('FPW Category Thumbnails', 'fpw-category-thumbnails');
 	$fpw_cat_thumbs_hook = add_options_page( $page_title, $menu_title, 'manage_options', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
 }
@@ -117,8 +117,6 @@ function fpw_cat_thumbs_help($contextual_help, $screen_id, $screen) {
 	------------------- */
 
 function fpw_cat_thumbs_settings() {
-	$plugin_version = '1.1.6';
-	
 	/* base name for uninstall file */
 	$uninstall = ABSPATH . PLUGINDIR . '/' . dirname( plugin_basename( __FILE__ ) ) . '/uninstall.';
 	
@@ -238,7 +236,7 @@ function fpw_cat_thumbs_settings() {
 	---------------------- */
 	
 	echo '<div class="wrap">' . PHP_EOL;
-	echo '	<h2>' . __('FPW Category Thumbnails (1.1.7) - Settings', 'fpw-category-thumbnails') . '</h2>' . PHP_EOL;
+	echo '	<h2>' . __('FPW Category Thumbnails (1.1.8) - Settings', 'fpw-category-thumbnails') . '</h2>' . PHP_EOL;
 
     /*	display warning if current theme doesn't support post thumbnails */
     if ( !current_theme_supports( 'post-thumbnails') ) {
