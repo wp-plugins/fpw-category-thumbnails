@@ -36,7 +36,7 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 == Changelog ==
 
 = 1.1.7 =
-* Combined default contextual help content and plugins contextual help content
+* Combined default contextual help content and plugin's contextual help content
 * Updated translations
 
 = 1.1.6 =
