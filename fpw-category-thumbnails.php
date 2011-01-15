@@ -244,7 +244,7 @@ function fpw_cat_thumbs_settings() {
     if ( !current_theme_supports( 'post-thumbnails') ) {
     	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;"><p><strong>';
 		echo __( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . ' '; 
-		echo __( 'You can continue but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ); 
+		echo __( 'You can continue but until you add add_theme_support( \'post-thumbnails\' ); to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ); 
 		echo '</strong></p></div>' . PHP_EOL;
 	}
 	
