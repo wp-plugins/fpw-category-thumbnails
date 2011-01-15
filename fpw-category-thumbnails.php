@@ -239,7 +239,7 @@ function fpw_cat_thumbs_settings() {
 	---------------------- */
 	
 	echo '<div class="wrap">' . PHP_EOL;
-	echo '	<h2>' . __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) . ' (' . $plugin_version . ') - ' . __( 'Settings', 'fpw-category-thumbnails' ) . '</h2>' . PHP_EOL;
+	echo '	<h2>' . __('FPW Category Thumbnails (1.1.7) - Settings', 'fpw-category-thumbnails') . '</h2>' . PHP_EOL;
 
     /*	display warning if current theme doesn't support post thumbnails */
     if ( !current_theme_supports( 'post-thumbnails') ) {
