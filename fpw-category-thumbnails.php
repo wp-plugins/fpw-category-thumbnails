@@ -74,7 +74,7 @@ function fpw_category_thumbnails_activate() {
 add_filter('plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', 'fpw_cat_thumbs_plugin_links', 10, 2);
 
 function fpw_cat_thumbs_plugin_links($links, $file) {
-	array_unshift($links, '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">'.__('Settings', 'fpw-category-thumbnails' ).</a>');
+	array_unshift($links, '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">'.__('Settings', 'fpw-category-thumbnails' ).'</a>');
     return $links;
 }
 
