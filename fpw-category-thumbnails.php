@@ -108,7 +108,7 @@ function fpw_cat_thumbs_help($contextual_help, $screen_id, $screen) {
 		echo '	' . __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
 
 		/*	display default content ( two links: WordPress Documentation and Wordpress Forums ) */
-		echo '	<h3>' . __( 'WordPress - Links', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
+		echo '	<h3>WordPress</h3>' . PHP_EOL;
 		echo $contextual_help . PHP_EOL;
 		
 	}
