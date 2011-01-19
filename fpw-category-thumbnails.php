@@ -43,7 +43,7 @@ function fpw_cat_thumbs_settings_menu() {
 	global $fpw_cat_thumbs_hook;
 	$page_title = __('FPW Category Thumbnails - Settings', 'fpw-category-thumbnails') . ' (1.1.8)';
 	$menu_title = __('FPW Category Thumbnails', 'fpw-category-thumbnails');
-	$fpw_cat_thumbs_hook = add_options_page( $page_title, $menu_title, 'administrator', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
+	$fpw_cat_thumbs_hook = add_options_page( $page_title, $menu_title, 'manage_options', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
 }
 
 /*	-------------------------------------
