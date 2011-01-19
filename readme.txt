@@ -37,6 +37,7 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 = 1.1.8 =
 * Changed minimum role required to manage settings
+* Moved table of available images to contextual help
 
 = 1.1.7 =
 * Combined default contextual help content and plugin's contextual help content

@@ -41,9 +41,9 @@ add_action('admin_menu', 'fpw_cat_thumbs_settings_menu');
 
 function fpw_cat_thumbs_settings_menu() {
 	global $fpw_cat_thumbs_hook;
-	$page_title = __('FPW Category Thumbnails (1.1.8) - Settings', 'fpw-category-thumbnails');
+	$page_title = __('FPW Category Thumbnails - Settings', 'fpw-category-thumbnails') . ' (1.1.8)';
 	$menu_title = __('FPW Category Thumbnails', 'fpw-category-thumbnails');
-	$fpw_cat_thumbs_hook = add_options_page( $page_title, $menu_title, 'manage_options', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
+	$fpw_cat_thumbs_hook = add_options_page( $page_title, $menu_title, 'administrator', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
 }
 
 /*	-------------------------------------
@@ -74,7 +74,8 @@ function fpw_category_thumbnails_activate() {
 add_filter('plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', 'fpw_cat_thumbs_plugin_links', 10, 2);
 
 function fpw_cat_thumbs_plugin_links($links, $file) {
-	array_unshift($links, '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">'.__('Settings', 'fpw-category-thumbnails' ).'</a>');
+   	$settings_link = '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">'.__("Settings", "fpw-category-thumbnails").'</a>';
+	array_unshift($links, $settings_link);
     return $links;
 }
 
@@ -94,24 +95,89 @@ function fpw_cat_thumbs_help($contextual_help, $screen_id, $screen) {
 	global $fpw_cat_thumbs_hook;
 	
 	if ($screen_id == $fpw_cat_thumbs_hook) {
-	
+		
 		/*	display description block */
-		echo '	<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-		echo '	<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-		echo '	<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+		$my_help  = '<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
+		$my_help .= '<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+		$my_help .= '<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
 
 		/*	display instructions block */
-		echo '	<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-		echo '	<p>' . __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'IDs', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-		echo '	' . __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>0</strong> ' . __( 'for categories without assignment.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-		echo '	' . __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately apply mappings to existing posts/pages.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-		echo '	' . __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
-
-		/*	display default content ( two links: WordPress Documentation and Wordpress Forums ) */
-		echo '	<h3>WordPress</h3>' . PHP_EOL;
-		echo $contextual_help . PHP_EOL;
+		$my_help .= '<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
+		$my_help .= '<p>' . __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'IDs', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+		$my_help .= __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>0</strong> ' . __( 'for categories without assignment.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+		$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately apply mappings to existing posts/pages.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+		$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
 		
+		/*	WordPress default help */
+		$my_help .= '<h3>WordPress</h3>' . PHP_EOL;
+		$my_help .= $contextual_help;
+		
+		/*	display table of images */
+		$my_help .= '<h3>' . __( 'Available images', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
+		$my_help .= '<p>' . PHP_EOL;
+
+		/*	start of images table */
+		$my_help .= '<table width="100%">' . PHP_EOL;
+		$my_help .= '<theader>' . PHP_EOL;
+		$my_help .= '	<tr>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '	</tr>' . PHP_EOL;
+		$my_help .= '</theader>' . PHP_EOL;
+		$my_help .= '<tbody>' . PHP_EOL;
+		
+		$i = 1;
+
+		/*	get available images from media library */
+		$args = array(
+			'post_type' => 'attachment',
+			'post_mime_type' => 'image/jpeg,image/png,image/gif',
+			'numberposts' => -1,
+			'post_status' => null,
+			'orderby' => 'ID',
+			'post_parent' => $post->ID
+		);
+	
+		$attachments = get_posts($args);
+	
+		if ($attachments) {
+			foreach ($attachments as $attachment) {
+				if ( 1 == $i ) {
+					$my_help .= '	<tr>' . PHP_EOL;
+					$my_help .= '		<td><img src="' . wp_get_attachment_url($attachment->ID) . '" width="64" /></td>' . PHP_EOL;
+					$my_help .= '		<td>' . $attachment->ID . '</td>' . PHP_EOL;
+					$i = 2;
+				} else if ( 2 == $i ) {
+					$my_help .= '		<td><img src="' . wp_get_attachment_url($attachment->ID) . '" width="64" /></td>' . PHP_EOL;
+					$my_help .= '		<td>' . $attachment->ID . '</td>' . PHP_EOL;
+					$i = 3;
+				} else if ( 3 == $i ) {
+					$my_help .= '		<td><img src="' . wp_get_attachment_url($attachment->ID) . '" width="64" /></td>' . PHP_EOL;
+					$my_help .= '		<td>' . $attachment->ID . '</td>' . PHP_EOL;
+					$i = 4;
+				} else {
+					$my_help .= '		<td><img src="' . wp_get_attachment_url($attachment->ID) . '" width="64" /></td>' . PHP_EOL;
+					$my_help .= '		<td>' . $attachment->ID . '</td>' . PHP_EOL;
+					$my_help .= '	</tr>' . PHP_EOL;
+					$i = 1;
+				}
+			}
+		}
+	
+		/*	end of images table */
+		$my_help .= '</tbody>' . PHP_EOL;
+		$my_help .= '</table>' . PHP_EOL;
+	
+		$my_help .= '</p>' . PHP_EOL;
+		$contextual_help = $my_help;
 	}
+	return $contextual_help; 
 }
 
 /*	----------------------
@@ -119,6 +185,8 @@ function fpw_cat_thumbs_help($contextual_help, $screen_id, $screen) {
 	------------------- */
 
 function fpw_cat_thumbs_settings() {
+	$plugin_version = '1.1.6';
+	
 	/* base name for uninstall file */
 	$uninstall = ABSPATH . PLUGINDIR . '/' . dirname( plugin_basename( __FILE__ ) ) . '/uninstall.';
 	
@@ -238,13 +306,13 @@ function fpw_cat_thumbs_settings() {
 	---------------------- */
 	
 	echo '<div class="wrap">' . PHP_EOL;
-	echo '	<h2>' . __('FPW Category Thumbnails (1.1.8) - Settings', 'fpw-category-thumbnails') . '</h2>' . PHP_EOL;
+	echo '	<h2>' . __( 'FPW Category Thumbnails - Settings', 'fpw-category-thumbnails' ) . ' (1.1.8)</h2>' . PHP_EOL;
 
     /*	display warning if current theme doesn't support post thumbnails */
     if ( !current_theme_supports( 'post-thumbnails') ) {
     	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;"><p><strong>';
 		echo __( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . ' '; 
-		echo __( 'You can continue but until you add add_theme_support( \'post-thumbnails\' ); to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ); 
+		echo __( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ); 
 		echo '</strong></p></div>' . PHP_EOL;
 	}
 	
@@ -325,41 +393,6 @@ function fpw_cat_thumbs_settings() {
 	
 	/*	end of form */
 	echo '		</form>' . PHP_EOL;
-	echo '	</p>' . PHP_EOL;
-	echo '	<h3>' . __( 'Available images', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-	echo '	<p>' . PHP_EOL;
-
-	/*	start of images table */
-	echo '		<table class="widefat">' . PHP_EOL;
-	echo '			<tr>' . PHP_EOL;
-	echo '				<th width="25%" style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '				<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '			</tr>' . PHP_EOL;
-
-	/*	get available images from media library */
-	$args = array(
-		'post_type' => 'attachment',
-		'post_mime_type' => 'image/jpeg,image/png,image/gif',
-		'numberposts' => -1,
-		'post_status' => null,
-		'orderby' => 'ID',
-		'post_parent' => $post->ID
-	);
-	
-	$attachments = get_posts($args);
-	
-	if ($attachments) {
-		foreach ($attachments as $attachment) {
-			echo '			<tr>' . PHP_EOL;
-			echo '				<td><img src="' . wp_get_attachment_url($attachment->ID) . '" width="64" /></td>' . PHP_EOL;
-			echo '				<td>' . $attachment->ID . '</td>' . PHP_EOL;
-			echo '			</tr>' . PHP_EOL;
-		}
-	}
-	
-	/*	end of images table */
-	echo '		</table>' . PHP_EOL;
-	
 	echo '	</p>' . PHP_EOL;
 	echo '</div>' . PHP_EOL;
 }
