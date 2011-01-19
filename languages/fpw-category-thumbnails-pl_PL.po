@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FPW Category Thumbnails 1.1.6\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
-"POT-Creation-Date: 2011-01-15 15:54:41+00:00\n"
-"PO-Revision-Date: 2011-01-15 08:55-0700\n"
+"POT-Creation-Date: 2011-01-19 08:57:55+00:00\n"
+"PO-Revision-Date: 2011-01-19 02:02-0700\n"
 "Last-Translator: Frank P. Walentynowicz <frankpw@fw2s.com>\n"
 "Language-Team: Frank P. Walentynowicz <frankpw@fw2s.com>\n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: fpw-category-thumbnails.php:44
-#: fpw-category-thumbnails.php:241
-msgid "FPW Category Thumbnails (1.1.7) - Settings"
-msgstr "FPW Miniaturki Kategorii (1.1.7) - Ustawienia"
+#: fpw-category-thumbnails.php:309
+msgid "FPW Category Thumbnails - Settings"
+msgstr "FPW Miniaturki Kategorii - Ustawienia"
 
-#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.1.7)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.1.8)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: fpw-category-thumbnails.php:45
 msgid "FPW Category Thumbnails"
@@ -30,130 +30,136 @@ msgstr "FPW Miniaturki Kategorii"
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: fpw-category-thumbnails.php:102
+#: fpw-category-thumbnails.php:100
 msgid "Description"
 msgstr "Opis"
 
-#: fpw-category-thumbnails.php:103
+#: fpw-category-thumbnails.php:101
 msgid "This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated."
 msgstr "Wtyczka przydziela miniaturkę, gdy wpis jest tworzony lub edytowany, na podstawie przyporządkowania miniaturek do kategorii. "
 
-#: fpw-category-thumbnails.php:104
+#: fpw-category-thumbnails.php:102
 msgid "Note"
 msgstr "Uwaga"
 
-#: fpw-category-thumbnails.php:104
+#: fpw-category-thumbnails.php:102
 msgid "please remember that your theme must support post thumbnails."
 msgstr "proszę pamiętać, że Twój motyw musi wspomagać miniaturki wpisów."
 
-#: fpw-category-thumbnails.php:107
+#: fpw-category-thumbnails.php:105
 msgid "Instructions"
 msgstr "Instrukcje"
 
-#: fpw-category-thumbnails.php:108
-#: fpw-category-thumbnails.php:109
+#: fpw-category-thumbnails.php:106
+#: fpw-category-thumbnails.php:107
 msgid "Enter"
 msgstr "Wprowadż"
 
-#: fpw-category-thumbnails.php:108
+#: fpw-category-thumbnails.php:106
 msgid "IDs"
 msgstr "identyfikatory"
 
-#: fpw-category-thumbnails.php:108
+#: fpw-category-thumbnails.php:106
 msgid "of thumbnail images for corresponding categories."
 msgstr "miniaturek dla odpowiadających im kategorii."
 
-#: fpw-category-thumbnails.php:109
+#: fpw-category-thumbnails.php:107
 msgid "for categories without assignment."
 msgstr "dla kategorii bez przyporządkowania."
 
-#: fpw-category-thumbnails.php:110
-#: fpw-category-thumbnails.php:111
+#: fpw-category-thumbnails.php:108
+#: fpw-category-thumbnails.php:109
 msgid "Click on"
 msgstr "Kliknij na"
 
-#: fpw-category-thumbnails.php:110
-#: fpw-category-thumbnails.php:323
+#: fpw-category-thumbnails.php:108
+#: fpw-category-thumbnails.php:391
 msgid "Apply to all existing posts/pages"
 msgstr "Zastosuj dla wszystkich istniejących wpisów/stron"
 
-#: fpw-category-thumbnails.php:110
+#: fpw-category-thumbnails.php:108
 msgid "to immediately apply mappings to existing posts/pages."
 msgstr ", aby natychmiast zastosować przyporządkowania do istniejących wpisów/stron."
 
-#: fpw-category-thumbnails.php:111
-#: fpw-category-thumbnails.php:324
+#: fpw-category-thumbnails.php:109
+#: fpw-category-thumbnails.php:392
 msgid "Remove all thumbnails from existing posts/pages"
 msgstr "Usuń wszystkie miniaturki z istniejących wpisów/stron"
 
-#: fpw-category-thumbnails.php:111
+#: fpw-category-thumbnails.php:109
 msgid "to immediately remove thumbnails from existing posts/pages."
 msgstr ", aby natychmiast usunąć miniaturki z istniejących wpisów/stron."
 
-#: fpw-category-thumbnails.php:246
-msgid "WARNING: Your theme has no support for <em>post thumbnails</em>!"
-msgstr "Ostrzeżenie: Twój motyw nie ma wspomagania dla <em>miniaturek wpisów</em>!"
-
-#: fpw-category-thumbnails.php:247
-msgid "You can continue but until you add add_theme_support( 'post-thumbnails' ); to the theme's functions.php you will not be able to display thumbnails."
-msgstr "Możesz kontynuować ustawienia, jednak przed dodaniem add_theme_support('post-thumbnails'); do functions.php motywu, wyświetlanie miniaturek nie będzie możliwe."
-
-#: fpw-category-thumbnails.php:254
-msgid "Settings updated successfully."
-msgstr "Aktualizacja ustawień zakończyła się pomyślnie."
-
-#: fpw-category-thumbnails.php:256
-msgid "No changes detected. Nothing to update."
-msgstr "Nie wykryto zmian. Nie ma nic do aktualizowania."
-
-#: fpw-category-thumbnails.php:261
-msgid "Applied to existing posts/pages successfully."
-msgstr "Pomyślnie zastosowano dla istniejących wpisów/stron."
-
-#: fpw-category-thumbnails.php:265
-msgid "All thumbnails removed successfully."
-msgstr "Pomyślnie usunięto wszystkie miniaturki."
-
-#: fpw-category-thumbnails.php:268
-msgid "For instructions click on"
-msgstr "Aby wyświetlić instrukcje, kliknij na"
-
-#: fpw-category-thumbnails.php:268
-msgid "Help"
-msgstr "Pomoc"
-
-#: fpw-category-thumbnails.php:268
-msgid "above"
-msgstr "powyżej"
-
-#: fpw-category-thumbnails.php:283
-msgid "Do not overwrite if post/page has thumbnail assigned allready"
-msgstr "Nie zmieniaj, jeśli wpis/strona ma już przydzieloną miniaturkę"
-
-#: fpw-category-thumbnails.php:288
-msgid "Remove plugin's data from database on uninstall"
-msgstr "Usuń dane z bazy danych podczas usuwania wtyczki"
-
-#: fpw-category-thumbnails.php:293
-msgid "Category (ID)"
-msgstr "Kategoria (ID)"
-
-#: fpw-category-thumbnails.php:294
-#: fpw-category-thumbnails.php:336
-msgid "Image ID"
-msgstr "ID Obrazka"
-
-#: fpw-category-thumbnails.php:322
-msgid "Update"
-msgstr "Aktualizacja"
-
-#: fpw-category-thumbnails.php:329
+#: fpw-category-thumbnails.php:116
 msgid "Available images"
 msgstr "Dostępne obrazki"
 
-#: fpw-category-thumbnails.php:335
+#: fpw-category-thumbnails.php:123
+#: fpw-category-thumbnails.php:125
+#: fpw-category-thumbnails.php:127
+#: fpw-category-thumbnails.php:129
 msgid "Image"
 msgstr "Obrazek"
+
+#: fpw-category-thumbnails.php:124
+#: fpw-category-thumbnails.php:126
+#: fpw-category-thumbnails.php:128
+#: fpw-category-thumbnails.php:130
+#: fpw-category-thumbnails.php:362
+msgid "Image ID"
+msgstr "ID Obrazka"
+
+#: fpw-category-thumbnails.php:314
+msgid "WARNING: Your theme has no support for <em>post thumbnails</em>!"
+msgstr "Ostrzeżenie: Twój motyw nie ma wspomagania dla <em>miniaturek wpisów</em>!"
+
+#: fpw-category-thumbnails.php:315
+msgid "You can continue with <em>Settings</em> but until you add <code>add_theme_support( 'post-thumbnails' );</code> to the theme's functions.php you will not be able to display thumbnails."
+msgstr "Możesz kontynuować ustawienia, jednak przed dodaniem add_theme_support('post-thumbnails'); do functions.php motywu, wyświetlanie miniaturek nie będzie możliwe."
+
+#: fpw-category-thumbnails.php:322
+msgid "Settings updated successfully."
+msgstr "Aktualizacja ustawień zakończyła się pomyślnie."
+
+#: fpw-category-thumbnails.php:324
+msgid "No changes detected. Nothing to update."
+msgstr "Nie wykryto zmian. Nie ma nic do aktualizowania."
+
+#: fpw-category-thumbnails.php:329
+msgid "Applied to existing posts/pages successfully."
+msgstr "Pomyślnie zastosowano dla istniejących wpisów/stron."
+
+#: fpw-category-thumbnails.php:333
+msgid "All thumbnails removed successfully."
+msgstr "Pomyślnie usunięto wszystkie miniaturki."
+
+#: fpw-category-thumbnails.php:336
+msgid "For instructions click on"
+msgstr "Aby wyświetlić instrukcje, kliknij na"
+
+#: fpw-category-thumbnails.php:336
+msgid "Help"
+msgstr "Pomoc"
+
+#: fpw-category-thumbnails.php:336
+msgid "above"
+msgstr "powyżej"
+
+#: fpw-category-thumbnails.php:351
+msgid "Do not overwrite if post/page has thumbnail assigned allready"
+msgstr "Nie zmieniaj, jeśli wpis/strona ma już przydzieloną miniaturkę"
+
+#: fpw-category-thumbnails.php:356
+msgid "Remove plugin's data from database on uninstall"
+msgstr "Usuń dane z bazy danych podczas usuwania wtyczki"
+
+#: fpw-category-thumbnails.php:361
+msgid "Category (ID)"
+msgstr "Kategoria (ID)"
+
+#: fpw-category-thumbnails.php:390
+msgid "Update"
+msgstr "Aktualizacja"
 
 #. Plugin URI of the plugin/theme
 msgid "http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/"
