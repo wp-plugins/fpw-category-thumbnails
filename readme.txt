@@ -4,7 +4,7 @@ Donate link:
 Tags: category, thumbnail
 Requires at least: 2.9.0
 Tested up to: 3.0.4
-Stable tag: 1.1.8
+Stable tag: 1.1.9
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
 the post is created or updated.
@@ -34,6 +34,9 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 1. Settings Page
 
 == Changelog ==
+
+= 1.1.9 =
+* Added plugin's dashboard info widget
 
 = 1.1.8 =
 * Changed minimum role required to manage settings
