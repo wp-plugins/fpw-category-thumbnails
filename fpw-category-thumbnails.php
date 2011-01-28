@@ -389,7 +389,7 @@ function fpw_cat_thumbs_settings() {
 	/*	do not overwrite checkbox */
 	echo '			<input type="checkbox" name="donotover" value="yes"';
 	if ( $fpw_options[ 'donotover' ] ) echo ' checked';
-	echo "> " . __( "Do not overwrite if post/page has thumbnail assigned allready", 'fpw-category-thumbnails' ) . "<br />" . PHP_EOL;
+	echo "> " . __( "Do not overwrite if post/page has thumbnail assigned already", 'fpw-category-thumbnails' ) . "<br />" . PHP_EOL;
 
 	/*	cleanup checkbox */
 	echo '			<input type="checkbox" name="cleanup" value="yes"';
