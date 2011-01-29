@@ -427,7 +427,7 @@ function fpw_cat_thumbs_settings() {
 	echo '			</table>' . PHP_EOL;
 	
 	/*	submit button */
-	echo '			<div class="inputbutton"><input type="submit" name="fpw_cat_thmb_submit" value="' . __( 'Update', 'fpw-category-thumbnails' ) . '" /> ';
+	echo '			<div class="inputbutton"><input type="submit" name="fpw_cat_thmb_submit" value="' . __( 'Update Settings', 'fpw-category-thumbnails' ) . '" /> ';
 	echo '<input type="submit" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '" /> ';
 	echo '<input type="submit" name="fpw_cat_thmb_submit_remove" value="' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '" /></div>' . PHP_EOL;
 	
