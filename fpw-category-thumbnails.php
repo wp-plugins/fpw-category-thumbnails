@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.2.0
+Version: 1.2.1
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 global	$fpw_category_thumbnails_version;
-$fpw_category_thumbnails_version = '1.2.0';
+$fpw_category_thumbnails_version = '1.2.1';
 
 /*	--------------------------------
 	Load text domain for translation
@@ -461,8 +461,16 @@ function fpw_update_category_thumbnail_id($post_id, $post) {
 	if ( $map ) {
 		$cat = get_the_category( $post_id );
 		foreach ( $cat as $c ) {
-			if ( ( array_key_exists( $c->cat_ID, $map ) ) && ( ( '' == $thumb_id ) || !( $do_notover ) ) )
-				update_post_meta( $post_id, '_thumbnail_id', $map[$c->cat_ID] );
+			if ( $post->post_date === $post->post_modified ) {
+				/*	in case of a new post we have to ignore setting of $do_notover flag
+					as the thumbnail of default category will be there already */
+				if ( array_key_exists( $c->cat_ID, $map ) )
+					update_post_meta( $post_id, '_thumbnail_id', $map[$c->cat_ID] );
+			} else {
+				/*	modified post - observe $do_notover flag */
+				if ( ( array_key_exists( $c->cat_ID, $map ) ) && ( ( '' == $thumb_id ) || !( $do_notover ) ) )
+					update_post_meta( $post_id, '_thumbnail_id', $map[$c->cat_ID] );
+			}
   		}
 	}
 }	
