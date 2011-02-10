@@ -294,9 +294,13 @@ function fpw_cat_thumbs_settings() {
 		foreach ( $posts as $post ) {
 			$post_id = $post->ID;
 			if ( $_POST['fpw_cat_thmb_submit_remove'] ) {
-				delete_post_meta($post_id,'_thumbnail_id');
+				/*	make sure this is not a revision */
+				if ( 'revision' != $post->post_type )
+					delete_post_meta($post_id,'_thumbnail_id');
 			} else {
-				fpw_update_category_thumbnail_id($post_id, $post);
+				/*	make sure this is not a revision */
+				if ( 'revision' != $post->post_type )
+					fpw_update_category_thumbnail_id($post_id, $post);
 			}
 		}
 	}
@@ -445,6 +449,10 @@ function fpw_cat_thumbs_settings() {
 add_action( 'save_post', 'fpw_update_category_thumbnail_id', 10, 2 );
 	
 function fpw_update_category_thumbnail_id($post_id, $post) {
+	/*	we don't want to apply changes to post's revision */
+	if ( 'revision' == $post->post_type )
+		return;
+	/*	this is actual post */
 	$thumb_id = get_post_meta( $post_id, '_thumbnail_id', TRUE );
 	$do_notover = get_option( 'fpw_category_thumb_opt' );
 	if ( $do_notover )
