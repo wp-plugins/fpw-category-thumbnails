@@ -35,8 +35,11 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.2.1 =
+* Fixed a bug ( for a new posts only ) causing default category thumbnail being set instead of the one of selected category when do not overwrite flag is on
+
 = 1.2.0 =
-Added checks to avoid operations on post revisions
+* Added checks to avoid operations on post revisions
 
 = 1.1.9 =
 * Added plugin's dashboard info widget
