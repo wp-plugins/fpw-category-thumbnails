@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the FPW Category Thumbnails package.
 msgid ""
 msgstr ""
-"Project-Id-Version: FPW Category Thumbnails 1.1.9\n"
+"Project-Id-Version: FPW Category Thumbnails 1.2.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
 "POT-Creation-Date: 2011-01-29 17:50:39+00:00\n"
-"PO-Revision-Date: 2011-01-29 10:53-0700\n"
+"PO-Revision-Date: 2011-02-10 04:33-0700\n"
 "Last-Translator: Frank P. Walentynowicz <frankpw@fw2s.com>\n"
 "Language-Team: Frank P. Walentynowicz <frankpw@fw2s.com>\n"
 "MIME-Version: 1.0\n"
