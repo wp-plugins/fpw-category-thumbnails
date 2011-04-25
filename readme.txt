@@ -3,7 +3,7 @@ Contributors: frankpw
 Donate link: 
 Tags: category, thumbnail
 Requires at least: 2.9.0
-Tested up to: 3.0.5
+Tested up to: 3.1.1
 Stable tag: 1.2.1
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
@@ -34,6 +34,9 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 1. Settings Page
 
 == Changelog ==
+
+= 1.2.2 =
+* Minor code improvements. Extensive tests on WP 3.1.1
 
 = 1.2.1 =
 * Fixed a bug ( new posts only ) causing default category thumbnail being set instead of the one of selected category when do not overwrite flag is on
