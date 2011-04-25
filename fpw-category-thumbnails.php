@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.2.1
+Version: 1.2.2
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 global	$fpw_category_thumbnails_version;
-$fpw_category_thumbnails_version = '1.2.1';
+$fpw_category_thumbnails_version = '1.2.2';
 
 /*	--------------------------------
 	Load text domain for translation
@@ -148,13 +148,8 @@ function fpw_cat_thumbs_help($contextual_help, $screen_id, $screen) {
 		$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately apply mappings to existing posts/pages.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
 		$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
 		
-		/*	WordPress default help */
-		$my_help .= '<h3>WordPress</h3>' . PHP_EOL;
-		$my_help .= $contextual_help;
-		
 		/*	display table of images */
 		$my_help .= '<h3>' . __( 'Available images', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-		$my_help .= '<p>' . PHP_EOL;
 
 		/*	start of images table */
 		$my_help .= '<table width="100%">' . PHP_EOL;
@@ -201,20 +196,57 @@ function fpw_cat_thumbs_help($contextual_help, $screen_id, $screen) {
 					$my_help .= '		<td><img src="' . wp_get_attachment_url($attachment->ID) . '" width="64" /></td>' . PHP_EOL;
 					$my_help .= '		<td>' . $attachment->ID . '</td>' . PHP_EOL;
 					$i = 4;
-				} else {
+				} else if ( 4 == $i ) {
 					$my_help .= '		<td><img src="' . wp_get_attachment_url($attachment->ID) . '" width="64" /></td>' . PHP_EOL;
 					$my_help .= '		<td>' . $attachment->ID . '</td>' . PHP_EOL;
 					$my_help .= '	</tr>' . PHP_EOL;
 					$i = 1;
 				}
 			}
+			if ( 2 == $i ) {
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '    </tr>' . PHP_EOL;
+			} else if ( 3 == $i ) {
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '    </tr>' . PHP_EOL;
+			} else if ( 4 == $i ) {
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '        <td>&nbsp;</td>' . PHP_EOL;
+				$my_help .= '    </tr>' . PHP_EOL;
+			}
 		}
+
+		$my_help .= '<tfooter>' . PHP_EOL;
+		$my_help .= '	<tr>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '		<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+		$my_help .= '	</tr>' . PHP_EOL;
+		$my_help .= '</tfooter>' . PHP_EOL;
 	
 		/*	end of images table */
 		$my_help .= '</tbody>' . PHP_EOL;
 		$my_help .= '</table>' . PHP_EOL;
-	
+
+		/*	WordPress default help */
+		$my_help .= '<h3>WordPress</h3>' . PHP_EOL;
+		$my_help .= '<p>' . PHP_EOL;
+		$my_help .= $contextual_help;
 		$my_help .= '</p>' . PHP_EOL;
+
 		$contextual_help = $my_help;
 	}
 	return $contextual_help; 
@@ -439,6 +471,12 @@ function fpw_cat_thumbs_settings() {
 	echo '		</form>' . PHP_EOL;
 	echo '	</p>' . PHP_EOL;
 	echo '</div>' . PHP_EOL;
+	echo '<div><p>&nbsp;</p></div>' . PHP_EOL;
+	echo '<div><p>&nbsp;</p></div>' . PHP_EOL;
+	echo '<div><p>&nbsp;</p></div>' . PHP_EOL;
+	echo '<div><p>&nbsp;</p></div>' . PHP_EOL;
+	echo '<div><p>&nbsp;</p></div>' . PHP_EOL;
+	echo '<div><p>&nbsp;</p></div>' . PHP_EOL;
 }
 
 /*	----------------------------------------------------------------------
