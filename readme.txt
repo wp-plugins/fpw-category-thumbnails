@@ -3,8 +3,8 @@ Contributors: frankpw
 Donate link: 
 Tags: category, thumbnail
 Requires at least: 2.9.0
-Tested up to: 3.1.1
-Stable tag: 1.2.2
+Tested up to: 3.1.2
+Stable tag: 1.2.3
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
 the post is created or updated.
@@ -34,6 +34,11 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 1. Settings Page
 
 == Changelog ==
+
+= 1.2.3 =
+* Changed code to properly recognize location of installation core files
+* Security related changes
+* Visual enhancements to Settings page
 
 = 1.2.2 =
 * Minor code improvements. Extensive tests on WP 3.1.1
