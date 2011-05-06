@@ -4,7 +4,7 @@ Donate link:
 Tags: category, thumbnail
 Requires at least: 2.9.0
 Tested up to: 3.1.2
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
 the post is created or updated.
