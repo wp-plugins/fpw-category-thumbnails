@@ -35,6 +35,11 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.3.0 =
+* Major release
+* Added support for media upload
+* Code cleanup
+
 = 1.2.3 =
 * Changed code to properly recognize location of installation core files
 * Security related changes
