@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.3.0
+Version: 1.3.1
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -24,13 +24,21 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 global	$fpw_category_thumbnails_version;
-$fpw_category_thumbnails_version = '1.3.0';
+$fpw_category_thumbnails_version = '1.3.1';
 
 //	Load text domain for translation
 function fpw_category_thumbnails_init(){
 	load_plugin_textdomain( 'fpw-category-thumbnails', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
 }	
 add_action( 'init', 'fpw_category_thumbnails_init', 1 );
+
+//	Register scripts and styles
+function fpw_category_thumbnails_admin_init() {
+	wp_register_style( 'fpw-category-thumbnails-alerts-css', WP_PLUGIN_URL . '/fpw-category-thumbnails/js/css/jquery.alerts.css' );
+	wp_register_script( 'fpw-category-thumbnails-alerts', WP_PLUGIN_URL . '/fpw-category-thumbnails/js/jquery.alerts.js', array( 'jquery' ) );
+	wp_register_script( 'fpw-category-thumbnails-upload', WP_PLUGIN_URL . '/fpw-category-thumbnails/js/fpw-category-thumbnails.js', array( 'jquery', 'media-upload', 'thickbox', 'fpw-category-thumbnails-alerts' ) );
+}
+add_action( 'admin_init', 'fpw_category_thumbnails_admin_init' );
 
 //	Register plugin's menu in Settings
 function fpw_cat_thumbs_settings_menu() {
@@ -39,8 +47,11 @@ function fpw_cat_thumbs_settings_menu() {
 	$page_title = __( 'FPW Category Thumbnails - Settings', 'fpw-category-thumbnails') . ' (' . $fpw_category_thumbnails_version . ')';
 	$menu_title = __( 'FPW Category Thumbnails', 'fpw-category-thumbnails');
 	$fpw_cat_thumbs_hook = add_options_page( $page_title, $menu_title, 'manage_options', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
+	add_action('admin_print_styles-' . $fpw_cat_thumbs_hook, 'fpw_category_thumbnails_admin_styles');
 }
 add_action( 'admin_menu', 'fpw_cat_thumbs_settings_menu' );
+
+
 
 //	Register plugin's Dashboard widget
 function fpw_cat_thumbs_add_dashboard_widgets() {
@@ -147,18 +158,14 @@ function fpw_cat_thumbs_help( $contextual_help, $screen_id, $screen ) {
 add_filter( 'contextual_help', 'fpw_cat_thumbs_help', 10, 3 );
 
 //	load scripts and styles
-function fpw_category_thumbnails_admin_scripts() {
+function fpw_category_thumbnails_admin_styles() {
+	wp_enqueue_style( 'fpw-category-thumbnails-alerts-css' );
+	wp_enqueue_style( 'thickbox' );
 	wp_enqueue_script( 'media-upload' );
 	wp_enqueue_script( 'thickbox' );
-	wp_register_script( 'fpw-category-thumbnails-upload', WP_PLUGIN_URL . '/fpw-category-thumbnails/js/fpw-category-thumbnails.js', array( 'jquery', 'media-upload', 'thickbox') );
+	wp_enqueue_script( 'fpw-category-thumbnails-alerts' );
 	wp_enqueue_script( 'fpw-category-thumbnails-upload' );
 }
-add_action( 'admin_print_scripts', 'fpw_category_thumbnails_admin_scripts' );
-
-function fpw_category_thumbnails_admin_styles() {
-	wp_enqueue_style( 'thickbox' );
-}
-add_action( 'admin_print_styles', 'fpw_category_thumbnails_admin_styles' );
 
 /*	----------------------
 	Plugin's settings page
@@ -351,15 +358,16 @@ function fpw_cat_thumbs_settings() {
 	echo '<tr>' . PHP_EOL;
 	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '<th width="100px" style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	// echo '<th style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th style="text-align: left;">' . __( 'Get Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '<th width="40px" style="text-align: left;">' . __( 'Get ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '<th style="text-align: left;">' . __( 'Clear', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '</tr>' . PHP_EOL;
 	echo '</thead>' . PHP_EOL;
 	echo '<tfoot>' . PHP_EOL;
 	echo '<tr>' . PHP_EOL;
 	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '<th width="100px" style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th style="text-align: left;">' . __( 'Get Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '<th width="40px" style="text-align: left;">' . __( 'Get ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '<th style="text-align: left;">' . __( 'Clear', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '</tr>' . PHP_EOL;
 	echo '</tfoot>' . PHP_EOL;
 	echo '<tbody>' . PHP_EOL;
@@ -377,8 +385,11 @@ function fpw_cat_thumbs_settings() {
 		echo '<td><input id="val-for-id-' . key( $assignments ) . '" type="text" size="10" maxlength="10" name="val-for-id-' . key( $assignments );
 		echo '-field" value="' . $assignments[ key( $assignments ) ] . '" /></td>' . PHP_EOL;
 		echo '<td><div class="inputbutton">';
-		echo '<input class="button-secondary" id="get-for-id-' . key( $assignments ) . '" type="button" name="get-for-id-' . key( $assignments );
+		echo '<input class="button-secondary btn-for-get" id="get-for-id-' . key( $assignments ) . '" type="button" name="get-for-id-' . key( $assignments );
 		echo '" value="' . __( 'Get', 'fpw-category-thumbnails' ) . '" /></div></td>' . PHP_EOL;
+		echo '<td><div class="inputbutton">';
+		echo '<input class="button-secondary btn-for-clear" id="clear-for-id-' . key( $assignments ) . '" type="button" name="clear-for-id-' . key( $assignments );
+		echo '" value="' . __( 'Clear', 'fpw-category-thumbnails' ) . '" /></div></td>' . PHP_EOL;
 		echo '</tr>' . PHP_EOL;
 		$i++;
 		next( $assignments );

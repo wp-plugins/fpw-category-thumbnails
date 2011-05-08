@@ -35,6 +35,10 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.3.1 =
+* Fixed problem with javascripts conflicts
+* Added a button to clear assigned image id
+
 = 1.3.0 =
 * Major release
 * Added support for media upload
