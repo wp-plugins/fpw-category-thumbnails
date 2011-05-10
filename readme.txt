@@ -4,7 +4,7 @@ Donate link:
 Tags: category, thumbnail
 Requires at least: 2.9.0
 Tested up to: 3.1.2
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
 the post is created or updated.
@@ -34,6 +34,9 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 1. Settings Page
 
 == Changelog ==
+
+= 1.3.2 =
+* Fixed problem with extraction of image id from NextGEN library
 
 = 1.3.1 =
 * Fixed problem with javascripts conflicts
