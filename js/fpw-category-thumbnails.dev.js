@@ -5,12 +5,20 @@ jQuery( document ).ready( function() {
 		id = id.slice( ( id.search( /get-for-id-/ ) + 11 ), id.length );
 		send_to_editor_clone = window.send_to_editor;
 		window.send_to_editor = function( html ) {
-			img_id = jQuery( 'img', html ).attr( 'class' );
-			if ( typeof img_id === 'undefined' ) {
-				jAlert( "<strong>Link URL</strong> cannot be empty or malformed!<br /><br />Next time click on <strong>File URL</strong> or <strong>Post URL</strong> preset<br />before clicking <strong>Insert into Post</strong>." );
+			std = html.search( /wp-image-/ );
+			nxt = html.search( /\[singlepic/ );
+			if ( std >= 0 ) {
+				img_id = html.slice( ( html.search( /wp-image-/ ) + 9 ), html.length );
+				img_id = img_id.replace(/[^\d]/g, "");
+			}
+			if ( nxt >= 0 ) {
+				arr = html.split( " " );
+				img_id = 'ngg-' + arr[1].slice( ( arr[1].search( /id=/ ) + 3 ), arr[1].length );
+			}
+			if ( std == -1 && nxt == -1 ) {
+				jAlert( "To get id of an image from <strong>NextGEN</strong> gallery you <strong>MUST</strong> select <strong>Size</strong> - <strong>Singlepc</strong><br />before clicking <strong>Insert into Post</strong>." );
 			}
 			else {
-				img_id = img_id.slice( ( img_id.search( /wp-image-/ ) + 9 ), img_id.length );
 				jQuery( '#val-for-id-' + id ).val( img_id );
 			}
 			tb_remove();
