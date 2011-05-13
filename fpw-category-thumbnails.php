@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.3.2
+Version: 1.3.3
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -23,8 +23,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-global	$fpw_category_thumbnails_version;
-$fpw_category_thumbnails_version = '1.3.2';
+global	$fpw_category_thumbnails_version, $wp_version;
+$fpw_category_thumbnails_version = '1.3.3';
 
 //	Load text domain for translation
 function fpw_category_thumbnails_init(){
@@ -50,6 +50,33 @@ function fpw_cat_thumbs_settings_menu() {
 	add_action('admin_print_styles-' . $fpw_cat_thumbs_hook, 'fpw_category_thumbnails_admin_styles');
 }
 add_action( 'admin_menu', 'fpw_cat_thumbs_settings_menu' );
+
+//	Register plugin's menu in admin bar for WP 3.1+
+if ( '3.1' <= $wp_version ) {
+	function fpw_cat_thumbs_settings_in_admin_bar() {
+		if ( current_user_can( 'edit_plugins' ) && is_admin() ) {
+			global $wp_admin_bar;
+
+			$main = array(
+				'id' => 'fpw_plugins',
+				'title' => __( 'FPW Plugins', 'fpw-category-thumbnails' ),
+				'href' => '#' );
+
+			$subm = array(
+				'id' => 'fpw_bar_category_thumbnails',
+				'parent' => 'fpw_plugins',
+				'title' => __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ),
+				'href' => get_admin_url() . 'options-general.php?page=fpw-category-thumbnails' );
+	
+			$addmain = ( is_array($wp_admin_bar->menu->fpw_plugins) ) ? false : true; 
+	
+			if ( $addmain )
+				$wp_admin_bar->add_menu( $main );
+			$wp_admin_bar->add_menu( $subm );
+		}
+	}
+	add_action( 'admin_bar_menu', 'fpw_cat_thumbs_settings_in_admin_bar', 1010 );
+}
 
 //	Register plugin's Dashboard widget
 function fpw_cat_thumbs_add_dashboard_widgets() {

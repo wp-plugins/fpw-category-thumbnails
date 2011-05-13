@@ -35,6 +35,9 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.3.3 =
+* Added FPW Plugins to admin bar for WordPress 3.1+
+
 = 1.3.2 =
 * Fixed problem with extraction of image id from NextGEN library
 
