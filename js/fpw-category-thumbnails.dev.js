@@ -1,8 +1,10 @@
 jQuery( document ).ready( function() {
+
 	jQuery( '.btn-for-get' ).click( function() {
 		id = this.id;
 		id = id.substr( 11 );
 		send_to_editor_clone = window.send_to_editor;
+
 		window.send_to_editor = function( html ) {
 			std = html.search( /wp-image-/ );
 			nxt = html.search( /\[singlepic/ );
@@ -23,15 +25,20 @@ jQuery( document ).ready( function() {
 			tb_remove();
 			window.send_to_editor = send_to_editor_clone;
 		}
+
 		tb_show( 'Get Image ID', 'media-upload.php?type=image&amp;TB_iframe=true' );
 		return false;
 	});
+
 	jQuery( '.btn-for-clear').click( function() {
 		id = this.id;
 		id = id.substr( 13 );
+
 		jConfirm('Are you sure you want to clear this ID?', 'Confirmation Dialog', function(r) {
 			if ( r ) jQuery( '#val-for-id-' + id ).val( 0 );
 		});
+
 		return false;
 	});
+
 });
