@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.3.4
+Version: 1.3.3
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -12,12 +12,10 @@ Copyright 2011 Frank P. Walentynowicz (email : frankpw@fw2s.com)
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
 published by the Free Software Foundation.
-
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -37,8 +35,6 @@ function fpw_category_thumbnails_admin_init() {
 	wp_register_style( 'fpw-category-thumbnails-alerts-css', WP_PLUGIN_URL . '/fpw-category-thumbnails/js/css/jquery.alerts.css' );
 	wp_register_script( 'fpw-category-thumbnails-alerts', WP_PLUGIN_URL . '/fpw-category-thumbnails/js/jquery.alerts.js', array( 'jquery' ) );
 	wp_register_script( 'fpw-category-thumbnails-upload', WP_PLUGIN_URL . '/fpw-category-thumbnails/js/fpw-category-thumbnails.js', array( 'jquery', 'media-upload', 'thickbox', 'fpw-category-thumbnails-alerts' ) );
-	if ( basename( $_SERVER['SCRIPT_FILENAME'] ) == 'media-upload.php' && array_key_exists( 'slt_fs_field', $_GET ) )
-		add_filter( 'flash_uploader', create_function( '$a','return false;' ), 5 );
 }
 add_action( 'admin_init', 'fpw_category_thumbnails_admin_init' );
 
@@ -56,22 +52,18 @@ add_action( 'admin_menu', 'fpw_cat_thumbs_settings_menu' );
 //	Register plugin's menu in admin bar for WP 3.1+
 if ( '3.1' <= $wp_version ) {
 	function fpw_cat_thumbs_settings_in_admin_bar() {
-		if ( current_user_can( 'edit_plugins' ) ) {
+		if ( current_user_can( 'edit_plugins' ) && is_admin() ) {
 			global $wp_admin_bar;
-
 			$main = array(
 				'id' => 'fpw_plugins',
 				'title' => __( 'FPW Plugins', 'fpw-category-thumbnails' ),
 				'href' => '#' );
-
 			$subm = array(
 				'id' => 'fpw_bar_category_thumbnails',
 				'parent' => 'fpw_plugins',
 				'title' => __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ),
 				'href' => get_admin_url() . 'options-general.php?page=fpw-category-thumbnails' );
-	
 			$addmain = ( is_array($wp_admin_bar->menu->fpw_plugins) ) ? false : true; 
-	
 			if ( $addmain )
 				$wp_admin_bar->add_menu( $main );
 			$wp_admin_bar->add_menu( $subm );
@@ -114,16 +106,13 @@ function fpw_cat_thumbs_dashboard_widget_function() {
 //	Register plugin's filters and actions
 function fpw_category_thumbnails_activate() {
 	//	base name for uninstall file
-	$uninstall_file_base = ABSPATH . PLUGINDIR . '/' . dirname( plugin_basename ( __FILE__ ) ) . '/uninstall';
-	
+	$uninstall_file = ABSPATH . PLUGINDIR . '/' . dirname( plugin_basename ( __FILE__ ) ) . '/uninstall';
 	//	get options array
 	$fpw_options = get_option( 'fpw_category_thumb_opt' );
-
 	//	if no options yet let's build it
 	if ( !$fpw_options ) {
 		$fpw_options = array( 'clean' => false, 'donotover' => false );
 	} 
-
 	// if cleanup requested make uninstall.php otherwise make uninstall.txt
 	if ( $fpw_options[ 'clean' ] ) {
 		if ( file_exists( $uninstall_file . '.txt' ) )
@@ -157,27 +146,22 @@ add_action( 'after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.ph
 //	Add plugin's contextual help
 function fpw_cat_thumbs_help( $contextual_help, $screen_id, $screen ) {
 	global $fpw_cat_thumbs_hook;
-	
 	if ( $screen_id == $fpw_cat_thumbs_hook ) {
-		
 		/*	display description block */
 		$my_help  = '<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
 		$my_help .= '<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
 		$my_help .= '<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
-
 		/*	display instructions block */
 		$my_help .= '<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
 		$my_help .= '<p>' . __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'IDs', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
 		$my_help .= __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>0</strong> ' . __( 'for categories without assignment.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
 		$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately apply mappings to existing posts/pages.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
 		$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
-		
 		/*	WordPress default help */
 		$my_help .= '<h3>WordPress</h3>' . PHP_EOL;
 		$my_help .= '<p>' . PHP_EOL;
 		$my_help .= $contextual_help;
 		$my_help .= '</p>' . PHP_EOL;
-
 		$contextual_help = $my_help;
 	}
 	return $contextual_help; 
@@ -192,33 +176,21 @@ function fpw_category_thumbnails_admin_styles() {
 	wp_enqueue_script( 'thickbox' );
 	wp_enqueue_script( 'fpw-category-thumbnails-alerts' );
 	wp_enqueue_script( 'fpw-category-thumbnails-upload' );
-
-	$protocol = isset( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
-
-	wp_localize_script( 'fpw-category-thumbnails-upload', 'fpw-category-thumbnails-upload', array(
-		'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
-		'text_select_file' => esc_html__( 'Get image ID', 'fpw-category-thumbnails' )
-	));
 }
 
 /*	----------------------
 	Plugin's settings page
 	------------------- */
-
 function fpw_cat_thumbs_settings() {
 	global	$fpw_category_thumbnails_version;
-	
 	//	base name for uninstall file
 	$uninstall = ABSPATH . PLUGINDIR . '/' . dirname( plugin_basename( __FILE__ ) ) . '/uninstall.';
-	
 	//	initialize options array
 	$fpw_options = get_option( 'fpw_category_thumb_opt' );
 	if ( !is_array( $fpw_options ) )
 		$fpw_options = array( 'clean' => FALSE, 'donotover' => FALSE );
-	
 	//	get all categories
 	$categories = array();
-
 	$cats0 = get_categories('hide_empty=0&orderby=name&parent=0');
 	foreach ( $cats0 as $cats00 ) {
     	array_push( $categories, array(0,$cats00) );
@@ -298,6 +270,7 @@ function fpw_cat_thumbs_settings() {
 	if ( $_POST[ 'fpw_cat_thmb_submit' ] ) {    
 		$do_cleanup = ( $_POST[ 'cleanup' ] == 'yes' );
 		$do_notover = ( $_POST[ 'donotover' ] == 'yes' );
+		
 		//	inserting posted values into $assignments array 
         reset( $assignments );
 		while ( strlen( key( $assignments ) ) ) {
@@ -336,7 +309,6 @@ function fpw_cat_thumbs_settings() {
 /*	------------------------------
 	Settings page HTML starts here
 	--------------------------- */
-	
 	echo '<div class="wrap">' . PHP_EOL;
 	echo '<div id="icon-options-general" class="icon32"></div><h2>' . __( 'FPW Category Thumbnails - Settings', 'fpw-category-thumbnails' ) . ' (' . $fpw_category_thumbnails_version . ')</h2>' . PHP_EOL;
 
@@ -347,7 +319,7 @@ function fpw_cat_thumbs_settings() {
 		echo __( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ); 
 		echo '</strong></p></div>' . PHP_EOL;
 	}
-	
+
 	//	display message about update status
 	if ( $_POST[ 'fpw_cat_thmb_submit' ] )
 		if ( $updateok ) {
@@ -355,11 +327,11 @@ function fpw_cat_thumbs_settings() {
 		} else {
 			echo '<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
 		}
-	
+
 	//	display message about apply status
 	if ( $_POST[ 'fpw_cat_thmb_submit_apply' ] )
 		echo '<div id="message" class="updated fade"><p><strong>' . __( 'Applied to existing posts/pages successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
-		
+
 	//	display message about remove status
 	if ( $_POST[ 'fpw_cat_thmb_submit_remove' ] )
 		echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
@@ -393,8 +365,7 @@ function fpw_cat_thumbs_settings() {
 	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '<th width="100px" style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '<th width="40px" style="text-align: left;">' . __( 'Get ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th width="60px" style="text-align: left;">' . __( 'Clear', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th style=text-align: left;">' . __( 'Preview', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '<th style="text-align: left;">' . __( 'Clear', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '</tr>' . PHP_EOL;
 	echo '</thead>' . PHP_EOL;
 	echo '<tfoot>' . PHP_EOL;
@@ -402,8 +373,7 @@ function fpw_cat_thumbs_settings() {
 	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '<th width="100px" style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '<th width="40px" style="text-align: left;">' . __( 'Get ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th width="60px" style="text-align: left;">' . __( 'Clear', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th style=text-align: left;">' . __( 'Preview', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '<th style="text-align: left;">' . __( 'Clear', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
 	echo '</tr>' . PHP_EOL;
 	echo '</tfoot>' . PHP_EOL;
 	echo '<tbody>' . PHP_EOL;
@@ -419,39 +389,28 @@ function fpw_cat_thumbs_settings() {
 		echo $indent . $categories[ key( $categories ) ][ 1 ] -> cat_name . ' (' . $categories[ key( $categories )][ 1 ] -> cat_ID . ')'; 
 		echo '</td>' . PHP_EOL;
 		echo '<td><input id="val-for-id-' . key( $assignments ) . '" type="text" size="10" maxlength="10" name="val-for-id-' . key( $assignments );
-		echo '-field" value="' . $assignments[ key( $assignments ) ] . '" class="value-for-id" /></td>' . PHP_EOL;
+		echo '-field" value="' . $assignments[ key( $assignments ) ] . '" /></td>' . PHP_EOL;
 		echo '<td><div class="inputbutton">';
 		echo '<input class="button-secondary btn-for-get" id="get-for-id-' . key( $assignments ) . '" type="button" name="get-for-id-' . key( $assignments );
 		echo '" value="' . __( 'Get', 'fpw-category-thumbnails' ) . '" /></div></td>' . PHP_EOL;
 		echo '<td><div class="inputbutton">';
 		echo '<input class="button-secondary btn-for-clear" id="clear-for-id-' . key( $assignments ) . '" type="button" name="clear-for-id-' . key( $assignments );
 		echo '" value="' . __( 'Clear', 'fpw-category-thumbnails' ) . '" /></div></td>' . PHP_EOL;
-		echo '<div class="fpw-category-thumbnail-preview" id="preview-for-id-' . key( $assignments ) . '"><td>' . PHP_EOL;
-		if ( ( '0' == $assignments[ key( $assignments ) ] ) || ( '' == $assignments[ key( $assignments ) ] ) ) {
-			echo '&nbsp';
-		} else {
-			if ( 'ngg-' == substr( $assignments[ key( $assignments ) ], 0, 4 ) ) {
-				echo nggSinglePicture( substr( $assignments[ key( $assignments ) ], 4 ), $width="150", $height="150" );
-			} else {
-				echo wp_get_attachment_image( $assignments[ key( $assignments ) ], 'thumbnail' );
-			}
-		}
-		echo '</td>' . PHP_EOL;
 		echo '</tr>' . PHP_EOL;
 		$i++;
 		next( $assignments );
 		next( $categories );
 	}
-	
+
 	//	end of the table
 	echo '</tbody>' . PHP_EOL;
 	echo '</table>' . PHP_EOL;
-	
+
 	//	submit buttons
-	echo '<br /><div class="inputbutton"><input id="fpw-update" class="button-primary" type="submit" name="fpw_cat_thmb_submit" value="' . __( 'Update Settings', 'fpw-category-thumbnails' ) . '" /> ';
+	echo '<br /><div class="inputbutton"><input class="button-primary" type="submit" name="fpw_cat_thmb_submit" value="' . __( 'Update Settings', 'fpw-category-thumbnails' ) . '" /> ';
 	echo '<input class="button-primary" type="submit" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '" /> ';
 	echo '<input class="button-primary" type="submit" name="fpw_cat_thmb_submit_remove" value="' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '" /></div>' . PHP_EOL;
-	
+
 	//	end of form
 	echo '</form>' . PHP_EOL;
 	echo '</p>' . PHP_EOL;
@@ -462,11 +421,12 @@ function fpw_cat_thumbs_settings() {
 	Main action - sets the value of post's _thumbnail_id based on category
 	assignments
 	------------------------------------------------------------------- */
-
 function fpw_update_category_thumbnail_id( $post_id, $post ) {
+
 	//	we don't want to apply changes to post's revision
 	if ( 'revision' == $post -> post_type )
 		return;
+
 	//	this is actual post
 	$thumb_id = get_post_meta( $post_id, '_thumbnail_id', TRUE );
 	$do_notover = get_option( 'fpw_category_thumb_opt' );
@@ -477,11 +437,13 @@ function fpw_update_category_thumbnail_id( $post_id, $post ) {
 		$cat = get_the_category( $post_id );
 		foreach ( $cat as $c ) {
 			if ( $post->post_date === $post -> post_modified ) {
+
 				//	in case of a new post we have to ignore setting of $do_notover flag
 				//	as the thumbnail of default category will be there already
 				if ( array_key_exists( $c -> cat_ID, $map ) )
 					update_post_meta( $post_id, '_thumbnail_id', $map[ $c -> cat_ID ] );
 			} else {
+
 				//	modified post - observe $do_notover flag
 				if ( ( array_key_exists( $c -> cat_ID, $map ) ) && ( ( '' == $thumb_id ) || !( $do_notover ) ) )
 					update_post_meta( $post_id, '_thumbnail_id', $map[ $c -> cat_ID ] );
