@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.3.4
+Version: 1.3.5
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 global	$fpw_category_thumbnails_version, $wp_version,
 		$fpw_options;
-$fpw_category_thumbnails_version = '1.3.4';
+$fpw_category_thumbnails_version = '1.3.5';
 
 //	Load text domain for translation
 function fpw_category_thumbnails_init(){
@@ -256,7 +256,7 @@ function fpw_cat_thumbs_settings() {
 	$update_mapping_ok = FALSE;
 	
 	//	check nonce if any of buttons was pressed
-	if ( ( $_POST[ 'fpw_cat_thmb_submit' ] ) || ( $_POST[ 'fpw_cat_thmb_submit_apply' ] ) || ( $_POST[ 'fpw_cat_thmb_submit_remove' ] ) ) {
+	if ( $_POST[ 'buttonPressed' ] ) {
 		if ( !isset( $_POST[ 'fpw-category-thumbnails-nonce' ] ) ) 
 			die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red"><strong>' . __( 'You did not send any credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
 		if ( !wp_verify_nonce( $_POST[ 'fpw-category-thumbnails-nonce' ], 'fpw-category-thumbnails-nonce' ) ) 
@@ -303,7 +303,7 @@ function fpw_cat_thumbs_settings() {
 	}
 
 	//	check if remove button was pressed
-	if ( $_POST['fpw_cat_thmb_submit_remove'] ) {
+	if ( 'Remove' == $_POST[ 'buttonPressed' ] ) {
 		reset( $assignments );
 		
 		while ( strlen( key( $assignments ) ) ) {
@@ -325,7 +325,7 @@ function fpw_cat_thumbs_settings() {
 	}
 
 	//	check if apply button was pressed
-	if ( $_POST['fpw_cat_thmb_submit_apply'] ) {
+	if ( 'Apply' == $_POST[ 'buttonPressed' ] ) {
 		$map = get_option( 'fpw_category_thumb_map' );
 		if ( $map )
 			while ( strlen( key( $map ) ) ) {
@@ -376,7 +376,7 @@ function fpw_cat_thumbs_settings() {
 	}
 
 	//	display message about update status
-	if ( $_POST[ 'fpw_cat_thmb_submit' ] )
+	if ( 'Update' == $_POST[ 'buttonPressed' ] )
 		if ( $update_options_ok || $update_mapping_ok ) {
 			echo '<div id="message" class="updated fade"><p><strong>' . __( 'Settings updated successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
 		} else {
@@ -384,11 +384,11 @@ function fpw_cat_thumbs_settings() {
 		}
 
 	//	display message about apply status
-	if ( $_POST[ 'fpw_cat_thmb_submit_apply' ] )
+	if ( 'Apply' == $_POST[ 'buttonPressed' ] )
 		echo '<div id="message" class="updated fade"><p><strong>' . __( 'Applied to existing posts/pages successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
 
 	//	display message about remove status
-	if ( $_POST[ 'fpw_cat_thmb_submit_remove' ] )
+	if ( 'Remove' == $_POST[ 'buttonPressed' ] )
 		echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
 
 	//	about instructions
@@ -458,9 +458,10 @@ function fpw_cat_thumbs_settings() {
 	echo '</table>' . PHP_EOL;
 
 	//	submit buttons
-	echo '<br /><div class="inputbutton"><input id="update" class="button-primary fpw-submit" type="submit" name="fpw_cat_thmb_submit" value="' . __( 'Update', 'fpw-category-thumbnails' ) . '" /> ';
-	echo '<input id="apply" class="button-primary fpw-submit" type="submit" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all posts/pages', 'fpw-category-thumbnails' ) . '" /> ';
-	echo '<input id="remove" class="button-primary fpw-submit" type="submit" name="fpw_cat_thmb_submit_remove" value="' . __( 'Remove all thumbnails from posts/pages', 'fpw-category-thumbnails' ) . '" /></div>' . PHP_EOL;
+	echo '<br /><div class="inputbutton"><input onclick="confirmUpdate();" id="update" class="button-primary fpw-submit" type="button" name="fpw_cat_thmb_submit" value="' . __( 'Update', 'fpw-category-thumbnails' ) . '" /> ';
+	echo '<input onclick="confirmApply();" id="apply" class="button-primary fpw-submit" type="button" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all posts/pages', 'fpw-category-thumbnails' ) . '" /> ';
+	echo '<input onclick="confirmRemove();" id="remove" class="button-primary fpw-submit" type="button" name="fpw_cat_thmb_submit_remove" value="' . __( 'Remove all thumbnails from posts/pages', 'fpw-category-thumbnails' ) . '" />';
+	echo '<input id="buttonPressed" type="hidden" value="" name="buttonPressed" /></div>' . PHP_EOL;
 
 	//	end of form
 	echo '</form>' . PHP_EOL;

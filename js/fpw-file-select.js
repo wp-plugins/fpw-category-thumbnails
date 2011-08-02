@@ -1,4 +1,37 @@
 /* Image Select script */
+function confirmUpdate() {
+	jQuery( '#buttonPressed' ).val( 'Update' );
+	jQuery("form[name='fpw_cat_thmb_form']").submit();
+}
+
+function confirmApply() {
+	msg = 'This action will add thumbnails based on current settings to <strong>ALL</strong> existing posts / pages.<br />';
+	msg = msg + '"<em>Do not overwrite if post/page has thumbnail assigned already</em>" option will be respected.<br /> <br />';
+	msg = msg + 'Are you sure you want to proceed?';
+	jConfirm(msg, 'Please Confirm', function(result){
+		if (result) {
+    		jQuery( '#buttonPressed' ).val( 'Apply' );
+			jQuery("form[name='fpw_cat_thmb_form']").submit();
+		} else {
+			return false;
+		}
+	});
+}
+
+function confirmRemove() {
+	msg = 'This action will <strong>REMOVE</strong> thumbnails from <strong>ALL</strong> existing posts / pages.<br />';
+	msg = msg + '"<em>Do not overwrite if post/page has thumbnail assigned already</em>" option will <strong>NOT</strong> be respected!<br /> <br />';
+	msg = msg + 'Are you sure you want to proceed?';
+	jConfirm(msg, 'Please Confirm', function(result){
+		if (result) {
+    		jQuery( '#buttonPressed' ).val( 'Remove' );
+			jQuery("form[name='fpw_cat_thmb_form']").submit();
+		} else {
+			return false;
+		}
+	});
+}
+
 jQuery( document ).ready( function( $ ) {
 
 	// Actions for screens with the file select button

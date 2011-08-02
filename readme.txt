@@ -32,6 +32,9 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.3.5 =
+* Added confirmation dialogs for bulk actions
+
 = 1.3.4 =
 * Improved code for bulk actions to reduce memory use
 * Modified media-upload to simplify image ID extraction
