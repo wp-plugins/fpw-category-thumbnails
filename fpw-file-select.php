@@ -2,6 +2,7 @@
 /*	Get Image ID Logic ( based on code from SLT File Select plugin by Steve Taylor )
 
 	Added support for NextGEN Gallery plugin
+	Added jQuery alerts
 */
 	
 if ( ! function_exists( 'add_action' ) ) {
@@ -9,38 +10,30 @@ if ( ! function_exists( 'add_action' ) ) {
 	exit;
 }
 
-// JavaScript
-//	Register scripts and styles
-function fpw_fs_admin_init() {
-	wp_register_style( 'fpw-fs-alerts-css', WP_PLUGIN_URL . '/fpw-category-thumbnails/js/css/jquery.alerts.css' );
-	wp_register_script( 'fpw-fs-alerts', WP_PLUGIN_URL . '/fpw-category-thumbnails/js/jquery.alerts.js' );
-}
-add_action( 'admin_init', 'fpw_fs_admin_init' );
-
-add_action( 'admin_print_scripts', 'fpw_fs_scripts' );
-function fpw_fs_scripts() {
-	wp_enqueue_script( 'fpw-fs-alerts' );
-	wp_enqueue_script( 'fpw-file-select', plugins_url( '/fpw-category-thumbnails/js/fpw-file-select.js' ), array( 'jquery', 'media-upload', 'thickbox' ) );
-	$protocol = isset( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
-	wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(
-		'ajaxurl'			=> admin_url( 'admin-ajax.php', $protocol ),
-		'text_select_file'	=> esc_html__( 'Get ID', 'fpw-category-thumbnails' )
-	));
-}
-
-// Styles
-add_action( 'admin_print_styles', 'fpw_fs_styles' );
-function fpw_fs_styles() {
-	wp_enqueue_style( 'thickbox' );
-	wp_enqueue_style( 'fpw-fs-alerts-css');
+//	Register and enqueue scripts & styles
+function fpw_category_thumbnails_enqueue_scripts( $hook ) {
+	if ( ( 'settings_page_fpw-category-thumbnails' == $hook ) || ( 'media-upload-popup' == $hook ) ) {
+		wp_register_style( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/css/jquery.alerts.css' ) );
+		wp_register_script( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/jquery.alerts.js' ), array( 'jquery' ) );
+		wp_register_script( 'fpw-file-select', plugins_url( '/fpw-category-thumbnails/js/fpw-file-select.js' ), array( 'jquery', 'fpw-fs-alerts', 'media-upload', 'thickbox' ) );
+		wp_enqueue_style( 'thickbox' );
+		wp_enqueue_style( 'fpw-fs-alerts');
+		wp_enqueue_script( 'fpw-fs-alerts' );
+		wp_enqueue_script( 'fpw-file-select' );
+		$protocol = isset( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
+		wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(
+			'ajaxurl'			=> admin_url( 'admin-ajax.php', $protocol ),
+			'text_select_file'	=> esc_html__( 'Get ID', 'fpw-category-thumbnails' )
+		));
+	}
 }
 
 // Disable Flash uploader when this plugin invokes Media Library overlay
-add_action( 'admin_init', 'fpw_fs_disable_flash_uploader' );
 function fpw_fs_disable_flash_uploader() {
 	if ( basename( $_SERVER['SCRIPT_FILENAME'] ) == 'media-upload.php' && array_key_exists( 'fpw_fs_field', $_GET ) )
 		add_filter( 'flash_uploader', create_function( '$a','return false;' ), 5 );
 }
+add_action( 'admin_init', 'fpw_fs_disable_flash_uploader' );
 
 // Output form button
 function fpw_fs_button( $name, $value, $catid, $label = 'Get ID', $preview_size = 'thumbnail', $removable = false ) { ?>
@@ -84,7 +77,6 @@ function fpw_fs_button( $name, $value, $catid, $label = 'Get ID', $preview_size 
 <?php }
 
 // AJAX wrapper to get image HTML
-add_action( 'wp_ajax_fpw_fs_get_file', 'fpw_fs_get_file_ajax' );
 function fpw_fs_get_file_ajax() {
 	if ( 'ngg-' == substr( $_REQUEST['id'], 0, 4 ) ) {
 		$id = substr( $_REQUEST['id'], 4 );
@@ -103,3 +95,4 @@ function fpw_fs_get_file_ajax() {
 	}
 	die();
 }
+add_action( 'wp_ajax_fpw_fs_get_file', 'fpw_fs_get_file_ajax' );
