@@ -4,7 +4,7 @@ Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail
 Requires at least: 2.9.0
 Tested up to: 3.2.1
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
 the post is created or updated.
