@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the FPW Category Thumbnails package.
 msgid ""
 msgstr ""
-"Project-Id-Version: FPW Category Thumbnails 1.3.4\n"
+"Project-Id-Version: FPW Category Thumbnails 1.3.6\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
-"POT-Creation-Date: 2011-07-31 18:42:28+00:00\n"
+"POT-Creation-Date: 2011-08-09 13:28:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,179 +12,179 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: fpw-file-select.php:8
+#: fpw-file-select.php:9
 msgid "This cannot be called directly."
 msgstr ""
 
-#: fpw-file-select.php:27
+#: fpw-file-select.php:26
 msgid "Get ID"
 msgstr ""
 
-#: fpw-file-select.php:50
+#: fpw-file-select.php:43
 msgid "Clear"
 msgstr ""
 
-#: fpw-category-thumbnails.php:52 fpw-category-thumbnails.php:368
+#: fpw-category-thumbnails.php:52 fpw-category-thumbnails.php:369
 msgid "FPW Category Thumbnails - Settings"
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.3.4)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.3.6)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: fpw-category-thumbnails.php:53 fpw-category-thumbnails.php:72
-#: fpw-category-thumbnails.php:87
+#: fpw-category-thumbnails.php:53 fpw-category-thumbnails.php:73
+#: fpw-category-thumbnails.php:88
 msgid "FPW Category Thumbnails"
 msgstr ""
 
-#: fpw-category-thumbnails.php:66
+#: fpw-category-thumbnails.php:67
 msgid "FPW Plugins"
 msgstr ""
 
-#: fpw-category-thumbnails.php:96 fpw-category-thumbnails.php:373
+#: fpw-category-thumbnails.php:97 fpw-category-thumbnails.php:374
 msgid "WARNING: Your theme has no support for <em>post thumbnails</em>!"
 msgstr ""
 
-#: fpw-category-thumbnails.php:113 fpw-category-thumbnails.php:409
+#: fpw-category-thumbnails.php:114 fpw-category-thumbnails.php:410
 msgid "Do not overwrite if post/page has thumbnail assigned already"
 msgstr ""
 
-#: fpw-category-thumbnails.php:114 fpw-category-thumbnails.php:414
+#: fpw-category-thumbnails.php:115 fpw-category-thumbnails.php:415
 msgid "Remove plugin's data from database on uninstall"
 msgstr ""
 
-#: fpw-category-thumbnails.php:137
+#: fpw-category-thumbnails.php:138
 msgid "Settings"
 msgstr ""
 
-#: fpw-category-thumbnails.php:146
+#: fpw-category-thumbnails.php:147
 msgid "Donate"
 msgstr ""
 
-#: fpw-category-thumbnails.php:169
+#: fpw-category-thumbnails.php:170
 msgid "Description"
 msgstr ""
 
-#: fpw-category-thumbnails.php:170
+#: fpw-category-thumbnails.php:171
 msgid ""
 "This plugin inserts a thumbnail based on category / thumbnail mapping while "
 "post / page is being created or updated."
 msgstr ""
 
-#: fpw-category-thumbnails.php:171
+#: fpw-category-thumbnails.php:172
 msgid "Note"
 msgstr ""
 
-#: fpw-category-thumbnails.php:171
+#: fpw-category-thumbnails.php:172
 msgid "please remember that your theme must support post thumbnails."
 msgstr ""
 
-#: fpw-category-thumbnails.php:174
+#: fpw-category-thumbnails.php:175
 msgid "Instructions"
 msgstr ""
 
-#: fpw-category-thumbnails.php:175 fpw-category-thumbnails.php:176
+#: fpw-category-thumbnails.php:176 fpw-category-thumbnails.php:177
 msgid "Enter"
 msgstr ""
 
-#: fpw-category-thumbnails.php:175
+#: fpw-category-thumbnails.php:176
 msgid "IDs"
 msgstr ""
 
-#: fpw-category-thumbnails.php:175
+#: fpw-category-thumbnails.php:176
 msgid "of thumbnail images for corresponding categories."
 msgstr ""
 
-#: fpw-category-thumbnails.php:176
+#: fpw-category-thumbnails.php:177
 msgid "for categories without assignment."
 msgstr ""
 
-#: fpw-category-thumbnails.php:177 fpw-category-thumbnails.php:178
+#: fpw-category-thumbnails.php:178 fpw-category-thumbnails.php:179
 msgid "Click on"
 msgstr ""
 
-#: fpw-category-thumbnails.php:177
+#: fpw-category-thumbnails.php:178
 msgid "Apply to all existing posts/pages"
 msgstr ""
 
-#: fpw-category-thumbnails.php:177
+#: fpw-category-thumbnails.php:178
 msgid "to immediately apply mappings to existing posts/pages."
 msgstr ""
 
-#: fpw-category-thumbnails.php:178
+#: fpw-category-thumbnails.php:179
 msgid "Remove all thumbnails from existing posts/pages"
 msgstr ""
 
-#: fpw-category-thumbnails.php:178
+#: fpw-category-thumbnails.php:179
 msgid "to immediately remove thumbnails from existing posts/pages."
 msgstr ""
 
-#: fpw-category-thumbnails.php:261
+#: fpw-category-thumbnails.php:262
 msgid "You did not send any credentials!"
 msgstr ""
 
-#: fpw-category-thumbnails.php:263
+#: fpw-category-thumbnails.php:264
 msgid "You did not send the right credentials!"
 msgstr ""
 
-#: fpw-category-thumbnails.php:374
+#: fpw-category-thumbnails.php:375
 msgid ""
 "You can continue with <em>Settings</em> but until you add "
 "<code>add_theme_support( 'post-thumbnails' );</code> to the theme's "
 "functions.php you will not be able to display thumbnails."
 msgstr ""
 
-#: fpw-category-thumbnails.php:381
+#: fpw-category-thumbnails.php:382
 msgid "Settings updated successfully."
 msgstr ""
 
-#: fpw-category-thumbnails.php:383
+#: fpw-category-thumbnails.php:384
 msgid "No changes detected. Nothing to update."
 msgstr ""
 
-#: fpw-category-thumbnails.php:388
+#: fpw-category-thumbnails.php:389
 msgid "Applied to existing posts/pages successfully."
 msgstr ""
 
-#: fpw-category-thumbnails.php:392
+#: fpw-category-thumbnails.php:393
 msgid "All thumbnails removed successfully."
 msgstr ""
 
-#: fpw-category-thumbnails.php:395
+#: fpw-category-thumbnails.php:396
 msgid "For instructions click on"
 msgstr ""
 
-#: fpw-category-thumbnails.php:395
+#: fpw-category-thumbnails.php:396
 msgid "Help"
 msgstr ""
 
-#: fpw-category-thumbnails.php:395
+#: fpw-category-thumbnails.php:396
 msgid "above"
 msgstr ""
 
-#: fpw-category-thumbnails.php:419
+#: fpw-category-thumbnails.php:420
 msgid "Show plugin info widget on the Dashboard"
 msgstr ""
 
-#: fpw-category-thumbnails.php:425 fpw-category-thumbnails.php:432
+#: fpw-category-thumbnails.php:426 fpw-category-thumbnails.php:433
 msgid "Category (ID)"
 msgstr ""
 
-#: fpw-category-thumbnails.php:426 fpw-category-thumbnails.php:433
+#: fpw-category-thumbnails.php:427 fpw-category-thumbnails.php:434
 msgid "Image ID"
 msgstr ""
 
-#: fpw-category-thumbnails.php:427 fpw-category-thumbnails.php:434
+#: fpw-category-thumbnails.php:428 fpw-category-thumbnails.php:435
 msgid "Preview"
 msgstr ""
 
-#: fpw-category-thumbnails.php:461
+#: fpw-category-thumbnails.php:462
 msgid "Update"
 msgstr ""
 
-#: fpw-category-thumbnails.php:462
+#: fpw-category-thumbnails.php:463
 msgid "Apply to all posts/pages"
 msgstr ""
 
-#: fpw-category-thumbnails.php:463
+#: fpw-category-thumbnails.php:464
 msgid "Remove all thumbnails from posts/pages"
 msgstr ""
 
