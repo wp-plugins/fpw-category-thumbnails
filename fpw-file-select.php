@@ -36,10 +36,10 @@ function fpw_fs_disable_flash_uploader() {
 add_action( 'admin_init', 'fpw_fs_disable_flash_uploader' );
 
 // Output form button
-function fpw_fs_button( $name, $value, $catid, $label = 'Get ID', $preview_size = 'thumbnail', $removable = false ) { ?>
+function fpw_fs_button( $name, $value, $catid, $label = __( 'Get ID', 'fpw-fct' ), $preview_size = 'thumbnail', $removable = false ) { ?>
 	<td><div>
 		<input type="text" size="10" maxlength="10" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="fpw-fs-value" />
-		<input type="button" class="button-secondary fpw-fs-button" value="<?php echo esc_attr( $label ); ?>" />
+		<input type="button" class="button-secondary fpw-fs-button" value="<?php echo __( 'Get ID', 'fpw-fct' ); ?>" />
 		<input class="button-secondary btn-for-clear" id="clear-for-id-<?php echo $catid; ?>" type="button" value="<?php echo __( 'Clear', 'fpw-fct' ); ?>" />		
 		<input type="hidden" value="<?php echo esc_attr( $preview_size ); ?>" name="<?php echo esc_attr( $name ); ?>_preview-size" id="<?php echo esc_attr( $name ); ?>_preview-size" class="fpw-fs-preview-size" />
 	</div></td>	
