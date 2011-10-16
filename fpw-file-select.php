@@ -6,7 +6,7 @@
 */
 	
 if ( ! function_exists( 'add_action' ) ) {
-	_e( "This cannot be called directly.", "fpw-category-thumbnails" );
+	_e( "This cannot be called directly.", "fpw-fct" );
 	exit;
 }
 
@@ -23,7 +23,7 @@ function fpw_fct_enqueue_scripts( $hook ) {
 		$protocol = isset( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
 		wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(
 			'ajaxurl'			=> admin_url( 'admin-ajax.php', $protocol ),
-			'text_select_file'	=> esc_html__( 'Get ID', 'fpw-fct' )
+			'text_select_file'	=> esc_html( __( 'Get ID', 'fpw-fct' ) )
 		));
 	}
 }
@@ -40,7 +40,7 @@ function fpw_fs_button( $name, $value, $catid, $label = 'Get ID', $preview_size 
 	<td><div>
 		<input type="text" size="10" maxlength="10" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="fpw-fs-value" />
 		<input type="button" class="button-secondary fpw-fs-button" value="<?php echo esc_attr( $label ); ?>" />
-		<input class="button-secondary btn-for-clear" id="clear-for-id-<?php echo $catid; ?>" type="button" value="<?php echo __( 'Clear', 'fpw-category-thumbnails' ); ?>" />		
+		<input class="button-secondary btn-for-clear" id="clear-for-id-<?php echo $catid; ?>" type="button" value="<?php echo __( 'Clear', 'fpw-fct' ); ?>" />		
 		<input type="hidden" value="<?php echo esc_attr( $preview_size ); ?>" name="<?php echo esc_attr( $name ); ?>_preview-size" id="<?php echo esc_attr( $name ); ?>_preview-size" class="fpw-fs-preview-size" />
 	</div></td>	
 	<td>
