@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.3.6
+Version: 1.3.7
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -23,54 +23,94 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-global	$fpw_category_thumbnails_version, $wp_version,
-		$fpw_options;
-$fpw_category_thumbnails_version = '1.3.6';
+global	$fpw_fct_version, $wp_version,
+		$fpw_fct_options;
+
+$fpw_fct_version = '1.3.7';
+
+//	Get plugin's options
+function fpw_fct_get_options() {
+	global	$wp_version;
+	
+	$needs_update = FALSE;
+	$opt = get_option( 'fpw_category_thumb_opt' );
+	
+	if ( !is_array( $opt ) ) {
+		$needs_update = TRUE;
+		if ( '3.1' <= $wp_version ) {
+			$opt = array( 
+				'clean'		=> FALSE,
+				'donotover' => FALSE,
+				'dash'		=> FALSE,
+				'abar'		=> FALSE );
+		} else {
+			$opt = array( 
+				'clean'		=> FALSE,
+				'donotover' => FALSE,
+				'dash'		=> FALSE );
+		}
+	} else {
+		if ( !array_key_exists( 'clean', $opt ) || !is_bool( $opt[ 'clean' ] ) ) { 
+			$needs_update = TRUE;
+			$opt[ 'clean' ] = FALSE;
+		}
+		if ( !array_key_exists( 'donotover', $opt ) || !is_bool( $opt[ 'donotover' ] ) ) { 
+			$needs_update = TRUE;
+			$opt[ 'donotover' ] = FALSE;
+		}
+		if ( !array_key_exists( 'dash', $opt ) || !is_bool( $opt[ 'dash' ] ) ) { 
+			$needs_update = TRUE;
+			$opt[ 'dash' ] = FALSE;
+		}
+		if ( '3.1' <= $wp_version ) 
+			if ( !array_key_exists( 'abar', $opt ) || !is_bool( $opt[ 'abar' ] ) ) { 
+				$needs_update = TRUE;
+				$opt[ 'abar' ] = FALSE;
+			}
+		if ( $needs_update ) 
+			update_option( 'fpw_category_thumb_opt', $opt );
+	}
+	return $opt;
+}
 
 //	Load text domain for translation
-function fpw_category_thumbnails_init(){
-	load_plugin_textdomain( 'fpw-category-thumbnails', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
+function fpw_fct_init(){
+	load_plugin_textdomain( 'fpw-fct', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
 }	
-add_action( 'init', 'fpw_category_thumbnails_init', 1 );
+add_action( 'init', 'fpw_fct_init', 1 );
 
 //	Read plugin's options
-$fpw_options = get_option( 'fpw_category_thumb_opt' );
-
-//	if no options yet let's build it
-if ( !$fpw_options ) {
-	$fpw_options = array( 'clean' => FALSE, 'donotover' => FALSE, 'dash' => FALSE );
-	update_option( 'fpw_category_thumb_opt', $fpw_options );
-} 
+$fpw_fct_options = fpw_fct_get_options();
 
 //	include Get Image ID logic
 include 'fpw-file-select.php';
 
 //	Register plugin's menu in Settings
-function fpw_cat_thumbs_settings_menu() {
-	global 	$fpw_cat_thumbs_hook,
-			$fpw_category_thumbnails_version;
-	$page_title = __( 'FPW Category Thumbnails - Settings', 'fpw-category-thumbnails') . ' (' . $fpw_category_thumbnails_version . ')';
-	$menu_title = __( 'FPW Category Thumbnails', 'fpw-category-thumbnails');
-	$fpw_cat_thumbs_hook = add_options_page( $page_title, $menu_title, 'manage_options', 'fpw-category-thumbnails', 'fpw_cat_thumbs_settings');
-	add_action( 'admin_enqueue_scripts', 'fpw_category_thumbnails_enqueue_scripts' );
+function fpw_fct_settings_menu() {
+	global 	$fpw_fct_hook,
+			$fpw_fct_version;
+	$page_title = __( 'FPW Category Thumbnails', 'fpw-fct' ) . ' (' . $fpw_fct_version . ')';
+	$menu_title = __( 'FPW Category Thumbnails', 'fpw-fct' );
+	$fpw_fct_hook = add_options_page( $page_title, $menu_title, 'manage_options', 'fpw-category-thumbnails', 'fpw_fct_settings');
+	add_action( 'admin_enqueue_scripts', 'fpw_fct_enqueue_scripts' );
 }
-add_action( 'admin_menu', 'fpw_cat_thumbs_settings_menu' );
+add_action( 'admin_menu', 'fpw_fct_settings_menu' );
 
 //	Register plugin's menu in admin bar for WP 3.1+
 if ( '3.1' <= $wp_version ) {
-	function fpw_cat_thumbs_settings_in_admin_bar() {
+	function fpw_fct_in_admin_bar() {
 		if ( current_user_can( 'edit_plugins' ) && is_admin() ) {
 			global $wp_admin_bar;
 
 			$main = array(
 				'id' => 'fpw_plugins',
-				'title' => __( 'FPW Plugins', 'fpw-category-thumbnails' ),
+				'title' => __( 'FPW Plugins', 'fpw-fct' ),
 				'href' => '#' );
 
 			$subm = array(
 				'id' => 'fpw_bar_category_thumbnails',
 				'parent' => 'fpw_plugins',
-				'title' => __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ),
+				'title' => __( 'FPW Category Thumbnails', 'fpw-fct' ),
 				'href' => get_admin_url() . 'options-general.php?page=fpw-category-thumbnails' );
 
 			$addmain = ( is_array($wp_admin_bar->menu->fpw_plugins) ) ? false : true; 
@@ -80,78 +120,93 @@ if ( '3.1' <= $wp_version ) {
 			$wp_admin_bar->add_menu( $subm );
 		}
 	}
-	add_action( 'admin_bar_menu', 'fpw_cat_thumbs_settings_in_admin_bar', 1010 );
+	if ( $_POST[ 'buttonPressed' ] ) 
+		$fpw_fct_options[ 'abar' ] = ( $_POST[ 'abar' ] == 'yes' ); 
+	if ( $fpw_fct_options[ 'abar' ] ) 
+		add_action( 'admin_bar_menu', 'fpw_fct_in_admin_bar', 1010 );
 }
 
 //	Register plugin's Dashboard widget
-function fpw_cat_thumbs_add_dashboard_widgets() {
-	$widget_title = __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' );
-	wp_add_dashboard_widget( 'fpw_dashboard_widget', $widget_title, 'fpw_cat_thumbs_dashboard_widget_function' );
+function fpw_fct_add_dashboard_widgets() {
+	$widget_title = __( 'FPW Category Thumbnails', 'fpw-fct' );
+	wp_add_dashboard_widget( 'fpw_fct_dashboard_widget', $widget_title, 'fpw_fct_dashboard_widget_function' );
 }
-if ( $fpw_options[ 'dash' ] )
-	add_action( 'wp_dashboard_setup', 'fpw_cat_thumbs_add_dashboard_widgets' );
+if ( $fpw_fct_options[ 'dash' ] ) 
+	add_action( 'wp_dashboard_setup', 'fpw_fct_add_dashboard_widgets' );
 
 //	Display plugin Dashboard Widget's content
-function fpw_cat_thumbs_dashboard_widget_function() {
+function fpw_fct_dashboard_widget_function() {
+	global	$fpw_fct_options, 
+			$wp_version;
+	
 	if ( !current_theme_supports( 'post-thumbnails') )
-		echo '<p style="font-family:arial;font-size:.9em;color:red;"><strong>' .__( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . '</strong></p>' . PHP_EOL; 
-	$fpw_options = get_option( 'fpw_category_thumb_opt' );
-	if ( is_array( $fpw_options ) ) {
-		if ( $fpw_options[ 'donotover' ] ) {
+		echo '<p style="font-family:arial;font-size:.9em;color:red;"><strong>' .__( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-fct' ) . '</strong></p>' . PHP_EOL; 
+	
+	if ( $fpw_fct_options[ 'donotover' ] ) {
 		$dont = 'On';
-		} else {
-			$dont = 'Off';
-		}
-		if ( $fpw_options[ 'clean' ] ) {
-			$clean = 'On';
-		} else {
-			$clean = 'Off';
-		}
 	} else {
 		$dont = 'Off';
+	}
+	
+	if ( $fpw_fct_options[ 'clean' ] ) {
+		$clean = 'On';
+	} else {
 		$clean = 'Off';
 	}
-	echo '<p style="font-family:arial;font-size:.9em;">' . __( "Do not overwrite if post/page has thumbnail assigned already", 'fpw-category-thumbnails' ) . ' ( <strong>' . $dont . '</strong> )<br />' . PHP_EOL;
-	echo __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . ' ( <strong>' . $clean . '</strong> )</p>' . PHP_EOL;
+	
+	if ( '3.1' <= $wp_version ) { 
+		if ( $fpw_fct_options[ 'abar' ] ) {
+			$abar = 'On';
+		} else {
+			$abar = 'Off';
+		}
+	}
+	
+	echo '<p style="font-family:arial;font-size:.9em;">' . __( "Do not overwrite if post/page has thumbnail assigned already", 'fpw-fct' ) . ' ( <strong>' . $dont . '</strong> )<br />' . PHP_EOL;
+	
+	if ( '3.1' <= $wp_version ) 
+		echo __( "Add this plugin to the Admin Bar", 'fpw-fct' ) . ' ( <strong>' . $abar . '</strong> )<br />' . PHP_EOL;
+	
+	echo __( "Remove plugin's data from database on uninstall", 'fpw-fct' ) . ' ( <strong>' . $clean . '</strong> )</p>' . PHP_EOL;
 } 
 
 //	Register plugin's filters and actions
-function fpw_category_thumbnails_activate() {
-	global	$fpw_options;
+function fpw_fct_activate() {
+	global	$fpw_fct_options;
 
 	//	base name for uninstall file
 	$uninstall_file_base = ABSPATH . PLUGINDIR . '/' . dirname( plugin_basename ( __FILE__ ) ) . '/uninstall';
 
 	//	if cleanup requested make uninstall.php otherwise make uninstall.txt
-	if ( $fpw_options[ 'clean' ] ) {
-		if ( file_exists( $uninstall_file_base . '.txt' ) )
+	if ( $fpw_fct_options[ 'clean' ] ) {
+		if ( file_exists( $uninstall_file_base . '.txt' ) ) 
 			rename( $uninstall_file_base . '.txt', $uninstall_file_base . '.php' );
 	} else {
-		if ( file_exists( $uninstall_file_base . '.php' ) )
+		if ( file_exists( $uninstall_file_base . '.php' ) ) 
 			rename( $uninstall_file_base . '.php', $uninstall_file_base . '.txt' );
 	}
 }	
-register_activation_hook( __FILE__, 'fpw_category_thumbnails_activate' );
+register_activation_hook( __FILE__, 'fpw_fct_activate' );
 
 //	Add link to Settings on Plugins page
-function fpw_cat_thumbs_plugin_links($links, $file) {
-   	$settings_link = '<a href="' . site_url( '/wp-admin/' ) . 'options-general.php?page=fpw-category-thumbnails">' . __( "Settings", "fpw-category-thumbnails" ) . '</a>';
-	array_unshift($links, $settings_link);
+function fpw_fct_plugin_links( $links, $file ) {
+   	$settings_link = '<a href="' . site_url( '/wp-admin/' ) . 'options-general.php?page=fpw-category-thumbnails">' . __( "Settings", "fpw-fct" ) . '</a>';
+	array_unshift( $links, $settings_link );
     return $links;
 }
-add_filter('plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', 'fpw_cat_thumbs_plugin_links', 10, 2);
+add_filter( 'plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', 'fpw_fct_plugin_links', 10, 2);
 
 //	Add link to Donation to plugins meta
-function fpw_cat_thumbs_plugin_meta_links($links, $file) {
+function fpw_fct_plugin_meta_links( $links, $file ) {
 	if ( 'fpw-category-thumbnails/fpw-category-thumbnails.php' == $file ) {
-		$links[] = '<a href="http://fw2s.com/payments-and-donations/" target="_blank">' . __( "Donate", "fpw-category-thumbnails" ) . '</a>';
+		$links[] = '<a href="http://fw2s.com/payments-and-donations/" target="_blank">' . __( "Donate", "fpw-fct" ) . '</a>';
 	}
 	return $links;
 }
-add_filter( 'plugin_row_meta', 'fpw_cat_thumbs_plugin_meta_links', 10, 2 );
+add_filter( 'plugin_row_meta', 'fpw_fct_plugin_meta_links', 10, 2 );
 
 //	Add update information after plugin mete
-function fpw_add_after_plugin_meta( $file, $plugin_data ) {
+function fpw_fct_add_after_plugin_meta( $file, $plugin_data ) {
 	$current = get_site_transient( 'update_plugins' );
 	if ( !isset( $current -> response[ $file ] ) ) 
 		return false;
@@ -159,52 +214,88 @@ function fpw_add_after_plugin_meta( $file, $plugin_data ) {
 	$update = wp_remote_fopen( $url );
 	echo '<tr class="plugin-update-tr"><td></td><td></td><td class="plugin-update"><div class="update-message">' . $update . '</div></td></tr>';
 }
-add_action( 'after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.php', 'fpw_add_after_plugin_meta', 10, 2 );
+add_action( 'after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.php', 'fpw_fct_add_after_plugin_meta', 10, 2 );
 
 //	Add plugin's contextual help
-function fpw_cat_thumbs_help( $contextual_help, $screen_id, $screen ) {
-	global $fpw_cat_thumbs_hook;
+if ( '3.3' <= $wp_version ) {
+	function fpw_fct_help33() {
+		global	$current_screen, $fpw_fct_hook;
+		
+		if ( $current_screen->id == $fpw_fct_hook ) {
+		
+			$sidebar =	'<p><strong>For more information:</strong><br />' . 
+						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/" target="_blank">Visit plugin site</a></p>' . 
+						'<p><strong>Support on:</strong><br />' . 
+						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://wordpress.org/tags/fpw-category-thumbnails?forum_id=10" target="_blank">wordpress.org</a><br />' . 
+						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://fw2s.com/forums/topic/fpw-category-thumbnail-plugin-support/" target="_blank">fw2s.com</a></p>'; 
+			
+			$current_screen->add_help_sidebar( $sidebar );
+			
+			$intro =	'<p style="text-align: justify">' . __( 'Setting featured images for posts / pages could be very time consuming, ', 'fpw-category-thumbnails' ) . 
+						__( 'especially when your media library holds hundreds of pictures. ', 'fpw-category-thumbnails' ) . 
+						__( 'Very often we select the same thumbnail for posts in particular category. ', 'fpw-category-thumbnails' ) . 
+						__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br /><br />' . 
+						'<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . 
+						'</p><p>&nbsp;</p>';
 
-	if ( $screen_id == $fpw_cat_thumbs_hook ) {
-		/*	display description block */
-		$my_help  = '<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-		$my_help .= '<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-		$my_help .= '<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+			$current_screen->add_help_tab( array(
+	    		'title'   => __('Introduction', 'fpw-category-thumbnails'),
+		    	'id'      => 'fpw-category-thumbnails-help-introduction',
+	    		'content' => $intro,
+			) );
 
-		/*	display instructions block */
-		$my_help .= '<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-		$my_help .= '<p>' . __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'IDs', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-		$my_help .= __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>0</strong> ' . __( 'for categories without assignment.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-		$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately apply mappings to existing posts/pages.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-		$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+			$current_screen->add_help_tab( array(
+	    		'title'   => __('Options', 'fpw-category-thumbnails'),
+		    	'id'      => 'fpw-category-thumbnails-help-options',
+	    		'content' => "<p>Help text for options...</p>",
+			) );
 
-		/*	WordPress default help */
-		$my_help .= '<h3>WordPress</h3>' . PHP_EOL;
-		$my_help .= '<p>' . PHP_EOL;
-		$my_help .= $contextual_help;
-		$my_help .= '</p>' . PHP_EOL;
-
-		$contextual_help = $my_help;
+			$current_screen->add_help_tab( array(
+	    		'title'   => __('FAQ', 'fpw-category-thumbnails'),
+		    	'id'      => 'fpw-category-thumbnails-help-faq',
+	    		'content' => "<p>Help text for faq...</p>",
+			) );
+			
+		}
 	}
-	return $contextual_help; 
+	add_action( 'admin_print_scripts', 'fpw_fct_help33' );
+} else {
+	function fpw_fct_help( $contextual_help, $screen_id, $screen ) {
+		global $fpw_fct_hook;
+
+		if ( $screen_id == $fpw_fct_hook ) {
+			//	display description block
+			$my_help  = '<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
+			$my_help .= '<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+			$my_help .= '<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+
+			//	display instructions block
+			$my_help .= '<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
+			$my_help .= '<p>' . __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'IDs', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+			$my_help .= __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>0</strong> ' . __( 'for categories without assignment.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+			$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately apply mappings to existing posts/pages.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
+			$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+
+			//	WordPress default help
+			$my_help .= '<h3>WordPress</h3>' . PHP_EOL;
+			$my_help .= '<p>' . PHP_EOL;
+			$my_help .= $contextual_help;
+			$my_help .= '</p>' . PHP_EOL;
+
+			$contextual_help = $my_help;
+		}
+		return $contextual_help; 
+	}
+	add_filter( 'contextual_help', 'fpw_fct_help', 10, 3 );
 }
-add_filter( 'contextual_help', 'fpw_cat_thumbs_help', 10, 3 );
 
 /*	----------------------
 	Plugin's settings page
 	------------------- */
-function fpw_cat_thumbs_settings() {
-	global	$fpw_category_thumbnails_version;
-
-	//	base name for uninstall file
-	$uninstall = ABSPATH . PLUGINDIR . '/' . dirname( plugin_basename( __FILE__ ) ) . '/uninstall.';
-
-	//	initialize options array
-	$fpw_options = get_option( 'fpw_category_thumb_opt' );
-	if ( !is_array( $fpw_options ) ) {
-		$fpw_options = array( 'clean' => FALSE, 'donotover' => FALSE, 'dash' => FALSE );
-		update_option( 'fpw_category_thumb_opt', $fpw_options );
-	}
+function fpw_fct_settings() {
+	global	$fpw_fct_version, 
+			$fpw_fct_options,
+			$wp_version;
 
 	//	get all categories
 	$categories = array();
@@ -258,20 +349,23 @@ function fpw_cat_thumbs_settings() {
 	
 	//	check nonce if any of buttons was pressed
 	if ( $_POST[ 'buttonPressed' ] ) {
-		if ( !isset( $_POST[ 'fpw-category-thumbnails-nonce' ] ) ) 
-			die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red"><strong>' . __( 'You did not send any credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
-		if ( !wp_verify_nonce( $_POST[ 'fpw-category-thumbnails-nonce' ], 'fpw-category-thumbnails-nonce' ) ) 
-			die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red;"><strong>' . __( 'You did not send the right credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
+		if ( !isset( $_POST[ 'fpw-fct-nonce' ] ) ) 
+			die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red"><strong>' . __( 'You did not send any credentials!', 'fpw-fct' ) . '</strong></p>' );
+		if ( !wp_verify_nonce( $_POST[ 'fpw-fct-nonce' ], 'fpw-fct-nonce' ) ) 
+			die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red;"><strong>' . __( 'You did not send the right credentials!', 'fpw-fct' ) . '</strong></p>' );
 
 		//	check ok - update options
-		$fpw_options[ 'clean' ] = ( $_POST[ 'cleanup' ] == 'yes' );
-		$fpw_options[ 'donotover' ] = ( $_POST[ 'donotover' ] == 'yes' );
-		$fpw_options[ 'dash' ] = ( $_POST[ 'dash' ] == 'yes' );
-		$update_options_ok = ( update_option( 'fpw_category_thumb_opt', $fpw_options ) );
+		$fpw_fct_options[ 'clean' ] = ( $_POST[ 'cleanup' ] == 'yes' );
+		$fpw_fct_options[ 'donotover' ] = ( $_POST[ 'donotover' ] == 'yes' );
+		$fpw_fct_options[ 'dash' ] = ( $_POST[ 'dash' ] == 'yes' );
+		if ( '3.1' <= $wp_version ) 
+			$fpw_fct_options[ 'abar' ] = ( $_POST[ 'abar' ] == 'yes' );
+		
+		$update_options_ok = ( update_option( 'fpw_category_thumb_opt', $fpw_fct_options ) );
 		
 		// 	if any changes to options then check uninstall file's extension
 		if ( $update_options_ok ) 
-			fpw_category_thumbnails_activate();
+			fpw_fct_activate();
 
 		//	update mappings
 		//	inserting posted values into $assignments array 
@@ -341,7 +435,7 @@ function fpw_cat_thumbs_settings() {
 					$post_id = $post -> ID;
 					//	make sure this is not a revision
 					if ( 'revision' != $post -> post_type )
-						fpw_update_category_thumbnail_id( $post_id, $post );
+						fpw_fct_update_id( $post_id, $post );
 				}
 				next($map);
 			}
@@ -366,34 +460,40 @@ function fpw_cat_thumbs_settings() {
 	--------------------------- */
 
 	echo '<div class="wrap">' . PHP_EOL;
-	echo '<div id="icon-options-general" class="icon32"></div><h2>' . __( 'FPW Category Thumbnails - Settings', 'fpw-category-thumbnails' ) . ' (' . $fpw_category_thumbnails_version . ')</h2>' . PHP_EOL;
+	echo '<div id="icon-options-general" class="icon32"></div><h2>' . __( 'FPW Category Thumbnails', 'fpw-fct' ) . ' (' . $fpw_fct_version . ')</h2>' . PHP_EOL;
 
     //	display warning if current theme doesn't support post thumbnails
     if ( !current_theme_supports( 'post-thumbnails') ) {
     	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;"><p><strong>';
-		echo __( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-category-thumbnails' ) . ' '; 
-		echo __( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-category-thumbnails' ); 
+		echo __( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-fct' ) . ' '; 
+		echo __( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-fct' ); 
 		echo '</strong></p></div>' . PHP_EOL;
 	}
 
 	//	display message about update status
 	if ( 'Update' == $_POST[ 'buttonPressed' ] )
 		if ( $update_options_ok || $update_mapping_ok ) {
-			echo '<div id="message" class="updated fade"><p><strong>' . __( 'Settings updated successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
+			echo '<div id="message" class="updated fade"><p><strong>' . __( 'Updated successfully.', 'fpw-fct' ) . '</strong></p></div>' . PHP_EOL;
 		} else {
-			echo '<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
+			echo '<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected. Nothing to update.', 'fpw-fct' ) . '</strong></p></div>' . PHP_EOL;
 		}
 
 	//	display message about apply status
 	if ( 'Apply' == $_POST[ 'buttonPressed' ] )
-		echo '<div id="message" class="updated fade"><p><strong>' . __( 'Applied to existing posts/pages successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
+		echo '<div id="message" class="updated fade"><p><strong>' . __( 'Applied thumbnails to existing posts / pages successfully.', 'fpw-fct' ) . '</strong></p></div>' . PHP_EOL;
 
 	//	display message about remove status
 	if ( 'Remove' == $_POST[ 'buttonPressed' ] )
-		echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>' . PHP_EOL;
+		echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-fct' ) . '</strong></p></div>' . PHP_EOL;
 
-	//	about instructions
-	echo '<p class="alignright">' . __( 'For instructions click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Help', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'above', 'fpw-category-thumbnails' ) . '.</p>' . PHP_EOL;
+	//	About Help message
+	echo '<p class="alignright">' . __( 'For additional information click on', 'fpw-fct' ) . ' <strong>' . __( 'Help', 'fpw-fct' ) . '</strong> ';
+	if ( '3.3' <= $wp_version ) {
+		echo __( 'on the Admin Bar', 'fpw-fct' );
+	} else {
+		echo __( 'above', 'fpw-category-thumbnails' );
+	}
+	echo '.</p>' . PHP_EOL;
 
 	//	the form starts here
 	echo '<p>' . PHP_EOL;
@@ -402,37 +502,48 @@ function fpw_cat_thumbs_settings() {
 	echo '" method="post">' . PHP_EOL;
 
 	//	protect this form with nonce
-	echo '<input name="fpw-category-thumbnails-nonce" type="hidden" value="' . wp_create_nonce( 'fpw-category-thumbnails-nonce' ) . '" />' . PHP_EOL;
+	echo '<input name="fpw-fct-nonce" type="hidden" value="' . wp_create_nonce( 'fpw-fct-nonce' ) . '" />' . PHP_EOL;
 
 	//	do not overwrite checkbox
 	echo '<input type="checkbox" name="donotover" value="yes"';
-	if ( $fpw_options[ 'donotover' ] ) echo ' checked';
-	echo "> " . __( "Do not overwrite if post/page has thumbnail assigned already", 'fpw-category-thumbnails' ) . "<br />" . PHP_EOL;
+	if ( $fpw_fct_options[ 'donotover' ] ) 
+		echo ' checked';
+	echo "> " . __( "Do not overwrite if post/page has thumbnail assigned already", 'fpw-fct' ) . "<br />" . PHP_EOL;
 
 	//	cleanup checkbox
 	echo '<input type="checkbox" name="cleanup" value="yes"';
-	if ( $fpw_options[ 'clean' ] ) echo ' checked';
-	echo "> " . __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . "<br />" . PHP_EOL;
+	if ( $fpw_fct_options[ 'clean' ] ) 
+		echo ' checked';
+	echo "> " . __( "Remove plugin's data from database on uninstall", 'fpw-fct' ) . "<br />" . PHP_EOL;
 
 	//	dashboard widget checkbox
 	echo '<input type="checkbox" name="dash" value="yes"';
-	if ( $fpw_options[ 'dash' ] ) echo ' checked';
-	echo "> " . __( "Show plugin info widget on the Dashboard", 'fpw-category-thumbnails' ) . "<br /><br />" . PHP_EOL;
+	if ( $fpw_fct_options[ 'dash' ] ) 
+		echo ' checked';
+	echo "> " . __( "Show plugin info widget on the Dashboard", 'fpw-fct' ) . "<br />" . PHP_EOL;
+
+	//	add plugin to admin bar checkbox
+	if ( '3.1' <= $wp_version ) {
+		echo '<input type="checkbox" name="abar" value="yes"';
+		if ( $fpw_fct_options[ 'abar' ] ) 
+			echo ' checked';
+		echo "> " . __( "Add this plugin to the Admin Bar", 'fpw-fct' ) . "<br /><br />" . PHP_EOL;
+	}
 
 	// start of the table
 	echo '<table class="widefat">' . PHP_EOL;
 	echo '<thead>' . PHP_EOL;
 	echo '<tr>' . PHP_EOL;
-	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th width="214px" style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th style="text-align: left;">' . __( 'Preview', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-fct' ) . '</th>' . PHP_EOL;
+	echo '<th width="214px" style="text-align: left;">' . __( 'Image ID', 'fpw-fct' ) . '</th>' . PHP_EOL;
+	echo '<th style="text-align: left;">' . __( 'Preview', 'fpw-fct' ) . '</th>' . PHP_EOL;
 	echo '</tr>' . PHP_EOL;
 	echo '</thead>' . PHP_EOL;
 	echo '<tfoot>' . PHP_EOL;
 	echo '<tr>' . PHP_EOL;
-	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th width="214px" style="text-align: left;">' . __( 'Image ID', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
-	echo '<th style="text-align: left;">' . __( 'Preview', 'fpw-category-thumbnails' ) . '</th>' . PHP_EOL;
+	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-fct' ) . '</th>' . PHP_EOL;
+	echo '<th width="214px" style="text-align: left;">' . __( 'Image ID', 'fpw-fct' ) . '</th>' . PHP_EOL;
+	echo '<th style="text-align: left;">' . __( 'Preview', 'fpw-fct' ) . '</th>' . PHP_EOL;
 	echo '</tr>' . PHP_EOL;
 	echo '</tfoot>' . PHP_EOL;
 	echo '<tbody>' . PHP_EOL;
@@ -459,9 +570,9 @@ function fpw_cat_thumbs_settings() {
 	echo '</table>' . PHP_EOL;
 
 	//	submit buttons
-	echo '<br /><div class="inputbutton"><input onclick="confirmUpdate();" id="update" class="button-primary fpw-submit" type="button" name="fpw_cat_thmb_submit" value="' . __( 'Update', 'fpw-category-thumbnails' ) . '" /> ';
-	echo '<input onclick="confirmApply();" id="apply" class="button-primary fpw-submit" type="button" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all posts/pages', 'fpw-category-thumbnails' ) . '" /> ';
-	echo '<input onclick="confirmRemove();" id="remove" class="button-primary fpw-submit" type="button" name="fpw_cat_thmb_submit_remove" value="' . __( 'Remove all thumbnails from posts/pages', 'fpw-category-thumbnails' ) . '" />';
+	echo '<br /><div class="inputbutton"><input onclick="confirmUpdate();" id="update" class="button-primary fpw-submit" type="button" name="fpw_cat_thmb_submit" value="' . __( 'Update', 'fpw-fct' ) . '" /> ';
+	echo '<input onclick="confirmApply();" id="apply" class="button-primary fpw-submit" type="button" name="fpw_cat_thmb_submit_apply" value="' . __( 'Apply to all posts/pages', 'fpw-fct' ) . '" /> ';
+	echo '<input onclick="confirmRemove();" id="remove" class="button-primary fpw-submit" type="button" name="fpw_cat_thmb_submit_remove" value="' . __( 'Remove all thumbnails from posts/pages', 'fpw-fct' ) . '" />';
 	echo '<input id="buttonPressed" type="hidden" value="" name="buttonPressed" /></div>' . PHP_EOL;
 
 	//	end of form
@@ -474,7 +585,7 @@ function fpw_cat_thumbs_settings() {
 	Main action - sets the value of post's _thumbnail_id based on category
 	assignments
 	------------------------------------------------------------------- */
-function fpw_update_category_thumbnail_id( $post_id, $post ) {
+function fpw_fct_update_id( $post_id, $post ) {
 	//	we don't want to apply changes to post's revision
 	if ( 'revision' == $post -> post_type )
 		return;
@@ -500,4 +611,4 @@ function fpw_update_category_thumbnail_id( $post_id, $post ) {
   		}
 	}
 }	
-add_action( 'save_post', 'fpw_update_category_thumbnail_id', 10, 2 );
+add_action( 'save_post', 'fpw_fct_update_id', 10, 2 );

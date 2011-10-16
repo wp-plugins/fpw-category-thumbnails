@@ -11,7 +11,7 @@ if ( ! function_exists( 'add_action' ) ) {
 }
 
 //	Register and enqueue scripts & styles
-function fpw_category_thumbnails_enqueue_scripts( $hook ) {
+function fpw_fct_enqueue_scripts( $hook ) {
 	if ( ( 'settings_page_fpw-category-thumbnails' == $hook ) || ( 'media-upload-popup' == $hook ) ) {
 		wp_register_style( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/css/jquery.alerts.css' ) );
 		wp_register_script( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/jquery.alerts.js' ), array( 'jquery' ) );
@@ -23,7 +23,7 @@ function fpw_category_thumbnails_enqueue_scripts( $hook ) {
 		$protocol = isset( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
 		wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(
 			'ajaxurl'			=> admin_url( 'admin-ajax.php', $protocol ),
-			'text_select_file'	=> esc_html__( 'Get ID', 'fpw-category-thumbnails' )
+			'text_select_file'	=> esc_html__( 'Get ID', 'fpw-fct' )
 		));
 	}
 }
@@ -56,7 +56,7 @@ function fpw_fs_button( $name, $value, $catid, $label = 'Get ID', $preview_size 
 						if ( !$picture ) {
 							echo '';
 						} else {
-							$pic = $picture->thumbURL;
+							$pic = $picture->imageURL;
 							$w = $picture->meta_data['thumbnail']['width'];
 							$h = $picture->meta_data['thumbnail']['height'];
 							$pic = '<img width="' . $w . '" height="' . $h . '" src="' . $pic . '" />';
@@ -81,7 +81,7 @@ function fpw_fs_get_file_ajax() {
 	if ( 'ngg-' == substr( $_REQUEST['id'], 0, 4 ) ) {
 		$id = substr( $_REQUEST['id'], 4 );
 		$picture = nggdb::find_image($id);
-		$pic = $picture->thumbURL;
+		$pic = $picture->imageURL;
 		$w = $picture->meta_data['thumbnail']['width'];
 		$h = $picture->meta_data['thumbnail']['height'];
 		$pic = '<img width="' . $w . '" height="' . $h . '" src="' . $pic . '" />';
