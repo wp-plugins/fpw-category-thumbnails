@@ -4,7 +4,7 @@ Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 2.9.0
 Tested up to: 3.3-Beta 1
-Stable tag: 1.3.6
+Stable tag: 1.3.7
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
 the post is created or updated.
@@ -30,12 +30,12 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 1. Settings Page
 2. Pre 3.3 Help
-3. 3.3 Help
+3. Version 3.3 Help
 
 == Changelog ==
 
 = 1.3.7 =
-* Minor code improvements
+* Code improvements
 * Full localization of javascripts
 * WordPress 3.3 ready
 
