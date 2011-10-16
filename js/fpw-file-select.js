@@ -145,7 +145,7 @@ jQuery( document ).ready( function( $ ) {
 			t = this;
 			id = t.id;
 			id = id.slice( ( id.search( /clear-for-id-/ ) + 13 ), id.length );
-			jConfirm('Are you sure you want to clear this ID?', 'Please confirm', function(r) {
+			jConfirm(fpw_file_select.clear_line_1, fpw_file_select.confirm_header, function(r) {
 				if ( r ) fpw_fs_select_item( 0, 'val-for-id-' + id + '-field' );
 			});
 			return false;
