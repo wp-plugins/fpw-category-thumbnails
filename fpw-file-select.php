@@ -24,7 +24,7 @@ function fpw_fct_enqueue_scripts( $hook ) {
 		wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(
 			'ajaxurl'			=> admin_url( 'admin-ajax.php', $protocol ),
 			'text_select_file'	=> esc_html( __( 'Get ID', 'fpw-fct' ) ),
-			'apply_line_1_1'	=> esc_html( __( 'Do not overwrite if post/page has thumbnail assigned already', 'fpw-fct' ) ),
+			'apply_line_1_1'	=> esc_html( __( 'This action will add thumbnails based on current settings to', 'fpw-fct' ) ),
 			'apply_line_1_2'	=> esc_html( __( 'ALL', 'fpw-fct' ) ),
 			'apply_line_1_3'	=> esc_html( __( 'existing posts / pages.', 'fpw-fct' ) ),
 			'apply_line_2_1'	=> esc_html( __( 'Do not overwrite if post/page has thumbnail assigned already', 'fpw-fct' ) ),
