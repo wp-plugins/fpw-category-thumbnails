@@ -6,14 +6,15 @@ function confirmUpdate() {
 
 function confirmApply() {
 //	msg = 'This action will add thumbnails based on current settings to <strong>ALL</strong> existing posts / pages.<br />';
-//	msg = msg + '"<em>Do not overwrite if post/page has thumbnail assigned already</em>" option will be respected.<br /> <br />';
+//	msg = msg + 'Option "<em>Do not overwrite if post / page has thumbnail assigned already</em>" will be respected.<br /> <br />';
 //	msg = msg + 'Are you sure you want to proceed?';
 	msg = fpw_file_select.apply_line_1_1 + ' <strong>';
 	msg = msg + fpw_file_select.apply_line_1_2 + '</strong> ';
-	msg = msg + fpw_file_select.apply_line_1_3 + '<br />';
-	msg = msg + '"<em>' + fpw_file_select.apply_line_2_1;
-	msg = msg + '</em>" ' + fpw_file_select.apply_line_2_2 + '<br /> <br />';
-	msg = msg + fpw_file_select.apply_line_3;
+	msg = msg + fpw_file_select.apply_line_1_3 + ' ';
+	msg = msg + fpw_file_select.apply_line_1_4 + ' "<em>';
+	msg = msg + fpw_file_select.apply_line_1_5 + '"</em> ';
+	msg = msg + fpw_file_select.apply_line_1_6 + '<br /> <br />';
+	msg = msg + fpw_file_select.apply_line_2;
 	jConfirm(msg, fpw_file_select.confirm_header, function(result){
 		if (result) {
     		jQuery( '#buttonPressed' ).val( 'Apply' );

@@ -508,7 +508,7 @@ function fpw_fct_settings() {
 	echo '<input type="checkbox" name="donotover" value="yes"';
 	if ( $fpw_fct_options[ 'donotover' ] ) 
 		echo ' checked';
-	echo "> " . __( "Do not overwrite if post/page has thumbnail assigned already", 'fpw-fct' ) . "<br />" . PHP_EOL;
+	echo "> " . __( "Do not overwrite if post / page has thumbnail assigned already", 'fpw-fct' ) . "<br />" . PHP_EOL;
 
 	//	cleanup checkbox
 	echo '<input type="checkbox" name="cleanup" value="yes"';
