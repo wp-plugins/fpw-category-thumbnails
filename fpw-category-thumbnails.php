@@ -231,27 +231,27 @@ if ( '3.3' <= $wp_version ) {
 			
 			$current_screen->add_help_sidebar( $sidebar );
 			
-			$intro =	'<p style="text-align: justify">' . __( 'Setting featured images for posts / pages could be very time consuming, ', 'fpw-category-thumbnails' ) . 
-						__( 'especially when your media library holds hundreds of pictures. ', 'fpw-category-thumbnails' ) . 
-						__( 'Very often we select the same thumbnail for posts in particular category. ', 'fpw-category-thumbnails' ) . 
-						__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br /><br />' . 
-						'<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . 
+			$intro =	'<p style="text-align: justify">' . __( 'Setting featured images for posts / pages could be very time consuming, ', 'fpw-fct' ) . 
+						__( 'especially when your media library holds hundreds of pictures. ', 'fpw-fct' ) . 
+						__( 'Very often we select the same thumbnail for posts in particular category. ', 'fpw-fct' ) . 
+						__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-fct' ) . '<br /><br />' . 
+						'<strong>' . __( 'Note', 'fpw-fct' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-fct' ) . 
 						'</p><p>&nbsp;</p>';
 
 			$current_screen->add_help_tab( array(
-	    		'title'   => __('Introduction', 'fpw-category-thumbnails'),
+	    		'title'   => __('Introduction', 'fpw-fct'),
 		    	'id'      => 'fpw-category-thumbnails-help-introduction',
 	    		'content' => $intro,
 			) );
 
 			$current_screen->add_help_tab( array(
-	    		'title'   => __('Options', 'fpw-category-thumbnails'),
+	    		'title'   => __('Options', 'fpw-fct'),
 		    	'id'      => 'fpw-category-thumbnails-help-options',
 	    		'content' => "<p>Help text for options...</p>",
 			) );
 
 			$current_screen->add_help_tab( array(
-	    		'title'   => __('FAQ', 'fpw-category-thumbnails'),
+	    		'title'   => __('FAQ', 'fpw-fct'),
 		    	'id'      => 'fpw-category-thumbnails-help-faq',
 	    		'content' => "<p>Help text for faq...</p>",
 			) );
@@ -265,16 +265,16 @@ if ( '3.3' <= $wp_version ) {
 
 		if ( $screen_id == $fpw_fct_hook ) {
 			//	display description block
-			$my_help  = '<h3>' . __( 'Description', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-			$my_help .= '<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-			$my_help .= '<strong>' . __( 'Note', 'fpw-category-thumbnails' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+			$my_help  = '<h3>' . __( 'Description', 'fpw-fct' ) . '</h3>' . PHP_EOL;
+			$my_help .= '<p>' . __( 'This plugin inserts a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-fct' ) . '<br />' . PHP_EOL;
+			$my_help .= '<strong>' . __( 'Note', 'fpw-fct' ) . '</strong>: ' . __( 'please remember that your theme must support post thumbnails.', 'fpw-fct' ) . '</p>' . PHP_EOL;
 
 			//	display instructions block
-			$my_help .= '<h3>' . __( 'Instructions', 'fpw-category-thumbnails' ) . '</h3>' . PHP_EOL;
-			$my_help .= '<p>' . __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'IDs', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'of thumbnail images for corresponding categories.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-			$my_help .= __( 'Enter', 'fpw-category-thumbnails' ) . ' <strong>0</strong> ' . __( 'for categories without assignment.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-			$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Apply to all existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately apply mappings to existing posts/pages.', 'fpw-category-thumbnails' ) . '<br />' . PHP_EOL;
-			$my_help .= __( 'Click on', 'fpw-category-thumbnails' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-category-thumbnails' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-category-thumbnails' ) . '</p>' . PHP_EOL;
+			$my_help .= '<h3>' . __( 'Instructions', 'fpw-fct' ) . '</h3>' . PHP_EOL;
+			$my_help .= '<p>' . __( 'Enter', 'fpw-fct' ) . ' <strong>' . __( 'IDs', 'fpw-fct' ) . '</strong> ' . __( 'of thumbnail images for corresponding categories.', 'fpw-fct' ) . '<br />' . PHP_EOL;
+			$my_help .= __( 'Enter', 'fpw-fct' ) . ' <strong>0</strong> ' . __( 'for categories without assignment.', 'fpw-fct' ) . '<br />' . PHP_EOL;
+			$my_help .= __( 'Click on', 'fpw-fct' ) . ' <strong>' . __( 'Apply to all existing posts/pages', 'fpw-fct' ) . '</strong> ' . __( 'to immediately apply mappings to existing posts/pages.', 'fpw-fct' ) . '<br />' . PHP_EOL;
+			$my_help .= __( 'Click on', 'fpw-fct' ) . ' <strong>' . __( 'Remove all thumbnails from existing posts/pages', 'fpw-fct' ) . '</strong> ' . __( 'to immediately remove thumbnails from existing posts/pages.', 'fpw-fct' ) . '</p>' . PHP_EOL;
 
 			//	WordPress default help
 			$my_help .= '<h3>WordPress</h3>' . PHP_EOL;
@@ -491,7 +491,7 @@ function fpw_fct_settings() {
 	if ( '3.3' <= $wp_version ) {
 		echo __( 'on the Admin Bar', 'fpw-fct' );
 	} else {
-		echo __( 'above', 'fpw-category-thumbnails' );
+		echo __( 'above', 'fpw-fct' );
 	}
 	echo '.</p>' . PHP_EOL;
 
