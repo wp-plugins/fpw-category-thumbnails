@@ -5,10 +5,14 @@ function confirmUpdate() {
 }
 
 function confirmApply() {
-	msg = 'This action will add thumbnails based on current settings to <strong>ALL</strong> existing posts / pages.<br />';
-	msg = msg + '"<em>Do not overwrite if post/page has thumbnail assigned already</em>" option will be respected.<br /> <br />';
-	msg = msg + 'Are you sure you want to proceed?';
-	jConfirm(msg, 'Please Confirm', function(result){
+	msg = fpw_file_select.apply_line_1_1 + ' <strong>';
+	msg = msg + fpw_file_select.apply_line_1_2 + '</strong> ';
+	msg = msg + fpw_file_select.apply_line_1_3 + ' ';
+	msg = msg + fpw_file_select.apply_line_1_4 + ' "<em>';
+	msg = msg + fpw_file_select.apply_line_1_5 + '"</em> ';
+	msg = msg + fpw_file_select.apply_line_1_6 + '<br /> <br />';
+	msg = msg + fpw_file_select.apply_line_2;
+	jConfirm(msg, fpw_file_select.confirm_header, function(result){
 		if (result) {
     		jQuery( '#buttonPressed' ).val( 'Apply' );
 			jQuery("form[name='fpw_cat_thmb_form']").submit();
@@ -19,10 +23,17 @@ function confirmApply() {
 }
 
 function confirmRemove() {
-	msg = 'This action will <strong>REMOVE</strong> thumbnails from <strong>ALL</strong> existing posts / pages.<br />';
-	msg = msg + '"<em>Do not overwrite if post/page has thumbnail assigned already</em>" option will <strong>NOT</strong> be respected!<br /> <br />';
-	msg = msg + 'Are you sure you want to proceed?';
-	jConfirm(msg, 'Please Confirm', function(result){
+	msg = fpw_file_select.remove_line_1_1 + ' <strong>';
+	msg = msg + fpw_file_select.remove_line_1_2 + '</strong> ';
+	msg = msg + fpw_file_select.remove_line_1_3 + ' <strong>';
+	msg = msg + fpw_file_select.remove_line_1_4 + '</strong> ';
+	msg = msg + fpw_file_select.remove_line_1_5 + ' ';
+	msg = msg + fpw_file_select.remove_line_1_6 + ' "<em>';
+	msg = msg + fpw_file_select.remove_line_1_7 + '</em>" <strong>';
+	msg = msg + fpw_file_select.remove_line_1_8 + '</strong> ';
+	msg = msg + fpw_file_select.remove_line_1_9 + '<br /> <br />';
+	msg = msg + fpw_file_select.apply_line_2;
+	jConfirm(msg, fpw_file_select.confirm_header, function(result){
 		if (result) {
     		jQuery( '#buttonPressed' ).val( 'Remove' );
 			jQuery("form[name='fpw_cat_thmb_form']").submit();
@@ -40,7 +51,7 @@ jQuery( document ).ready( function( $ ) {
 		// Invoke Media Library interface on button click
 		$( '.fpw-fs-button' ).click( function() {
 			$( 'html' ).addClass( 'File' );
-			tb_show( 'Get Image ID', 'media-upload.php?fpw_fs_field=' + $( this ).siblings( 'input.fpw-fs-value' ).attr( 'id' ) + '&type=file&TB_iframe=true' );			
+			tb_show( fpw_file_select.tb_show_title, 'media-upload.php?fpw_fs_field=' + $( this ).siblings( 'input.fpw-fs-value' ).attr( 'id' ) + '&type=file&TB_iframe=true' );			
 			return false;
 		});
 	
@@ -131,7 +142,7 @@ jQuery( document ).ready( function( $ ) {
 			t = this;
 			id = t.id;
 			id = id.slice( ( id.search( /clear-for-id-/ ) + 13 ), id.length );
-			jConfirm('Are you sure you want to clear this ID?', 'Please confirm', function(r) {
+			jConfirm(fpw_file_select.clear_line_1, fpw_file_select.confirm_header, function(r) {
 				if ( r ) fpw_fs_select_item( 0, 'val-for-id-' + id + '-field' );
 			});
 			return false;
