@@ -5,9 +5,6 @@ function confirmUpdate() {
 }
 
 function confirmApply() {
-//	msg = 'This action will add thumbnails based on current settings to <strong>ALL</strong> existing posts / pages.<br />';
-//	msg = msg + 'Option "<em>Do not overwrite if post / page has thumbnail assigned already</em>" will be respected.<br /> <br />';
-//	msg = msg + 'Are you sure you want to proceed?';
 	msg = fpw_file_select.apply_line_1_1 + ' <strong>';
 	msg = msg + fpw_file_select.apply_line_1_2 + '</strong> ';
 	msg = msg + fpw_file_select.apply_line_1_3 + ' ';
@@ -26,10 +23,20 @@ function confirmApply() {
 }
 
 function confirmRemove() {
-	msg = 'This action will <strong>REMOVE</strong> thumbnails from <strong>ALL</strong> existing posts / pages.<br />';
-	msg = msg + '"<em>Do not overwrite if post/page has thumbnail assigned already</em>" option will <strong>NOT</strong> be respected!<br /> <br />';
-	msg = msg + 'Are you sure you want to proceed?';
-	jConfirm(msg, 'Please Confirm', function(result){
+//	msg = 'This action will <strong>REMOVE</strong> thumbnails from <strong>ALL</strong> existing posts / pages.<br />';
+//	msg = msg + 'Option "<em>Do not overwrite if post / page has thumbnail assigned already</em>" <strong>WILL NOT</strong> be respected!<br /> <br />';
+//	msg = msg + 'Are you sure you want to proceed?';
+	msg = fpw_file_select.remove_line_1_1 + ' <strong>';
+	msg = msg + fpw_file_select.remove_line_1_2 + '</strong> ';
+	msg = msg + fpw_file_select.remove_line_1_3 + ' <strong>';
+	msg = msg + fpw_file_select.remove_line_1_4 + '</strong> ';
+	msg = msg + fpw_file_select.remove_line_1_5 + ' ';
+	msg = msg + fpw_file_select.remove_line_1_6 + ' "<em>';
+	msg = msg + fpw_file_select.remove_line_1_7 + '</em>" <strong>';
+	msg = msg + fpw_file_select.remove_line_1_8 + '</strong> ';
+	msg = msg + fpw_file_select.remove_line_1_9 + '<br /> <br />';
+	msg = msg + fpw_file_select.apply_line_2;
+	jConfirm(msg, fpw_file_select.confirm_header, function(result){
 		if (result) {
     		jQuery( '#buttonPressed' ).val( 'Remove' );
 			jQuery("form[name='fpw_cat_thmb_form']").submit();

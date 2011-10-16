@@ -31,6 +31,15 @@ function fpw_fct_enqueue_scripts( $hook ) {
 			'apply_line_1_5'	=> esc_html( __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-fct' ) ),
 			'apply_line_1_6'	=> esc_html( __( 'will be respected.', 'fpw-fct' ) ),
 			'apply_line_2'		=> esc_html( __( 'Are you sure you want to proceed?', 'fpw-fct' ) ),
+			'remove_line_1_1'	=> esc_html( __( 'This action', 'fpw-fct' ) ),
+			'remove_line_1_2'	=> esc_html( __( 'WILL REMOVE', 'fpw-fct' ) ),
+			'remove_line_1_3'	=> esc_html( __( 'thumbnails from', 'fpw-fct' ) ),
+			'remove_line_1_4'	=> esc_html( __( 'ALL', 'fpw-fct' ) ),
+			'remove_line_1_5'	=> esc_html( __( 'existing posts / pages.', 'fpw-fct' ) ),
+			'remove_line_1_6'	=> esc_html( __( 'Option', 'fpw-fct' ) ),
+			'remove_line_1_7'	=> esc_html( __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-fct' ) ),
+			'remove_line_1_8'	=> esc_html( __( 'WILL NOT', 'fpw-fct' ) ),
+			'remove_line_1_9'	=> esc_html( __( 'be respected!', 'fpw-fct' ) ),
 			'confirm_header'	=> esc_html( __( 'Please confirm', 'fpw-fct' ) )
 		));
 	}
