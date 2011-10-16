@@ -54,7 +54,7 @@ jQuery( document ).ready( function( $ ) {
 		// Invoke Media Library interface on button click
 		$( '.fpw-fs-button' ).click( function() {
 			$( 'html' ).addClass( 'File' );
-			tb_show( 'Get Image ID', 'media-upload.php?fpw_fs_field=' + $( this ).siblings( 'input.fpw-fs-value' ).attr( 'id' ) + '&type=file&TB_iframe=true' );			
+			tb_show( fpw_file_select.tb_show_title, 'media-upload.php?fpw_fs_field=' + $( this ).siblings( 'input.fpw-fs-value' ).attr( 'id' ) + '&type=file&TB_iframe=true' );			
 			return false;
 		});
 	
