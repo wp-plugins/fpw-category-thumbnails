@@ -23,7 +23,14 @@ function fpw_fct_enqueue_scripts( $hook ) {
 		$protocol = isset( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
 		wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(
 			'ajaxurl'			=> admin_url( 'admin-ajax.php', $protocol ),
-			'text_select_file'	=> esc_html( __( 'Get ID', 'fpw-fct' ) )
+			'text_select_file'	=> esc_html( __( 'Get ID', 'fpw-fct' ) ),
+			'apply_line_1_1'	=> esc_html( __( 'Do not overwrite if post/page has thumbnail assigned already', 'fpw-fct' ) ),
+			'apply_line_1_2'	=> esc_html( __( 'ALL', 'fpw-fct' ) ),
+			'apply_line_1_3'	=> esc_html( __( 'existing posts / pages.', 'fpw-fct' ) ),
+			'apply_line_2_1'	=> esc_html( __( 'Do not overwrite if post/page has thumbnail assigned already', 'fpw-fct' ) ),
+			'apply_line_2_2'	=> esc_html( __( 'option will be respected.', 'fpw-fct' ) ),
+			'apply_line_3'		=> esc_html( __( 'Are you sure you want to proceed?', 'fpw-fct' ) ),
+			'confirm_header'	=> esc_html( __( 'Please confirm', 'fpw-fct' ) )
 		));
 	}
 }
@@ -36,7 +43,7 @@ function fpw_fs_disable_flash_uploader() {
 add_action( 'admin_init', 'fpw_fs_disable_flash_uploader' );
 
 // Output form button
-function fpw_fs_button( $name, $value, $catid, $label = __( 'Get ID', 'fpw-fct' ), $preview_size = 'thumbnail', $removable = false ) { ?>
+function fpw_fs_button( $name, $value, $catid, $label = 'Get ID', $preview_size = 'thumbnail', $removable = false ) { ?>
 	<td><div>
 		<input type="text" size="10" maxlength="10" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="fpw-fs-value" />
 		<input type="button" class="button-secondary fpw-fs-button" value="<?php echo __( 'Get ID', 'fpw-fct' ); ?>" />

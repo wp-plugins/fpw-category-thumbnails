@@ -535,14 +535,14 @@ function fpw_fct_settings() {
 	echo '<thead>' . PHP_EOL;
 	echo '<tr>' . PHP_EOL;
 	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-fct' ) . '</th>' . PHP_EOL;
-	echo '<th width="214px" style="text-align: left;">' . __( 'Image ID', 'fpw-fct' ) . '</th>' . PHP_EOL;
+	echo '<th width="250px" style="text-align: left;">' . __( 'Image ID', 'fpw-fct' ) . '</th>' . PHP_EOL;
 	echo '<th style="text-align: left;">' . __( 'Preview', 'fpw-fct' ) . '</th>' . PHP_EOL;
 	echo '</tr>' . PHP_EOL;
 	echo '</thead>' . PHP_EOL;
 	echo '<tfoot>' . PHP_EOL;
 	echo '<tr>' . PHP_EOL;
 	echo '<th width="25%" style="text-align: left;">' . __( 'Category (ID)', 'fpw-fct' ) . '</th>' . PHP_EOL;
-	echo '<th width="214px" style="text-align: left;">' . __( 'Image ID', 'fpw-fct' ) . '</th>' . PHP_EOL;
+	echo '<th width="250px" style="text-align: left;">' . __( 'Image ID', 'fpw-fct' ) . '</th>' . PHP_EOL;
 	echo '<th style="text-align: left;">' . __( 'Preview', 'fpw-fct' ) . '</th>' . PHP_EOL;
 	echo '</tr>' . PHP_EOL;
 	echo '</tfoot>' . PHP_EOL;
