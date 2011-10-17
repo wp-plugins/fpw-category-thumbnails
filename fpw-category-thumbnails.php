@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.3.7
+Version: 1.3.7.1
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 global	$fpw_fct_version, $wp_version,
 		$fpw_fct_options;
 
-$fpw_fct_version = '1.3.7';
+$fpw_fct_version = '1.3.7.1';
 
 //	Get plugin's options
 function fpw_fct_get_options() {
@@ -143,22 +143,22 @@ function fpw_fct_dashboard_widget_function() {
 		echo '<p style="font-family:arial;font-size:.9em;color:red;"><strong>' .__( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-fct' ) . '</strong></p>' . PHP_EOL; 
 	
 	if ( $fpw_fct_options[ 'donotover' ] ) {
-		$dont = 'On';
+		$dont = __( 'On', 'fpw-fct' );
 	} else {
-		$dont = 'Off';
+		$dont = __( 'Off', 'fpw-fct' );
 	}
 	
 	if ( $fpw_fct_options[ 'clean' ] ) {
-		$clean = 'On';
+		$clean = __( 'On', 'fpw-fct' );
 	} else {
-		$clean = 'Off';
+		$clean = __( 'Off', 'fpw-fct' );
 	}
 	
 	if ( '3.1' <= $wp_version ) { 
 		if ( $fpw_fct_options[ 'abar' ] ) {
-			$abar = 'On';
+			$abar = __( 'On', 'fpw-fct' );
 		} else {
-			$abar = 'Off';
+			$abar = __( 'Off', 'fpw-fct' );
 		}
 	}
 	
@@ -190,7 +190,7 @@ register_activation_hook( __FILE__, 'fpw_fct_activate' );
 
 //	Add link to Settings on Plugins page
 function fpw_fct_plugin_links( $links, $file ) {
-   	$settings_link = '<a href="' . site_url( '/wp-admin/' ) . 'options-general.php?page=fpw-category-thumbnails">' . __( "Settings", "fpw-fct" ) . '</a>';
+   	$settings_link = '<a href="' . site_url( '/wp-admin/' ) . 'options-general.php?page=fpw-category-thumbnails">' . __( 'Settings', 'fpw-fct' ) . '</a>';
 	array_unshift( $links, $settings_link );
     return $links;
 }
@@ -223,9 +223,9 @@ if ( '3.3' <= $wp_version ) {
 		
 		if ( $current_screen->id == $fpw_fct_hook ) {
 		
-			$sidebar =	'<p><strong>For more information:</strong><br />' . 
-						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/" target="_blank">Visit plugin site</a></p>' . 
-						'<p><strong>Support on:</strong><br />' . 
+			$sidebar =	'<p><strong>' . __( 'For more information:', 'fpw-fct' ) . '</strong><br />' . 
+						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Visit plugin site', fpw-fct' ) . '</a></p>' . 
+						'<p><strong>' . __( 'Support on:', 'fpw-fct' ) . '</strong><br />' . 
 						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://wordpress.org/tags/fpw-category-thumbnails?forum_id=10" target="_blank">wordpress.org</a><br />' . 
 						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://fw2s.com/forums/topic/fpw-category-thumbnail-plugin-support/" target="_blank">fw2s.com</a></p>'; 
 			
@@ -239,21 +239,21 @@ if ( '3.3' <= $wp_version ) {
 						'</p><p>&nbsp;</p>';
 
 			$current_screen->add_help_tab( array(
-	    		'title'   => __('Introduction', 'fpw-fct'),
-		    	'id'      => 'fpw-category-thumbnails-help-introduction',
+	    		'title'   => __( 'Introduction', 'fpw-fct' ),
+		    	'id'      => 'fpw-fct-help-introduction',
 	    		'content' => $intro,
 			) );
 
 			$current_screen->add_help_tab( array(
-	    		'title'   => __('Options', 'fpw-fct'),
-		    	'id'      => 'fpw-category-thumbnails-help-options',
-	    		'content' => "<p>Help text for options...</p>",
+	    		'title'   => __( 'Options', 'fpw-fct' ),
+		    	'id'      => 'fpw-fct-help-options',
+	    		'content' => '<p>' . __( 'Help text for options...', 'fpw-fct' ) . '</p>',
 			) );
 
 			$current_screen->add_help_tab( array(
-	    		'title'   => __('FAQ', 'fpw-fct'),
-		    	'id'      => 'fpw-category-thumbnails-help-faq',
-	    		'content' => "<p>Help text for faq...</p>",
+	    		'title'   => __( 'FAQ', 'fpw-fct' ),
+		    	'id'      => 'fpw-fct-help-faq',
+	    		'content' => '<p>' . __( 'Help text for faq...', 'fpw-fct' ) . '</p>',
 			) );
 			
 		}
@@ -463,7 +463,7 @@ function fpw_fct_settings() {
 	echo '<div id="icon-options-general" class="icon32"></div><h2>' . __( 'FPW Category Thumbnails', 'fpw-fct' ) . ' (' . $fpw_fct_version . ')</h2>' . PHP_EOL;
 
     //	display warning if current theme doesn't support post thumbnails
-    if ( !current_theme_supports( 'post-thumbnails') ) {
+    if ( !current_theme_supports( 'post-thumbnails' ) ) {
     	echo '	<div id="message" class="error fade" style="background-color: #CCFFFF; color: red;"><p><strong>';
 		echo __( 'WARNING: Your theme has no support for <em>post thumbnails</em>!', 'fpw-fct' ) . ' '; 
 		echo __( 'You can continue with <em>Settings</em> but until you add <code>add_theme_support( \'post-thumbnails\' );</code> to the theme\'s functions.php you will not be able to display thumbnails.', 'fpw-fct' ); 
@@ -508,26 +508,26 @@ function fpw_fct_settings() {
 	echo '<input type="checkbox" name="donotover" value="yes"';
 	if ( $fpw_fct_options[ 'donotover' ] ) 
 		echo ' checked';
-	echo "> " . __( "Do not overwrite if post / page has thumbnail assigned already", 'fpw-fct' ) . "<br />" . PHP_EOL;
+	echo '> ' . __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-fct' ) . '<br />' . PHP_EOL;
 
 	//	cleanup checkbox
 	echo '<input type="checkbox" name="cleanup" value="yes"';
 	if ( $fpw_fct_options[ 'clean' ] ) 
 		echo ' checked';
-	echo "> " . __( "Remove plugin's data from database on uninstall", 'fpw-fct' ) . "<br />" . PHP_EOL;
+	echo '> ' . __( "Remove plugin's data from database on uninstall", 'fpw-fct' ) . '<br />' . PHP_EOL;
 
 	//	dashboard widget checkbox
 	echo '<input type="checkbox" name="dash" value="yes"';
 	if ( $fpw_fct_options[ 'dash' ] ) 
 		echo ' checked';
-	echo "> " . __( "Show plugin info widget on the Dashboard", 'fpw-fct' ) . "<br />" . PHP_EOL;
+	echo '> ' . __( "Show plugin's info widget on the Dashboard", 'fpw-fct' ) . '<br />' . PHP_EOL;
 
 	//	add plugin to admin bar checkbox
 	if ( '3.1' <= $wp_version ) {
 		echo '<input type="checkbox" name="abar" value="yes"';
 		if ( $fpw_fct_options[ 'abar' ] ) 
 			echo ' checked';
-		echo "> " . __( "Add this plugin to the Admin Bar", 'fpw-fct' ) . "<br /><br />" . PHP_EOL;
+		echo '> ' . __( 'Add this plugin to the Admin Bar', 'fpw-fct' ) . '<br /><br />' . PHP_EOL;
 	}
 
 	// start of the table
@@ -558,7 +558,7 @@ function fpw_fct_settings() {
 		$indent = str_repeat( '&nbsp;', $categories[ key( $categories )][ 0 ] * 4);
 		echo $indent . $categories[ key( $categories ) ][ 1 ] -> cat_name . ' (' . $categories[ key( $categories )][ 1 ] -> cat_ID . ')'; 
 		echo '</td>' . PHP_EOL;
-		fpw_fs_button( 'val-for-id-' . key( $assignments ) . '-field', $assignments[ key( $assignments ) ], key( $assignments ), $label = 'Get ID' );
+		fpw_fs_button( 'val-for-id-' . key( $assignments ) . '-field', $assignments[ key( $assignments ) ], key( $assignments ), $label = __( 'Get ID', 'fpw-fct' ) );
 		echo '</tr>' . PHP_EOL;
 		$i++;
 		next( $assignments );
