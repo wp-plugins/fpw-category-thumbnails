@@ -224,7 +224,7 @@ if ( '3.3' <= $wp_version ) {
 		if ( $current_screen->id == $fpw_fct_hook ) {
 		
 			$sidebar =	'<p><strong>' . __( 'For more information:', 'fpw-fct' ) . '</strong><br />' . 
-						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Visit plugin site', fpw-fct' ) . '</a></p>' . 
+						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Visit plugin site', 'fpw-fct' ) . '</a></p>' . 
 						'<p><strong>' . __( 'Support on:', 'fpw-fct' ) . '</strong><br />' . 
 						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://wordpress.org/tags/fpw-category-thumbnails?forum_id=10" target="_blank">wordpress.org</a><br />' . 
 						'&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://fw2s.com/forums/topic/fpw-category-thumbnail-plugin-support/" target="_blank">fw2s.com</a></p>'; 
