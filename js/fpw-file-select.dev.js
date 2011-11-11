@@ -45,6 +45,8 @@ function confirmRemove() {
 
 jQuery( document ).ready( function( $ ) {
 
+	jQuery("#contextual-help-link").html(fpw_file_select.help_link_text);
+
 	// Actions for screens with the file select button
 	if ( $( '.fpw-fs-button' ).length ) {
 
@@ -148,6 +150,25 @@ jQuery( document ).ready( function( $ ) {
 			return false;
 		});
 	}
+
+	// Actions for screens with the refresh button
+	if ( $( '.btn-for-refresh' ).length ) {
+		$( '.btn-for-refresh' ).click( function() {
+			t = this;
+			id = t.id;
+			id = id.slice( ( id.search( /refresh-for-id-/ ) + 15 ), id.length );
+			value = $( '#' + 'val-for-id-' + id + '-field' ).attr( 'value' );
+			fpw_fs_select_item( value, 'val-for-id-' + id + '-field' );
+			return false;
+		});
+	}
+
+	// Fade out update message
+	setTimeout(function(){
+  		$("div.updated").fadeOut("slow", function () {
+  			$("div.updated").remove();
+      	});
+	}, 5000);
 	
 });
 

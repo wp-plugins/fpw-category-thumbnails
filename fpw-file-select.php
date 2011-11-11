@@ -42,7 +42,8 @@ function fpw_fct_enqueue_scripts( $hook ) {
 			'remove_line_1_9'	=> esc_html( __( 'be respected!', 'fpw-fct' ) ),
 			'clear_line_1'		=> esc_html( __( 'Are you sure you want to clear this ID?', 'fpw-fct' ) ),
 			'tb_show_title'		=> esc_html( __( 'Get Image ID', 'fpw-fct' ) ),
-			'confirm_header'	=> esc_html( __( 'Please confirm', 'fpw-fct' ) )
+			'confirm_header'	=> esc_html( __( 'Please confirm', 'fpw-fct' ) ),
+			'help_link_text'	=> esc_html( __( 'FPW Category Thumbnails - Help') )
 		));
 		wp_localize_script( 'fpw-fs-alerts', 'fpw_fs_alerts', array (
 			'text_ok'			=> esc_html( __( 'OK', 'fpw-fct' ) ),
@@ -60,13 +61,14 @@ add_action( 'admin_init', 'fpw_fs_disable_flash_uploader' );
 
 // Output form button
 function fpw_fs_button( $name, $value, $catid, $label = 'Get ID', $preview_size = 'thumbnail', $removable = false ) { ?>
-	<td><div>
+	<td style="vertical-align: middle;"><div>
 		<input type="text" size="10" maxlength="10" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="fpw-fs-value" />
-		<input type="button" class="button-secondary fpw-fs-button" value="<?php echo __( 'Get ID', 'fpw-fct' ); ?>" />
-		<input class="button-secondary btn-for-clear" id="clear-for-id-<?php echo $catid; ?>" type="button" value="<?php echo __( 'Clear', 'fpw-fct' ); ?>" />		
+		<input type="button" class="button-secondary fpw-fs-button" title="<?php echo __( 'fetches image ID from media library', 'fpw-fct' ); ?>" value="<?php echo __( 'Get ID', 'fpw-fct' ); ?>" />
+		<input class="button-secondary btn-for-clear" title="<?php echo __( 'clears \'Image ID\' input value and \'Preview\' area', 'fpw-fct' ); ?>" id="clear-for-id-<?php echo $catid; ?>" type="button" value="<?php echo __( 'Clear', 'fpw-fct' ); ?>" />		
+		<input class="button-secondary btn-for-refresh" title="<?php echo __( 'refreshes \'Preview\' area', 'fpw-fct' ); ?>" id="refresh-for-id-<?php echo $catid; ?>" type="button" value="<?php echo __( 'Refresh', 'fpw-fct' ); ?>" />		
 		<input type="hidden" value="<?php echo esc_attr( $preview_size ); ?>" name="<?php echo esc_attr( $name ); ?>_preview-size" id="<?php echo esc_attr( $name ); ?>_preview-size" class="fpw-fs-preview-size" />
 	</div></td>	
-	<td>
+	<td style="vertical-align: middle;">
 		<div class="fpw-fs-preview" id="<?php echo esc_attr( $name ); ?>_preview">
 		<?php
 			if ( $value ) {

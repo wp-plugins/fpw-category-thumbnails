@@ -3,17 +3,21 @@ Contributors: frankpw
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 2.9.0
-Tested up to: 3.3-Beta 1
+Tested up to: 3.3-beta3
 Stable tag: 1.3.7
 
-Assigns a thumbnail based on categoryid/thumbnail mapping to a post/page when
-the post is created or updated.
+Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
+page when the post is created or updated.
 
 == Description ==
-**FPW Category Thumbnails** allows assigning thumbnails to post categories.
-When configured it will check on create/update of the post/page if selected
-category has thumbnail mapped to it and will add that thumbnail to the 
-post/page.
+Setting featured images for posts / pages could be very time 
+consuming, especially when your media library holds hundreds of 
+pictures. Very often we select the same thumbnail for posts in 
+particular category. This plugin automates the process by inserting a 
+thumbnail based on category / thumbnail mapping while post / page is
+being created or updated.
+
+Note: please remember that your theme must support post thumbnails.
 
 == Installation ==
 
@@ -22,6 +26,9 @@ post/page.
 1. Select Dashboard's Settings -> FPW Category Thumbnails and build category/thumbnail mapping
 
 == Frequently Asked Questions ==
+
+= I got an ID for the image and assigned it to the category, and the plugin does not display it in posts.
+The plugin does not display thumbnails by itself. This is your theme's role.
 
 = I've entered ID of a picture from NextGen Gallery and thumbnail doesn't show. =
 IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230.
@@ -33,6 +40,12 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 3. Version 3.3 Help
 
 == Changelog ==
+
+= 1.3.8 =
+* New option ( width of 'Image ID' column )
+* New ability to AJAX-ed refresh of 'Preview' column after manual insertion of ID
+* Added missing text for Help screens
+* Various code modifications
 
 = 1.3.7 =
 * Code improvements
