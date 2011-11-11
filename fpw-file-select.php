@@ -43,7 +43,7 @@ function fpw_fct_enqueue_scripts( $hook ) {
 			'clear_line_1'		=> esc_html( __( 'Are you sure you want to clear this ID?', 'fpw-fct' ) ),
 			'tb_show_title'		=> esc_html( __( 'Get Image ID', 'fpw-fct' ) ),
 			'confirm_header'	=> esc_html( __( 'Please confirm', 'fpw-fct' ) ),
-			'help_link_text'	=> esc_html( __( 'FPW Category Thumbnails - Help') )
+			'help_link_text'	=> esc_html( __( 'FPW Category Thumbnails - Help', fpw-fct ) )
 		));
 		wp_localize_script( 'fpw-fs-alerts', 'fpw_fs_alerts', array (
 			'text_ok'			=> esc_html( __( 'OK', 'fpw-fct' ) ),
