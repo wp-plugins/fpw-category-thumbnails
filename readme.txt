@@ -27,7 +27,7 @@ Note: please remember that your theme must support post thumbnails.
 
 == Frequently Asked Questions ==
 
-= I got an ID for the image and assigned it to the category, and the plugin does not display it in posts.
+= I got an ID for the image and assigned it to the category, and the plugin does not display it in posts. =
 The plugin does not display thumbnails by itself. This is your theme's role.
 
 = I've entered ID of a picture from NextGen Gallery and thumbnail doesn't show. =
