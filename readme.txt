@@ -3,7 +3,7 @@ Contributors: frankpw
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 2.9.0
-Tested up to: 3.3-beta3
+Tested up to: 3.3
 Stable tag: 1.3.8
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
@@ -40,6 +40,10 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 3. Version 3.3 Help
 
 == Changelog ==
+
+= 1.3.9 =
+* Optimized for WordPress 3.3
+* Code cleanup
 
 = 1.3.8 =
 * New option ( width of 'Image ID' column )
