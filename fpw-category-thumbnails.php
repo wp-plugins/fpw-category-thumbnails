@@ -414,7 +414,7 @@ function fpw_fct_plugin_meta_links( $links, $file ) {
 }
 add_filter( 'plugin_row_meta', 'fpw_fct_plugin_meta_links', 10, 2 );
 
-//	Add update information after plugin mete
+//	Add update information after plugin meta
 function fpw_fct_add_after_plugin_meta( $file, $plugin_data ) {
 	$current = get_site_transient( 'update_plugins' );
 	if ( !isset( $current -> response[ $file ] ) ) 
