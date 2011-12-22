@@ -49,7 +49,7 @@ class fpwCategoryThumbnails {
 		add_action( 'admin_menu', array( &$this, 'adminMenu' ) );
 		add_action( 'admin_init', array( &$this, 'disableFlashUploader' ) );
 		add_action( 'wp_ajax_fpw_fs_get_file', array( &$this, 'fpw_fs_get_file_ajax' ) );
-		add_action( 'save_post', array( &$this, 'updateID' ) );
+		add_action( 'save_post', array( &$this, 'updateID' ), 10, 2 );
 		add_action( 'after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'afterPluginMeta' ), 10, 2 );
 
 		add_filter( 'plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'pluginLinks' ), 10, 2);
