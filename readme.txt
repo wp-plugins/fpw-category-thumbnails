@@ -41,6 +41,10 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.4.0 =
+* Maintenance release
+* Recoded using classes to prevent naming conflicts
+
 = 1.3.9 =
 * Optimized for WordPress 3.3
 * Code cleanup
