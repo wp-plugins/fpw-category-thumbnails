@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.4.0
+Version: 1.4.1
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -608,9 +608,9 @@ class fpwCategoryThumbnails {
 						post_type => 'any' );
 					$posts = get_posts( $parg );
 					foreach ( $posts as $post ) {
-						$post_id = $post -> ID;
-						//	make sure this is not a revision
-						if ( 'revision' != $post -> post_type )
+						$post_id = $post->ID;
+						//	make sure this is not a revision nor draft
+						if ( ( 'revision' != $post->post_type ) && ( 'draft' != $post->post_status ) )
 							$this->updateID( $post_id, $post );
 					}
 					next($map);
@@ -851,13 +851,15 @@ class fpwCategoryThumbnails {
 		return $opt;
 	}
 
-	/*	----------------------------------------------------------------------
+	/*	------------------------------------------------------------------
 	Main action - sets the value of post's _thumbnail_id based on category
 	assignments
 	------------------------------------------------------------------- */
-	public function updateID( $post_id, $post ) {
-		//	we don't want to apply changes to post's revision
-		if ( 'revision' == $post -> post_type )
+	public function updateID( $post_id, $post = NULL ) {
+		if ( NULL === $post ) 
+			return;
+		//	we don't want to apply changes to post's revision or drafts
+		if ( ( 'revision' == $post->post_type ) || ( 'draft' == $post->post_status ) ) 
 			return;
 		//	this is actual post
 		$thumb_id = get_post_meta( $post_id, '_thumbnail_id', TRUE );
@@ -868,15 +870,15 @@ class fpwCategoryThumbnails {
 		if ( $map ) {
 			$cat = get_the_category( $post_id );
 			foreach ( $cat as $c ) {
-				if ( $post->post_date === $post -> post_modified ) {
+				if ( $post->post_date === $post->post_modified ) {
 					//	in case of a new post we have to ignore setting of $do_notover flag
 					//	as the thumbnail of default category will be there already
-					if ( array_key_exists( $c -> cat_ID, $map ) )
-						update_post_meta( $post_id, '_thumbnail_id', $map[ $c -> cat_ID ] );
+					if ( array_key_exists( $c->cat_ID, $map ) )
+						update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
 				} else {
 					//	modified post - observe $do_notover flag
-					if ( ( array_key_exists( $c -> cat_ID, $map ) ) && ( ( '' == $thumb_id ) || !( $do_notover ) ) )
-						update_post_meta( $post_id, '_thumbnail_id', $map[ $c -> cat_ID ] );
+					if ( ( array_key_exists( $c->cat_ID, $map ) ) && ( ( '' == $thumb_id ) || !( $do_notover ) ) )
+						update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
 				}
   			}
 		}
