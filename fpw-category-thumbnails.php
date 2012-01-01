@@ -42,7 +42,7 @@ class fpwCategoryThumbnails {
 		$this->pluginUrl = WP_PLUGIN_URL . '/fpw-category-thumbnails';
 		
 		//	set version
-		$this->pluginVersion = '1.4.0';
+		$this->pluginVersion = '1.4.1';
 		
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
