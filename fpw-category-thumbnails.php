@@ -46,16 +46,20 @@ class fpwCategoryThumbnails {
 		
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
-		add_action( 'admin_menu', array( &$this, 'adminMenu' ) );
-		add_action( 'admin_init', array( &$this, 'disableFlashUploader' ) );
-		add_action( 'wp_ajax_fpw_fs_get_file', array( &$this, 'fpw_fs_get_file_ajax' ) );
-		add_action( 'save_post', array( &$this, 'updateID' ), 10, 2 );
-		add_action( 'after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'afterPluginMeta' ), 10, 2 );
+		
+		//	actions below are not used in front end
+		if ( is_admin() ) {
+			add_action( 'admin_menu', array( &$this, 'adminMenu' ) );
+			add_action( 'admin_init', array( &$this, 'disableFlashUploader' ) );
+			add_action( 'wp_ajax_fpw_fs_get_file', array( &$this, 'fpw_fs_get_file_ajax' ) );
+			add_action( 'save_post', array( &$this, 'updateID' ), 10, 2 );
+			add_action( 'after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'afterPluginMeta' ), 10, 2 );
 
-		add_filter( 'plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'pluginLinks' ), 10, 2);
-		add_filter( 'plugin_row_meta', array( &$this, 'pluginMetaLinks'), 10, 2 );
+			add_filter( 'plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'pluginLinks' ), 10, 2);
+			add_filter( 'plugin_row_meta', array( &$this, 'pluginMetaLinks'), 10, 2 );
 
-		register_activation_hook( __FILE__, array( &$this, 'pluginActivate' ) );
+			register_activation_hook( __FILE__, array( &$this, 'pluginActivate' ) );
+		}
 		
 		//	Read plugin's options
 		$this->pluginOptions = $this->getOptions();
@@ -67,7 +71,7 @@ class fpwCategoryThumbnails {
 				add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
 		}
 		
-		if ( $this->pluginOptions[ 'dash' ] ) 
+		if ( ( $this->pluginOptions[ 'dash' ] ) && is_admin() )
 			add_action( 'wp_dashboard_setup', array( &$this, 'addDashboardWidget' ) );
 	}
 

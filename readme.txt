@@ -41,6 +41,10 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.4.1 =
+* Prevents adding thumbnails to drafts
+* Adding actions and filters to back end only 
+
 = 1.4.0 =
 * Maintenance release
 * Recoded using classes to prevent naming conflicts
