@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category.
 Plugin URI: http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/
-Version: 1.4.1
+Version: 1.4.2
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -42,7 +42,7 @@ class fpwCategoryThumbnails {
 		$this->pluginUrl = WP_PLUGIN_URL . '/fpw-category-thumbnails';
 		
 		//	set version
-		$this->pluginVersion = '1.4.1';
+		$this->pluginVersion = '1.4.2';
 		
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
@@ -147,7 +147,7 @@ class fpwCategoryThumbnails {
 					'<blockquote><a href="http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Plugin\' site', 'fpw-fct' ) . '</a></blockquote>' . 
 					'<p style="font-size: larger">' . __( 'Support', 'fpw-fct' ) . '</p>' . 
 					'<blockquote><a href="http://wordpress.org/tags/fpw-category-thumbnails?forum_id=10" target="_blank">WordPress</a><br />' . 
-					'<a href="http://fw2s.com/forums/topic/fpw-category-thumbnail-plugin-support/" target="_blank">FWSS</a></blockquote>'; 
+					'<a href="http://fw2s.com/support/fpw-category-thumbnails-support/" target="_blank">FWSS</a></blockquote>'; 
 			
 		$current_screen->set_help_sidebar( $sidebar );
 			
