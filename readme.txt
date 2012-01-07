@@ -41,6 +41,9 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 
 == Changelog ==
 
+= 1.4.3 =
+* Optimized code to use less resources
+
 = 1.4.2 =
 * Changed support links to reflect changes to FWSS site
 
