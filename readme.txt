@@ -42,7 +42,7 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 == Changelog ==
 
 = 1.4.4 =
-* Change to make it 100% predictable which thumbnail will be used in case of multiple categories selection 
+* Change to make it 100% predictable which thumbnail will be used in case of multiple categories selection. 
 
 = 1.4.3 =
 * Optimized code to use less resources
