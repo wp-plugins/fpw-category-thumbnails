@@ -558,9 +558,15 @@ class fpwCategoryThumbnails {
 						update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
 				} else {
 					//	modified post - observe $do_notover flag
-					if ( ( array_key_exists( $c->cat_ID, $map ) ) && ( ( '' == $thumb_id ) || !( $do_notover ) ) )
-						update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
+					if ( array_key_exists( $c->cat_ID, $map ) ) 
+						if ( !( $do_notover ) ) {
+							update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
+						} else {
+							if ( '' == $thumb_id ) 
+								update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
+						}
 				}
+				$thumb_id = get_post_meta( $post_id, '_thumbnail_id', TRUE );
   			}
 		}
 	}	
