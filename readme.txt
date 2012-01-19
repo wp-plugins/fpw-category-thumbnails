@@ -3,7 +3,7 @@ Contributors: frankpw
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 2.9.0
-Tested up to: 3.3
+Tested up to: 3.3.1
 Stable tag: 1.4.3
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
@@ -40,6 +40,9 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 3. Version 3.3 Help
 
 == Changelog ==
+
+= 1.4.4 =
+* Change to make it 100% predictable which thumbnail will be used in case of multiple categories selection 
 
 = 1.4.3 =
 * Optimized code to use less resources
