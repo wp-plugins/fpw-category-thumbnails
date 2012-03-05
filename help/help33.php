@@ -25,14 +25,14 @@
 		) );
 			
 		$opts =		'<p style="font-size: larger">' . __( 'Available Options', 'fpw-fct' ) . '</p>' . 
-					'<blockquote style="text-align: justify"><strong>Do not overwrite if post / page has thumbnail assigned already</strong> ' . 
-					'( checked ) - while the post is being saved the originally set thumbnail will be preserved<br />' . 
-					'<strong>Remove plugin\'s data from database on uninstall</strong> ' . 
-					'( checked ) - during uninstall procedure all plugin\'s information ( options, mappings ) will be removed from the database<br />' . 
-					'<strong>Add this plugin to the Admin Bar</strong> ' . 
-					'( checked ) - the plugin\'s link to its settings page will be added to the Admin Bar<br />' . 
-					'<strong>width of Image ID column in pixels</strong> - ' . 
-					'this value may need to be adjusted for non-English translations of the plugin as widths of buttons could be different</blockquote>';
+					'<blockquote style="text-align: justify"><strong>' . __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-fct' ) . '</strong> ' . 
+					'( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( 'while the post is being saved the originally set thumbnail will be preserved', 'fpw-fct' ) . '<br />' . 
+					'<strong>' . __( 'Remove plugin\'s data from database on uninstall', 'fpw-fct' ) . '</strong> ' . 
+					'( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( 'during uninstall procedure all plugin\'s information ( options, mappings ) will be removed from the database', 'fpw-fct' ) . '<br />' . 
+					'<strong>' . __( 'Add this plugin to the Admin Bar', 'fpw-fct' ) . '</strong> ' . 
+					'( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( 'the plugin\'s link to its settings page will be added to the Admin Bar', 'fpw-fct' ) . '<br />' . 
+					'<strong>' . __( 'width of Image ID column in pixels', 'fpw-fct' ) . '</strong> - ' . 
+					__( 'this value may need to be adjusted for non-English translations of the plugin as widths of buttons could be different', 'fpw-fct' ). '</blockquote>';
 
 		$current_screen->add_help_tab( array(
    			'title'   => __( 'Options', 'fpw-fct' ),

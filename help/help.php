@@ -9,7 +9,7 @@
 			$my_help .= '<tr>';
 			$my_help .= '<td style="vertical-align: top;"><p style="text-align: justify;">' . 
 						__( 'Setting featured images for posts / pages could be very time consuming, especially when your media library holds hundreds of pictures.', 'fpw-fct' ) . ' ' . 
-						__( 'Very often we select the same thumbnail for posts in particular category.', 'fpw-fct' ) . ' ' . 
+						__( 'Very often we select the same thumbnail for posts in particular category. ', 'fpw-fct' ) .  
 						__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-fct' ) . '</p>' . 
 						'<p style="font-size: larger">' . __( 'Note', 'fpw-fct' ) . '</p>' . '<blockquote style="text-align: justify">' . 
 						__( 'Please remember that the active theme must support post thumbnails.', 'fpw-fct' ) . '</blockquote></td>';

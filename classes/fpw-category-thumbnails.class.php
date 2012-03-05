@@ -50,7 +50,7 @@ class fpwCategoryThumbnails {
 
 	//	Register plugin's textdomain
 	public function init() {
-		load_plugin_textdomain( 'fpw-fct', false, $this->pluginPath . '/languages' );
+		load_plugin_textdomain( 'fpw-fct', false, 'fpw-category-thumbnails/languages/' );
 	} 
 
 	//	Register admin menu
