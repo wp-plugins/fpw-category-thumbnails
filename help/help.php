@@ -8,17 +8,18 @@
 			$my_help .= '<tbody>';
 			$my_help .= '<tr>';
 			$my_help .= '<td style="vertical-align: top;"><p style="text-align: justify;">' . 
-						__( 'Setting featured images for posts / pages could be very time consuming, especially when your media library holds hundreds of pictures.', 'fpw-fct' ) . ' ' . 
+						__( 'Setting featured images for posts / pages could be very time consuming, ', 'fpw-fct' ) . 
+						__( 'especially when your media library holds hundreds of pictures. ', 'fpw-fct' ) .  
 						__( 'Very often we select the same thumbnail for posts in particular category. ', 'fpw-fct' ) .  
 						__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-fct' ) . '</p>' . 
 						'<p style="font-size: larger">' . __( 'Note', 'fpw-fct' ) . '</p>' . '<blockquote style="text-align: justify">' . 
 						__( 'Please remember that the active theme must support post thumbnails.', 'fpw-fct' ) . '</blockquote></td>';
 			$my_help .= '<td style="vertical-align: top;"><p style="text-align: justify"><strong>' . __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-fct' ) . 
-						'</strong> ' . __( '( checked ) - while the post is being saved the originally set thumbnail will be preserved', 'fpt-fct' ) . 
-						'<br /><strong>' . __( 'Removes plugin\'s data from database on uninstall', 'fpw-fct' ) . '</strong> ' . 
-						__( '( checked ) - during uninstall procedure all plugin\'s information ( options, mappings ) will be removed from the database', 'fpt-fct' ) . 
+						'</strong> ( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( 'while the post is being saved the originally set thumbnail will be preserved', 'fpw-fct' ) . 
+						'<br /><strong>' . __( 'Remove plugin\'s data from database on uninstall', 'fpw-fct' ) . '</strong> ' . 
+						'( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( 'during uninstall procedure all plugin\'s information ( options, mappings ) will be removed from the database', 'fpw-fct' ) . 
 						'<br /><strong>' . __( 'Add this plugin to the Admin Bar', 'fpw-fct' ) . 
-						'</strong> ' . __( '( checked ) - the plugin\'s link to its settings page will be added to the Admin Bar', 'fpw-fct' ) . 
+						'</strong> ( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( 'the plugin\'s link to its settings page will be added to the Admin Bar', 'fpw-fct' ) . 
 						'<br /><strong>' . __( 'width of Image ID column in pixels', 'fpw-fct' ) . '</strong> - ' . 
 						__( 'this value may need to be adjusted for non-English translations of the plugin as widths of buttons could be different', 'fpw-fct' ) . '</p></td>';
 			$my_help .= '</tr>';

@@ -15,7 +15,7 @@
 					__( 'Very often we select the same thumbnail for posts in particular category. ', 'fpw-fct' ) . 
 					__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-fct' ) . '</blockquote></p>' . 
 					'<p style="font-size: larger">' . __( 'Note', 'fpw-fct' ) . '</p>' . 
-					'<blockquote style="text-align: justify">' . __( 'Please remember that your theme must support post thumbnails.', 'fpw-fct' ) . 
+					'<blockquote style="text-align: justify">' . __( 'Please remember that the active theme must support post thumbnails.', 'fpw-fct' ) . 
 					'</blockquote>';
 
 		$current_screen->add_help_tab( array(
