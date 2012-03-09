@@ -33,6 +33,12 @@ The plugin does not display thumbnails by itself. This is your theme's role.
 = I've entered ID of a picture from NextGen Gallery and thumbnail doesn't show. =
 IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230.
 
+= What is required to use authors' pictures as thumbnails? = 
+Upload authors' pictures into media library or NextGen gallery. 
+File names of authors' pictures in media library must follow this naming convention: 'autor_id.jpg' where 'id' is author's user id. 
+File names of authors' pictures in NextGen gallery must follow this naming convention: 'id.jpg' where 'id' is author's user id.
+The name of NextGen gallery must be 'authors'. 
+
 == Screenshots ==
 
 1. Settings Page
@@ -40,6 +46,10 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 3. Version 3.3 Help
 
 == Changelog ==
+
+= 1.4.5 =
+* New feature: authors' pictures as thumbnails
+* Updated .pot file for translations
 
 = 1.4.5 =
 * Added missing strings for translations

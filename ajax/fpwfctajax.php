@@ -7,6 +7,8 @@
 			$h = $picture->meta_data['thumbnail']['height'];
 			$pic = '<img width="' . $w . '" height="' . $h . '" src="' . $pic . '" />';
 			echo $pic;
+		} elseif ( 'Author' === $_REQUEST['id'] ) {
+			echo '[ ' . __( 'Picture', 'fpw-fct' ) . ' ]';
 		} else {
 			if ( wp_attachment_is_image( $_REQUEST['id'] ) ) {
 				echo wp_get_attachment_image( $_REQUEST['id'], $_REQUEST['size'] );

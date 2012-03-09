@@ -246,6 +246,7 @@ class fpwCategoryThumbnails {
 				if ( strlen( $v ) > 0 ) {
 					if ( ctype_digit( $v ) ) {
 						if ( strlen( $v ) > 1 ) $v = ltrim( $v, '0' );
+					} elseif ( 'Author' === $v ) {
 					} else {
 						if ( 'ngg-' == substr( $v, 0, 4 ) ) {
 							$v = 'ngg-' . ltrim( substr( $v, 4 ), '0' );
@@ -387,7 +388,7 @@ class fpwCategoryThumbnails {
 
 		//	width of Image ID column
 		echo '<br /><input type="text" name="cwidth" size="3" maxlength="3" value="' . $this->pluginOptions[ 'width' ] . '" style="text-align: right">px - ';
-		echo __( 'width of Image ID column in pixels', 'fpw-fct' ) . '<br /><br />';
+		echo __( 'width of Image ID column in pixels ( for English - 396 )', 'fpw-fct' ) . '<br /><br />';
 
 		// start of the table
 		echo '<table class="widefat">';
@@ -451,6 +452,7 @@ class fpwCategoryThumbnails {
 		<td style="vertical-align: middle;"><div>
 			<input type="text" size="10" maxlength="10" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="fpw-fs-value" />
 			<input type="button" class="button-secondary fpw-fs-button" title="<?php echo __( 'fetches image ID from media library', 'fpw-fct' ); ?>" value="<?php echo __( 'Get ID', 'fpw-fct' ); ?>" />
+			<input type="button" class="button-secondary btn-for-author" title="<?php echo __( 'will use author\'s picture as a thumbnail', 'fpw-fct' ); ?>" id="author-for-id-<?php echo $catid; ?>" value="<?php echo __( 'Author\'s picture', 'fpw-fct' ); ?>" />
 			<input class="button-secondary btn-for-clear" title="<?php echo __( 'clears \'Image ID\' input value and \'Preview\' area', 'fpw-fct' ); ?>" id="clear-for-id-<?php echo $catid; ?>" type="button" value="<?php echo __( 'Clear', 'fpw-fct' ); ?>" />		
 			<input class="button-secondary btn-for-refresh" title="<?php echo __( 'refreshes \'Preview\' area', 'fpw-fct' ); ?>" id="refresh-for-id-<?php echo $catid; ?>" type="button" value="<?php echo __( 'Refresh', 'fpw-fct' ); ?>" />		
 			<input type="hidden" value="<?php echo esc_attr( $preview_size ); ?>" name="<?php echo esc_attr( $name ); ?>_preview-size" id="<?php echo esc_attr( $name ); ?>_preview-size" class="fpw-fs-preview-size" />
@@ -461,6 +463,8 @@ class fpwCategoryThumbnails {
 				if ( $value ) {
 					if ( '0' == $value ) {
 						echo '';
+					} elseif ( 'Author' === $value ) {
+						echo '[ ' . __( 'Picture', 'fpw-fct' ) . ' ]';
 					} else {
 						if ( ( 'ngg-' == substr( $value, 0, 4 ) ) && class_exists( 'nggdb' ) ) {
 							$id = substr( $value, 4 );
@@ -506,7 +510,7 @@ class fpwCategoryThumbnails {
 				$opt = array( 
 					'clean'		=> FALSE,
 					'donotover' => FALSE,
-					'width'		=> '293' );
+					'width'		=> '396' );
 			}
 		} else {
 			if ( !array_key_exists( 'clean', $opt ) || !is_bool( $opt[ 'clean' ] ) ) { 
@@ -519,7 +523,7 @@ class fpwCategoryThumbnails {
 			}
 			if ( !array_key_exists( 'width', $opt ) || !ctype_digit( $opt[ 'width' ] ) ) { 
 				$needs_update = TRUE;
-				$opt[ 'width' ] = '293';
+				$opt[ 'width' ] = '436';
 			}
 			if ( '3.1' <= $this->wpVersion ) 
 				if ( !array_key_exists( 'abar', $opt ) || !is_bool( $opt[ 'abar' ] ) ) { 
@@ -555,20 +559,77 @@ class fpwCategoryThumbnails {
 					//	in case of a new post we have to ignore setting of $do_notover flag
 					//	as the thumbnail of default category will be there already
 					if ( array_key_exists( $c->cat_ID, $map ) )
-						update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
+						if ( $map[ $c->cat_ID ] === 'Author' ) {
+							$auth_pic_id = $this->GetAuthorsPictureID( $post->post_author );
+							if ( '0' != $auth_pic_id ) 
+								update_post_meta( $post_id, '_thumbnail_id', $auth_pic_id );
+						} else { 
+							update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
+						}
 				} else {
 					//	modified post - observe $do_notover flag
 					if ( array_key_exists( $c->cat_ID, $map ) ) 
 						if ( !( $do_notover ) ) {
-							update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
-						} else {
-							if ( '' == $thumb_id ) 
+							if ( $map[ $c->cat_ID ] === 'Author' ) {
+								$auth_pic_id = $this->GetAuthorsPictureID( $post->post_author );
+								if ( '0' != $auth_pic_id )
+									 update_post_meta( $post_id, '_thumbnail_id', $auth_pic_id );
+							} else {
 								update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
+							}
+						} else {
+							if ( '' == $thumb_id )
+								if ( $map[ $c->cat_ID ] === 'Author' ) {
+									 $auth_pic_id = $this->GetAuthorsPictureID( $post->post_author );
+									 if ( '0' != $auth_pic_id )
+									 	update_post_meta( $post_id, '_thumbnail_id', $auth_pic_id );
+								} else {
+									update_post_meta( $post_id, '_thumbnail_id', $map[ $c->cat_ID ] );
+								}
 						}
 				}
 				$thumb_id = get_post_meta( $post_id, '_thumbnail_id', TRUE );
   			}
 		}
+	}
+	
+	//	Get author's picture id - helper function
+	private function getAuthorsPictureID( $author_id ) {
+		global $wpdb;
+		$pic_id = 0;
+		$all_media = $wpdb->get_results( "SELECT DISTINCT * FROM " . $wpdb->prefix . "posts " .
+			"WHERE post_type = 'attachment' AND guid LIKE '%author_" . $author_id . ".jpg%' ORDER " .
+			"BY post_date DESC" );
+		if ( 0 < count( $all_media ) ) {
+			$obj = $all_media[0];
+			$pic_id	= $obj->ID;
+		} else {
+			$active_plugins = get_option( 'active_plugins' );
+			$length = count( $active_plugins );
+			$nextGenActive = FALSE;
+			$i = 0;
+			while ( $i < $length ) {
+				if ( 0 < strpos( $active_plugins[ $i ], 'nggallery.php' ) ) {
+					$nextGenActive = TRUE;
+					$i = $length;
+				}
+				$i++;
+			}
+			if ( $nextGenActive ) {
+				$tmp = $wpdb->get_results( "SELECT DISTINCT * FROM " . $wpdb->prefix . "ngg_gallery WHERE slug = 'authors'" );
+				if ( 0 < count( $tmp ) ) {
+					$obj = $tmp[0];
+					$galleryID = $obj->gid;
+					$tmp = $wpdb->get_results( "SELECT DISTINCT * FROM " . $wpdb->prefix . "ngg_pictures " .
+						"WHERE galleryid = " . $galleryID . " AND filename LIKE '%" . $author_id . ".jpg%'" );
+					if ( 0 < count( $tmp ) ) {
+						$obj = $tmp[0];
+						$pic_id = 'ngg-' . $obj->pid;
+					}
+				}
+			}
+		}	
+		return $pic_id;
 	}	
 	 
 }

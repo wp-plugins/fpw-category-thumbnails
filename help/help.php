@@ -46,9 +46,13 @@
 						__( 'Get ID', 'fpw-fct' ) . '" />' . '</td><td style="text-align: justify; vertical-align: middle; border: 0; padding: 2px;">' .  
 						__( 'will call \'media upload\' overlay and on return will populate \'Image ID\' input box and \'Preview\' area ( AJAX - without reloading screen )', 'fpw-fct' ) . 
 						'</td></tr><tr><td style="text-align: left; vertical-align: middle; border: 0; padding: 2px;">' . 
+						'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' .
+						__( 'Author\'s picture', 'fpw-fct' ) . '" /></td><td style="text-align: justify; vertical-align: middle; border: 0; padding: 2px;">' .
+						__( 'will assign author\'s picture as a thumbnail for the category', 'fpw-fct' ) . 
+						'</td></tr><tr><td style="text-align: left; vertical-align: middle; border: 0; padding: 2px;">' .
 						'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' . 
 						__( 'Clear', 'fpw-fct' ) . '" /></td><td style="text-align: justify; vertical-align: middle; border: 0; padding: 2px;">' . 
-						__( 'if confirmed it will enter \'0\' as image ID and clear \'Preview\' area ( AJAX - without reloading screen )', 'fpw-fct' ) . 
+						__( 'will enter \'0\' as image ID and clear \'Preview\' area ( AJAX - without reloading screen )', 'fpw-fct' ) . 
 						'</td></tr><tr><td style="text-align: left; vertical-align: middle; border: 0; padding: 2px;">' . 
 						'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' . 
 						__( 'Refresh', 'fpw-fct' ) . '" /></td><td style="text-align: justify; vertical-align: middle; border: 0; padding: 2px;">' . 
@@ -77,7 +81,15 @@
 						__( 'Question:', 'fpw-fct' ) . '</strong> ' . 
 						__( 'I\'ve entered ID of a picture from NextGen Gallery and thumbnail doesn\'t show.', 'fpw-fct' ) . '<br><strong>' . 
 						__( 'Answer:', 'fpw-fct' ) . '</strong> ' . 
-						__( 'IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230.', 'fpw-fct' ) . '</p>' . 
+						__( 'IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230.', 'fpw-fct' ) . 
+						'<br /><br /><strong>' . 
+						__( 'Question:', 'fpw-fct' ) . '</strong> ' . 
+						__( 'What is required to use authors\' pictures as thumbnails?', 'fpw-fct' ) . '<br><strong>' . 
+						__( 'Answer:', 'fpw-fct' ) . '</strong> ' . 
+						__( 'Upload authors\' pictures into media library or NextGen gallery.', 'fpw-fct' ) . ' ' . 
+						__( 'File names of authors\' pictures in media library must follow this naming convention: \'autor_id.jpg\' where \'id\' is author\'s user id. ', 'fpw-fct' ) . ' ' . 
+						__( 'File names of authors\' pictures in NextGen gallery must follow this naming convention: \'id.jpg\' where \'id\' is author\'s user id.', 'fpw-fct' ) . ' ' .
+						__( 'The name of NextGen gallery must be \'authors\'.', 'fpw-fct' ) . '</p>' . 
 						'<p style="font-size: larger">' . __( 'More information', 'fpw-fct' ) . '</p>' . 
 						'<blockquote><a href="http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Plugin\'s site', 'fpw-fct' ) . '</a></blockquote>' . 
 						'<p style="font-size: larger">' . __( 'Support', 'fpw-fct' ) . '</p>' . 
