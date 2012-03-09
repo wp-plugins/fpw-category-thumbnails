@@ -4,7 +4,7 @@ Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 2.9.0
 Tested up to: 3.3.1
-Stable tag: 1.4.5
+Stable tag: 1.4.6
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
 page when the post is created or updated.
@@ -47,7 +47,7 @@ The name of NextGen gallery must be 'authors'.
 
 == Changelog ==
 
-= 1.4.5 =
+= 1.4.6 =
 * New feature: authors' pictures as thumbnails
 * Updated .pot file for translations
 
