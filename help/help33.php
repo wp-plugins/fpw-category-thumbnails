@@ -2,7 +2,7 @@
 		global	$current_screen;
 		
 		$sidebar =	'<p style="font-size: larger">' . __( 'More information', 'fpw-fct' ) . '</p>' . 
-					'<blockquote><a href="http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Plugin\' site', 'fpw-fct' ) . '</a></blockquote>' . 
+					'<blockquote><a href="http://fw2s.com/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Plugin\' site', 'fpw-fct' ) . '</a></blockquote>' . 
 					'<p style="font-size: larger">' . __( 'Support', 'fpw-fct' ) . '</p>' . 
 					'<blockquote><a href="http://wordpress.org/tags/fpw-category-thumbnails?forum_id=10" target="_blank">WordPress</a><br />' . 
 					'<a href="http://fw2s.com/support/fpw-category-thumbnails-support/" target="_blank">FWSS</a></blockquote>'; 

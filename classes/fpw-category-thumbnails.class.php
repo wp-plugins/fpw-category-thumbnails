@@ -41,7 +41,7 @@ class fpwCategoryThumbnails {
 		$this->pluginOptions = $this->getOptions();
 
 		if ( '3.1' <= $this->wpVersion ) {
-			if ( $_POST[ 'buttonPressed' ] ) 
+			if ( isset( $_POST[ 'buttonPressed' ] ) ) 
 				$this->pluginOptions[ 'abar' ] = ( $_POST[ 'abar' ] == 'yes' ); 
 			if ( $this->pluginOptions[ 'abar' ] ) 
 				add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
@@ -214,7 +214,7 @@ class fpwCategoryThumbnails {
 		$update_mapping_ok = FALSE;
 	
 		//	check nonce if any of buttons was pressed
-		if ( $_POST[ 'buttonPressed' ] ) {
+		if ( isset( $_POST[ 'buttonPressed' ] ) ) {
 			if ( !isset( $_POST[ 'fpw-fct-nonce' ] ) ) 
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red"><strong>' . __( 'You did not send any credentials!', 'fpw-fct' ) . '</strong></p>' );
 			if ( !wp_verify_nonce( $_POST[ 'fpw-fct-nonce' ], 'fpw-fct-nonce' ) ) 
@@ -266,36 +266,13 @@ class fpwCategoryThumbnails {
 
 			//	database update
 			$update_mapping_ok = ( update_option( 'fpw_category_thumb_map', $option ) );
-		}
 
-		//	check if remove button was pressed
-		if ( 'Remove' == $_POST[ 'buttonPressed' ] ) {
-			reset( $assignments );
+			//	check if remove button was pressed
+			if ( 'Remove' == $_POST[ 'buttonPressed' ] ) {
+				reset( $assignments );
 		
-			while ( strlen( key( $assignments ) ) ) {
-				$catid = key( $assignments );
-				$parg = array(
-					numberofposts => -1,
-					nopaging => true,
-					category => $catid,
-					post_type => 'any' );
-				$posts = get_posts( $parg );
-				foreach ( $posts as $post ) {
-					$post_id = $post -> ID;
-					//	make sure this is not a revision
-					if ( 'revision' != $post -> post_type )
-						delete_post_meta( $post_id, '_thumbnail_id' );
-				}
-				next( $assignments );
-			}
-		}
-
-		//	check if apply button was pressed
-		if ( 'Apply' == $_POST[ 'buttonPressed' ] ) {
-			$map = get_option( 'fpw_category_thumb_map' );
-			if ( $map )
-				while ( strlen( key( $map ) ) ) {
-					$catid = key($map);
+				while ( strlen( key( $assignments ) ) ) {
+					$catid = key( $assignments );
 					$parg = array(
 						numberofposts => -1,
 						nopaging => true,
@@ -303,15 +280,38 @@ class fpwCategoryThumbnails {
 						post_type => 'any' );
 					$posts = get_posts( $parg );
 					foreach ( $posts as $post ) {
-						$post_id = $post->ID;
-						//	make sure this is not a revision nor draft
-						if ( ( 'revision' != $post->post_type ) && ( 'draft' != $post->post_status ) )
-							$this->updateID( $post_id, $post );
+						$post_id = $post -> ID;
+						//	make sure this is not a revision
+						if ( 'revision' != $post -> post_type )
+							delete_post_meta( $post_id, '_thumbnail_id' );
 					}
-					next($map);
+					next( $assignments );
 				}
+			}
+
+			//	check if apply button was pressed
+			if ( 'Apply' == $_POST[ 'buttonPressed' ] ) {
+				$map = get_option( 'fpw_category_thumb_map' );
+				if ( $map )
+					while ( strlen( key( $map ) ) ) {
+						$catid = key($map);
+						$parg = array(
+							numberofposts => -1,
+							nopaging => true,
+							category => $catid,
+							post_type => 'any' );
+						$posts = get_posts( $parg );
+						foreach ( $posts as $post ) {
+							$post_id = $post->ID;
+							//	make sure this is not a revision nor draft
+							if ( ( 'revision' != $post->post_type ) && ( 'draft' != $post->post_status ) )
+								$this->updateID( $post_id, $post );
+						}
+						next($map);
+					}
+			}
 		}
-	
+
 		//	get assignments from database
 		$opt = get_option( 'fpw_category_thumb_map' );
 
@@ -341,22 +341,26 @@ class fpwCategoryThumbnails {
 			echo '</strong></p></div>';
 		}
 
-		//	display message about update status
-		if ( 'Update' == $_POST[ 'buttonPressed' ] )
-			if ( $update_options_ok || $update_mapping_ok ) {
-				echo '<div id="message" class="updated fade"><p><strong>' . __( 'Updated successfully.', 'fpw-fct' ) . '</strong></p></div>';
-			} else {
-				echo '<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected. Nothing to update.', 'fpw-fct' ) . '</strong></p></div>';
-			}
+		//	check if any of submit buttons was pressed
+		if ( isset( $_POST[ 'buttonPressed' ] ) ) { 
+		
+			//	display message about update status
+			if ( 'Update' == $_POST[ 'buttonPressed' ] )
+				if ( $update_options_ok || $update_mapping_ok ) {
+					echo '<div id="message" class="updated fade"><p><strong>' . __( 'Updated successfully.', 'fpw-fct' ) . '</strong></p></div>';
+				} else {
+					echo '<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected. Nothing to update.', 'fpw-fct' ) . '</strong></p></div>';
+				}
 
-		//	display message about apply status
-		if ( 'Apply' == $_POST[ 'buttonPressed' ] )
-			echo '<div id="message" class="updated fade"><p><strong>' . __( 'Applied thumbnails to existing posts / pages successfully.', 'fpw-fct' ) . '</strong></p></div>';
+			//	display message about apply status
+			if ( 'Apply' == $_POST[ 'buttonPressed' ] )
+				echo '<div id="message" class="updated fade"><p><strong>' . __( 'Applied thumbnails to existing posts / pages successfully.', 'fpw-fct' ) . '</strong></p></div>';
 
-		//	display message about remove status
-		if ( 'Remove' == $_POST[ 'buttonPressed' ] )
-			echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-fct' ) . '</strong></p></div>';
-
+			//	display message about remove status
+			if ( 'Remove' == $_POST[ 'buttonPressed' ] )
+				echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-fct' ) . '</strong></p></div>';
+		}
+		
 		//	the form starts here
 		echo '<p>';
 		echo '<form name="fpw_cat_thmb_form" action="';
@@ -504,7 +508,7 @@ class fpwCategoryThumbnails {
 				$opt = array( 
 					'clean'		=> FALSE,
 					'donotover' => FALSE,
-					'width'		=> '293',
+					'width'		=> '396',
 					'abar'		=> FALSE );
 			} else {
 				$opt = array( 
@@ -523,7 +527,7 @@ class fpwCategoryThumbnails {
 			}
 			if ( !array_key_exists( 'width', $opt ) || !ctype_digit( $opt[ 'width' ] ) ) { 
 				$needs_update = TRUE;
-				$opt[ 'width' ] = '436';
+				$opt[ 'width' ] = '396';
 			}
 			if ( '3.1' <= $this->wpVersion ) 
 				if ( !array_key_exists( 'abar', $opt ) || !is_bool( $opt[ 'abar' ] ) ) { 

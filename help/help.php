@@ -91,7 +91,7 @@
 						__( 'File names of authors\' pictures in NextGen gallery must follow this naming convention: \'id.jpg\' where \'id\' is author\'s user id.', 'fpw-fct' ) . ' ' .
 						__( 'The name of NextGen gallery must be \'authors\'.', 'fpw-fct' ) . '</p>' . 
 						'<p style="font-size: larger">' . __( 'More information', 'fpw-fct' ) . '</p>' . 
-						'<blockquote><a href="http://fw2s.com/2010/10/14/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Plugin\'s site', 'fpw-fct' ) . '</a></blockquote>' . 
+						'<blockquote><a href="http://fw2s.com/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Plugin\'s site', 'fpw-fct' ) . '</a></blockquote>' . 
 						'<p style="font-size: larger">' . __( 'Support', 'fpw-fct' ) . '</p>' . 
 						'<blockquote><a href="http://wordpress.org/tags/fpw-category-thumbnails?forum_id=10" target="_blank">WordPress</a><br />' . 
 						'<a href="http://fw2s.com/support/fpw-category-thumbnails-support/" target="_blank">FWSS</a></blockquote></td>';
