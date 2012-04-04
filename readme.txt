@@ -49,7 +49,7 @@ The name of NextGen gallery must be 'authors'.
 
 = 1.4.7 =
 * Fixed issues with PHP notices about uninitialized $_POST index
-* Fixed external links to plugin's website ( changed permalinks at fw2s.com ) 
+* Fixed external links to plugin's website (changed permalinks at fw2s.com) 
 
 = 1.4.6 =
 * New feature: authors' pictures as thumbnails
