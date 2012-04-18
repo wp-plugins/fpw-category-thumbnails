@@ -23,6 +23,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+//	back end only
 if ( is_admin() ) {
 	require_once dirname(__FILE__) . '/classes/fpw-category-thumbnails.class.php';
 	new fpwCategoryThumbnails( dirname(__FILE__), '1.4.8' );

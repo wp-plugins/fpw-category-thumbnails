@@ -23,16 +23,6 @@ class fpwCategoryThumbnails {
 		//	set WP version
 		$this->wpVersion = $wp_version;
 		
-		//	Pointer's content - version related
-    	$this->pointerContent  = '<h3>' . __( 'Changes in this version', 'fpw-fct' ) . '</h3>';
-		$this->pointerContent .= '<p style="padding-left:10px;">';
-		$this->pointerContent .= '* ' . __( 'Added support for pointers', 'fpw-fct' ) . ' ( WP 3.3+ )<br />';
-		$this->pointerContent .= '* ' . __( 'Minor bugs fixes', 'fpw-fct' ) . '</p>';
-		$this->pointerContent .= '<h4 style="padding-left:10px;font-size:1.1em">' . __( 'Planned for the next version', 'fpw-fct' ) . '</h4>';
-		$this->pointerContent .= '<p style="padding-left:10px;text-align:justify">';
-		$this->pointerContent .= __( 'Support for multiple thumbnails.', 'fpw-fct' ) . ' ';
-		$this->pointerContent .= __( 'It will be possible to display more than one thumbnail if a post / page does belong to two or more categories.', 'fpw-fct' ) . '</p>';
-		
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
 		
@@ -58,12 +48,12 @@ class fpwCategoryThumbnails {
 		}
 	}
 
-	//	Register plugin's textdomain
+	//	register plugin's textdomain
 	public function init() {
 		load_plugin_textdomain( 'fpw-fct', false, 'fpw-category-thumbnails/languages/' );
 	} 
 
-	//	Register admin menu
+	//	register admin menu
 	public function adminMenu() {
 		$page_title = __( 'FPW Category Thumbnails', 'fpw-fct' ) . ' (' . $this->pluginVersion . ')';
 		$menu_title = __( 'FPW Category Thumbnails', 'fpw-fct' );
@@ -79,14 +69,14 @@ class fpwCategoryThumbnails {
 		}
 	}
 
-	//	Register styles, scripts, and localize javascript
+	//	register styles, scripts, and localize javascript
 	public function enqueueScripts( $hook ) {
 		if ( ( 'settings_page_fpw-category-thumbnails' == $hook ) || ( 'media-upload-popup' == $hook ) ) {
 			include $this->pluginPath . '/code/enqueuescripts.php';
 		}
 	}
 	
-	//	Enqueue pointer scripts
+	//	enqueue pointer scripts
 	public function enqueuePointerScripts( $hook ) {
 		$proceed = false;
 		$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
@@ -101,14 +91,21 @@ class fpwCategoryThumbnails {
 		}
 	}
 
-	// 	Handle pointer
+	// 	handle pointer
 	public function custom_print_footer_scripts() {
+    	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;list-style:square">' . __( 'Added support for pointers', 'fpw-fct' ) . ' (WP 3.3+)</li>';
+		$pointerContent .= '<li style="margin-left:25px;list-style:square">' . __( 'Minor bugs fixes', 'fpw-fct' ) . '</li>';
+		$pointerContent .= '<h4 style="padding-left:10px;font-size:1.1em">' . __( 'Planned for the next version', 'fpw-fct' ) . '</h4>';
+		$pointerContent .= '<p style="padding-left:10px;text-align:justify">';
+		$pointerContent .= __( 'Support for multiple thumbnails.', 'fpw-fct' ) . ' ';
+		$pointerContent .= __( 'It will be possible to display more than one thumbnail if a post / page does belong to two or more categories.', 'fpw-fct' ) . '</p>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
     		jQuery(document).ready( function($) {
         		$('#fct-settings-title').pointer({
-        			content: '<?php echo $this->pointerContent; ?>',
+        			content: '<?php echo $pointerContent; ?>',
         			position: 'top',
             		close: function() {
 						jQuery.post( ajaxurl, {
@@ -123,13 +120,13 @@ class fpwCategoryThumbnails {
     	<?php
 	}
 
-	//	Contextual help for WordPress 3.3+
+	//	contextual help for WordPress 3.3+
 	public function help33() {
 		if ( '3.3' <= $this->wpVersion ) 
 			include $this->pluginPath . '/help/help33.php';
 	}
 	
-	//	Contextual help for Wordpress older than 3.3
+	//	contextual help for Wordpress older than 3.3
 	public function help( $contextual_help, $screen_id, $screen ) {
 		if ( $screen_id == $this->pluginPage ) {
 			include $this->pluginPath . '/help/help.php';
@@ -143,7 +140,7 @@ class fpwCategoryThumbnails {
 			include $this->pluginPath . '/ajax/fpwfctajax.php';
 	}
 
-	//	Add update information after plugin meta
+	//	add update information after plugin meta
 	public function afterPluginMeta( $file, $plugin_data ) {
 		$current = get_site_transient( 'update_plugins' );
 		if ( !isset( $current -> response[ $file ] ) ) 
@@ -154,21 +151,21 @@ class fpwCategoryThumbnails {
 			'<img class="alignleft" src="' . $this->pluginUrl . '/Thumbs_Up.png" width="64">' . $update . '</div></td></tr>';
 	}
 
-	//	Add link to Donation to plugins meta
+	//	add link to Donation to plugins meta
 	public function pluginMetaLinks( $links, $file ) {
 		if ( 'fpw-category-thumbnails/fpw-category-thumbnails.php' == $file ) 
 			$links[] = '<a href="http://fw2s.com/payments-and-donations/" target="_blank">' . __( "Donate", "fpw-fct" ) . '</a>';
 		return $links;
 	}
 	
-	//	Add link to settings page in plugins list
+	//	add link to settings page in plugins list
 	public function pluginLinks( $links, $file ) {
    		$settings_link = '<a href="' . site_url( '/wp-admin/' ) . 'options-general.php?page=fpw-category-thumbnails">' . __( 'Settings', 'fpw-fct' ) . '</a>';
 		array_unshift( $links, $settings_link );
     	return $links;
 	}
 	
-	//	Uninstall file maintenance
+	//	uninstall file maintenance
 	public function pluginActivate() {
 		//	if cleanup requested make uninstall.php otherwise make uninstall.txt
 		if ( $this->pluginOptions[ 'clean' ] ) {
@@ -180,7 +177,7 @@ class fpwCategoryThumbnails {
 		}
 	}	
 	
-	//	Add plugin to admin bar ( WordPress 3.1+ )	
+	//	add plugin to admin bar ( WordPress 3.1+ )	
 	public function pluginToAdminBar() {
 		if ( current_user_can( 'manage_options' ) ) {
 			global 	$wp_admin_bar;
@@ -208,7 +205,7 @@ class fpwCategoryThumbnails {
 		}
 	}
 	
-	//	Plugin's Settings page
+	//	plugin's Settings page
 	public function pluginSettings() {
 		//	get all categories
 		$categories = array();
@@ -498,7 +495,7 @@ class fpwCategoryThumbnails {
 		echo '</div>';
 	}
 	
-	//	Bulid settings form fields
+	//	bulid settings form fields
 	private function button( $name, $value, $catid, $label = 'Get ID', $preview_size = 'thumbnail', $removable = false ) { ?>
 		<td style="vertical-align: middle;"><div>
 			<input type="text" size="10" maxlength="10" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="fpw-fs-value" />
@@ -543,7 +540,7 @@ class fpwCategoryThumbnails {
 		</td>
 	<?php }
 	
-	//	Get plugin's options ( build if not exists )
+	//	get plugin's options ( build if not exists )
 	private function getOptions() {
 	
 		$needs_update = FALSE;
@@ -644,7 +641,7 @@ class fpwCategoryThumbnails {
 		}
 	}
 	
-	//	Get author's picture id - helper function
+	//	get author's picture id - helper function
 	private function getAuthorsPictureID( $author_id ) {
 		global $wpdb;
 		$pic_id = 0;
