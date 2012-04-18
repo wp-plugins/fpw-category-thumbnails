@@ -23,6 +23,16 @@ class fpwCategoryThumbnails {
 		//	set WP version
 		$this->wpVersion = $wp_version;
 		
+		//	Pointer's content - version related
+    	$this->pointerContent  = '<h3>' . __( 'Changes in this version', 'fpw-fct' ) . '</h3>';
+		$this->pointerContent .= '<p style="padding-left:10px;">';
+		$this->pointerContent .= '* ' . __( 'Added support for pointers', 'fpw-fct' ) . ' ( WP 3.3+ )<br />';
+		$this->pointerContent .= '* ' . __( 'Minor bugs fixes', 'fpw-fct' ) . '</p>';
+		$this->pointerContent .= '<h4 style="padding-left:10px;font-size:1.1em">' . __( 'Planned for the next version', 'fpw-fct' ) . '</h4>';
+		$this->pointerContent .= '<p style="padding-left:10px;text-align:justify">';
+		$this->pointerContent .= __( 'Support for multiple thumbnails.', 'fpw-fct' ) . ' ';
+		$this->pointerContent .= __( 'It will be possible to display more than one thumbnail if a post / page does belong to two or more categories.', 'fpw-fct' ) . '</p>';
+		
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
 		
@@ -42,7 +52,7 @@ class fpwCategoryThumbnails {
 
 		if ( '3.1' <= $this->wpVersion ) {
 			if ( isset( $_POST[ 'buttonPressed' ] ) ) 
-				$this->pluginOptions[ 'abar' ] = ( $_POST[ 'abar' ] == 'yes' ); 
+				$this->pluginOptions[ 'abar' ] = ( isset( $_POST[ 'abar' ] ) ) ? true : false;
 			if ( $this->pluginOptions[ 'abar' ] ) 
 				add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
 		}
@@ -62,6 +72,7 @@ class fpwCategoryThumbnails {
 		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueueScripts' ) );
 	
 		if ( '3.3' <= $this->wpVersion ) {
+			add_action( 'admin_enqueue_scripts', array( &$this, 'enqueuePointerScripts' ) );
 			add_action( 'load-' . $this->pluginPage, array( &$this, 'help33' ) );
 		} else {
 			add_filter( 'contextual_help', array( &$this, 'help'), 10, 3 );
@@ -73,6 +84,43 @@ class fpwCategoryThumbnails {
 		if ( ( 'settings_page_fpw-category-thumbnails' == $hook ) || ( 'media-upload-popup' == $hook ) ) {
 			include $this->pluginPath . '/code/enqueuescripts.php';
 		}
+	}
+	
+	//	Enqueue pointer scripts
+	public function enqueuePointerScripts( $hook ) {
+		$proceed = false;
+		$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
+		if ( !in_array( 'fpwfct148', $dismissed ) && apply_filters( 'show_wp_pointer_admin_bar', TRUE ) ) {
+			$proceed = true;
+			add_action( 'admin_print_footer_scripts', array( &$this, 'custom_print_footer_scripts' ) );
+		}
+		if ( $proceed ) {
+    		wp_enqueue_style('wp-pointer');
+    		wp_enqueue_script('wp-pointer');
+    		wp_enqueue_script('utils');
+		}
+	}
+
+	// 	Handle pointer
+	public function custom_print_footer_scripts() {
+    	?>
+    	<script type="text/javascript">
+    	// <![CDATA[
+    		jQuery(document).ready( function($) {
+        		$('#fct-settings-title').pointer({
+        			content: '<?php echo $this->pointerContent; ?>',
+        			position: 'top',
+            		close: function() {
+						jQuery.post( ajaxurl, {
+							pointer: 'fpwfct148',
+							action: 'dismiss-wp-pointer'
+						});
+            		}
+				}).pointer('open');
+			});
+    	// ]]>
+    	</script>
+    	<?php
 	}
 
 	//	Contextual help for WordPress 3.3+
@@ -136,7 +184,7 @@ class fpwCategoryThumbnails {
 	public function pluginToAdminBar() {
 		if ( current_user_can( 'manage_options' ) ) {
 			global 	$wp_admin_bar;
-
+			
 			$main = array(
 				'id' => 'fpw_plugins',
 				'title' => __( 'FPW Plugins', 'fpw-fct' ),
@@ -150,9 +198,8 @@ class fpwCategoryThumbnails {
 
 			if ( '3.3' <= $this->wpVersion ) {
 				$addmain = ( is_array( $wp_admin_bar->get_node( 'fpw_plugins' ) ) ) ? false : true;
-				// echo $addmain; die();
 			} else {
-				$addmain = ( is_array( $wp_admin_bar->menu->fpw_plugins ) ) ? false : true;
+				$addmain = ( isset( $wp_admin_bar->menu->fpw_plugins ) ) ? false : true;
 			} 
 
 			if ( $addmain )
@@ -221,12 +268,12 @@ class fpwCategoryThumbnails {
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red;"><strong>' . __( 'You did not send the right credentials!', 'fpw-fct' ) . '</strong></p>' );
 
 			//	check ok - update options
-			$this->pluginOptions[ 'clean' ] = ( $_POST[ 'cleanup' ] == 'yes' );
-			$this->pluginOptions[ 'donotover' ] = ( $_POST[ 'donotover' ] == 'yes' );
+			$this->pluginOptions[ 'clean' ] = ( isset( $_POST[ 'cleanup' ] ) ) ? true : false;
+			$this->pluginOptions[ 'donotover' ] = ( isset( $_POST[ 'donotover' ] ) ) ? true : false;
 			if ( '3.1' <= $this->wpVersion ) 
-				$this->pluginOptions[ 'abar' ] = ( $_POST[ 'abar' ] == 'yes' );
+				$this->pluginOptions[ 'abar' ] = ( isset( $_POST[ 'abar' ] ) ) ? true : false;
 			if ( !ctype_digit( $_POST[ 'cwidth' ] ) ) { 
-				$this->pluginOptions[ 'width' ] = '283';
+				$this->pluginOptions[ 'width' ] = '396';
 			} else {
 				$this->pluginOptions[ 'width' ] = $_POST[ 'cwidth' ];
 			}
@@ -331,7 +378,7 @@ class fpwCategoryThumbnails {
 		--------------------------- */
 
 		echo '<div class="wrap">' . PHP_EOL;
-		echo '<div id="icon-options-general" class="icon32"></div><h2>' . __( 'FPW Category Thumbnails', 'fpw-fct' ) . ' (' . $this->pluginVersion . ')</h2>';
+		echo '<div id="icon-options-general" class="icon32"></div><h2 id="fct-settings-title">' . __( 'FPW Category Thumbnails', 'fpw-fct' ) . ' (' . $this->pluginVersion . ')</h2>';
 
     	//	display warning if current theme doesn't support post thumbnails
     	if ( !current_theme_supports( 'post-thumbnails' ) ) {

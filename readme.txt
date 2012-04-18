@@ -47,6 +47,10 @@ The name of NextGen gallery must be 'authors'.
 
 == Changelog ==
 
+= 1.4.8 =
+* Added support for pointers ( WP 3.3+ )
+* Minor bugs fixes
+
 = 1.4.7 =
 * Fixed issues with PHP notices about uninitialized $_POST index
 * Fixed external links to plugin's website ( changed permalinks at fw2s.com ) 
