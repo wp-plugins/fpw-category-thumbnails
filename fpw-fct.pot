@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FPW Category Thumbnails 1.4.8\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
-"POT-Creation-Date: 2012-04-18 12:42:18+00:00\n"
+"POT-Creation-Date: 2012-04-18 18:21:10+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,189 +12,189 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: ajax/fpwfctajax.php:11 classes/fpw-category-thumbnails.class.php:518
+#: ajax/fpwfctajax.php:11 classes/fpw-category-thumbnails.class.php:515
 msgid "Picture"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:27
-msgid "Changes in this version"
+#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.4.8)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: classes/fpw-category-thumbnails.class.php:58
+#: classes/fpw-category-thumbnails.class.php:59
+#: classes/fpw-category-thumbnails.class.php:193
+#: classes/fpw-category-thumbnails.class.php:378
+msgid "FPW Category Thumbnails"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:29
+#: classes/fpw-category-thumbnails.class.php:96
+msgid "What's new in this version?"
+msgstr ""
+
+#: classes/fpw-category-thumbnails.class.php:97
 msgid "Added support for pointers"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:30
+#: classes/fpw-category-thumbnails.class.php:98
 msgid "Minor bugs fixes"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:31
+#: classes/fpw-category-thumbnails.class.php:99
 msgid "Planned for the next version"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:33
+#: classes/fpw-category-thumbnails.class.php:101
 msgid "Support for multiple thumbnails."
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:34
+#: classes/fpw-category-thumbnails.class.php:102
 msgid ""
 "It will be possible to display more than one thumbnail if a post / page does "
 "belong to two or more categories."
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.4.8)  #-#-#-#-#
-#. Plugin Name of the plugin/theme
-#: classes/fpw-category-thumbnails.class.php:68
-#: classes/fpw-category-thumbnails.class.php:69
-#: classes/fpw-category-thumbnails.class.php:196
-#: classes/fpw-category-thumbnails.class.php:381
-msgid "FPW Category Thumbnails"
-msgstr ""
-
-#: classes/fpw-category-thumbnails.class.php:160
+#: classes/fpw-category-thumbnails.class.php:157
 msgid "Donate"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:166
+#: classes/fpw-category-thumbnails.class.php:163
 msgid "Settings"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:190
+#: classes/fpw-category-thumbnails.class.php:187
 msgid "FPW Plugins"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:266
+#: classes/fpw-category-thumbnails.class.php:263
 msgid "You did not send any credentials!"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:268
+#: classes/fpw-category-thumbnails.class.php:265
 msgid "You did not send the right credentials!"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:386
+#: classes/fpw-category-thumbnails.class.php:383
 msgid "WARNING: Your theme has no support for <em>post thumbnails</em>!"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:387
+#: classes/fpw-category-thumbnails.class.php:384
 msgid ""
 "You can continue with <em>Settings</em> but until you add "
 "<code>add_theme_support( 'post-thumbnails' );</code> to the theme's "
 "functions.php you will not be able to display thumbnails."
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:397
+#: classes/fpw-category-thumbnails.class.php:394
 msgid "Updated successfully."
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:399
+#: classes/fpw-category-thumbnails.class.php:396
 msgid "No changes detected. Nothing to update."
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:404
+#: classes/fpw-category-thumbnails.class.php:401
 msgid "Applied thumbnails to existing posts / pages successfully."
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:408
+#: classes/fpw-category-thumbnails.class.php:405
 msgid "All thumbnails removed successfully."
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:424 code/enqueuescripts.php:17
+#: classes/fpw-category-thumbnails.class.php:421 code/enqueuescripts.php:17
 #: code/enqueuescripts.php:26 help/help.php:17 help/help33.php:28
 msgid "Do not overwrite if post / page has thumbnail assigned already"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:430 help/help.php:19
+#: classes/fpw-category-thumbnails.class.php:427 help/help.php:19
 #: help/help33.php:30
 msgid "Remove plugin's data from database on uninstall"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:437 help/help.php:21
+#: classes/fpw-category-thumbnails.class.php:434 help/help.php:21
 #: help/help33.php:32
 msgid "Add this plugin to the Admin Bar"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:442
+#: classes/fpw-category-thumbnails.class.php:439
 msgid "width of Image ID column in pixels ( for English - 396 )"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:448
-#: classes/fpw-category-thumbnails.class.php:455
+#: classes/fpw-category-thumbnails.class.php:445
+#: classes/fpw-category-thumbnails.class.php:452
 msgid "Category (ID)"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:449
-#: classes/fpw-category-thumbnails.class.php:456
+#: classes/fpw-category-thumbnails.class.php:446
+#: classes/fpw-category-thumbnails.class.php:453
 msgid "Image ID"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:450
-#: classes/fpw-category-thumbnails.class.php:457
+#: classes/fpw-category-thumbnails.class.php:447
+#: classes/fpw-category-thumbnails.class.php:454
 msgid "Preview"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:472
-#: classes/fpw-category-thumbnails.class.php:505 code/enqueuescripts.php:12
+#: classes/fpw-category-thumbnails.class.php:469
+#: classes/fpw-category-thumbnails.class.php:502 code/enqueuescripts.php:12
 #: help/help.php:46 help/help33.php:52
 msgid "Get ID"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:485
+#: classes/fpw-category-thumbnails.class.php:482
 msgid "Writes modified options and mapping to the database"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:486 help/help.php:62
+#: classes/fpw-category-thumbnails.class.php:483 help/help.php:62
 #: help/help33.php:68
 msgid "Update"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:488
+#: classes/fpw-category-thumbnails.class.php:485
 msgid ""
 "Adds post thumbnail to every existing post / page belonging to the category "
 "which has thumbnail id mapped to"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:489 help/help.php:66
+#: classes/fpw-category-thumbnails.class.php:486 help/help.php:66
 #: help/help33.php:71
 msgid "Apply Mapping"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:491
+#: classes/fpw-category-thumbnails.class.php:488
 msgid ""
 "Removes thumbnails from all existing posts / pages regardless of the category"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:492 help/help.php:70
+#: classes/fpw-category-thumbnails.class.php:489 help/help.php:70
 #: help/help33.php:74
 msgid "Remove Thumbnails"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:505
+#: classes/fpw-category-thumbnails.class.php:502
 msgid "fetches image ID from media library"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:506
+#: classes/fpw-category-thumbnails.class.php:503
 msgid "will use author's picture as a thumbnail"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:506 help/help.php:50
+#: classes/fpw-category-thumbnails.class.php:503 help/help.php:50
 #: help/help33.php:56
 msgid "Author's picture"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:507
+#: classes/fpw-category-thumbnails.class.php:504
 msgid "clears 'Image ID' input value and 'Preview' area"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:507 help/help.php:54
+#: classes/fpw-category-thumbnails.class.php:504 help/help.php:54
 #: help/help33.php:60
 msgid "Clear"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:508
+#: classes/fpw-category-thumbnails.class.php:505
 msgid "refreshes 'Preview' area"
 msgstr ""
 
-#: classes/fpw-category-thumbnails.class.php:508 help/help.php:58
+#: classes/fpw-category-thumbnails.class.php:505 help/help.php:58
 #: help/help33.php:64
 msgid "Refresh"
 msgstr ""
