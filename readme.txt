@@ -2,7 +2,7 @@
 Contributors: frankpw
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
-Requires at least: 2.9.0
+Requires at least: 2.9
 Tested up to: 3.3.1
 Stable tag: 1.4.8
 
@@ -42,10 +42,11 @@ The name of NextGen gallery must be 'authors'.
 == Screenshots ==
 
 1. Settings Page
-2. Pre 3.3 Help
-3. Version 3.3 Help
 
 == Changelog ==
+
+= 1.4.9 =
+* Added code to prevent plugin being activated when WordPress version is lower than 2.9
 
 = 1.4.8 =
 * Added support for pointers ( WP 3.3+ )
