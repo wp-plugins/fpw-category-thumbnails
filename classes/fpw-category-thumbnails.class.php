@@ -6,10 +6,9 @@ class fpwCategoryThumbnails {
 	public	$pluginVersion;
 	public	$pluginPage;
 	public	$wpVersion;
-	public	$canActivate;
 	
 	//	constructor
-	public	function __construct( $path, $version ) {
+	function __construct( $path, $version ) {
 		global $wp_version;
 
 		//	set plugin's path
@@ -24,23 +23,20 @@ class fpwCategoryThumbnails {
 		//	set WP version
 		$this->wpVersion = $wp_version;
 		
-		//	set canActivate flag
-		$this->canActivate = ( '2.9' <= $this->wpVersion ) ? true : false;
-
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
 		
 		//	actions below are not used in front end
 		add_action( 'admin_menu', array( &$this, 'adminMenu' ) );
 		add_action( 'wp_ajax_fpw_fs_get_file', array( &$this, 'fpw_fs_get_file_ajax' ) );
-		add_action( 'save_post', array( &$this, 'updateID' ), 10, 2 );
+		add_action( 'save_post', array( &$this, 'addThumbnailToPost' ), 10, 2 );
 		add_action( 'after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'afterPluginMeta' ), 10, 2 );
 
 		add_filter( 'plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'pluginLinks' ), 10, 2);
 		add_filter( 'plugin_row_meta', array( &$this, 'pluginMetaLinks'), 10, 2 );
 
-		register_activation_hook( $this->pluginPath . '/fpw-category-thumbnails.php', array( &$this, 'pluginActivate' ) );
-				
+		register_activation_hook( __FILE__, array( &$this, 'pluginActivate' ) );
+		
 		//	Read plugin's options
 		$this->pluginOptions = $this->getOptions();
 
@@ -53,12 +49,12 @@ class fpwCategoryThumbnails {
 	}
 
 	//	register plugin's textdomain
-	public function init() {
+	function init() {
 		load_plugin_textdomain( 'fpw-fct', false, 'fpw-category-thumbnails/languages/' );
 	} 
 
 	//	register admin menu
-	public function adminMenu() {
+	function adminMenu() {
 		$page_title = __( 'FPW Category Thumbnails', 'fpw-fct' ) . ' (' . $this->pluginVersion . ')';
 		$menu_title = __( 'FPW Category Thumbnails', 'fpw-fct' );
 		$this->pluginPage = add_options_page( $page_title, $menu_title, 'manage_options', 'fpw-category-thumbnails', array( &$this, 'pluginSettings' ) );
@@ -74,14 +70,14 @@ class fpwCategoryThumbnails {
 	}
 
 	//	register styles, scripts, and localize javascript
-	public function enqueueScripts( $hook ) {
+	function enqueueScripts( $hook ) {
 		if ( ( 'settings_page_fpw-category-thumbnails' == $hook ) || ( 'media-upload-popup' == $hook ) ) {
 			include $this->pluginPath . '/code/enqueuescripts.php';
 		}
 	}
 	
 	//	enqueue pointer scripts
-	public function enqueuePointerScripts( $hook ) {
+	function enqueuePointerScripts( $hook ) {
 		$proceed = false;
 		$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
 		if ( !in_array( 'fpwfct148', $dismissed ) && apply_filters( 'show_wp_pointer_admin_bar', TRUE ) ) {
@@ -96,7 +92,7 @@ class fpwCategoryThumbnails {
 	}
 
 	// 	handle pointer
-	public function custom_print_footer_scripts() {
+	function custom_print_footer_scripts() {
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;list-style:square">' . __( 'Added support for pointers', 'fpw-fct' ) . ' (WP 3.3+)</li>';
 		$pointerContent .= '<li style="margin-left:25px;list-style:square">' . __( 'Minor bugs fixes', 'fpw-fct' ) . '</li>';
@@ -125,13 +121,13 @@ class fpwCategoryThumbnails {
 	}
 
 	//	contextual help for WordPress 3.3+
-	public function help33() {
+	function help33() {
 		if ( '3.3' <= $this->wpVersion ) 
 			include $this->pluginPath . '/help/help33.php';
 	}
 	
 	//	contextual help for Wordpress older than 3.3
-	public function help( $contextual_help, $screen_id, $screen ) {
+	function help( $contextual_help, $screen_id, $screen ) {
 		if ( $screen_id == $this->pluginPage ) {
 			include $this->pluginPath . '/help/help.php';
 		}	
@@ -139,13 +135,13 @@ class fpwCategoryThumbnails {
 	}
 
 	// AJAX wrapper to get image HTML
-	public function fpw_fs_get_file_ajax() {
+	function fpw_fs_get_file_ajax() {
 		if ( defined("DOING_AJAX") && DOING_AJAX ) 
 			include $this->pluginPath . '/ajax/fpwfctajax.php';
 	}
 
 	//	add update information after plugin meta
-	public function afterPluginMeta( $file, $plugin_data ) {
+	function afterPluginMeta( $file, $plugin_data ) {
 		$current = get_site_transient( 'update_plugins' );
 		if ( !isset( $current -> response[ $file ] ) ) 
 			return false;
@@ -156,41 +152,33 @@ class fpwCategoryThumbnails {
 	}
 
 	//	add link to Donation to plugins meta
-	public function pluginMetaLinks( $links, $file ) {
+	function pluginMetaLinks( $links, $file ) {
 		if ( 'fpw-category-thumbnails/fpw-category-thumbnails.php' == $file ) 
 			$links[] = '<a href="http://fw2s.com/payments-and-donations/" target="_blank">' . __( "Donate", "fpw-fct" ) . '</a>';
 		return $links;
 	}
 	
 	//	add link to settings page in plugins list
-	public function pluginLinks( $links, $file ) {
+	function pluginLinks( $links, $file ) {
    		$settings_link = '<a href="' . site_url( '/wp-admin/' ) . 'options-general.php?page=fpw-category-thumbnails">' . __( 'Settings', 'fpw-fct' ) . '</a>';
 		array_unshift( $links, $settings_link );
     	return $links;
 	}
 	
-	//	activation and uninstall file maintenance
-	public function pluginActivate() {
-		//	check if activation is possible
-		if ( $this->canActivate ) {
-			//	if cleanup requested make uninstall.php otherwise make uninstall.txt
-			if ( $this->pluginOptions[ 'clean' ] ) {
-				if ( file_exists( $this->pluginPath . '/uninstall.txt' ) ) 
-					rename( $this->pluginPath . '/uninstall.txt', $this->pluginPath . '/uninstall.php' );
-			} else {
-				if ( file_exists( $this->pluginPath . '/uninstall.php' ) ) 
-					rename( $this->pluginPath . '/uninstall.php', $this->pluginPath . '/uninstall.txt' );
-			}
+	//	uninstall file maintenance
+	function pluginActivate() {
+		//	if cleanup requested make uninstall.php otherwise make uninstall.txt
+		if ( $this->pluginOptions[ 'clean' ] ) {
+			if ( file_exists( $this->pluginPath . '/uninstall.txt' ) ) 
+				rename( $this->pluginPath . '/uninstall.txt', $this->pluginPath . '/uninstall.php' );
 		} else {
-			deactivate_plugins( $this->pluginPath . '/fpw-category-thumbnails.php' );
-			wp_die( '<center><strong>CANNOT ACTIVATE<br />&nbsp;<br />' . 
-					'FPW Category Thumbnails</strong> requires <strong>WordPress 2.9 or higher</strong><br />&nbsp;<br />' . 
-					'Press your browser\'s <em>Back</em> button</center>' );		
+			if ( file_exists( $this->pluginPath . '/uninstall.php' ) ) 
+				rename( $this->pluginPath . '/uninstall.php', $this->pluginPath . '/uninstall.txt' );
 		}
 	}	
 	
 	//	add plugin to admin bar ( WordPress 3.1+ )	
-	public function pluginToAdminBar() {
+	function pluginToAdminBar() {
 		if ( current_user_can( 'manage_options' ) ) {
 			global 	$wp_admin_bar;
 			
@@ -218,7 +206,7 @@ class fpwCategoryThumbnails {
 	}
 	
 	//	plugin's Settings page
-	public function pluginSettings() {
+	function pluginSettings() {
 		//	get all categories
 		$categories = array();
 		$cats0 = get_categories('hide_empty=0&orderby=name&parent=0');
@@ -361,7 +349,7 @@ class fpwCategoryThumbnails {
 							$post_id = $post->ID;
 							//	make sure this is not a revision nor draft
 							if ( ( 'revision' != $post->post_type ) && ( 'draft' != $post->post_status ) )
-								$this->updateID( $post_id, $post );
+								$this->addThumbnailToPost( $post_id, $post );
 						}
 						next($map);
 					}
@@ -600,7 +588,7 @@ class fpwCategoryThumbnails {
 	Main action - sets the value of post's _thumbnail_id based on category
 	assignments
 	------------------------------------------------------------------- */
-	public function updateID( $post_id, $post = NULL ) {
+	function addThumbnailToPost( $post_id, $post = NULL ) {
 		if ( NULL === $post ) 
 			return;
 		//	we don't want to apply changes to post's revision or drafts
@@ -620,7 +608,7 @@ class fpwCategoryThumbnails {
 					//	as the thumbnail of default category will be there already
 					if ( array_key_exists( $c->cat_ID, $map ) )
 						if ( $map[ $c->cat_ID ] === 'Author' ) {
-							$auth_pic_id = $this->GetAuthorsPictureID( $post->post_author );
+							$auth_pic_id = self::getAuthorsPictureID( $post->post_author );
 							if ( '0' != $auth_pic_id ) 
 								update_post_meta( $post_id, '_thumbnail_id', $auth_pic_id );
 						} else { 
@@ -631,7 +619,7 @@ class fpwCategoryThumbnails {
 					if ( array_key_exists( $c->cat_ID, $map ) ) 
 						if ( !( $do_notover ) ) {
 							if ( $map[ $c->cat_ID ] === 'Author' ) {
-								$auth_pic_id = $this->GetAuthorsPictureID( $post->post_author );
+								$auth_pic_id = self::getAuthorsPictureID( $post->post_author );
 								if ( '0' != $auth_pic_id )
 									 update_post_meta( $post_id, '_thumbnail_id', $auth_pic_id );
 							} else {
@@ -640,7 +628,7 @@ class fpwCategoryThumbnails {
 						} else {
 							if ( '' == $thumb_id )
 								if ( $map[ $c->cat_ID ] === 'Author' ) {
-									 $auth_pic_id = $this->GetAuthorsPictureID( $post->post_author );
+									 $auth_pic_id = self::getAuthorsPictureID( $post->post_author );
 									 if ( '0' != $auth_pic_id )
 									 	update_post_meta( $post_id, '_thumbnail_id', $auth_pic_id );
 								} else {
@@ -654,7 +642,7 @@ class fpwCategoryThumbnails {
 	}
 	
 	//	get author's picture id - helper function
-	private function getAuthorsPictureID( $author_id ) {
+	private static function getAuthorsPictureID( $author_id ) {
 		global $wpdb;
 		$pic_id = 0;
 		$all_media = $wpdb->get_results( "SELECT DISTINCT * FROM " . $wpdb->prefix . "posts " .

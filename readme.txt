@@ -1,9 +1,11 @@
 === FPW Category Thumbnails ===
 Contributors: frankpw
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 2.9
-Tested up to: 3.3.1
+Tested up to: 3.4-beta4
 Stable tag: 1.4.8
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
@@ -37,7 +39,10 @@ IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be e
 Upload authors' pictures into media library or NextGen gallery. 
 File names of authors' pictures in media library must follow this naming convention: 'autor_id.jpg' where 'id' is author's user id. 
 File names of authors' pictures in NextGen gallery must follow this naming convention: 'id.jpg' where 'id' is author's user id.
-The name of NextGen gallery must be 'authors'. 
+The name of NextGen gallery must be 'authors'.
+
+= How to use 'fpwCategoryThumbnails::addThumbnailToPost' method? =
+Look into [Public method fpwCategoryThumbnails::addThumbnailToPost] (http://fw2s.com/support/fpw-category-thumbnails-documentation/public-method-fpwcategorythumbnailsaddthumbnailtopost/) topic of Documentation. 
 
 == Screenshots ==
 
@@ -47,6 +52,8 @@ The name of NextGen gallery must be 'authors'.
 
 = 1.4.9 =
 * Added code to prevent plugin being activated when WordPress version is lower than 2.9
+* Exposed method 'fpwCategoryThumbnails::addThumbnailToPost' for both back and front end
+* Minor code mofifications
 
 = 1.4.8 =
 * Added support for pointers ( WP 3.3+ )

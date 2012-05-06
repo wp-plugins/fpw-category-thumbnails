@@ -89,7 +89,13 @@
 						__( 'Upload authors\' pictures into media library or NextGen gallery.', 'fpw-fct' ) . ' ' . 
 						__( 'File names of authors\' pictures in media library must follow this naming convention: \'autor_id.jpg\' where \'id\' is author\'s user id. ', 'fpw-fct' ) . ' ' . 
 						__( 'File names of authors\' pictures in NextGen gallery must follow this naming convention: \'id.jpg\' where \'id\' is author\'s user id.', 'fpw-fct' ) . ' ' .
-						__( 'The name of NextGen gallery must be \'authors\'.', 'fpw-fct' ) . '</p>' . 
+						__( 'The name of NextGen gallery must be \'authors\'.', 'fpw-fct' ) . '<br /><br /><strong>'.
+						__( 'Question:', 'fpw-fct' ) . '</strong> ' . 
+						__( 'How to use \'fpwCategoryThumbnails::addThumbnailToPost\' method?', 'fpw-fct' ) . '<br><strong>' . 
+						__( 'Answer:', 'fpw-fct' ) . '</strong> ' . 
+						__( 'Look into', 'fpw-fct' ) . 
+						' <a href="http://fw2s.com/support/fpw-category-thumbnails-documentation/public-method-fpwcategorythumbnailsaddthumbnailtopost/" target="_blank">Public method fpwCategoryThumbnails::addThumbnailToPost</a> ' . 
+						__( 'topic of Documentation.', 'fpw-fct' ) . '</p>' . 
 						'<p style="font-size: larger">' . __( 'More information', 'fpw-fct' ) . '</p>' . 
 						'<blockquote><a href="http://fw2s.com/fpw-category-thumbnails-plugin/" target="_blank">' . __( 'Plugin\'s site', 'fpw-fct' ) . '</a></blockquote>' . 
 						'<p style="font-size: larger">' . __( 'Support', 'fpw-fct' ) . '</p>' . 
