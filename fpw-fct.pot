@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the FPW Category Thumbnails package.
 msgid ""
 msgstr ""
-"Project-Id-Version: FPW Category Thumbnails 1.4.8\n"
+"Project-Id-Version: FPW Category Thumbnails 1.4.9\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
-"POT-Creation-Date: 2012-04-18 18:21:10+00:00\n"
+"POT-Creation-Date: 2012-05-06 21:54:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,7 +16,7 @@ msgstr ""
 msgid "Picture"
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.4.8)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.4.9)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: classes/fpw-category-thumbnails.class.php:58
 #: classes/fpw-category-thumbnails.class.php:59
@@ -413,8 +413,9 @@ msgstr ""
 msgid "removes thumbnails from all posts /pages regardless of the category"
 msgstr ""
 
-#: help/help.php:74 help/help.php:81 help/help.php:86 help/help33.php:84
-#: help/help33.php:91 help/help33.php:95
+#: help/help.php:74 help/help.php:81 help/help.php:86 help/help.php:93
+#: help/help33.php:84 help/help33.php:91 help/help33.php:95
+#: help/help33.php:102
 msgid "Question:"
 msgstr ""
 
@@ -424,8 +425,9 @@ msgid ""
 "does not display it in posts."
 msgstr ""
 
-#: help/help.php:76 help/help.php:83 help/help.php:88 help/help33.php:86
-#: help/help33.php:93 help/help33.php:97
+#: help/help.php:76 help/help.php:83 help/help.php:88 help/help.php:95
+#: help/help33.php:86 help/help33.php:93 help/help33.php:97
+#: help/help33.php:104
 msgid "Answer:"
 msgstr ""
 
@@ -481,15 +483,27 @@ msgstr ""
 msgid "The name of NextGen gallery must be 'authors'."
 msgstr ""
 
-#: help/help.php:93 help/help33.php:4
+#: help/help.php:94 help/help33.php:103
+msgid "How to use 'fpwCategoryThumbnails::addThumbnailToPost' method?"
+msgstr ""
+
+#: help/help.php:96 help/help33.php:105
+msgid "Look into"
+msgstr ""
+
+#: help/help.php:98 help/help33.php:107
+msgid "topic of Documentation."
+msgstr ""
+
+#: help/help.php:99 help/help33.php:4
 msgid "More information"
 msgstr ""
 
-#: help/help.php:94
+#: help/help.php:100
 msgid "Plugin's site"
 msgstr ""
 
-#: help/help.php:95 help/help33.php:6
+#: help/help.php:101 help/help33.php:6
 msgid "Support"
 msgstr ""
 
@@ -509,7 +523,7 @@ msgstr ""
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: help/help33.php:104
+#: help/help33.php:110
 msgid "FAQ"
 msgstr ""
 
