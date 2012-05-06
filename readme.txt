@@ -42,7 +42,7 @@ File names of authors' pictures in NextGen gallery must follow this naming conve
 The name of NextGen gallery must be 'authors'.
 
 = How to use 'fpwCategoryThumbnails::addThumbnailToPost' method? =
-Look into [Public method fpwCategoryThumbnails::addThumbnailToPost] (http://fw2s.com/support/fpw-category-thumbnails-documentation/public-method-fpwcategorythumbnailsaddthumbnailtopost/) topic of Documentation. 
+Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.com/support/fpw-category-thumbnails-documentation/public-method-fpwcategorythumbnailsaddthumbnailtopost/) topic of Documentation. 
 
 == Screenshots ==
 
