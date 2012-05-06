@@ -53,7 +53,7 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 = 1.4.9 =
 * Added code to prevent plugin being activated when WordPress version is lower than 2.9
 * Exposed method 'fpwCategoryThumbnails::addThumbnailToPost' for both back and front end
-* Minor code mofifications
+* Minor code modifications
 
 = 1.4.8 =
 * Added support for pointers ( WP 3.3+ )
