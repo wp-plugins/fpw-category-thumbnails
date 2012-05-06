@@ -80,7 +80,7 @@ class fpwCategoryThumbnails {
 	function enqueuePointerScripts( $hook ) {
 		$proceed = false;
 		$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
-		if ( !in_array( 'fpwfct148', $dismissed ) && apply_filters( 'show_wp_pointer_admin_bar', TRUE ) ) {
+		if ( !in_array( 'fpwfct149', $dismissed ) && apply_filters( 'show_wp_pointer_admin_bar', TRUE ) ) {
 			$proceed = true;
 			add_action( 'admin_print_footer_scripts', array( &$this, 'custom_print_footer_scripts' ) );
 		}
