@@ -94,12 +94,8 @@ class fpwCategoryThumbnails {
 	// 	handle pointer
 	function custom_print_footer_scripts() {
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;list-style:square">' . __( 'Added support for pointers', 'fpw-fct' ) . ' (WP 3.3+)</li>';
-		$pointerContent .= '<li style="margin-left:25px;list-style:square">' . __( 'Minor bugs fixes', 'fpw-fct' ) . '</li>';
-		$pointerContent .= '<h4 style="padding-left:10px;font-size:1.1em">' . __( 'Planned for the next version', 'fpw-fct' ) . '</h4>';
-		$pointerContent .= '<p style="padding-left:10px;text-align:justify">';
-		$pointerContent .= __( 'Support for multiple thumbnails.', 'fpw-fct' ) . ' ';
-		$pointerContent .= __( 'It will be possible to display more than one thumbnail if a post / page does belong to two or more categories.', 'fpw-fct' ) . '</p>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . __( 'Added code to prevent plugin being activated when WordPress version is lower than 2.9', 'fpw-fct' ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( 'Exposed method "fpwCategoryThumbnails::addThumbnailToPost" for both back and front end', 'fpw-fct' ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -109,7 +105,7 @@ class fpwCategoryThumbnails {
         			position: 'top',
             		close: function() {
 						jQuery.post( ajaxurl, {
-							pointer: 'fpwfct148',
+							pointer: 'fpwfct149',
 							action: 'dismiss-wp-pointer'
 						});
             		}
