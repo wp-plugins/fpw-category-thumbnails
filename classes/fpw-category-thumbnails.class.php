@@ -80,7 +80,7 @@ class fpwCategoryThumbnails {
 	function enqueuePointerScripts( $hook ) {
 		$proceed = false;
 		$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
-		if ( !in_array( 'fpwfct149', $dismissed ) && apply_filters( 'show_wp_pointer_admin_bar', TRUE ) ) {
+		if ( !in_array( 'fpwfct' . str_replace( '.', '', $this->pluginVersion ), $dismissed ) && apply_filters( 'show_wp_pointer_admin_bar', TRUE ) ) {
 			$proceed = true;
 			add_action( 'admin_print_footer_scripts', array( &$this, 'custom_print_footer_scripts' ) );
 		}
@@ -93,6 +93,7 @@ class fpwCategoryThumbnails {
 
 	// 	handle pointer
 	function custom_print_footer_scripts() {
+		$pointer = 'fpwfct' . str_replace( '.', '', $this->pluginVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . __( 'Added code to prevent plugin being activated when WordPress version is lower than 2.9', 'fpw-fct' ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( 'Exposed method "fpwCategoryThumbnails::addThumbnailToPost" for both back and front end', 'fpw-fct' ) . '</li>';
@@ -105,7 +106,7 @@ class fpwCategoryThumbnails {
         			position: 'top',
             		close: function() {
 						jQuery.post( ajaxurl, {
-							pointer: 'fpwfct149',
+							pointer: '<?php echo $pointer; ?>',
 							action: 'dismiss-wp-pointer'
 						});
             		}
