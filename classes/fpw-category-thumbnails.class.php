@@ -157,7 +157,7 @@ class fpwCategoryThumbnails {
 		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( 'Use WP_List_Table descendant to display category / thumbnail mapping', 'fpw-fct' ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( 'Full AJAX implementation of all operations', 'fpw-fct' ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( 'Ensured proper operation when JavaScript is disabled', 'fpw-fct' ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( "Support for downloading of translation files from plugin's repository", "fpw-fct" ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( 'Support for downloading of translation files from plugin`s repository', 'fpw-fct' ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
