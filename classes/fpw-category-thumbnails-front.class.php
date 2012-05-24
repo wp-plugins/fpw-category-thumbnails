@@ -1,4 +1,5 @@
 <?php
+//	front end class
 class fpwCategoryThumbnails {
 	public	$pluginOptions;
 	public	$pluginPath;

@@ -4,7 +4,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
-Requires at least: 2.9
+Requires at least: 3.1
 Tested up to: 3.4-beta4
 Stable tag: 1.4.9
 
@@ -50,7 +50,16 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 
 == Changelog ==
 
+= 1.5.0 =
+* Major release
+* Dropped support for WordPress versions lower than 3.1
+* Use WP_List_table descendant to display category / thumbnail mapping
+* Full AJAX implementation of all operations
+* Ensured proper operation when JavaScript is disabled
+* Support for downloading of translation files from plugin's repository
+
 = 1.4.9 =
+* Last version supporting WordPress versions from 2.9 and lower than 3.1
 * Added code to prevent plugin being activated when WordPress version is lower than 2.9
 * Exposed method 'fpwCategoryThumbnails::addThumbnailToPost' for both back and front end
 * Minor code modifications
