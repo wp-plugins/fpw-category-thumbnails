@@ -53,7 +53,7 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 = 1.5.0 =
 * Major release
 * Dropped support for WordPress versions lower than 3.1
-* Uses WP_List_table descendant to display category / thumbnail mapping
+* Uses WP_List_Table descendant to display category / thumbnail mapping
 * Full AJAX implementation of all operations
 * Ensured proper operation when JavaScript is disabled
 * Support for downloading of translation files from plugin's repository
