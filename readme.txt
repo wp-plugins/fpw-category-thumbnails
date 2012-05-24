@@ -6,7 +6,7 @@ Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 3.1
 Tested up to: 3.4-beta4
-Stable tag: 1.4.9
+Stable tag: 1.5.0
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
 page when the post is created or updated.
@@ -53,7 +53,7 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 = 1.5.0 =
 * Major release
 * Dropped support for WordPress versions lower than 3.1
-* Use WP_List_table descendant to display category / thumbnail mapping
+* Uses WP_List_table descendant to display category / thumbnail mapping
 * Full AJAX implementation of all operations
 * Ensured proper operation when JavaScript is disabled
 * Support for downloading of translation files from plugin's repository
