@@ -17,7 +17,8 @@ jQuery( document ).ready( function( $ ) {
 			$( 'html' ).addClass( 'File' );
 			id = $(this).attr('id');
 			id = id.slice( ( id.search( /b-get-for-/ ) + 10 ), id.length );
-			tb_show( fpw_file_select.tb_show_title, 'media-upload.php?post_id=' + id + '&fpw_fs_field=val-for-id-' + id + '-field&type=file&TB_iframe=true' );			
+//			tb_show( fpw_file_select.tb_show_title, 'media-upload.php?post_id=' + id + '&fpw_fs_field=val-for-id-' + id + '-field&type=file&TB_iframe=true' );			
+			tb_show( fpw_file_select.tb_show_title, 'media-upload.php?post_id=0&fpw_fs_field=val-for-id-' + id + '-field&type=file&TB_iframe=true' );			
 			return false;
 		});
 	
