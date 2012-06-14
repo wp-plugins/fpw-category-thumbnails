@@ -17,7 +17,6 @@ jQuery( document ).ready( function( $ ) {
 			$( 'html' ).addClass( 'File' );
 			id = $(this).attr('id');
 			id = id.slice( ( id.search( /b-get-for-/ ) + 10 ), id.length );
-//			tb_show( fpw_file_select.tb_show_title, 'media-upload.php?post_id=' + id + '&fpw_fs_field=val-for-id-' + id + '-field&type=file&TB_iframe=true' );			
 			tb_show( fpw_file_select.tb_show_title, 'media-upload.php?post_id=0&fpw_fs_field=val-for-id-' + id + '-field&type=file&TB_iframe=true' );			
 			return false;
 		});
@@ -38,7 +37,6 @@ jQuery( document ).ready( function( $ ) {
 		var select_button = '<a href="#" class="fpw-fs-insert button-secondary">' + fpw_file_select.text_select_file + '</a>';
 		parent_doc = parent.document;
 		parent_src = parent_doc.getElementById( 'TB_iframeContent' ).src;
-		//alert(parent_src);
 		parent_src_vars = fpw_fs_get_url_vars( parent_src );
 		if ( 'fpw_fs_field' in parent_src_vars ) {
 			current_tab = $( 'ul#sidemenu a.current' ).parent( 'li' ).attr( 'id' );
@@ -85,6 +83,7 @@ jQuery( document ).ready( function( $ ) {
 			// Select functionality
 			$( 'a.fpw-fs-insert' ).click( function() {
 				var item_id;
+				var cat_id;
 				if ( $( this ).parent().attr( 'class' ) == 'savesend' ) {
 					item_id = $( this ).siblings( '.del-attachment' ).attr( 'id' );
 					item_id = item_id.match( /del_attachment_([0-9]+)/ );
@@ -97,7 +96,10 @@ jQuery( document ).ready( function( $ ) {
 						item_id = 'ngg-' + item_id;
 					}
 				}
-				parent.fpw_fs_select_item( parent_src_vars['post_id'], item_id, parent_src_vars['fpw_fs_field'] );
+				cat_id = parent_src_vars['fpw_fs_field'];
+				cat_id = cat_id.replace( 'val-for-id-', '');
+				cat_id = cat_id.replace( '-field', '');
+				parent.fpw_fs_select_item( cat_id, item_id, parent_src_vars['fpw_fs_field'] );
 				return false;
 			});
 		}
