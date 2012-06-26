@@ -6,7 +6,7 @@ Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 3.3
 Tested up to: 3.4
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
 page when the post is created or updated. Built-in FPW Post Thumbnails.
