@@ -11,11 +11,11 @@
 		$ok = ( update_option( 'fpw_category_thumb_opt', $opt ) );
 		echo '<p><strong>';
 		if ( $ok ) {
-			$this->pluginOptions = $opt;
+			$this->fctOptions = $opt;
 			$this->uninstallMaintenance();
 			echo __( 'Options updated successfully.', 'fpw-fct' );
 		} else {
-			echo __( 'No changes. Nothing to update.');
+			echo __( 'No changes. Nothing to update.', 'fpw-fct' );
 		}
 		echo '</strong></p>';
 		die();

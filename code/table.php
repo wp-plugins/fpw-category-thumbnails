@@ -62,7 +62,7 @@
 		reset( $categories );
 		reset( $assignments );
 		
-		require_once $this->pluginPath . '/classes/fpw-category-thumbnails-table.class.php';
+		require_once $this->fctPath . '/classes/fpw-category-thumbnails-table-class.php';
 
 		$this->categoryListTable = new fpw_Category_Thumbnails_Table( $this->mapArray );
 
@@ -89,8 +89,11 @@ td.fpwct_cat_name, td.fpwct_image_id, td.fpwct_preview {
 </style>
 
 <?php
+		echo '<div id="cat_table">';
 
 		$this->categoryListTable->prepare_items();
 
 		$this->categoryListTable->display();
+		
+		echo '</div>';
 ?>

@@ -4,12 +4,12 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
-Requires at least: 3.1
-Tested up to: 3.4-beta4
+Requires at least: 3.3
+Tested up to: 3.4
 Stable tag: 1.5.0
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
-page when the post is created or updated.
+page when the post is created or updated. Built-in FPW Post Thumbnails.
 
 == Description ==
 Setting featured images for posts / pages could be very time 
@@ -17,15 +17,16 @@ consuming, especially when your media library holds hundreds of
 pictures. Very often we select the same thumbnail for posts in 
 particular category. This plugin automates the process by inserting a 
 thumbnail based on category / thumbnail mapping while post / page is
-being created or updated.
+being created or updated. Now bundled with FPW Post Thumbnails.
 
 Note: please remember that your theme must support post thumbnails.
 
 == Installation ==
 
 1. Upload `fpw-category-thumbnails` folder to the `/wp-content/plugins/` directory
+1. If standalone plugin FPW Post Thumbnails is installed deactivate and remove it.
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Select Dashboard's Settings -> FPW Category Thumbnails and build category/thumbnail mapping
+1. Select Dashboard's Appearance -> FPW Category Thumbnails and build category/thumbnail mapping
 
 == Frequently Asked Questions ==
 
@@ -46,9 +47,18 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 
 == Screenshots ==
 
-1. Settings Page
+1. FPW Category Thumbnails - Settings Page
+1. FPW Post Thumbnails - Settings Page
+1. FPW Post Thumbnails - Content Preview
+1. FPW Post Thumbnails - Excerpt Preview
 
 == Changelog ==
+
+= 1.5.1 =
+* Dropped support for WordPress versions lower than 3.3
+* Bundled with FPW Post Thumbnails plugin
+* Moved to Appearance menu of the Dashboard
+* Loading JavaScript into the footer
 
 = 1.5.0 =
 * Major release
