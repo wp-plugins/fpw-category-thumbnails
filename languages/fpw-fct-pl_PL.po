@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: FPW Category Thumbnails v1.5.1\n"
+"Project-Id-Version: FPW Category Thumbnails v1.5.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-06-26 15:07:59+0000\n"
+"PO-Revision-Date: 2012-06-27 10:26:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,8 +30,8 @@ msgstr "WSZYSTKICH"
 msgid "Action Buttons"
 msgstr "Przyciski Działań"
 
-#: classes/fpw-category-thumbnails-class.php:447
-#: classes/fpw-post-thumbnails-class.php:497
+#: classes/fpw-category-thumbnails-class.php:445
+#: classes/fpw-post-thumbnails-class.php:499
 #: help/fpthelp.php:43
 #: help/help.php:32
 #@ fpw-fct
@@ -39,7 +39,7 @@ msgid "Add this plugin to the Admin Bar"
 msgstr "Dodaj tę wtyczkę do Paska Administratora"
 
 #: ajax/remove.php:22
-#: classes/fpw-category-thumbnails-class.php:401
+#: classes/fpw-category-thumbnails-class.php:399
 #@ fpw-fct
 msgid "All thumbnails removed successfully."
 msgstr "Wszystkie ikony zostały pomyślnie usunięte."
@@ -54,7 +54,7 @@ msgid "Answer:"
 msgstr "Odpowiedź:"
 
 #: ajax/apply.php:21
-#: classes/fpw-category-thumbnails-class.php:399
+#: classes/fpw-category-thumbnails-class.php:397
 #@ fpw-fct
 msgid "Applied thumbnails to existing posts / pages successfully."
 msgstr "Dodanie ikon do istniejących wpisów / stron zakończyło się pomyślnie."
@@ -75,7 +75,7 @@ msgstr "Czy z pewnością chcesz wyczyścić ten ID?"
 msgid "Are you sure you want to proceed?"
 msgstr "Czy z pewnością chcesz to wykonać?"
 
-#: classes/fpw-category-thumbnails-class.php:492
+#: classes/fpw-category-thumbnails-class.php:490
 #: classes/fpw-category-thumbnails-table-class.php:63
 #@ fpw-fct
 msgid "Author"
@@ -96,7 +96,7 @@ msgstr "Dostępne Ustawienia"
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: classes/fpw-category-thumbnails-class.php:168
+#: classes/fpw-category-thumbnails-class.php:166
 #@ fpw-fct
 msgid "Categories"
 msgstr "Kategorii"
@@ -106,14 +106,14 @@ msgstr "Kategorii"
 msgid "Category (ID)"
 msgstr "Kategoria (ID)"
 
-#: classes/fpw-category-thumbnails-class.php:493
+#: classes/fpw-category-thumbnails-class.php:491
 #: classes/fpw-category-thumbnails-table-class.php:72
 #: help/help.php:58
 #@ fpw-fct
 msgid "Clear"
 msgstr "Wyczyść"
 
-#: classes/fpw-category-thumbnails-class.php:435
+#: classes/fpw-category-thumbnails-class.php:433
 #: help/help.php:28
 #: scripts/enqueuescripts.php:15
 #: scripts/enqueuescripts.php:24
@@ -121,7 +121,7 @@ msgstr "Wyczyść"
 msgid "Do not overwrite if post / page has thumbnail assigned already"
 msgstr "Nie nadpisuj, jeśli wpis / strona ma już przydzieloną ikonę"
 
-#: classes/fpw-category-thumbnails-class.php:237
+#: classes/fpw-category-thumbnails-class.php:235
 #@ fpw-fct
 msgid "Donate"
 msgstr "Wspomóż"
@@ -131,7 +131,7 @@ msgstr "Wspomóż"
 msgid "Each row of the mapping table represents a category and a thumbnail image ID assigned to it."
 msgstr "Każdy rząd tabeli przyporządkowań reprezentuje kategorię i ID obrazka jej przydzielonego."
 
-#: classes/fpw-category-thumbnails-class.php:513
+#: classes/fpw-category-thumbnails-class.php:511
 #@ fpw-fct
 msgid "Enable JavaScript and enjoy fully AJAX powered interface!"
 msgstr "Włącz JavaScript, aby cieszyć się w pełni wspomaganym przez AJAX środowiskiem."
@@ -144,15 +144,15 @@ msgstr "Często Zadawane Pytania"
 
 #: classes/fpw-category-thumbnails-class.php:110
 #: classes/fpw-category-thumbnails-class.php:111
-#: classes/fpw-category-thumbnails-class.php:272
-#: classes/fpw-category-thumbnails-class.php:381
-#: classes/fpw-post-thumbnails-class.php:481
+#: classes/fpw-category-thumbnails-class.php:270
+#: classes/fpw-category-thumbnails-class.php:379
+#: classes/fpw-post-thumbnails-class.php:483
 #@ fpw-fct
 msgid "FPW Category Thumbnails"
 msgstr "Ikony Kategorii FPW"
 
-#: classes/fpw-category-thumbnails-class.php:266
-#: classes/fpw-post-thumbnails-class.php:237
+#: classes/fpw-category-thumbnails-class.php:264
+#: classes/fpw-post-thumbnails-class.php:239
 #@ fpw-fct
 msgid "FPW Plugins"
 msgstr "Wtyczki FPW"
@@ -177,7 +177,7 @@ msgstr "Pierwsza kolumna zawiera nazwę kategorii i jej ID."
 msgid "Frequently Asked Questions"
 msgstr "Często Zadawane Pytania"
 
-#: classes/fpw-category-thumbnails-class.php:491
+#: classes/fpw-category-thumbnails-class.php:489
 #: classes/fpw-category-thumbnails-table-class.php:58
 #: help/help.php:50
 #: scripts/enqueuescripts.php:10
@@ -196,12 +196,12 @@ msgid "Get Image ID"
 msgstr "Pobierz ID Obrazka"
 
 #: classes/fpw-category-thumbnails-table-class.php:161
-#: classes/fpw-post-thumbnails-class.php:526
+#: classes/fpw-post-thumbnails-class.php:528
 #@ fpw-fct
 msgid "Get Language File"
 msgstr "Pobierz Plik Językowy"
 
-#: classes/fpw-category-thumbnails-class.php:499
+#: classes/fpw-category-thumbnails-class.php:497
 #@ fpw-fct
 msgid "Help"
 msgstr "Pomoc"
@@ -231,7 +231,7 @@ msgstr "Wprowadziłem ID obrazka z galerii NextGen a ikona nie pokazuje się."
 msgid "IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230."
 msgstr "ID z galerii NextGen musi być wprowadzone z przedrostkiem ngg-, tak więc ID 230 powinien być wprowadzony jako ngg-230."
 
-#: classes/fpw-category-thumbnails-class.php:502
+#: classes/fpw-category-thumbnails-class.php:500
 #: classes/fpw-category-thumbnails-table-class.php:92
 #@ fpw-fct
 msgid "Image ID"
@@ -242,7 +242,7 @@ msgstr "ID Obrazka"
 msgid "Image ID can be entered manually ( if you remember it ) or by clicking on 'Get ID' button which will call 'media upload' overlay."
 msgstr "ID obrazka może być wprowadzone bezpośrednio ( jeśli go pamiętamy ) lub z użyciem przycisku 'Pobierz ID', który spowoduje wywołanie nakładki 'media upload'."
 
-#: classes/fpw-category-thumbnails-class.php:501
+#: classes/fpw-category-thumbnails-class.php:499
 #@ fpw-fct
 msgid "In this state you have to enter"
 msgstr "W tym trybie konieczne jest bezpośrednie wprowadzanie wartości do pola"
@@ -265,31 +265,31 @@ msgstr "Nieaktywny przycisk - jako przykład"
 msgid "Introduction"
 msgstr "Wprowadzenie"
 
-#: classes/fpw-category-thumbnails-class.php:488
+#: classes/fpw-category-thumbnails-class.php:486
 #@ fpw-fct
 msgid "JavaScript is disabled!"
 msgstr "JavaScript jest wyłączony!"
 
-#: classes/fpw-category-thumbnails-class.php:411
+#: classes/fpw-category-thumbnails-class.php:409
 #@ fpw-fct
 msgid "Language file already exists."
 msgstr "Plik językowy już istnieje."
 
 #: ajax/fptlanguage.php:17
 #: ajax/language.php:12
-#: classes/fpw-post-thumbnails-class.php:557
+#: classes/fpw-post-thumbnails-class.php:559
 #@ fpw-fct
 msgid "Language file downloaded successfully. It will be applied as soon as this page is reloaded."
 msgstr "Plik językowy ściągnięto pomyślnie. Będzie on zastosowany po odświeżeniu strony."
 
-#: classes/fpw-category-thumbnails-class.php:407
+#: classes/fpw-category-thumbnails-class.php:405
 #@ fpw-fct
 msgid "Language file downloaded. Click"
 msgstr "Pobrano plik językowy. Kliknij"
 
 #: ajax/fptlanguage.php:9
 #: ajax/language.php:4
-#: classes/fpw-post-thumbnails-class.php:549
+#: classes/fpw-post-thumbnails-class.php:551
 #@ fpw-fct
 msgid "Language file for this version is not yet available."
 msgstr "Plik językowy dla tej wersji nie jest jeszcze dostępny."
@@ -299,7 +299,7 @@ msgstr "Plik językowy dla tej wersji nie jest jeszcze dostępny."
 msgid "Language file is already installed."
 msgstr "Plik językowy jest już zainstalowany."
 
-#: classes/fpw-category-thumbnails-class.php:414
+#: classes/fpw-category-thumbnails-class.php:412
 #@ fpw-fct
 msgid "Language file is not available."
 msgstr "Plik językowy nie jest dostępny."
@@ -364,7 +364,7 @@ msgstr "Ustawienia"
 
 #: ajax/fptupdate.php:23
 #: ajax/update.php:16
-#: classes/fpw-post-thumbnails-class.php:537
+#: classes/fpw-post-thumbnails-class.php:539
 #@ fpw-fct
 msgid "Options updated successfully."
 msgstr "Ustawienia zapisano z pomyślnie."
@@ -392,8 +392,8 @@ msgid "Plugin's site"
 msgstr "Witryna wtyczki"
 
 #: classes/fpw-category-thumbnails-table-class.php:93
-#: classes/fpw-post-thumbnails-class.php:598
-#: classes/fpw-post-thumbnails-class.php:776
+#: classes/fpw-post-thumbnails-class.php:600
+#: classes/fpw-post-thumbnails-class.php:778
 #@ fpw-fct
 msgid "Preview"
 msgstr "Podgląd"
@@ -412,14 +412,14 @@ msgstr "Pytanie:"
 msgid "Read this article"
 msgstr "Przeczytaj artykuł"
 
-#: classes/fpw-category-thumbnails-class.php:494
+#: classes/fpw-category-thumbnails-class.php:492
 #: classes/fpw-category-thumbnails-table-class.php:78
 #: help/help.php:62
 #@ fpw-fct
 msgid "Refresh"
 msgstr "Odśwież"
 
-#: classes/fpw-category-thumbnails-class.php:509
+#: classes/fpw-category-thumbnails-class.php:507
 #@ fpw-fct
 msgid "Remember to click on"
 msgstr "Pamiętaj, aby kliknąć na"
@@ -430,13 +430,13 @@ msgstr "Pamiętaj, aby kliknąć na"
 msgid "Remove Thumbnails"
 msgstr "Usuń Ikony"
 
-#: classes/fpw-category-thumbnails-class.php:441
+#: classes/fpw-category-thumbnails-class.php:439
 #: help/help.php:30
 #@ fpw-fct
 msgid "Remove plugin's data from database on uninstall"
 msgstr "Usuń dane wtyczki z bazy danych podczas usuwania wtyczki"
 
-#: classes/fpw-category-thumbnails-class.php:496
+#: classes/fpw-category-thumbnails-class.php:494
 #@ fpw-fct
 msgid "Screen Options"
 msgstr "Opcje Ekranu"
@@ -451,7 +451,7 @@ msgstr "Druga kolumna to ID Obrazka - pole do wprowadzania ID ikony."
 msgid "Setting featured images for posts / pages could be very time consuming,"
 msgstr "Ustawianie ikon dla wpisów / stron może być bardzo czasochłonne,"
 
-#: classes/fpw-category-thumbnails-class.php:243
+#: classes/fpw-category-thumbnails-class.php:241
 #@ fpw-fct
 msgid "Settings"
 msgstr "Ustawienia"
@@ -462,7 +462,7 @@ msgstr "Ustawienia"
 msgid "Support"
 msgstr "Wspomaganie"
 
-#: classes/fpw-category-thumbnails-class.php:490
+#: classes/fpw-category-thumbnails-class.php:488
 #@ fpw-fct
 msgid "That makes the functionality of table row actions"
 msgstr "Degraduje to funkcjonalność akcji rzędów tabeli."
@@ -492,10 +492,10 @@ msgstr "To działanie spowoduje dodanie ikon na podstawie bieżących przyporzą
 msgid "This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated."
 msgstr "Wtyczka automatyzuje ten proces poprzez dodawanie ikony na podstawie przyporządkowań kategoria / ikona, gdy wpis jest tworzony lub uaktualniany."
 
-#: classes/fpw-category-thumbnails-class.php:504
-#: classes/fpw-category-thumbnails-class.php:510
+#: classes/fpw-category-thumbnails-class.php:502
+#: classes/fpw-category-thumbnails-class.php:508
 #: classes/fpw-category-thumbnails-table-class.php:148
-#: classes/fpw-post-thumbnails-class.php:516
+#: classes/fpw-post-thumbnails-class.php:518
 #: help/help.php:66
 #@ fpw-fct
 msgid "Update"
@@ -521,7 +521,7 @@ msgstr "NIE BĘDZIE"
 msgid "WILL REMOVE"
 msgstr "USUNIE"
 
-#: classes/fpw-category-thumbnails-class.php:506
+#: classes/fpw-category-thumbnails-class.php:504
 #@ fpw-fct
 msgid "Warning"
 msgstr "Ostrzeżenie"
@@ -532,19 +532,19 @@ msgid "What is required to use authors' pictures as thumbnails?"
 msgstr "Jakie są wymagania konieczne do użycia zdjęć autorów jako ikon?"
 
 #: classes/fpw-category-thumbnails-class.php:138
-#: classes/fpw-post-thumbnails-class.php:179
+#: classes/fpw-post-thumbnails-class.php:180
 #@ fpw-fct
 msgid "What's new in this version?"
 msgstr "Co nowego w tej wersji?"
 
-#: classes/fpw-category-thumbnails-class.php:305
-#: classes/fpw-post-thumbnails-class.php:410
+#: classes/fpw-category-thumbnails-class.php:303
+#: classes/fpw-post-thumbnails-class.php:412
 #@ fpw-fct
 msgid "You did not send any credentials!"
 msgstr "Nie wysłałe(a)ś żadnych poświadczeń!"
 
-#: classes/fpw-category-thumbnails-class.php:308
-#: classes/fpw-post-thumbnails-class.php:413
+#: classes/fpw-category-thumbnails-class.php:306
+#: classes/fpw-post-thumbnails-class.php:415
 #@ fpw-fct
 msgid "You did not send the right credentials!"
 msgstr "Nie wysłałe(a)ś poprawnych poświadczeń!"
@@ -564,7 +564,7 @@ msgstr "dodaj ikonę do każdego wpisu / strony należącego do kategorii z przy
 msgid "adds thumbnails to existing posts / pages based on category mapping"
 msgstr "dodaje ikony do istiejących wpisów i stron na podstawie przyporządkowań kategorii"
 
-#: classes/fpw-category-thumbnails-class.php:498
+#: classes/fpw-category-thumbnails-class.php:496
 #@ fpw-fct
 msgid "and contextual"
 msgstr ", a także"
@@ -574,17 +574,17 @@ msgstr ", a także"
 msgid "be respected!"
 msgstr "uwzględniane!"
 
-#: classes/fpw-category-thumbnails-class.php:511
+#: classes/fpw-category-thumbnails-class.php:509
 #@ fpw-fct
 msgid "before switching to another page!"
 msgstr "przed zmianą strony!"
 
-#: classes/fpw-category-thumbnails-class.php:495
+#: classes/fpw-category-thumbnails-class.php:493
 #@ fpw-fct
 msgid "being degraded. Other actions are affected too."
 msgstr " Dotyczy to także innych akcji."
 
-#: classes/fpw-category-thumbnails-class.php:505
+#: classes/fpw-category-thumbnails-class.php:503
 #@ fpw-fct
 msgid "button to save changes."
 msgstr ", aby zachować zmiany."
@@ -632,7 +632,7 @@ msgstr "istniejących wpisów / stron."
 msgid "get thumbnail's picture ID from media library"
 msgstr "pobierz ID ikony z biblioteki mediów"
 
-#: classes/fpw-category-thumbnails-class.php:409
+#: classes/fpw-category-thumbnails-class.php:407
 #@ fpw-fct
 msgid "here"
 msgstr "tutaj,"
@@ -657,7 +657,7 @@ msgstr "usuwa ikony ze wszystkich wpisów / stron"
 msgid "saves modified options and mapping to the database"
 msgstr "zapisuje zaktualizowane ustawienia i przyporządkowania do bazy danych"
 
-#: classes/fpw-category-thumbnails-class.php:500
+#: classes/fpw-category-thumbnails-class.php:498
 #@ fpw-fct
 msgid "screen will not be visible."
 msgstr "kontekstowa nie będą dostępne."
@@ -667,7 +667,7 @@ msgstr "kontekstowa nie będą dostępne."
 msgid "set author's picture as thumbnail"
 msgstr "użyj zdjęcia autora jako ikony"
 
-#: classes/fpw-category-thumbnails-class.php:508
+#: classes/fpw-category-thumbnails-class.php:506
 #@ fpw-fct
 msgid "the content of the table's current page."
 msgstr "zostaną zachowane."
@@ -682,7 +682,7 @@ msgstr "odnośnik do ustawień wtyczki zostanie dodany do Paska Administratora"
 msgid "thumbnails from"
 msgstr "ikony ze"
 
-#: classes/fpw-category-thumbnails-class.php:409
+#: classes/fpw-category-thumbnails-class.php:407
 #@ fpw-fct
 msgid "to reload page."
 msgstr "aby odświeżyć stronę."
@@ -692,7 +692,7 @@ msgstr "aby odświeżyć stronę."
 msgid "topic of Documentation."
 msgstr "temat Dokumentacji."
 
-#: classes/fpw-category-thumbnails-class.php:503
+#: classes/fpw-category-thumbnails-class.php:501
 #@ fpw-fct
 msgid "values manually and click on any row action link or"
 msgstr "i kliknięcie na jakikolwiek odnośnik akcji rzędu lub przycisk "
@@ -702,7 +702,7 @@ msgstr "i kliknięcie na jakikolwiek odnośnik akcji rzędu lub przycisk "
 msgid "when clicked after entering of an image ID manually it will populate 'Preview' area ( AJAX - without reloading screen )"
 msgstr "kliknięcie po bezpośrednim wprowadzeniu ID obrazka spowoduje wyświetlnie ikony w polu 'Podgląd' ( AJAX - bez przeładowania strony )"
 
-#: classes/fpw-category-thumbnails-class.php:497
+#: classes/fpw-category-thumbnails-class.php:495
 #@ fpw-fct
 msgid "which controls number of categories per page"
 msgstr "kontrolujące ilość kategorii na stronę"
@@ -732,7 +732,7 @@ msgstr "wywoła nakładkę 'media upload' i po powrocie wypełni pola 'ID Obrazk
 msgid "will enter '0' as image ID and clear 'Preview' area ( AJAX - without reloading screen )"
 msgstr "wyzeruje pole ID Obrazka i wyczyści pole 'Podgląd' ( AJAX - bez przeładowania strony )"
 
-#: classes/fpw-category-thumbnails-class.php:507
+#: classes/fpw-category-thumbnails-class.php:505
 #@ fpw-fct
 msgid "without JavaScript the only mapping saved on submit will be"
 msgstr "bez aktywnego JavaScript jedynie przyporządkowania bieżącej strony tabeli"
@@ -748,8 +748,8 @@ msgid "No changes. Nothing to update."
 msgstr "Nie wykryto żadnych zmian."
 
 #: ajax/fptupdate.php:25
-#: classes/fpw-category-thumbnails-class.php:396
-#: classes/fpw-post-thumbnails-class.php:539
+#: classes/fpw-category-thumbnails-class.php:394
+#: classes/fpw-post-thumbnails-class.php:541
 #@ fpw-fct
 msgid "No changes detected. Nothing to update."
 msgstr "Nie wykryto żadnych zmian."
@@ -761,19 +761,19 @@ msgid "Please wait..."
 msgstr "Proszę czekać..."
 
 #: ajax/fptcopyleft.php:6
-#: classes/fpw-post-thumbnails-class.php:576
+#: classes/fpw-post-thumbnails-class.php:578
 #@ fpw-fct
 msgid "Values copied from the right to the left panel."
 msgstr "Przekopiowano prawy panel do lewego."
 
 #: ajax/fptcopyright.php:6
-#: classes/fpw-post-thumbnails-class.php:566
+#: classes/fpw-post-thumbnails-class.php:568
 #@ fpw-fct
 msgid "Values copied from the left to the right panel."
 msgstr "Przekopiowano lewy panel to prawego."
 
 #: ajax/fptlanguage.php:11
-#: classes/fpw-post-thumbnails-class.php:551
+#: classes/fpw-post-thumbnails-class.php:553
 #@ fpw-fct
 msgid "Language file is already installed. Please reload this page."
 msgstr "Plik językowy jest już zainstalowany. Proszę odświeżyć stronę."
@@ -783,81 +783,81 @@ msgstr "Plik językowy jest już zainstalowany. Proszę odświeżyć stronę."
 msgid "Validation failed!"
 msgstr "Wykryto błędy danych!"
 
-#: classes/fpw-category-thumbnails-class.php:384
-#: classes/fpw-post-thumbnails-class.php:154
+#: classes/fpw-category-thumbnails-class.php:382
 #: classes/fpw-post-thumbnails-class.php:155
-#: classes/fpw-post-thumbnails-class.php:243
-#: classes/fpw-post-thumbnails-class.php:479
+#: classes/fpw-post-thumbnails-class.php:156
+#: classes/fpw-post-thumbnails-class.php:245
+#: classes/fpw-post-thumbnails-class.php:481
 #: help/fpthelp.php:29
 #@ fpw-fct
 msgid "FPW Post Thumbnails"
 msgstr "Ikony Wpisów FPW"
 
-#: classes/fpw-post-thumbnails-class.php:313
-#: classes/fpw-post-thumbnails-class.php:335
-#: classes/fpw-post-thumbnails-class.php:355
+#: classes/fpw-post-thumbnails-class.php:315
+#: classes/fpw-post-thumbnails-class.php:337
+#: classes/fpw-post-thumbnails-class.php:357
 #@ fpw-fct
 msgid "In Content panel field"
 msgstr "W panelu Wpisów pole"
 
-#: classes/fpw-post-thumbnails-class.php:315
-#: classes/fpw-post-thumbnails-class.php:322
+#: classes/fpw-post-thumbnails-class.php:317
+#: classes/fpw-post-thumbnails-class.php:324
 #@ fpw-fct
 msgid "contains non-numeric characters."
 msgstr "zawiera znaki nienumeryczne."
 
-#: classes/fpw-post-thumbnails-class.php:320
-#: classes/fpw-post-thumbnails-class.php:343
-#: classes/fpw-post-thumbnails-class.php:362
+#: classes/fpw-post-thumbnails-class.php:322
+#: classes/fpw-post-thumbnails-class.php:345
+#: classes/fpw-post-thumbnails-class.php:364
 #@ fpw-fct
 msgid "In Excerpt panel field"
 msgstr "W panelu Wypisów pole"
 
-#: classes/fpw-post-thumbnails-class.php:337
-#: classes/fpw-post-thumbnails-class.php:345
-#: classes/fpw-post-thumbnails-class.php:357
-#: classes/fpw-post-thumbnails-class.php:364
+#: classes/fpw-post-thumbnails-class.php:339
+#: classes/fpw-post-thumbnails-class.php:347
+#: classes/fpw-post-thumbnails-class.php:359
+#: classes/fpw-post-thumbnails-class.php:366
 #@ fpw-fct
 msgid "must start with '#' charcter followed by 6 hexadecimal digits."
 msgstr "musi składać się ze znaku '#' i następujących po nim sześciu cyfr w systemie szesnastkowym"
 
-#: classes/fpw-post-thumbnails-class.php:523
+#: classes/fpw-post-thumbnails-class.php:525
 #@ fpw-fct
 msgid "load language file for your version"
 msgstr "załąduj plik językowy dla bieżącej wersji"
 
-#: classes/fpw-post-thumbnails-class.php:589
+#: classes/fpw-post-thumbnails-class.php:591
 #@ fpw-fct
 msgid "Content thumbnails enabled:"
 msgstr "Ikony Wpisów włączone:"
 
-#: classes/fpw-post-thumbnails-class.php:593
+#: classes/fpw-post-thumbnails-class.php:595
 #@ fpw-fct
 msgid "copy all values to the right panel"
 msgstr "kopiuj dane tego panelu do prawego panelu"
 
-#: classes/fpw-post-thumbnails-class.php:595
-#: classes/fpw-post-thumbnails-class.php:773
+#: classes/fpw-post-thumbnails-class.php:597
+#: classes/fpw-post-thumbnails-class.php:775
 #@ fpw-fct
 msgid "Copy"
 msgstr "Kopiuj"
 
-#: classes/fpw-post-thumbnails-class.php:597
+#: classes/fpw-post-thumbnails-class.php:599
 #@ fpw-fct
 msgid "Content - Preview"
 msgstr "Wpis - Podgląd"
 
-#: classes/fpw-post-thumbnails-class.php:767
+#: classes/fpw-post-thumbnails-class.php:769
 #@ fpw-fct
 msgid "Excerpt thumbnails enabled:"
 msgstr "Ikony Wypisów włączone:"
 
-#: classes/fpw-post-thumbnails-class.php:771
+#: classes/fpw-post-thumbnails-class.php:773
 #@ fpw-fct
 msgid "copy all values to the left panel"
 msgstr "kopiuj dane tego panelu do lewego panelu"
 
-#: classes/fpw-post-thumbnails-class.php:775
+#: classes/fpw-post-thumbnails-class.php:777
 #@ fpw-fct
 msgid "Excerpt - Preview"
 msgstr "Wypis - Podgląd"
@@ -997,43 +997,24 @@ msgstr "Nie zalecałbym tego, jeśli motyw wyświetla ikony dla wpisów i wypis�
 msgid "Help for FPW Post Thumbnails"
 msgstr "Pomoc dla wtyczki Ikony Wpisów FPW"
 
-#: classes/fpw-category-thumbnails-class.php:394
+#: classes/fpw-category-thumbnails-class.php:392
 #@ fpw-fct
 msgid "Changed data saved successfully."
 msgstr "Zapisano zmiany pomyślnie."
 
-#: classes/fpw-post-thumbnails-class.php:513
+#: classes/fpw-post-thumbnails-class.php:515
 #@ fpw-fct
 msgid "write modified data to the database"
 msgstr "zapisz zmienione dane do bazy danych "
-
-#: classes/fpw-category-thumbnails-class.php:139
-#@ fpw-fct
-msgid "Dropped support for WordPress versions lower than 3.3"
-msgstr "Zaniechano wspomaganie dla wersji WordPress starszych niż 3.3"
-
-#: classes/fpw-category-thumbnails-class.php:140
-#@ fpw-fct
-msgid "Bundled with FPW Post Thumbnails plugin"
-msgstr "Połączono z wtyczką Ikony Wpisów FPW"
-
-#: classes/fpw-category-thumbnails-class.php:141
-#@ fpw-fct
-msgid "Moved to Appearance menu of the Dashboard"
-msgstr "Przeniesiono do menu Wygląd kokpitu"
-
-#: classes/fpw-category-thumbnails-class.php:142
-#@ fpw-fct
-msgid "Loading JavaScript into the footer"
-msgstr "Ładuje JavaScript do stopki strony"
-
-#: classes/fpw-post-thumbnails-class.php:180
-#@ fpw-fct
-msgid "Bundled with FPW Category Thumbnails plugin"
-msgstr "Połączono z wtyczką Ikony Kategorii FPW"
 
 #: help/fpthelp.php:17
 #@ fpw-fct
 msgid "There are many nice themes not providing any support for"
 msgstr "Jest wiele ładnych motywów nie wspomagających jednak"
+
+#: classes/fpw-category-thumbnails-class.php:140
+#: classes/fpw-post-thumbnails-class.php:182
+#@ fpw-fct
+msgid "Added check to prevent activation if standalone version of FPW Post Thumbnails plugin is installed and active"
+msgstr "Dodano test zapobiegający aktywowanie, gdy samodzielna wtyczka Ikony Wpisów FPW jest zainstalowana i aktywna"
 

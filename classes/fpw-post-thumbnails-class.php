@@ -8,7 +8,7 @@ class fpwPostThumbnails {
 	var	$fptOptions;
 	var	$fptPath;
 	var	$fptUrl;
-	var	$fptVersion;
+	var $fptVersion;
 	var	$fptPage;
 	var	$fptLocale;
 	var	$translationURL;
@@ -32,6 +32,7 @@ class fpwPostThumbnails {
 		
 		//	set version
 		$this->fptVersion = $version;
+		define( 'FPW_POST_THUMBNAILS_VERSION', $version );
 		
 		$this->fptLocale = get_locale();
 
@@ -177,7 +178,8 @@ class fpwPostThumbnails {
 	public function custom_print_footer_scripts() {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;list-style:square">' . __( 'Bundled with FPW Category Thumbnails plugin', 'fpw-fct' ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;list-style:square">' . 
+						   __( 'Added check to prevent activation if standalone version of FPW Post Thumbnails plugin is installed and active', 'fpw-fct' ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[

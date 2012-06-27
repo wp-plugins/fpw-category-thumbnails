@@ -136,10 +136,8 @@ class fpwCategoryThumbnails {
 	function custom_print_footer_scripts() {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . __( 'Dropped support for WordPress versions lower than 3.3', 'fpw-fct' ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( 'Bundled with FPW Post Thumbnails plugin', 'fpw-fct' ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( 'Moved to Appearance menu of the Dashboard', 'fpw-fct' ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-right:25px;list-style:square">' . __( 'Loading JavaScript into the footer', 'fpw-fct' ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
+						   __( 'Added check to prevent activation if standalone version of FPW Post Thumbnails plugin is installed and active', 'fpw-fct' ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
