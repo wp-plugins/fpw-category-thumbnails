@@ -55,7 +55,7 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 == Changelog ==
 
 = 1.5.2 =
-* Added check to prevent activation if standalone version of FPW Post Thumbnails plugin is installed and active.
+* Added check to prevent activation if standalone version of FPW Post Thumbnails plugin is installed and active
 
 = 1.5.1 =
 * Dropped support for WordPress versions lower than 3.3
