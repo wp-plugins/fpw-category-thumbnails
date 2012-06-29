@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category. Built-in FPW Post Thumbnails.
 Plugin URI: http://fw2s.com/fpw-category-thumbnails-plugin/
-Version: 1.5.2
+Version: 1.5.3
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -63,21 +63,25 @@ if ( is_admin() ) {
 	//	back end
 	require_once dirname(__FILE__) . '/classes/fpw-category-thumbnails-class.php';
 	
-	$needFPWPostThumbnailsClass = true;
-	require_once dirname(__FILE__) . '/classes/fpw-post-thumbnails-class.php';
+	$o = get_option( 'fpw_category_thumb_opt' );
+	if ( is_array( $o ) && ( true === $o[ 'fpt' ] ) ) {
+		$needFPWPostThumbnailsClass = true;
+		require_once dirname(__FILE__) . '/classes/fpw-post-thumbnails-class.php';
+	}
 } else {
 	//	front end
 	require_once dirname(__FILE__) . '/classes/fpw-category-thumbnails-front-class.php';
 
-	$o = get_option( 'fpw_post_thumbnails_options' );
-	if ( is_array( $o ) && ( $o[ 'content' ][ 'enabled' ] || $o[ 'excerpt' ][ 'enabled' ] ) ) {
+	$oFCT = get_option( 'fpw_category_thumb_opt' );
+	$oFPT = get_option( 'fpw_post_thumbnails_options' );
+	if ( is_array( $oFCT ) && is_array( $oFPT ) && ( true === $oFCT[ 'fpt' ] ) && ( $oFPT[ 'content' ][ 'enabled' ] || $oFPT[ 'excerpt' ][ 'enabled' ] ) ) {
 		$needFPWPostThumbnailsClass = true;
 		require_once dirname(__FILE__) . '/classes/fpw-post-thumbnails-front-class.php';
 	}
 }
-$fpw_CT = new fpwCategoryThumbnails( dirname(__FILE__), '1.5.2' );
+$fpw_CT = new fpwCategoryThumbnails( dirname(__FILE__), '1.5.3' );
 
 if ( $needFPWPostThumbnailsClass ) {
-	$fpw_PT = new fpwPostThumbnails( dirname(__FILE__), '1.5.2' );
+	$fpw_PT = new fpwPostThumbnails( dirname(__FILE__), '1.5.3' );
 }
 ?>

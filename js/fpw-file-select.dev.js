@@ -143,6 +143,14 @@ jQuery( document ).ready( function( $ ) {
 			message_div = jQuery( '#message' );
 			barr = jQuery('input:checkbox:checked.option-group').map(function () {
   						return this.value; }).get();
+  			i = $.inArray( 'fpt', barr );
+  			if ( i == -1 ) {
+				$( "#fpt-link" ).css( "display", "none" );
+				$( "#wp-admin-bar-fpw_bar_post_thumbnails" ).css( "display", "none" );
+			} else {
+				$( "#fpt-link" ).css( "display", "" );
+				$( "#wp-admin-bar-fpw_bar_post_thumbnails" ).css( "display", "" );
+			}
 			message_div.html( '<p><strong>' + fpw_file_select.wait_msg + '</strong></p>' ).load( fpw_file_select.ajaxurl, {
 				boxes:		barr,
 				action:		'fpw_ct_update'

@@ -179,7 +179,7 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;list-style:square">' . 
-						   __( 'Added check to prevent activation if standalone version of FPW Post Thumbnails plugin is installed and active', 'fpw-fct' ) . '</li>';
+						   __( 'No changes', 'fpw-fct' ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[

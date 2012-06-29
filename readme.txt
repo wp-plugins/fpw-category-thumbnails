@@ -5,7 +5,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 3.3
-Tested up to: 3.4
+Tested up to: 3.4.1
 Stable tag: 1.5.2
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
@@ -53,6 +53,9 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 1. FPW Post Thumbnails - Excerpt Preview
 
 == Changelog ==
+
+= 1.5.3 =
+* Added option to enable / disable built-in FPW Post Thumbnails
 
 = 1.5.2 =
 * Added check to prevent activation if standalone version of FPW Post Thumbnails plugin is installed and active

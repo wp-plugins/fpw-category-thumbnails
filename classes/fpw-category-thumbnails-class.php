@@ -137,7 +137,7 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   __( 'Added check to prevent activation if standalone version of FPW Post Thumbnails plugin is installed and active', 'fpw-fct' ) . '</li>';
+						   __( 'Added option to enable / disable built-in FPW Post Thumbnails', 'fpw-fct' ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -309,6 +309,7 @@ class fpwCategoryThumbnails {
 			$this->fctOptions[ 'clean' ] = ( isset( $_POST[ 'cleanup' ] ) ) ? true : false;
 			$this->fctOptions[ 'donotover' ] = ( isset( $_POST[ 'donotover' ] ) ) ? true : false;
 			$this->fctOptions[ 'abar' ] = ( isset( $_POST[ 'abar' ] ) ) ? true : false;
+			$this->fctOptions[ 'fpt'] = ( isset( $_POST[ 'fpt' ] ) ) ? true : false;
 		
 			$update_options_ok = ( update_option( 'fpw_category_thumb_opt', $this->fctOptions ) );
 		
@@ -376,8 +377,10 @@ class fpwCategoryThumbnails {
 
 		echo '<div class="wrap">';
 		
+		$displayAttr = ( $this->fctOptions[ 'fpt' ] ) ? '' : ' display: none';
+		
 		echo '<div id="icon-themes" class="icon32"></div><h2 id="fct-settings-title">' . __( 'FPW Category Thumbnails', 'fpw-fct' ) . 
-			 ' <span style="font-size: small">- <a href="' . get_admin_url() . 
+			 ' <span id="fpt-link" style="font-size: small;' . $displayAttr . '">- <a href="' . get_admin_url() . 
 			 'themes.php?page=fpw-post-thumbnails">' . 
 			 __( 'FPW Post Thumbnails', 'fpw-fct' ) . '</a></span></h2>';
 		
@@ -444,12 +447,18 @@ class fpwCategoryThumbnails {
 			echo ' checked';
 		echo '> ' . __( 'Add this plugin to the Admin Bar', 'fpw-fct' ) . '<br />';
 
+		//	add plugin to admin bar checkbox
+		echo '<input type="checkbox" class="option-group" id="box-fpt" name="fpt" value="fpt"';
+		if ( $this->fctOptions[ 'fpt' ] ) 
+			echo ' checked';
+		echo '> ' . __( 'Enable FPW Post Thumbnails', 'fpw-fct' ) . '<br />';
+
 		//	end of options section
 		echo '</div>';
 		
 		//	notification division for AJAX
 		echo 	'<div id="message" class="updated" style="position: absolute; ' . 
-				'display: none; z-index: 10;margin-top: 57px;"><p>&nbsp;</p></div>';
+				'display: none; z-index: 10;margin-top: 73px;"><p>&nbsp;</p></div>';
 				
 		require_once $this->fctPath . '/code/table.php';
 
@@ -589,7 +598,8 @@ class fpwCategoryThumbnails {
 			$opt = array( 
 				'clean'		=> FALSE,
 				'donotover' => FALSE,
-				'abar'		=> FALSE );
+				'abar'		=> FALSE,
+				'fpt'		=> FALSE );
 		} else {
 			if ( !array_key_exists( 'clean', $opt ) || !is_bool( $opt[ 'clean' ] ) ) { 
 				$needs_update = TRUE;
@@ -602,6 +612,10 @@ class fpwCategoryThumbnails {
 			if ( !array_key_exists( 'abar', $opt ) || !is_bool( $opt[ 'abar' ] ) ) { 
 				$needs_update = TRUE;
 				$opt[ 'abar' ] = FALSE;
+			}
+			if ( !array_key_exists( 'fpt', $opt ) || !is_bool( $opt[ 'fpt' ] ) ) { 
+				$needs_update = TRUE;
+				$opt[ 'fpt' ] = FALSE;
 			}
 			if ( $needs_update ) 
 				update_option( 'fpw_category_thumb_opt', $opt );
