@@ -54,6 +54,9 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 
 == Changelog ==
 
+= 1.5.4 =
+* Fixed mapping not being applied when post/page is created/updated in user context ( eg. xmlrpc )
+
 = 1.5.3 =
 * Added option to enable / disable built-in FPW Post Thumbnails
 

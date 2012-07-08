@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: FPW Category Thumbnails v1.5.3\n"
+"Project-Id-Version: FPW Category Thumbnails v1.5.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-06-29 06:42:13+0000\n"
+"PO-Revision-Date: 2012-07-08 19:39:13+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1017,13 +1017,13 @@ msgstr "Jest wiele ładnych motywów nie wspomagających jednak"
 msgid "Enable FPW Post Thumbnails"
 msgstr "Włącz Ikony Wpisów FPW"
 
-#: classes/fpw-category-thumbnails-class.php:140
-#@ fpw-fct
-msgid "Added option to enable / disable built-in FPW Post Thumbnails"
-msgstr "Dodano wybór włączania / wyłączania dołączonej wtyczki Ikony Wpisów FPW"
-
 #: classes/fpw-post-thumbnails-class.php:182
 #@ fpw-fct
 msgid "No changes"
 msgstr "Bez zmian"
+
+#: classes/fpw-category-thumbnails-class.php:140
+#@ fpw-fct
+msgid "Fixed mapping not being applied when post/page is created/updated in user context ( eg. xmlrpc )"
+msgstr "Poprawiono problem dodania ikony, gdy wpis/strona jest utworzony/zmodyfikowny w kontekście użytkownika ( np. xmlrcp )"
 

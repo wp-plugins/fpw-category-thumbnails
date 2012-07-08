@@ -23,6 +23,10 @@ class fpwCategoryThumbnails {
 
 		//	set WP version
 		$this->wpVersion = $wp_version;
+		
+		//	hook main action
+		add_action( 'save_post', array( &$this, 'addThumbnailToPost' ), 10, 2 );
+
 	}	
 
 	/*	------------------------------------------------------------------

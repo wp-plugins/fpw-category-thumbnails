@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category. Built-in FPW Post Thumbnails.
 Plugin URI: http://fw2s.com/fpw-category-thumbnails-plugin/
-Version: 1.5.3
+Version: 1.5.4
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -79,9 +79,9 @@ if ( is_admin() ) {
 		require_once dirname(__FILE__) . '/classes/fpw-post-thumbnails-front-class.php';
 	}
 }
-$fpw_CT = new fpwCategoryThumbnails( dirname(__FILE__), '1.5.3' );
+$fpw_CT = new fpwCategoryThumbnails( dirname(__FILE__), '1.5.4' );
 
 if ( $needFPWPostThumbnailsClass ) {
-	$fpw_PT = new fpwPostThumbnails( dirname(__FILE__), '1.5.3' );
+	$fpw_PT = new fpwPostThumbnails( dirname(__FILE__), '1.5.4' );
 }
 ?>
