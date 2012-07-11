@@ -54,6 +54,10 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 
 == Changelog ==
 
+= 1.5.5 =
+* Added choice of base dimension for image scaling ( FPW Post Thumbnails )
+* Removed built-in stylesheet for preview and added dynamic CSS instead ( FPW Post Thumbnails )
+
 = 1.5.4 =
 * Fixed mapping not being applied when post/page is created/updated in user context ( eg. xmlrpc )
 
