@@ -67,7 +67,11 @@ class fpwPostThumbnails {
     		margin-left: <?php echo $this->fptOptions[ 'content' ][ 'margin_left' ] ?>px;
     		margin-bottom: <?php echo $this->fptOptions[ 'content' ][ 'margin_bottom' ] ?>px;
     		margin-right: <?php echo $this->fptOptions[ 'content' ][ 'margin_right' ] ?>px;
+    		<?php if ( 'width' == $this->fptOptions[ 'content' ][ 'base' ] ) { ?>
     		width: <?php echo $this->fptOptions[ 'content' ][ 'width' ] ?>px;
+    		<?php } else { ?>
+    		height: <?php echo $this->fptOptions[ 'content' ][ 'height' ] ?>px;
+    		<?php } ?>
 		<?php
     	if ( $this->fptOptions[ 'content' ][ 'border' ] ) {
 		?>
@@ -132,7 +136,11 @@ class fpwPostThumbnails {
     		margin-left: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_left' ] ?>px;
     		margin-bottom: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_bottom' ] ?>px;
     		margin-right: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_right' ] ?>px;
+    		<?php if ( 'width' == $this->fptOptions[ 'excerpt' ][ 'base' ] ) { ?>
     		width: <?php echo $this->fptOptions[ 'excerpt' ][ 'width' ] ?>px;
+    		<?php } else { ?>
+    		height: <?php echo $this->fptOptions[ 'excerpt' ][ 'height' ] ?>px;
+    		<?php } ?>
 		<?php
     	if ( $this->fptOptions[ 'excerpt' ][ 'border' ] ) {
 		?>

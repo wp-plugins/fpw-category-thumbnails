@@ -137,7 +137,7 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   __( 'Fixed mapping not being applied when post/page is created/updated in user context ( eg. xmlrpc )', 'fpw-fct' ) . '</li>';
+						   __( 'No changes', 'fpw-fct' ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[

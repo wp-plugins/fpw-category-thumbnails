@@ -50,7 +50,8 @@
 					__( 'Thumbnails for Excerpt enabled:', 'fpw-fct' ) . '</strong> - ' . 				
 					__( 'if checked then enables thumbnails for excerpts', 'fpw-fct' ) . '</p>' . 
 					'<p style="text-align: justify;"><strong>width</strong> ' . __( 'and', 'fpw-fct' ) . ' <strong>height</strong> - ' . 
-					__( 'width and height of the thumbnail', 'fpw-fct' ) . '<br /><strong>float</strong> - ' . 
+					__( 'width and height of the thumbnail', 'fpw-fct' ) . '<br /><strong>scaling base</strong> - ' . 
+					__( 'base dimension for scaling', 'fpw-fct' ) . '<br /><strong>float</strong> - ' . 
 					__( 'position of the thumbnail relative to the content ( excerpt )', 'fpw-fct' ) . 
 					'</p><p style="text-align: justify;"><strong>border</strong> - ' . 
 					__( 'if checked then the thumbnail will have a border and next four parameters will be applied', 'fpw-fct') . 
