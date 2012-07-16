@@ -31,7 +31,9 @@ class fpwPostThumbnails {
 		//	read tte options
 		$this->fptOptions = get_option( 'fpw_post_thumbnails_options' );
 		
-		add_action( 'after_setup_theme', array( &$this, 'enableThemeSupportForThumbnails' ), 999 ); 
+		add_action( 'after_setup_theme', array( &$this, 'enableThemeSupportForThumbnails' ), 999 );
+		
+		add_action( 'wp_head', array( &$this, 'dynamicThumbnailStyles' ) ); 
 		
 		if ( is_array( $this->fptOptions ) ) {
 			if ( $this->fptOptions[ 'content' ][ 'enabled' ] )
@@ -48,20 +50,17 @@ class fpwPostThumbnails {
 		add_image_size( 'content-thumbnail', $this->fptOptions[ 'content' ][ 'width' ], $this->fptOptions[ 'content' ][ 'height' ], false );
 		add_image_size( 'excerpt-thumbnail', $this->fptOptions[ 'excerpt' ][ 'width' ], $this->fptOptions[ 'excerpt' ][ 'height' ], false );
 	}
-
-	//	thumbnail for content filter
-	function fptContent( $content ) {
-		global $post;
-		
-	    ?>
-    	<style type="text/css">
-    	<!--
+	
+	function dynamicThumbnailStyles() {
+		?>
+		<style type="text/css">
+		<!--
 		.attachment-thumbnail-content,
 		.wp-post-image-content {
-    		float: <?php echo $this->fptOptions[ 'content' ][ 'position' ] ?>;
-    		padding-top: <?php echo $this->fptOptions[ 'content' ][ 'padding_top' ] ?>px;
-    		padding-left: <?php echo $this->fptOptions[ 'content' ][ 'padding_left' ] ?>px;
-    		padding-bottom: <?php echo $this->fptOptions[ 'content' ][ 'padding_bottom' ] ?>px;
+			float: <?php echo $this->fptOptions[ 'content' ][ 'position' ] ?>;
+			padding-top: <?php echo $this->fptOptions[ 'content' ][ 'padding_top' ] ?>px;
+			padding-left: <?php echo $this->fptOptions[ 'content' ][ 'padding_left' ] ?>px;
+			padding-bottom: <?php echo $this->fptOptions[ 'content' ][ 'padding_bottom' ] ?>px;
 			padding-right: <?php echo $this->fptOptions[ 'content' ][ 'padding_right' ] ?>px;
     		margin-top: <?php echo $this->fptOptions[ 'content' ][ 'margin_top' ] ?>px;
     		margin-left: <?php echo $this->fptOptions[ 'content' ][ 'margin_left' ] ?>px;
@@ -72,22 +71,55 @@ class fpwPostThumbnails {
     		<?php } else { ?>
     		height: <?php echo $this->fptOptions[ 'content' ][ 'height' ] ?>px;
     		<?php } ?>
-		<?php
-    	if ( $this->fptOptions[ 'content' ][ 'border' ] ) {
-		?>
-        	background-color: <?php echo $this->fptOptions[ 'content' ][ 'background_color' ] ?>;
-        	border: <?php echo $this->fptOptions[ 'content' ][ 'border_width' ] ?>px solid <?php echo $this->fptOptions[ 'content' ][ 'border_color' ] ?>;
-        	border-radius: <?php echo $this->fptOptions[ 'content' ][ 'border_radius' ] ?>px;
-        	-moz-border-radius: <?php echo $this->fptOptions[ 'content' ][ 'border_radius' ] ?>px;
-        	-webkit-border-radius: <?php echo $this->fptOptions[ 'content' ][ 'border_radius' ] ?>px;
+			<?php
+    		if ( $this->fptOptions[ 'content' ][ 'border' ] ) {
+			?>
+    		background-color: <?php echo $this->fptOptions[ 'content' ][ 'background_color' ] ?>;
+    		border: <?php echo $this->fptOptions[ 'content' ][ 'border_width' ] ?>px solid <?php echo $this->fptOptions[ 'content' ][ 'border_color' ] ?>;
+    		border-radius: <?php echo $this->fptOptions[ 'content' ][ 'border_radius' ] ?>px;
+    		-moz-border-radius: <?php echo $this->fptOptions[ 'content' ][ 'border_radius' ] ?>px;
+    		-webkit-border-radius: <?php echo $this->fptOptions[ 'content' ][ 'border_radius' ] ?>px;
 		<?php	
 		}
 		?>
 		}
-    	-->
-    	</style>
-    	<?php
+		.attachment-thumbnail-excerpt,
+		.wp-post-image-excerpt {
+    		float: <?php echo $this->fptOptions[ 'excerpt' ][ 'position' ] ?>;
+    		padding-top: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_top' ] ?>px;
+    		padding-left: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_left' ] ?>px;
+    		padding-bottom: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_bottom' ] ?>px;
+			padding-right: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_right' ] ?>px;
+    		margin-top: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_top' ] ?>px;
+    		margin-left: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_left' ] ?>px;
+    		margin-bottom: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_bottom' ] ?>px;
+    		margin-right: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_right' ] ?>px;
+    		<?php if ( 'width' == $this->fptOptions[ 'excerpt' ][ 'base' ] ) { ?>
+    		width: <?php echo $this->fptOptions[ 'excerpt' ][ 'width' ] ?>px;
+    		<?php } else { ?>
+    		height: <?php echo $this->fptOptions[ 'excerpt' ][ 'height' ] ?>px;
+    		<?php } ?>
+		<?php
+    	if ( $this->fptOptions[ 'excerpt' ][ 'border' ] ) {
+		?>
+        	background-color: <?php echo $this->fptOptions[ 'excerpt' ][ 'background_color' ] ?>;
+        	border: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_width' ] ?>px solid <?php echo $this->fptOptions[ 'excerpt' ][ 'border_color' ] ?>;
+        	border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px;
+        	-moz-border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px;
+        	-webkit-border-radius: <?php echo $this->fptOptions[ 'excerp' ][ 'border_radius' ] ?>px;
+		<?php	
+		}
+		?>
+		}
+		-->
+		</style>
+		<?php	
+	}
 
+	//	thumbnail for content filter
+	function fptContent( $content ) {
+		global $post;
+		
 		$thumbID = get_post_meta( $post->ID, '_thumbnail_id', true );
 	
 		if ( !( '' === $thumbID ) ) {
@@ -122,41 +154,6 @@ class fpwPostThumbnails {
 	function fptExcerpt( $excerpt ) {
 		global $post;
 		
-	    ?>
-    	<style type="text/css">
-    	<!--
-		.attachment-thumbnail-excerpt,
-		.wp-post-image-excerpt {
-    		float: <?php echo $this->fptOptions[ 'excerpt' ][ 'position' ] ?>;
-    		padding-top: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_top' ] ?>px;
-    		padding-left: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_left' ] ?>px;
-    		padding-bottom: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_bottom' ] ?>px;
-			padding-right: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_right' ] ?>px;
-    		margin-top: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_top' ] ?>px;
-    		margin-left: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_left' ] ?>px;
-    		margin-bottom: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_bottom' ] ?>px;
-    		margin-right: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_right' ] ?>px;
-    		<?php if ( 'width' == $this->fptOptions[ 'excerpt' ][ 'base' ] ) { ?>
-    		width: <?php echo $this->fptOptions[ 'excerpt' ][ 'width' ] ?>px;
-    		<?php } else { ?>
-    		height: <?php echo $this->fptOptions[ 'excerpt' ][ 'height' ] ?>px;
-    		<?php } ?>
-		<?php
-    	if ( $this->fptOptions[ 'excerpt' ][ 'border' ] ) {
-		?>
-        	background-color: <?php echo $this->fptOptions[ 'excerpt' ][ 'background_color' ] ?>;
-        	border: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_width' ] ?>px solid <?php echo $this->fptOptions[ 'excerpt' ][ 'border_color' ] ?>;
-        	border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px;
-        	-moz-border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px;
-        	-webkit-border-radius: <?php echo $this->fptOptions[ 'excerp' ][ 'border_radius' ] ?>px;
-		<?php	
-		}
-		?>
-		}
-    	-->
-    	</style>
-    	<?php
-
 		$thumbID = get_post_meta( $post->ID, '_thumbnail_id', true );
 	
 		if ( !( '' === $thumbID ) ) {

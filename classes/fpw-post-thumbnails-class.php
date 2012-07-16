@@ -189,7 +189,7 @@ class fpwPostThumbnails {
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
 						   __( 'Added choice of base dimension for image scaling', 'fpw-fct' ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   __( 'Removed built-in stylesheet for preview and added dynamic CSS instead', 'fpw-fct' ) . '</li>';
+						   __( 'Removed built-in front end stylesheet and added dynamic CSS instead', 'fpw-fct' ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[

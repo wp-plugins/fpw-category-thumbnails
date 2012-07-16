@@ -54,6 +54,9 @@ Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.
 
 == Changelog ==
 
+= 1.5.6 =
+* Removed built-in front end stylesheet and added dynamic CSS instead ( FPW Post Thumbnails )
+
 = 1.5.5 =
 * Added choice of base dimension for image scaling ( FPW Post Thumbnails )
 * Removed built-in stylesheet for preview and added dynamic CSS instead ( FPW Post Thumbnails )

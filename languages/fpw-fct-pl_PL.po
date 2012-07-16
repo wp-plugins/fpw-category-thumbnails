@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: FPW Category Thumbnails v1.5.5\n"
+"Project-Id-Version: FPW Category Thumbnails v1.5.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-07-11 17:35:12+0000\n"
+"PO-Revision-Date: 2012-07-16 15:06:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1022,11 +1022,6 @@ msgstr "Włącz Ikony Wpisów FPW"
 msgid "Added choice of base dimension for image scaling"
 msgstr "Dodano wybór bazowego wymiaru dla zachowania proporcji ikony"
 
-#: classes/fpw-post-thumbnails-class.php:192
-#@ fpw-fct
-msgid "Removed built-in stylesheet for preview and added dynamic CSS instead"
-msgstr "Usunięto wbudowany arkusz stylu podglądu zatępując go arkuszem stylu budowanym dynamicznie"
-
 #: help/fpthelp.php:54
 #@ fpw-fct
 msgid "base dimension for scaling"
@@ -1036,4 +1031,9 @@ msgstr "wymiar bazowy dla zachowania proporcji ikony"
 #@ fpw-fct
 msgid "No changes"
 msgstr "Nie ma zmian"
+
+#: classes/fpw-post-thumbnails-class.php:192
+#@ fpw-fct
+msgid "Removed built-in front end stylesheet and added dynamic CSS instead"
+msgstr "Usunięto wbudowany arkusz stylów dla trybu użytkownika i dodano dynamiczny arkusz stylów do nagłówka strony"
 
