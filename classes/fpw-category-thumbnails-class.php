@@ -86,7 +86,7 @@ class fpwCategoryThumbnails {
 	
 	//	set heading for custom column 'Thumbnail' - Categories admin screen
 	function fpw_category_columns_head( $defaults ) {
-		$defaults[ 'thumbnail_column' ]  = 'Thumbnail';
+		$defaults[ 'thumbnail_column' ]  = __( 'Thumbnail', 'fpw-fct' );
 		return $defaults;
 	}
 	
@@ -192,7 +192,7 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   __( 'Added "Thumbnail" column to Posts -> Categories admin screen', 'fpw-fct' ) . '</li>';
+						   esc_js( __( "Added 'Thumbnail' column to Posts -> Categories admin screen", "fpw-fct" ) ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
 						   __( 'Fixed bug in JavaScript detection handler', 'fpw-fct' ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
@@ -555,38 +555,6 @@ class fpwCategoryThumbnails {
 		return $a;
 	}
 	
-	//	display no javascript message
-	function noJavascriptMessage() {
-    	//	display message about javascript being disabled
-   		echo	'<div id="message" class="error"><p><strong>' . 
-   				__( 'JavaScript is disabled!', 'fpw-fct' ) . '</strong> ' . 
-				__( 'That makes the functionality of ' . 
-				'table row actions', 'fpw-fct' ) . ' ( <strong><em>' . 
-				__( 'Get ID', 'fpw-fct' ) . '</em></strong>, <strong><em>' . 
-				__( 'Author', 'fpw-fct' ) . '</em></strong>, <strong><em>' .
-				__( 'Clear', 'fpw-fct' ) . '</em></strong>, and <strong><em>' . 
-				__( 'Refresh', 'fpw-fct' ) . '</em></strong> ) ' . 
-				__( 'being degraded. Other actions are affected too.', 'fpw-fct' ) . 
-				' <strong><em>' . __( 'Screen Options', 'fpw-fct' ) . 
-				'</em></strong> ( ' . __( 'which controls number of categories per page', 'fpw-fct' ) . 
-				' ) ' . __( 'and contextual', 'fpw-fct' ) . ' <strong><em>' . 
-				__( 'Help', 'fpw-fct' ) . '</em></strong> ' . 
-				__( 'screen will not be visible.', 'fpw-fct' ) . ' ' . 
-				__( 'In this state you have to enter', 'fpw-fct' ) . ' <strong><em>' . 
-				__( 'Image ID', 'fpw-fct' ) . '</em></strong> ' . 
-				__( 'values manually and click on any row action link or', 'fpw-fct' ) . 
-				' <strong><em>' . __( 'Update', 'fpw-fct' ) . '</em></strong> ' . 
-				__( 'button to save changes.', 'fpw-fct' ) . '</p><p><strong>' . 
-				__( 'Warning', 'fpw-fct' ) . '</strong>: ' . 
-				__( 'without JavaScript the only mapping saved on submit will be', 'fpw-fct' ) . 
-				' ' . __( "the content of the table's current page.", "fpw-fct" ) . 
-				' ' . __( 'Remember to click on', 'fpw-fct' ) . ' <strong><em>' . 
-				__( 'Update', 'fpw-fct' ) . '</em></strong> ' . 
-				__( 'before switching to another page!', 'fpw-fct' ) . '</p><p>' . 
-				'<strong>' . __( 'Enable JavaScript and fully enjoy AJAX' . 
-				' powered interface!', 'fpw-fct' ) . '</strong></p></div>';  
-	}
-
 	//	build categories' array
 	function getAllCategories() {
 		$categories = array();
