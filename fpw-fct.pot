@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FPW Category Thumbnails 1.5.7\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
-"POT-Creation-Date: 2012-12-25 20:21:54+00:00\n"
+"POT-Creation-Date: 2012-12-25 21:01:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -69,6 +69,10 @@ msgstr ""
 msgid "All thumbnails removed successfully."
 msgstr ""
 
+#: classes/fpw-category-thumbnails-class.php:89
+msgid "Thumbnail"
+msgstr ""
+
 #: classes/fpw-category-thumbnails-class.php:111 code/table.php:25
 msgid "NextGen Gallery: picture not found!"
 msgstr ""
@@ -97,7 +101,7 @@ msgid "What's new in this version?"
 msgstr ""
 
 #: classes/fpw-category-thumbnails-class.php:195
-msgid "Added \"Thumbnail\" column to Posts -> Categories admin screen"
+msgid "Added 'Thumbnail' column to Posts -> Categories admin screen"
 msgstr ""
 
 #: classes/fpw-category-thumbnails-class.php:197
@@ -185,101 +189,17 @@ msgstr ""
 msgid "Enable FPW Post Thumbnails"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:562
-msgid "JavaScript is disabled!"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:565
 #: classes/fpw-category-thumbnails-table-class.php:58 help/help.php:50
 #: scripts/enqueuescripts.php:10
 msgid "Get ID"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:566
-#: classes/fpw-category-thumbnails-table-class.php:63
-msgid "Author"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:567
-#: classes/fpw-category-thumbnails-table-class.php:72 help/help.php:58
-msgid "Clear"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:568
-#: classes/fpw-category-thumbnails-table-class.php:78 help/help.php:62
-msgid "Refresh"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:569
-msgid "being degraded. Other actions are affected too."
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:570
-msgid "Screen Options"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:571
-msgid "which controls number of categories per page"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:572
-msgid "and contextual"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:573
-msgid "Help"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:574
-msgid "screen will not be visible."
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:575
-msgid "In this state you have to enter"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:576
-#: classes/fpw-category-thumbnails-table-class.php:92
-msgid "Image ID"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:577
-msgid "values manually and click on any row action link or"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:578
-#: classes/fpw-category-thumbnails-class.php:584
-#: classes/fpw-category-thumbnails-table-class.php:148
-#: classes/fpw-post-thumbnails-class.php:491 help/help.php:66
-msgid "Update"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:579
-msgid "button to save changes."
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:580
-msgid "Warning"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:581
-msgid "without JavaScript the only mapping saved on submit will be"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:582
-msgid "the content of the table's current page."
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:583
-msgid "Remember to click on"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:585
-msgid "before switching to another page!"
-msgstr ""
-
 #: classes/fpw-category-thumbnails-table-class.php:60
 msgid "get thumbnail's picture ID from media library"
+msgstr ""
+
+#: classes/fpw-category-thumbnails-table-class.php:63
+msgid "Author"
 msgstr ""
 
 #: classes/fpw-category-thumbnails-table-class.php:65
@@ -290,8 +210,20 @@ msgstr ""
 msgid "clear Image ID and Preview fields"
 msgstr ""
 
+#: classes/fpw-category-thumbnails-table-class.php:72 help/help.php:58
+msgid "Clear"
+msgstr ""
+
+#: classes/fpw-category-thumbnails-table-class.php:78 help/help.php:62
+msgid "Refresh"
+msgstr ""
+
 #: classes/fpw-category-thumbnails-table-class.php:91
 msgid "Category (ID)"
+msgstr ""
+
+#: classes/fpw-category-thumbnails-table-class.php:92
+msgid "Image ID"
 msgstr ""
 
 #: classes/fpw-category-thumbnails-table-class.php:93
@@ -302,6 +234,11 @@ msgstr ""
 
 #: classes/fpw-category-thumbnails-table-class.php:147
 msgid "write modified options and mapping to the database"
+msgstr ""
+
+#: classes/fpw-category-thumbnails-table-class.php:148
+#: classes/fpw-post-thumbnails-class.php:491 help/help.php:66
+msgid "Update"
 msgstr ""
 
 #: classes/fpw-category-thumbnails-table-class.php:150
