@@ -2,9 +2,7 @@
 		//	build form's input fields and buttons
 		reset( $assignments );
 		reset( $categories );
-
 		$this->mapArray = array();
-
 		while ( strlen( key( $assignments ) ) ) {
 			$indent = str_repeat( '&nbsp;', $categories[ key( $categories ) ][ 0 ] * 4);
 			$name = 'val-for-id-' . key( $assignments ) . '-field';
@@ -61,11 +59,8 @@
 		}
 		reset( $categories );
 		reset( $assignments );
-		
 		require_once $this->fctPath . '/classes/fpw-category-thumbnails-table-class.php';
-
 		$this->categoryListTable = new fpw_Category_Thumbnails_Table( $this->mapArray );
-
 ?>
 <style type="text/css">
 <!--
@@ -87,13 +82,9 @@ td.fpwct_cat_name, td.fpwct_image_id, td.fpwct_preview {
 }
 -->
 </style>
-
 <?php
 		echo '<div id="cat_table">';
-
 		$this->categoryListTable->prepare_items();
-
 		$this->categoryListTable->display();
-		
 		echo '</div>';
 ?>

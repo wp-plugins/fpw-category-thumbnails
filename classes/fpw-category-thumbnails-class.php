@@ -48,7 +48,7 @@ class fpwCategoryThumbnails {
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
 
-		register_activation_hook( $this->fctPath . '/fpw-category-thumbnails.php', array( &$this, 'uninstallMainenance' ) );
+		register_activation_hook( $this->fctPath . '/fpw-category-thumbnails.php', array( &$this, 'uninstallMaintenance' ) );
 		
 		//	actions below are not used in front end
 		add_action( 'admin_menu', array( &$this, 'adminMenu' ) );
@@ -66,6 +66,9 @@ class fpwCategoryThumbnails {
 		add_filter( 'plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'pluginLinks' ), 10, 2);
 		add_filter( 'plugin_row_meta', array( &$this, 'pluginMetaLinks'), 10, 2 );
 		
+		add_filter('manage_edit-category_columns', array( &$this, 'fpw_category_columns_head' ) );
+		add_filter('manage_category_custom_column', array( &$this, 'fpw_custom_category_column_content' ), 10, 3 );
+		
 		//	read plugin's options
 		$this->fctOptions = $this->getOptions();
 
@@ -80,7 +83,59 @@ class fpwCategoryThumbnails {
 		if ( $this->fctOptions[ 'abar' ] ) 
 			add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
 	}
-
+	
+	//	set heading for custom column 'Thumbnail' - Categories admin screen
+	function fpw_category_columns_head( $defaults ) {
+		$defaults[ 'thumbnail_column' ]  = 'Thumbnail';
+		return $defaults;
+	}
+	
+	//	show value of custom column 'Thumbnail' - Categories admin screen
+	function fpw_custom_category_column_content( $data, $column, $id ) {
+		if ( $column == 'thumbnail_column' ) {
+			$map = get_option( 'fpw_category_thumb_map' );
+			$thumbnail_id = '0';
+			if ( array_key_exists( $id, $map ) ) {
+    	    	$value = $map[ $id ];
+				$preview_size = 'thumbnail';
+				//ob_start();
+				if ( 'Author' === $value ) {
+					return '[ ' . __( 'Picture', 'fpw-fct' ) . ' ]';
+				} else {
+					if ( 'ngg-' == substr( $value, 0, 4 ) ) {
+						if ( class_exists( 'nggdb' ) ) {
+							$thumbnail_id = substr( $value, 4 );
+							$picture = nggdb::find_image($thumbnail_id);
+							if ( !$picture ) {
+								return 	'<span style="font-size: large; color: red">' . 
+										__( 'NextGen Gallery: picture not found!', 'fpw-fct' ) . '</span>';
+							} else {
+								$pic = $picture->imageURL;
+								$w = $picture->meta_data['thumbnail']['width'];
+								$h = $picture->meta_data['thumbnail']['height'];
+								$pic = '<img width="' . $w . '" height="' . $h . '" src="' . $pic . '" />';
+								return $pic;
+							}
+						} else {
+							return 	'<span style="font-size: large; color: red">' . 
+									__( 'NextGen Gallery: not active!', 'fpw-fct' ) . '</span>';
+						}
+					} else {
+						if ( wp_attachment_is_image( $value ) ) {
+							return wp_get_attachment_image( $value, $preview_size );
+						} else {
+							return 	'<span style="font-size: large; color: red">' . 
+									__( 'Media Library: picture not found!', 'fpw-fct' ) . '</span>';
+						}
+					}
+				}
+    	    } else {
+				return '';
+			}
+    	}
+    	return $data;
+	}
+	
 	//	check translation file availability
 	function translationAvailable() {
 		
@@ -107,7 +162,7 @@ class fpwCategoryThumbnails {
 
 	//	register admin menu
 	function adminMenu() {
-		$page_title = __( 'FPW Category Thumbnails', 'fpw-fct' ) . ' (' . $this->fctVersion . ')';
+		$page_title = __( 'FPW Category Thumbnails', 'fpw-fct' );
 		$menu_title = __( 'FPW Category Thumbnails', 'fpw-fct' );
 		$this->fctPage = add_theme_page( $page_title, $menu_title, 'manage_options', 
 							'fpw-category-thumbnails', array( &$this, 'fctSettings' ) );
@@ -137,7 +192,11 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   __( 'No changes', 'fpw-fct' ) . '</li>';
+						   __( 'Added "Thumbnail" column to Posts -> Categories admin screen', 'fpw-fct' ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
+						   __( 'Fixed bug in JavaScript detection handler', 'fpw-fct' ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
+						   esc_js( __( "Removing plugins's data from database on uninstallation handled independently from FPW Post Thumbnails", "fpw-fct" ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -245,15 +304,26 @@ class fpwCategoryThumbnails {
 	
 	//	uninstall file maintenance
 	function uninstallMaintenance() {
-		if ( $this->fctOptions[ 'clean' ] ) {
-			if ( file_exists( $this->fctPath . '/uninstall.txt' ) ) 
-				rename( $this->fctPath . '/uninstall.txt', $this->fctPath . '/uninstall.php' );
+		if ( class_exists( 'fpwPostThumbnails' ) ) {
+			global $fpw_PT;
+			if ( $this->fctOptions[ 'clean' ] || $fpw_PT->fptOptions[ 'clean' ] ) {
+				if ( file_exists( $this->fctPath . '/uninstall.txt' ) ) 
+					rename( $this->fctPath . '/uninstall.txt', $this->fctPath . '/uninstall.php' );
+			} else {
+				if ( file_exists( $this->fctPath . '/uninstall.php' ) ) 
+					rename( $this->fctPath . '/uninstall.php', $this->fctPath . '/uninstall.txt' );
+			}
 		} else {
-			if ( file_exists( $this->fctPath . '/uninstall.php' ) ) 
-				rename( $this->fctPath . '/uninstall.php', $this->fctPath . '/uninstall.txt' );
+			if ( $this->fctOptions[ 'clean' ] ) {
+				if ( file_exists( $this->fctPath . '/uninstall.txt' ) ) 
+					rename( $this->fctPath . '/uninstall.txt', $this->fctPath . '/uninstall.php' );
+			} else {
+				if ( file_exists( $this->fctPath . '/uninstall.php' ) ) 
+					rename( $this->fctPath . '/uninstall.php', $this->fctPath . '/uninstall.txt' );
+			}
 		}
 	}	
-	
+
 	//	add plugin to admin bar	
 	function pluginToAdminBar() {
 		if ( current_user_can( 'manage_options' ) ) {
@@ -295,8 +365,8 @@ class fpwCategoryThumbnails {
 			(	isset( $_POST['submit-getid'] ) || isset( $_POST['submit-author'] ) || 
 				isset( $_POST['submit-clear'] ) || isset( $_POST['submit-refresh'] ) || 
 				isset( $_POST['submit-update'] ) || isset( $_POST['submit-apply'] ) || 
-				isset( $_POST['submit-remove'] ) || isset( $_POST['submit-language'] ) ) ? true : false; 
-
+				isset( $_POST['submit-remove'] ) || isset( $_POST['submit-language'] ) ) ? true : false;
+				
 		if ( $anyButtonPressed ) {
 			if ( !isset( $_POST[ 'fpw-fct-nonce' ] ) ) 
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red"><strong>' . 
@@ -383,11 +453,10 @@ class fpwCategoryThumbnails {
 			 ' <span id="fpt-link" style="font-size: small;' . $displayAttr . '">- <a href="' . get_admin_url() . 
 			 'themes.php?page=fpw-post-thumbnails">' . 
 			 __( 'FPW Post Thumbnails', 'fpw-fct' ) . '</a></span></h2>';
-		
+			 
 		//	check if any of submit buttons was pressed
 		if ( $anyButtonPressed ) {
 			$assignments = $this->updateMapping( $assignments );
-			$this->noJavascriptMessage();
 			if (	isset( $_POST['submit-getid'] ) || isset( $_POST['submit-author'] ) || 
 				 	isset( $_POST['submit-clear'] ) || isset( $_POST['submit-refresh'] ) || 
 					isset( $_POST['submit-update'] ) ) {
@@ -419,9 +488,7 @@ class fpwCategoryThumbnails {
 		
 		//	the form starts here
 		echo '<div>';
-		echo '<form name="fpw_cat_thmb_form" action="';
-		print '?page=' . basename( __FILE__ );
-		echo '" method="post">';
+		echo '<form name="fpw_cat_thmb_form" action="?page=fpw-category-thumbnails" method="post">';
 		
 		//	protect this form with nonce
 		echo '<input name="fpw-fct-nonce" type="hidden" value="' . wp_create_nonce( 'fpw-fct-nonce' ) . '" />';
@@ -516,7 +583,7 @@ class fpwCategoryThumbnails {
 				' ' . __( 'Remember to click on', 'fpw-fct' ) . ' <strong><em>' . 
 				__( 'Update', 'fpw-fct' ) . '</em></strong> ' . 
 				__( 'before switching to another page!', 'fpw-fct' ) . '</p><p>' . 
-				'<strong>' . __( 'Enable JavaScript and enjoy fully AJAX' . 
+				'<strong>' . __( 'Enable JavaScript and fully enjoy AJAX' . 
 				' powered interface!', 'fpw-fct' ) . '</strong></p></div>';  
 	}
 

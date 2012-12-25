@@ -78,7 +78,7 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
 									'" value="' . __( 'Refresh', 'fpw-fct' ) . '">'));
         
         //Return the cat_name contents
-        return sprintf('<strong>%1$s</strong> (<strong>%2$s</strong>) %3$s',
+        return sprintf('<strong>%1$s</strong> (<strong>%2$s</strong>) <span class="hide-if-no-js">%3$s</span>',
             /*$1%s*/ $item['fpwct_cat_name'],
             /*$2%s*/ $item['fpwct_cat_id'],
             /*$3%s*/ $this->row_actions($actions)

@@ -5,7 +5,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 3.3
-Tested up to: 3.4.1
+Tested up to: 3.5
 Stable tag: 1.5.6
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
@@ -45,14 +45,23 @@ The name of NextGen gallery must be 'authors'.
 = How to use 'fpwCategoryThumbnails::addThumbnailToPost' method? =
 Look into [Public method fpwCategoryThumbnails::addThumbnailToPost](http://fw2s.com/support/fpw-category-thumbnails-documentation/public-method-fpwcategorythumbnailsaddthumbnailtopost/) topic of Documentation. 
 
+= Will both plugins work with JavaScript turned off? =
+Yes. Both plugins are functional with JavaScript turned off to comply with accessibility regulations.
+
 == Screenshots ==
 
-1. FPW Category Thumbnails - Settings Page
-1. FPW Post Thumbnails - Settings Page
-1. FPW Post Thumbnails - Content Preview
-1. FPW Post Thumbnails - Excerpt Preview
+1. FPW Category Thumbnails - Settings - JavaScript on
+1. FPW Category Thumbnails - Settings - JavaScript off
+1. FPW Post Thumbnails - Settings - JavaScript on
+1. FPW Post Thumbnails - Settings - JavaScript off
 
 == Changelog ==
+
+= 1.5.7 =
+* FPW Category Thumbnails: added "Thumbnail" column to Posts -> Categories admin screen
+* FPW Category Thumbnails: fixed bug in JavaScript detection handler
+* FPW Post Thumbnails: added JavaScript detection handler
+* Removing plugins' data from database on uninstallation handled independently from each other
 
 = 1.5.6 =
 * Removed built-in front end stylesheet and added dynamic CSS instead ( FPW Post Thumbnails )

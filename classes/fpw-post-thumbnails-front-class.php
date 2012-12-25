@@ -106,7 +106,7 @@ class fpwPostThumbnails {
         	border: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_width' ] ?>px solid <?php echo $this->fptOptions[ 'excerpt' ][ 'border_color' ] ?>;
         	border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px;
         	-moz-border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px;
-        	-webkit-border-radius: <?php echo $this->fptOptions[ 'excerp' ][ 'border_radius' ] ?>px;
+        	-webkit-border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px;
 		<?php	
 		}
 		?>

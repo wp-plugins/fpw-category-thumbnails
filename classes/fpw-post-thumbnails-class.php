@@ -49,6 +49,8 @@ class fpwPostThumbnails {
 		if ( ! is_array( $this->fptOptions ) ) {
 			$this->fptOptions = $this->fptBuildOptions();
 		} else {
+			if ( !isset( $this->fptOptions[ 'clean' ] ) ) 
+				$this->fptOptions[ 'clean' ] = false;
 			if ( !isset( $this->fptOptions[ 'content' ][ 'base' ] ) )
 				$this->fptOptions[ 'content' ][ 'base' ] = 'width';
 			if ( !isset( $this->fptOptions[ 'excerpt' ][ 'base' ] ) )
@@ -59,7 +61,7 @@ class fpwPostThumbnails {
 		add_action( 'after_setup_theme', array( &$this, 'enableThemeSupportForThumbnails' ), 999 ); 
 		add_action( 'init', array( &$this, 'init' ) );
 
-		//register_activation_hook( $this->fptPath . '/fpw-post-thumbnails.php', array( &$this, 'uninstallMaintenance' ) );
+		register_activation_hook( $this->fptPath . '/fpw-category-thumbnails.php', array( &$this, 'uninstallMaintenance' ) );
 		
 		//	actions below are not used in front end
 		add_action( 'admin_menu', array( &$this, 'adminMenu' ) );
@@ -80,6 +82,18 @@ class fpwPostThumbnails {
 			add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
 	}
 	
+	//	uninstall file maintenance
+	function uninstallMaintenance() {
+		global $fpw_CT;
+		if ( $this->fptOptions[ 'clean' ] || $fpw_CT->fctOptions[ 'clean' ] ) {
+			if ( file_exists( $this->fptPath . '/uninstall.txt' ) ) 
+				rename( $this->fptPath . '/uninstall.txt', $this->fptPath . '/uninstall.php' );
+		} else {
+			if ( file_exists( $this->fptPath . '/uninstall.php' ) ) 
+				rename( $this->fptPath . '/uninstall.php', $this->fptPath . '/uninstall.txt' );
+		}
+	}	
+
 	//	add theme support for thumbnails
 	function enableThemeSupportForThumbnails() {
 		if ( !current_theme_supports( 'post-thumbnails' ) ) 
@@ -89,6 +103,7 @@ class fpwPostThumbnails {
 	//	build FPW Post Thumbnails options
 	function fptBuildOptions() {
 		$opt = array(
+					'clean'		=> false,
 					'abar'		=> false,
 					'content' 	=> array(
 						'enabled'			=> false,
@@ -160,7 +175,7 @@ class fpwPostThumbnails {
 
 	//	register admin menu
 	function adminMenu() {
-		$page_title = __( 'FPW Post Thumbnails', 'fpw-fct' ) . ' (' . $this->fptVersion . ')';
+		$page_title = __( 'FPW Post Thumbnails', 'fpw-fct' );
 		$menu_title = __( 'FPW Post Thumbnails', 'fpw-fct' );
 		$this->fptPage = add_theme_page( $page_title, $menu_title, 'manage_options', 
 							'fpw-post-thumbnails', array( &$this, 'fptSettings' ) );
@@ -187,9 +202,9 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   __( 'Added choice of base dimension for image scaling', 'fpw-fct' ) . '</li>';
+						   __( 'Added JavaScript detection handler', 'fpw-fct' ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   __( 'Removed built-in front end stylesheet and added dynamic CSS instead', 'fpw-fct' ) . '</li>';
+						   esc_js( __( "Removing plugin's data from database on uninstallation handled independently from FPW Category Thumbnails", "fpw-fct" ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -291,6 +306,7 @@ class fpwPostThumbnails {
 			'background_color'
 		);
 
+		$this->fptOptions[ 'clean' ] = ( isset( $p[ 'clean' ] ) ) ? true : false;
 		$this->fptOptions[ 'abar' ] = ( isset( $p[ 'abar' ] ) ) ? true : false;
 
 		foreach ( $checkboxes as $ck ) {
@@ -432,7 +448,7 @@ class fpwPostThumbnails {
 				__( 'FPW Post Thumbnails', 'fpw-fct' ) . ' <span style="font-size: small">- <a href="' . 
 				get_admin_url() . 'themes.php?page=fpw-category-thumbnails">' . 
 				__( 'FPW Category Thumbnails', 'fpw-fct' ) . '</a></span></h2>';
-				
+
 		//	the form starts here
 		echo '<div>';
 		echo '<form name="fpw_post_thmb_form" action="?page=fpw-post-thumbnails" method="post">';
@@ -443,6 +459,12 @@ class fpwPostThumbnails {
 		//	options section
 		echo '<div id="fpw-fpt-options" style="margin-top: 5px">';
 		
+		//	remove plugin's data on uninstall checkbox
+		echo '<input type="checkbox" class="fpt-option-group" id="box-clean" name="clean" value="clean"';
+		if ( $this->fptOptions[ 'clean' ] ) 
+			echo ' checked';
+		echo '> ' . __( "Remove plugin's data from database on uninstall", 'fpw-fct' ) . '<br />';
+
 		//	add plugin to admin bar checkbox
 		echo '<input type="checkbox" class="fpt-option-group" id="box-abar" name="abar" value="abar"';
 		if ( $this->fptOptions[ 'abar' ] ) 
@@ -458,7 +480,7 @@ class fpwPostThumbnails {
 
 		//	notification division for AJAX
 		echo 	'<div id="fpt-message" class="updated" style="position: absolute; ' . 
-				'display: none; z-index: 10; margin-top: 23px"><p>&nbsp;</p></div>';
+				'display: none; z-index: 10; margin-top: 40px"><p>&nbsp;</p></div>';
 				
 		echo	'</div>';
 				
@@ -487,7 +509,8 @@ class fpwPostThumbnails {
 			if ( '' == $resp ) {
 				$updateOK = update_option( 'fpw_post_thumbnails_options', $this->fptOptions );
 				if ( $updateOK ) {
-					echo __( 'Options updated successfully.', 'fpw-fct' );				
+					echo __( 'Changed data saved successfully.', 'fpw-fct' );
+					$this->uninstallMaintenance();				
 				} else {
 					echo __( 'No changes detected. Nothing to update.', 'fpw-fct' );				
 				}
@@ -546,8 +569,8 @@ class fpwPostThumbnails {
 		echo	'> <input type="submit" title="' . __( 'copy all values to the right panel', 'fpw-fct' ) . 
 				'" id="fpt-copy-right" name="submit-copy-right" value="' . 
 				__( 'Copy', 'fpw-fct' ) . ' &raquo;' . 
-				'" class="button-secondary fpt-submit"> <input alt="#TB_inline?height=300&width=400&inlineId=fptContentPreviev" ' . 
-				'title="' . __( 'Content - Preview', 'fpw-fct' ) . '" class="thickbox button-secondary" ' . 
+				'" class="button-secondary fpt-submit hide-if-no-js"> <input alt="#TB_inline?height=300&width=400&inlineId=fptContentPreviev" ' . 
+				'title="' . __( 'Content - Preview', 'fpw-fct' ) . '" class="thickbox button-secondary hide-if-no-js" ' . 
 				'type="button" value="' . __( 'Preview', 'fpw-fct' ) . '" id="content-preview" />' . 
 				'</h3>';
 				
@@ -737,8 +760,8 @@ class fpwPostThumbnails {
 		echo	'> <input type="submit" title="' . __( 'copy all values to the left panel', 'fpw-fct' ) . 
 				'" id="fpt-copy-left" name="submit-copy-left" value="&laquo; ' . 
 				__( 'Copy', 'fpw-fct' ) . 
-				'" class="button-secondary fpt-submit"> <input alt="#TB_inline?height=300&width=400&inlineId=fptExcerptPreviev" ' . 
-				'title="' . __( 'Excerpt - Preview', 'fpw-fct' ) . '" class="thickbox button-secondary" ' . 
+				'" class="button-secondary fpt-submit hide-if-no-js"> <input alt="#TB_inline?height=300&width=400&inlineId=fptExcerptPreviev" ' . 
+				'title="' . __( 'Excerpt - Preview', 'fpw-fct' ) . '" class="thickbox button-secondary hide-if-no-js" ' . 
 				'type="button" value="' . __( 'Preview', 'fpw-fct' ) . '" id="excerpt-preview" /></h3>';
 
 		echo	'<div id="fptExcerptPreviev" class="thickbox" style="display: none;">';
@@ -919,5 +942,6 @@ class fpwPostThumbnails {
  
 		echo	'<div style="clear:both;"></div>';
 	}
+	
 }
 ?>
