@@ -11,17 +11,17 @@ class fpwPostThumbnails {
 	public	$pluginPage;
 	public	$wpVersion;
 	public	$fptOptions;
-	
+
 	//	constructor
 	public	function __construct( $path, $version ) {
 		global $wp_version;
 
 		//	set plugin's path
 		$this->fptPath = $path;
-		
+
 		//	set plugin's url
 		$this->fptUrl = WP_PLUGIN_URL . '/fpw-category-thumbnails';
-		
+
 		//	set version
 		$this->fptVersion = $version;
 
@@ -30,11 +30,8 @@ class fpwPostThumbnails {
 
 		//	read tte options
 		$this->fptOptions = get_option( 'fpw_post_thumbnails_options' );
-		
 		add_action( 'after_setup_theme', array( &$this, 'enableThemeSupportForThumbnails' ), 999 );
-		
 		add_action( 'wp_head', array( &$this, 'dynamicThumbnailStyles' ) ); 
-		
 		if ( is_array( $this->fptOptions ) ) {
 			if ( $this->fptOptions[ 'content' ][ 'enabled' ] )
 				add_filter( 'the_content', array( &$this, 'fptContent' ) );
@@ -42,7 +39,7 @@ class fpwPostThumbnails {
 				add_filter( 'the_excerpt', array( &$this, 'fptExcerpt' ) );
 		}
 	}
-	
+
 	//	enable post thumbnails support and add image sizes
 	function enableThemeSupportForThumbnails() {
 		if ( !current_theme_supports( 'post-thumbnails' ) ) 
@@ -50,7 +47,7 @@ class fpwPostThumbnails {
 		add_image_size( 'content-thumbnail', $this->fptOptions[ 'content' ][ 'width' ], $this->fptOptions[ 'content' ][ 'height' ], false );
 		add_image_size( 'excerpt-thumbnail', $this->fptOptions[ 'excerpt' ][ 'width' ], $this->fptOptions[ 'excerpt' ][ 'height' ], false );
 	}
-	
+
 	function dynamicThumbnailStyles() {
 		?>
 		<style type="text/css">
@@ -119,13 +116,9 @@ class fpwPostThumbnails {
 	//	thumbnail for content filter
 	function fptContent( $content ) {
 		global $post;
-		
 		$thumbID = get_post_meta( $post->ID, '_thumbnail_id', true );
-	
 		if ( !( '' === $thumbID ) ) {
-		
 			if ( 'ngg-' == substr( $thumbID, 0, 4 ) ) {
-		
 				if ( class_exists( 'nggdb' ) ) {
 					$id = substr( $thumbID, 4 );
 					$picture = nggdb::find_image( $id );
@@ -149,17 +142,13 @@ class fpwPostThumbnails {
 		}
 		return $pic . $content;
 	}
-	
+
 	//	thumbnail for excerpt filter
 	function fptExcerpt( $excerpt ) {
 		global $post;
-		
 		$thumbID = get_post_meta( $post->ID, '_thumbnail_id', true );
-	
 		if ( !( '' === $thumbID ) ) {
-		
 			if ( 'ngg-' == substr( $thumbID, 0, 4 ) ) {
-		
 				if ( class_exists( 'nggdb' ) ) {
 					$id = substr( $thumbID, 4 );
 					$picture = nggdb::find_image( $id );
@@ -183,6 +172,5 @@ class fpwPostThumbnails {
 		}
 		return $pic . $excerpt;
 	}
-	 
 }
 ?>

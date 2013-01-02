@@ -3,7 +3,7 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category. Built-in FPW Post Thumbnails.
 Plugin URI: http://fw2s.com/fpw-category-thumbnails-plugin/
-Version: 1.5.7
+Version: 1.5.8
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
 
@@ -40,7 +40,7 @@ if ( ! fpw_is_wp_version( '3.3' ) )
 			'-webkit-border-radius: 10px; text-decoration: none; color: black; ' . 
 			'background-color: cyan;" href="/wp-admin/plugins.php" title="Go back to Installed plugins">' . 
 			'Back</a></center>' );
-			
+
 //	quit if standalone FPW Post Thumbnails plugin is active
 if ( class_exists( 'fpwPostThumbnails' ) ) {
 	$ver = ( defined( 'FPW_POST_THUMBNAILS_VERSION' ) ) ? ' ' . FPW_POST_THUMBNAILS_VERSION : '';
@@ -62,8 +62,8 @@ $needFPWPostThumbnailsClass = false;
 if ( is_admin() ) {
 	//	back end
 	require_once dirname( __FILE__ ) . '/classes/fpw-category-thumbnails-class.php';
-	
 	$o = get_option( 'fpw_category_thumb_opt' );
+
 	if ( is_array( $o ) && ( true === $o[ 'fpt' ] ) ) {
 		$needFPWPostThumbnailsClass = true;
 		require_once dirname( __FILE__ ) . '/classes/fpw-post-thumbnails-class.php';
@@ -71,7 +71,6 @@ if ( is_admin() ) {
 } else {
 	//	front end
 	require_once dirname( __FILE__ ) . '/classes/fpw-category-thumbnails-front-class.php';
-
 	$oFCT = get_option( 'fpw_category_thumb_opt' );
 	$oFPT = get_option( 'fpw_post_thumbnails_options' );
 	if ( is_array( $oFCT ) && is_array( $oFPT ) && ( true === $oFCT[ 'fpt' ] ) && ( $oFPT[ 'content' ][ 'enabled' ] || $oFPT[ 'excerpt' ][ 'enabled' ] ) ) {
@@ -79,9 +78,9 @@ if ( is_admin() ) {
 		require_once dirname( __FILE__ ) . '/classes/fpw-post-thumbnails-front-class.php';
 	}
 }
-$fpw_CT = new fpwCategoryThumbnails( dirname( __FILE__ ), '1.5.7' );
 
+$fpw_CT = new fpwCategoryThumbnails( dirname( __FILE__ ), '1.5.8' );
 if ( $needFPWPostThumbnailsClass ) {
-	$fpw_PT = new fpwPostThumbnails( dirname( __FILE__ ), '1.5.7' );
+	$fpw_PT = new fpwPostThumbnails( dirname( __FILE__ ), '1.5.8' );
 }
 ?>

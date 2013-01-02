@@ -8,24 +8,22 @@ if( !class_exists( 'WP_List_Table' ) )
 
 class fpw_Category_Thumbnails_Table extends WP_List_Table {
     var $map;
-    
+
 	//	constructor
 	function __construct( $mapArray ) {
         global $status, $page;
-                
+
         //Set parent defaults
         parent::__construct( array(
             'singular'  => 'fpwct_category',    //singular name of the listed records
             'plural'    => 'fpwct-categories',  //plural name of the listed records
             'ajax'      => true		        	//does this table support ajax?
         ) );
-
         $this->map = $mapArray;
     }
 
     function _js_vars() {
         $current_screen = get_current_screen();
-
         $args = array(
             'class'  => get_class( $this ),
             'screen' => array(
@@ -33,7 +31,6 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
                 'base' => $current_screen->base,
             )
         );
-
         printf( "<script type='text/javascript'>list_args = %s;</script>\n", json_encode( $args ) );
     }
 
@@ -48,10 +45,10 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
                 return $item[$column_name];
         }
     }
-   
+
 	//	special column category (id)	    
 	function column_fpwct_cat_name( $item ) {
-        
+
         //Build row actions
         $actions = array(
             'getid'     => sprintf( '<input name="submit-getid" type="submit" value="' . 
@@ -76,7 +73,7 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
 									__( 'refresh Preview field after manual ' . 
 									'changes to Image ID field', 'fpw-fct' ) .
 									'" value="' . __( 'Refresh', 'fpw-fct' ) . '">'));
-        
+
         //Return the cat_name contents
         return sprintf('<strong>%1$s</strong> (<strong>%2$s</strong>) <span class="hide-if-no-js">%3$s</span>',
             /*$1%s*/ $item['fpwct_cat_name'],
@@ -94,42 +91,40 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
         );
         return $columns;
     }
-    
+
 	//	get sortable columns - empty
     function get_sortable_columns() {
         $sortable_columns = array();
         return $sortable_columns;
     }
-	
+
 	//	preparation of items
 	function prepare_items() {
 		global $current_user;
-		
 		get_currentuserinfo(); 
-        
+
         //	how many records per page to show
 		$per_page = parent::get_items_per_page( 'edit_category_per_page' );
-
         $columns = $this->get_columns();
         $hidden = array();
         $sortable = array();
-        
+
 		//	column headers
         $this->_column_headers = array( $columns, $hidden, $sortable );
-        
+
 		//	get data
         $data = $this->map;
-                
+
 		//	get current page number
         $current_page = $this->get_pagenum();
-        
+
 		//	get total number of rows
         $total_items = count( $data );
-        
+
 		//	prepare items for current page
         $data = array_slice( $data, ( ( $current_page-1 ) * $per_page ), $per_page );
         $this->items = $data;
-        
+
         //	prepare pagination
         $this->set_pagination_args( array(
             'total_items' => $total_items,
@@ -137,11 +132,11 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
             'total_pages' => ceil( $total_items / $per_page ) 
         ) );
     }
-    
+
     //	our extra buttons
 	function extra_tablenav( $which ) {
 		global $fpw_CT;
-		
+
 		if ( $which == 'top' ) {
 			echo '<input title="' . 
 				 __( 'write modified options and mapping to the database', 'fpw-fct' ) . 
@@ -153,7 +148,6 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
 				 __( 'remove thumbnails from all existing posts / pages regardless of the category', 'fpw-fct' ) . 
 	 			 '" id="remove" class="button-primary fpw-submit" type="submit" name="submit-remove" value="' . __( 'Remove Thumbnails', 'fpw-fct' ) . '" />';
 			echo '<input id="buttonPressed" type="hidden" value="" name="buttonPressed" />';
-			
 			if ( !( 'en_US' == get_locale() ) && ( ( 'available' == $fpw_CT->translationStatus ) || ( 'not_exist' == $fpw_CT->translationStatus ) ) )  
 				echo ' <input title="' . 
 					 __( 'download language file for current version', 'fpw-fct' ) . 
@@ -162,5 +156,4 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
 		} 
 	}
 }
-
 ?>

@@ -1,10 +1,15 @@
 <?php
+			//	prevent direct access
+			if ( preg_match( '#' . basename(__FILE__) . '#', $_SERVER[ 'PHP_SELF' ] ) ) 
+				die( "Direct access to this script is forbidden!" );
+
 			wp_register_style( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/css/jquery.alerts.css' ) );
 			wp_enqueue_style( 'thickbox' );
 			wp_enqueue_style( 'fpw-fs-alerts' );
 			wp_enqueue_script( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/jquery.alerts.js' ), array( 'jquery' ), false, true );
 			wp_enqueue_script( 'fpw-file-select', plugins_url( '/fpw-category-thumbnails/js/fpw-file-select.js' ), array( 'jquery', 'fpw-fs-alerts', 'media-upload', 'thickbox' ), false, true );
 			$protocol = isset( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
+
 			wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(
 				'ajaxurl'			=> admin_url( 'admin-ajax.php', $protocol ),
 				'text_select_file'	=> esc_html( __( 'Get ID', 'fpw-fct' ) ),
@@ -30,6 +35,7 @@
 				'wait_msg'			=> esc_html( __( 'Please wait...', 'fpw-fct' ) ),
 				'help_link_text'	=> esc_html( __( 'Help for FPW Category Thumbnails', 'fpw-fct' ) )
 				));
+
 			wp_localize_script( 'fpw-fs-alerts', 'fpw_fs_alerts', array (
 				'text_ok'			=> esc_html( __( 'OK', 'fpw-fct' ) ),
 				'text_cancel'		=> esc_html( __( 'Cancel', 'fpw-fct' ) )

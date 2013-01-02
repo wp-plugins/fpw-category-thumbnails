@@ -9,13 +9,11 @@ $assignments = $this->getAssignmentsArray( $this->getAllCategories() );
 
 while ( strlen( key( $assignments ) ) ) {
 	$catid = key( $assignments );
-
 	$parg = array(
 		'numberofposts' => -1,
 		'nopaging' => true,
 		'category' => $catid,
 		'post_type' => 'any' );
-
 	$posts = get_posts( $parg );
 
 	foreach ( $posts as $post ) {
@@ -27,7 +25,6 @@ while ( strlen( key( $assignments ) ) ) {
 
 	next( $assignments );
 }
-
 reset( $assignments );
 echo '<p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-fct' ) . '</strong></p>';
 die();

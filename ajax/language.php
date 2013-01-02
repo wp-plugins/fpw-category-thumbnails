@@ -16,6 +16,7 @@ if ( 'not_exist' == $this->translationStatus ) {
 	$this->translationStatus = 'installed';
 	$m = __( 'Language file downloaded successfully. It will be applied as soon as this page is reloaded.', 'fpw-fct' );
 }			
+
 echo '<p><strong>' . $m . '</strong></p>';
 die();
 ?>

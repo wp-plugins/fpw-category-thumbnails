@@ -57,6 +57,11 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 
 == Changelog ==
 
+= 1.5.8 =
+* FPW Category Thumbnails: modified contextual help
+* FPW Post Thumbnails: removed 'hide-if-no-js' class from both 'Copy' buttons
+* FPW Post Thumbnails: modified contextual help
+
 = 1.5.7 =
 * FPW Category Thumbnails: added "Thumbnail" column to Posts -> Categories admin screen
 * FPW Category Thumbnails: fixed bug in JavaScript detection handler

@@ -192,11 +192,7 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "Added 'Thumbnail' column to Posts -> Categories admin screen", "fpw-fct" ) ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   __( 'Fixed bug in JavaScript detection handler', 'fpw-fct' ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "Removing plugins's data from database on uninstallation handled independently from FPW Post Thumbnails", "fpw-fct" ) ) . '</li>';
+						   esc_js( __( "Modified plugin's contextual help", "fpw-fct" ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[

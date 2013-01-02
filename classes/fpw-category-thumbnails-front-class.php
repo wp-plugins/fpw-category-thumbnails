@@ -1,4 +1,8 @@
 <?php
+//	prevent direct access
+if ( preg_match( '#' . basename(__FILE__) . '#', $_SERVER[ 'PHP_SELF' ] ) )  
+	die( "Direct access to this script is forbidden!" );
+
 //	front end class
 class fpwCategoryThumbnails {
 	public	$fctOptions;
@@ -7,26 +11,25 @@ class fpwCategoryThumbnails {
 	public	$fctVersion;
 	public	$fctPage;
 	public	$wpVersion;
-	
+
 	//	constructor
 	public	function __construct( $path, $version ) {
 		global $wp_version;
 
 		//	set plugin's path
 		$this->fctPath = $path;
-		
+
 		//	set plugin's url
 		$this->fctUrl = WP_PLUGIN_URL . '/fpw-category-thumbnails';
-		
+
 		//	set version
 		$this->fctVersion = $version;
 
 		//	set WP version
 		$this->wpVersion = $wp_version;
-		
+
 		//	hook main action
 		add_action( 'save_post', array( &$this, 'addThumbnailToPost' ), 10, 2 );
-
 	}	
 
 	/*	------------------------------------------------------------------
@@ -85,7 +88,7 @@ class fpwCategoryThumbnails {
   			}
 		}
 	}
-	
+
 	//	get author's picture id - helper function
 	private static function getAuthorsPictureID( $author_id ) {
 		global $wpdb;
@@ -124,6 +127,5 @@ class fpwCategoryThumbnails {
 		}	
 		return $pic_id;
 	}	
-	 
 }
 ?>
