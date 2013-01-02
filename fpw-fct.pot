@@ -1,63 +1,63 @@
-# Copyright (C) 2012 FPW Category Thumbnails
+# Copyright (C) 2013 FPW Category Thumbnails
 # This file is distributed under the same license as the FPW Category Thumbnails package.
 msgid ""
 msgstr ""
-"Project-Id-Version: FPW Category Thumbnails 1.5.7\n"
+"Project-Id-Version: FPW Category Thumbnails 1.5.8\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
-"POT-Creation-Date: 2012-12-25 21:01:41+00:00\n"
+"POT-Creation-Date: 2013-01-02 00:26:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: ajax/apply.php:26 classes/fpw-category-thumbnails-class.php:469
+#: ajax/apply.php:31 classes/fpw-category-thumbnails-class.php:465
 msgid "Applied thumbnails to existing posts / pages successfully."
 msgstr ""
 
-#: ajax/fptcopyleft.php:6 classes/fpw-post-thumbnails-class.php:552
+#: ajax/fptcopyleft.php:7 classes/fpw-post-thumbnails-class.php:533
 msgid "Values copied from the right to the left panel."
 msgstr ""
 
-#: ajax/fptcopyright.php:6 classes/fpw-post-thumbnails-class.php:542
+#: ajax/fptcopyright.php:6 classes/fpw-post-thumbnails-class.php:524
 msgid "Values copied from the left to the right panel."
 msgstr ""
 
 #: ajax/fptlanguage.php:9 ajax/language.php:9
-#: classes/fpw-post-thumbnails-class.php:525
+#: classes/fpw-post-thumbnails-class.php:507
 msgid "Language file for this version is not yet available."
 msgstr ""
 
-#: ajax/fptlanguage.php:11 classes/fpw-post-thumbnails-class.php:527
+#: ajax/fptlanguage.php:11 classes/fpw-post-thumbnails-class.php:509
 msgid "Language file is already installed. Please reload this page."
 msgstr ""
 
 #: ajax/fptlanguage.php:17 ajax/language.php:17
-#: classes/fpw-post-thumbnails-class.php:533
+#: classes/fpw-post-thumbnails-class.php:515
 msgid ""
 "Language file downloaded successfully. It will be applied as soon as this "
 "page is reloaded."
 msgstr ""
 
-#: ajax/fptupdate.php:19 ajax/update.php:24
-#: classes/fpw-category-thumbnails-class.php:464
-#: classes/fpw-post-thumbnails-class.php:512
+#: ajax/fptupdate.php:25 ajax/update.php:24
+#: classes/fpw-category-thumbnails-class.php:460
+#: classes/fpw-post-thumbnails-class.php:494
 msgid "Changed data saved successfully."
 msgstr ""
 
-#: ajax/fptupdate.php:22 ajax/update.php:26
-#: classes/fpw-category-thumbnails-class.php:466
-#: classes/fpw-post-thumbnails-class.php:515
+#: ajax/fptupdate.php:28 ajax/update.php:26
+#: classes/fpw-category-thumbnails-class.php:462
+#: classes/fpw-post-thumbnails-class.php:497
 msgid "No changes detected. Nothing to update."
 msgstr ""
 
-#: ajax/fptupdate.php:25
+#: ajax/fptupdate.php:32
 msgid "Validation failed!"
 msgstr ""
 
-#: ajax/getimageid.php:30 classes/fpw-category-thumbnails-class.php:103
-#: code/table.php:17
+#: ajax/getimageid.php:33 classes/fpw-category-thumbnails-class.php:103
+#: code/table.php:21
 msgid "Picture"
 msgstr ""
 
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Language file is already installed."
 msgstr ""
 
-#: ajax/remove.php:32 classes/fpw-category-thumbnails-class.php:471
+#: ajax/remove.php:29 classes/fpw-category-thumbnails-class.php:467
 msgid "All thumbnails removed successfully."
 msgstr ""
 
@@ -73,283 +73,275 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:111 code/table.php:25
+#: classes/fpw-category-thumbnails-class.php:111 code/table.php:29
 msgid "NextGen Gallery: picture not found!"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:121 code/table.php:35
+#: classes/fpw-category-thumbnails-class.php:121 code/table.php:39
 msgid "NextGen Gallery: not active!"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:128 code/table.php:42
+#: classes/fpw-category-thumbnails-class.php:128 code/table.php:46
 msgid "Media Library: picture not found!"
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.5.7)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (FPW Category Thumbnails 1.5.8)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: classes/fpw-category-thumbnails-class.php:165
 #: classes/fpw-category-thumbnails-class.php:166
-#: classes/fpw-category-thumbnails-class.php:340
-#: classes/fpw-category-thumbnails-class.php:452
-#: classes/fpw-post-thumbnails-class.php:450
+#: classes/fpw-category-thumbnails-class.php:336
+#: classes/fpw-category-thumbnails-class.php:448
+#: classes/fpw-post-thumbnails-class.php:436
 msgid "FPW Category Thumbnails"
 msgstr ""
 
 #: classes/fpw-category-thumbnails-class.php:193
-#: classes/fpw-post-thumbnails-class.php:203
+#: classes/fpw-post-thumbnails-class.php:204
 msgid "What's new in this version?"
 msgstr ""
 
 #: classes/fpw-category-thumbnails-class.php:195
-msgid "Added 'Thumbnail' column to Posts -> Categories admin screen"
+#: classes/fpw-post-thumbnails-class.php:208
+msgid "Modified plugin's contextual help"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:197
-msgid "Fixed bug in JavaScript detection handler"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:199
-msgid ""
-"Removing plugins's data from database on uninstallation handled "
-"independently from FPW Post Thumbnails"
-msgstr ""
-
-#: classes/fpw-category-thumbnails-class.php:225
+#: classes/fpw-category-thumbnails-class.php:221
 msgid "Categories"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:294
+#: classes/fpw-category-thumbnails-class.php:290
 msgid "Donate"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:300
+#: classes/fpw-category-thumbnails-class.php:296
 msgid "Settings"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:334
+#: classes/fpw-category-thumbnails-class.php:330
 #: classes/fpw-post-thumbnails-class.php:264
 msgid "FPW Plugins"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:373
-#: classes/fpw-post-thumbnails-class.php:435
+#: classes/fpw-category-thumbnails-class.php:369
+#: classes/fpw-post-thumbnails-class.php:424
 msgid "You did not send any credentials!"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:376
-#: classes/fpw-post-thumbnails-class.php:438
+#: classes/fpw-category-thumbnails-class.php:372
+#: classes/fpw-post-thumbnails-class.php:427
 msgid "You did not send the right credentials!"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:455
-#: classes/fpw-post-thumbnails-class.php:178
-#: classes/fpw-post-thumbnails-class.php:179
-#: classes/fpw-post-thumbnails-class.php:270
-#: classes/fpw-post-thumbnails-class.php:448 help/fpthelp.php:29
+#: classes/fpw-category-thumbnails-class.php:451
+#: classes/fpw-post-thumbnails-class.php:180
+#: classes/fpw-post-thumbnails-class.php:181
+#: classes/fpw-post-thumbnails-class.php:269
+#: classes/fpw-post-thumbnails-class.php:434 help/fpthelp.php:29
 msgid "FPW Post Thumbnails"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:477
+#: classes/fpw-category-thumbnails-class.php:473
 msgid "Language file downloaded. Click"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:479
+#: classes/fpw-category-thumbnails-class.php:475
 msgid "here"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:479
+#: classes/fpw-category-thumbnails-class.php:475
 msgid "to reload page."
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:481
+#: classes/fpw-category-thumbnails-class.php:477
 msgid "Language file already exists."
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:484
+#: classes/fpw-category-thumbnails-class.php:480
 msgid "Language file is not available."
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:503 help/help.php:28
-#: scripts/enqueuescripts.php:15 scripts/enqueuescripts.php:24
+#: classes/fpw-category-thumbnails-class.php:499 help/help.php:32
+#: scripts/enqueuescripts.php:20 scripts/enqueuescripts.php:29
 msgid "Do not overwrite if post / page has thumbnail assigned already"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:509
-#: classes/fpw-post-thumbnails-class.php:466 help/help.php:30
+#: classes/fpw-category-thumbnails-class.php:505
+#: classes/fpw-post-thumbnails-class.php:452 help/fpthelp.php:43
+#: help/help.php:34
 msgid "Remove plugin's data from database on uninstall"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:515
-#: classes/fpw-post-thumbnails-class.php:472 help/fpthelp.php:43
-#: help/help.php:32
+#: classes/fpw-category-thumbnails-class.php:511
+#: classes/fpw-post-thumbnails-class.php:458 help/fpthelp.php:46
+#: help/help.php:36
 msgid "Add this plugin to the Admin Bar"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-class.php:521
+#: classes/fpw-category-thumbnails-class.php:517 help/help.php:38
 msgid "Enable FPW Post Thumbnails"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:58 help/help.php:50
-#: scripts/enqueuescripts.php:10
+#: classes/fpw-category-thumbnails-table-class.php:55 help/help.php:66
+#: scripts/enqueuescripts.php:15
 msgid "Get ID"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:60
+#: classes/fpw-category-thumbnails-table-class.php:57
 msgid "get thumbnail's picture ID from media library"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:63
+#: classes/fpw-category-thumbnails-table-class.php:60 help/help.php:70
 msgid "Author"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:65
+#: classes/fpw-category-thumbnails-table-class.php:62
 msgid "set author's picture as thumbnail"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:71
+#: classes/fpw-category-thumbnails-table-class.php:68
 msgid "clear Image ID and Preview fields"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:72 help/help.php:58
+#: classes/fpw-category-thumbnails-table-class.php:69 help/help.php:74
 msgid "Clear"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:78 help/help.php:62
+#: classes/fpw-category-thumbnails-table-class.php:75 help/help.php:78
 msgid "Refresh"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:91
+#: classes/fpw-category-thumbnails-table-class.php:88
 msgid "Category (ID)"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:92
+#: classes/fpw-category-thumbnails-table-class.php:89
 msgid "Image ID"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:93
-#: classes/fpw-post-thumbnails-class.php:574
-#: classes/fpw-post-thumbnails-class.php:765
+#: classes/fpw-category-thumbnails-table-class.php:90
+#: classes/fpw-post-thumbnails-class.php:553
+#: classes/fpw-post-thumbnails-class.php:717 help/fpthelp.php:64
 msgid "Preview"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:147
+#: classes/fpw-category-thumbnails-table-class.php:142
 msgid "write modified options and mapping to the database"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:148
-#: classes/fpw-post-thumbnails-class.php:491 help/help.php:66
+#: classes/fpw-category-thumbnails-table-class.php:143
+#: classes/fpw-post-thumbnails-class.php:475 help/fpthelp.php:53
+#: help/help.php:57
 msgid "Update"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:150
+#: classes/fpw-category-thumbnails-table-class.php:145
 msgid ""
 "add post thumbnail to every existing post / page belonging to the category "
 "which has thumbnail id mapped to"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:151 help/help.php:69
+#: classes/fpw-category-thumbnails-table-class.php:146 help/help.php:60
 msgid "Apply Mapping"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:153
+#: classes/fpw-category-thumbnails-table-class.php:148
 msgid ""
 "remove thumbnails from all existing posts / pages regardless of the category"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:154 help/help.php:72
+#: classes/fpw-category-thumbnails-table-class.php:149 help/help.php:63
 msgid "Remove Thumbnails"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:159
+#: classes/fpw-category-thumbnails-table-class.php:153
 msgid "download language file for current version"
 msgstr ""
 
-#: classes/fpw-category-thumbnails-table-class.php:161
-#: classes/fpw-post-thumbnails-class.php:501
+#: classes/fpw-category-thumbnails-table-class.php:155
+#: classes/fpw-post-thumbnails-class.php:485
 msgid "Get Language File"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:205
-msgid "Added JavaScript detection handler"
+#: classes/fpw-post-thumbnails-class.php:206
+msgid "Removed 'hide-if-no-js' class from both 'Copy' buttons"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:207
-msgid ""
-"Removing plugin's data from database on uninstallation handled independently "
-"from FPW Category Thumbnails"
-msgstr ""
-
-#: classes/fpw-post-thumbnails-class.php:339
-#: classes/fpw-post-thumbnails-class.php:361
-#: classes/fpw-post-thumbnails-class.php:379
+#: classes/fpw-post-thumbnails-class.php:334
+#: classes/fpw-post-thumbnails-class.php:355
+#: classes/fpw-post-thumbnails-class.php:370
 msgid "In Content panel field"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:341
-#: classes/fpw-post-thumbnails-class.php:348
+#: classes/fpw-post-thumbnails-class.php:336
+#: classes/fpw-post-thumbnails-class.php:343
 msgid "contains non-numeric characters."
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:346
-#: classes/fpw-post-thumbnails-class.php:369
-#: classes/fpw-post-thumbnails-class.php:386
+#: classes/fpw-post-thumbnails-class.php:341
+#: classes/fpw-post-thumbnails-class.php:362
+#: classes/fpw-post-thumbnails-class.php:376
 msgid "In Excerpt panel field"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:363
-#: classes/fpw-post-thumbnails-class.php:371
-#: classes/fpw-post-thumbnails-class.php:381
-#: classes/fpw-post-thumbnails-class.php:388
+#: classes/fpw-post-thumbnails-class.php:357
+#: classes/fpw-post-thumbnails-class.php:364
+#: classes/fpw-post-thumbnails-class.php:372
+#: classes/fpw-post-thumbnails-class.php:378
 msgid "must start with '#' charcter followed by 6 hexadecimal digits."
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:488
+#: classes/fpw-post-thumbnails-class.php:472
 msgid "write modified data to the database"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:498
+#: classes/fpw-post-thumbnails-class.php:482
 msgid "load language file for your version"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:565
+#: classes/fpw-post-thumbnails-class.php:544
 msgid "Content thumbnails enabled:"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:569
+#: classes/fpw-post-thumbnails-class.php:548
 msgid "copy all values to the right panel"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:571
-#: classes/fpw-post-thumbnails-class.php:762
+#: classes/fpw-post-thumbnails-class.php:550
+#: classes/fpw-post-thumbnails-class.php:714 help/fpthelp.php:56
+#: help/fpthelp.php:60
 msgid "Copy"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:573
+#: classes/fpw-post-thumbnails-class.php:552
 msgid "Content - Preview"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:756
+#: classes/fpw-post-thumbnails-class.php:708
 msgid "Excerpt thumbnails enabled:"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:760
+#: classes/fpw-post-thumbnails-class.php:712
 msgid "copy all values to the left panel"
 msgstr ""
 
-#: classes/fpw-post-thumbnails-class.php:764
+#: classes/fpw-post-thumbnails-class.php:716
 msgid "Excerpt - Preview"
 msgstr ""
 
-#: help/fpthelp.php:8 help/help.php:4
+#: help/fpthelp.php:8 help/help.php:8
 msgid "More information"
 msgstr ""
 
-#: help/fpthelp.php:9 help/help.php:5
+#: help/fpthelp.php:9 help/help.php:9
 msgid "Plugin's site"
 msgstr ""
 
-#: help/fpthelp.php:10 help/help.php:6
+#: help/fpthelp.php:10 help/help.php:10
 msgid "Support"
+msgstr ""
+
+#: help/fpthelp.php:16 help/fpthelp.php:36 help/help.php:16 help/help.php:26
+msgid "Introduction"
 msgstr ""
 
 #: help/fpthelp.php:17
@@ -381,96 +373,137 @@ msgid ""
 "And what's most important it will not modify the current theme in any way."
 msgstr ""
 
-#: help/fpthelp.php:36 help/help.php:12 help/help.php:22
-msgid "Introduction"
+#: help/fpthelp.php:41 help/help.php:31
+msgid "Available Options"
 msgstr ""
 
-#: help/fpthelp.php:41
-msgid "General"
+#: help/fpthelp.php:44 help/fpthelp.php:47 help/fpthelp.php:77
+#: help/fpthelp.php:80 help/fpthelp.php:87 help/help.php:33 help/help.php:35
+#: help/help.php:37 help/help.php:39
+msgid "checked"
 msgstr ""
 
-#: help/fpthelp.php:44
+#: help/fpthelp.php:45
 msgid ""
-"if checked then plugin's link to settings page will be added to the Admin Bar"
-msgstr ""
-
-#: help/fpthelp.php:46
-msgid "Panels"
+"during uninstall procedure all plugin's information will be removed from the "
+"database"
 msgstr ""
 
 #: help/fpthelp.php:48
-msgid "Thumbnails for Content enabled:"
+msgid "plugin's link to settings page will be added to the Admin Bar"
 msgstr ""
 
-#: help/fpthelp.php:49
-msgid "if checked then enables thumbnails for contents"
+#: help/fpthelp.php:50 help/help.php:53
+msgid "Action Buttons"
 msgstr ""
 
-#: help/fpthelp.php:50
-msgid "Thumbnails for Excerpt enabled:"
-msgstr ""
-
-#: help/fpthelp.php:51
-msgid "if checked then enables thumbnails for excerpts"
-msgstr ""
-
-#: help/fpthelp.php:52
-msgid "and"
+#: help/fpthelp.php:52 help/fpthelp.php:55 help/fpthelp.php:59
+#: help/fpthelp.php:63 help/help.php:56 help/help.php:59 help/help.php:62
+#: help/help.php:65 help/help.php:69 help/help.php:73 help/help.php:77
+msgid "Inactive button - presentation only"
 msgstr ""
 
 #: help/fpthelp.php:53
-msgid "width and height of the thumbnail"
-msgstr ""
-
-#: help/fpthelp.php:54
-msgid "base dimension for scaling"
-msgstr ""
-
-#: help/fpthelp.php:55
-msgid "position of the thumbnail relative to the content ( excerpt )"
+msgid "saves modified data to the database"
 msgstr ""
 
 #: help/fpthelp.php:57
-msgid ""
-"if checked then the thumbnail will have a border and next four parameters "
-"will be applied"
+msgid "copies all data from the left to the right panel"
 msgstr ""
 
 #: help/fpthelp.php:61
-msgid "thickness of the border in pixels"
-msgstr ""
-
-#: help/fpthelp.php:62
-msgid "color of the border"
-msgstr ""
-
-#: help/fpthelp.php:63
-msgid "thumbnail's background color"
+msgid "copies all data from the right to the left panel"
 msgstr ""
 
 #: help/fpthelp.php:65
-msgid "these are standard padding and margin parameters"
+msgid ""
+"shows preview of the thumbnail and its layout ( hidden if JavaScript is "
+"turned off )"
 msgstr ""
 
-#: help/fpthelp.php:68 help/help.php:36
-msgid "Options"
+#: help/fpthelp.php:69
+msgid "Options & Actions"
 msgstr ""
 
-#: help/fpthelp.php:74 help/help.php:82 help/help.php:89 help/help.php:93
-#: help/help.php:100
-msgid "Question:"
-msgstr ""
-
-#: help/fpthelp.php:75
-msgid "Can I use this plugin if my theme supports and displays thumbnails?"
-msgstr ""
-
-#: help/fpthelp.php:76 help/help.php:84 help/help.php:91 help/help.php:95
-#: help/help.php:102
-msgid "Answer:"
+#: help/fpthelp.php:74 help/fpthelp.php:101
+msgid "Panels"
 msgstr ""
 
 #: help/fpthelp.php:76
+msgid "Thumbnails for Content enabled:"
+msgstr ""
+
+#: help/fpthelp.php:78
+msgid "enables thumbnails for contents"
+msgstr ""
+
+#: help/fpthelp.php:79
+msgid "Thumbnails for Excerpt enabled:"
+msgstr ""
+
+#: help/fpthelp.php:81
+msgid "enables thumbnails for excerpts"
+msgstr ""
+
+#: help/fpthelp.php:82
+msgid "and"
+msgstr ""
+
+#: help/fpthelp.php:83
+msgid "width and height of thumbnails"
+msgstr ""
+
+#: help/fpthelp.php:84
+msgid "base dimension for scaling"
+msgstr ""
+
+#: help/fpthelp.php:85
+msgid "position of thumbnails relative to the content ( excerpt )"
+msgstr ""
+
+#: help/fpthelp.php:88
+msgid "thumbnails will have a border and next four parameters will be applied"
+msgstr ""
+
+#: help/fpthelp.php:92
+msgid "thickness of the border in pixels"
+msgstr ""
+
+#: help/fpthelp.php:93
+msgid "color of the border"
+msgstr ""
+
+#: help/fpthelp.php:94 help/fpthelp.php:96
+msgid "selection with JavaScript Color Wheel"
+msgstr ""
+
+#: help/fpthelp.php:95
+msgid "thumbnails' background color"
+msgstr ""
+
+#: help/fpthelp.php:98
+msgid "these are standard padding and margin parameters"
+msgstr ""
+
+#: help/fpthelp.php:106 help/help.php:88
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: help/fpthelp.php:107 help/fpthelp.php:111 help/help.php:89 help/help.php:96
+#: help/help.php:100 help/help.php:107 help/help.php:113
+msgid "Question:"
+msgstr ""
+
+#: help/fpthelp.php:108
+msgid "Can I use this plugin if my theme supports and displays thumbnails?"
+msgstr ""
+
+#: help/fpthelp.php:109 help/fpthelp.php:113 help/help.php:91 help/help.php:98
+#: help/help.php:102 help/help.php:109 help/help.php:115
+msgid "Answer:"
+msgstr ""
+
+#: help/fpthelp.php:110
 msgid ""
 "If the theme displays thumbnails for both the content and excerpts I would "
 "not recommended it as you would get two thumbnails displayed. However I can "
@@ -480,289 +513,282 @@ msgid ""
 "other part."
 msgstr ""
 
-#: help/fpthelp.php:80 help/help.php:108
+#: help/fpthelp.php:112 help/help.php:114
+msgid "Will this plugin work with JavaScript turned off?"
+msgstr ""
+
+#: help/fpthelp.php:114 help/help.php:116
+msgid ""
+"Yes. This plugin is functional with JavaScript turned off to comply with "
+"accessibility regulations."
+msgstr ""
+
+#: help/fpthelp.php:118 help/help.php:119
 msgid "FAQ"
 msgstr ""
 
-#: help/help.php:13
+#: help/help.php:17
 msgid "Setting featured images for posts / pages could be very time consuming,"
 msgstr ""
 
-#: help/help.php:14
+#: help/help.php:18
 msgid "especially when your media library holds hundreds of pictures."
 msgstr ""
 
-#: help/help.php:15
+#: help/help.php:19
 msgid ""
 "Very often we select the same thumbnail for posts in particular category."
 msgstr ""
 
-#: help/help.php:16
+#: help/help.php:20
 msgid ""
 "This plugin automates the process by inserting a thumbnail based on "
 "category / thumbnail mapping while post / page is being created or updated."
 msgstr ""
 
-#: help/help.php:17
+#: help/help.php:21
 msgid "Note"
 msgstr ""
 
-#: help/help.php:18
+#: help/help.php:22
 msgid "Please remember that the active theme must support post thumbnails."
 msgstr ""
 
-#: help/help.php:27
-msgid "Available Options"
-msgstr ""
-
-#: help/help.php:29 help/help.php:31 help/help.php:33
-msgid "checked"
-msgstr ""
-
-#: help/help.php:29
+#: help/help.php:33
 msgid ""
 "while the post is being saved the originally set thumbnail will be preserved"
 msgstr ""
 
-#: help/help.php:31
+#: help/help.php:35
 msgid ""
 "during uninstall procedure all plugin's information ( options, mappings ) "
 "will be removed from the database"
 msgstr ""
 
-#: help/help.php:33
+#: help/help.php:37
 msgid "the plugin's link to its settings page will be added to the Admin Bar"
 msgstr ""
 
-#: help/help.php:41
-msgid "Mapping"
+#: help/help.php:39
+msgid "activates FPW Post Thumbnails plugin's functionality"
 msgstr ""
 
 #: help/help.php:42
+msgid "Options"
+msgstr ""
+
+#: help/help.php:47
+msgid "Mapping"
+msgstr ""
+
+#: help/help.php:48
 msgid ""
 "Each row of the mapping table represents a category and a thumbnail image ID "
 "assigned to it."
 msgstr ""
 
-#: help/help.php:43
+#: help/help.php:49
 msgid "First column holds a category name and its ID."
 msgstr ""
 
-#: help/help.php:44
+#: help/help.php:50
 msgid ""
 "Second column consists of four elements: Image ID - an input field which "
 "holds thumbnail's image ID,"
 msgstr ""
 
-#: help/help.php:45
+#: help/help.php:51
 msgid ""
 "Get ID, Clear, and Refresh buttons. Third column holds thumbnail's preview."
 msgstr ""
 
-#: help/help.php:46
+#: help/help.php:52
 msgid ""
 "Image ID can be entered manually ( if you remember it ) or by clicking on "
 "'Get ID' button which will call 'media upload' overlay."
 msgstr ""
 
-#: help/help.php:47
-msgid "Action Buttons"
+#: help/help.php:57
+msgid "saves modified options and mapping to the database"
 msgstr ""
 
-#: help/help.php:49 help/help.php:53 help/help.php:57 help/help.php:61
-#: help/help.php:65 help/help.php:68 help/help.php:71
-msgid "Inactive button - presentation only"
+#: help/help.php:60
+msgid "adds thumbnails to existing posts / pages based on category mapping"
 msgstr ""
 
-#: help/help.php:51
+#: help/help.php:63
+msgid "removes thumbnails from all posts /pages regardless of the category"
+msgstr ""
+
+#: help/help.php:67
 msgid ""
 "will call 'media upload' overlay and on return will populate 'Image ID' "
 "input box and 'Preview' area ( AJAX - without reloading screen )"
 msgstr ""
 
-#: help/help.php:54
-msgid "Author picture"
-msgstr ""
-
-#: help/help.php:55
+#: help/help.php:71
 msgid "will assign author's picture as a thumbnail for the category"
 msgstr ""
 
-#: help/help.php:59
+#: help/help.php:75
 msgid ""
 "will enter '0' as image ID and clear 'Preview' area ( AJAX - without "
 "reloading screen )"
 msgstr ""
 
-#: help/help.php:63
+#: help/help.php:79
 msgid ""
 "when clicked after entering of an image ID manually it will populate "
 "'Preview' area ( AJAX - without reloading screen )"
 msgstr ""
 
-#: help/help.php:66
-msgid "saves modified options and mapping to the database"
-msgstr ""
-
-#: help/help.php:69
-msgid "adds thumbnails to existing posts / pages based on category mapping"
-msgstr ""
-
-#: help/help.php:72
-msgid "removes thumbnails from all posts /pages regardless of the category"
-msgstr ""
-
-#: help/help.php:76
+#: help/help.php:83
 msgid "Mapping & Actions"
 msgstr ""
 
-#: help/help.php:81
-msgid "Frequently Asked Questions"
-msgstr ""
-
-#: help/help.php:83
+#: help/help.php:90
 msgid ""
 "I got an ID for the image and assigned it to the category, and the plugin "
 "does not display it in posts."
 msgstr ""
 
-#: help/help.php:84
+#: help/help.php:91
 msgid ""
 "The plugin does not display thumbnails by itself. This is your theme's role."
 msgstr ""
 
-#: help/help.php:85
+#: help/help.php:92
 msgid "Read this article"
 msgstr ""
 
-#: help/help.php:88
+#: help/help.php:95
 msgid "by"
 msgstr ""
 
-#: help/help.php:88
+#: help/help.php:95
 msgid "about enabling theme's support for post thumbnails."
 msgstr ""
 
-#: help/help.php:90
+#: help/help.php:97
 msgid ""
 "I've entered ID of a picture from NextGen Gallery and thumbnail doesn't show."
 msgstr ""
 
-#: help/help.php:92
+#: help/help.php:99
 msgid ""
 "IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should "
 "be entered as ngg-230."
 msgstr ""
 
-#: help/help.php:94
+#: help/help.php:101
 msgid "What is required to use authors' pictures as thumbnails?"
 msgstr ""
 
-#: help/help.php:96
+#: help/help.php:103
 msgid "Upload authors' pictures into media library or NextGen gallery."
 msgstr ""
 
-#: help/help.php:97
+#: help/help.php:104
 msgid ""
 "File names of authors' pictures in media library must follow this naming "
 "convention: 'autor_id.jpg' where 'id' is author's user id."
 msgstr ""
 
-#: help/help.php:98
+#: help/help.php:105
 msgid ""
 "File names of authors' pictures in NextGen gallery must follow this naming "
 "convention: 'id.jpg' where 'id' is author's user id."
 msgstr ""
 
-#: help/help.php:99
+#: help/help.php:106
 msgid "The name of NextGen gallery must be 'authors'."
 msgstr ""
 
-#: help/help.php:101
+#: help/help.php:108
 msgid "How to use 'fpwCategoryThumbnails::addThumbnailToPost' method?"
 msgstr ""
 
-#: help/help.php:103
+#: help/help.php:110
 msgid "Look into"
 msgstr ""
 
-#: help/help.php:105
+#: help/help.php:112
 msgid "topic of Documentation."
 msgstr ""
 
-#: scripts/enqueuescripts.php:11
+#: scripts/enqueuescripts.php:16
 msgid "This action will add thumbnails based on current settings to"
 msgstr ""
 
-#: scripts/enqueuescripts.php:12 scripts/enqueuescripts.php:21
+#: scripts/enqueuescripts.php:17 scripts/enqueuescripts.php:26
 msgid "ALL"
 msgstr ""
 
-#: scripts/enqueuescripts.php:13 scripts/enqueuescripts.php:22
+#: scripts/enqueuescripts.php:18 scripts/enqueuescripts.php:27
 msgid "existing posts / pages."
 msgstr ""
 
-#: scripts/enqueuescripts.php:14 scripts/enqueuescripts.php:23
+#: scripts/enqueuescripts.php:19 scripts/enqueuescripts.php:28
 msgid "Option"
 msgstr ""
 
-#: scripts/enqueuescripts.php:16
+#: scripts/enqueuescripts.php:21
 msgid "will be respected."
 msgstr ""
 
-#: scripts/enqueuescripts.php:17
+#: scripts/enqueuescripts.php:22
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: scripts/enqueuescripts.php:18
+#: scripts/enqueuescripts.php:23
 msgid "This action"
 msgstr ""
 
-#: scripts/enqueuescripts.php:19
+#: scripts/enqueuescripts.php:24
 msgid "WILL REMOVE"
 msgstr ""
 
-#: scripts/enqueuescripts.php:20
+#: scripts/enqueuescripts.php:25
 msgid "thumbnails from"
 msgstr ""
 
-#: scripts/enqueuescripts.php:25
+#: scripts/enqueuescripts.php:30
 msgid "WILL NOT"
 msgstr ""
 
-#: scripts/enqueuescripts.php:26
+#: scripts/enqueuescripts.php:31
 msgid "be respected!"
 msgstr ""
 
-#: scripts/enqueuescripts.php:27
+#: scripts/enqueuescripts.php:32
 msgid "Are you sure you want to clear this ID?"
 msgstr ""
 
-#: scripts/enqueuescripts.php:28
+#: scripts/enqueuescripts.php:33
 msgid "Get Image ID"
 msgstr ""
 
-#: scripts/enqueuescripts.php:29
+#: scripts/enqueuescripts.php:34
 msgid "Please confirm"
 msgstr ""
 
-#: scripts/enqueuescripts.php:30 scripts/fptenqueuescripts.php:15
+#: scripts/enqueuescripts.php:35 scripts/fptenqueuescripts.php:17
 msgid "Please wait..."
 msgstr ""
 
-#: scripts/enqueuescripts.php:31
+#: scripts/enqueuescripts.php:36
 msgid "Help for FPW Category Thumbnails"
 msgstr ""
 
-#: scripts/enqueuescripts.php:34
+#: scripts/enqueuescripts.php:40
 msgid "OK"
 msgstr ""
 
-#: scripts/enqueuescripts.php:35
+#: scripts/enqueuescripts.php:41
 msgid "Cancel"
 msgstr ""
 
-#: scripts/fptenqueuescripts.php:16
+#: scripts/fptenqueuescripts.php:18
 msgid "Help for FPW Post Thumbnails"
 msgstr ""
 
