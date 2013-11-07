@@ -40,10 +40,10 @@ class fpwCategoryThumbnails {
 
 		//	set translation URL
 		$this->translationURL = 'http://svn.wp-plugins.org/fpw-category-thumbnails/translations/' . 
-								$this->fctVersion . '/fpw-fct-' . $this->fctLocale . '.mo';
+								$this->fctVersion . '/fpw-category-thumbnails-' . $this->fctLocale . '.mo';
 								
 		//	set translation path
-		$this->translationPath = $this->fctPath . '/languages/fpw-fct-' . $this->fctLocale . '.mo';
+		$this->translationPath = $this->fctPath . '/languages/fpw-category-thumbnails-' . $this->fctLocale . '.mo';
 		
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
@@ -287,7 +287,7 @@ class fpwCategoryThumbnails {
 	//	add link to Donation to plugins meta
 	function pluginMetaLinks( $links, $file ) {
 		if ( 'fpw-category-thumbnails/fpw-category-thumbnails.php' == $file ) 
-			$links[] = '<a href="http://fw2s.com/payments-and-donations/" target="_blank">' . __( "Donate", "fpw-fct" ) . '</a>';
+			$links[] = '<a href="http://fw2s.com/payments-and-donations/" target="_blank">' . __( "Donate", "fpw-category-thumbnails" ) . '</a>';
 		return $links;
 	}
 	

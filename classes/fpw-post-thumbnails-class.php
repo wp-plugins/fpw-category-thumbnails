@@ -39,10 +39,10 @@ class fpwPostThumbnails {
 		
 		//	set translation URL
 		$this->translationURL = 'http://svn.wp-plugins.org/fpw-category-thumbnails/translations/' . 
-								$this->fptVersion . '/fpw-fct-' . $this->fptLocale . '.mo';
+								$this->fptVersion . '/fpw-catgory-thumbnails-' . $this->fptLocale . '.mo';
 
 		//	set translation path
-		$this->translationPath = $this->fptPath . '/languages/fpw-fct-' . $this->fptLocale . '.mo';
+		$this->translationPath = $this->fptPath . '/languages/fpw-category-thumbnails-' . $this->fptLocale . '.mo';
 
 		//	get post thumbnails options
 		$this->fptOptions = get_option( 'fpw_post_thumbnails_options' );
@@ -167,7 +167,7 @@ class fpwPostThumbnails {
 
 	//	initialize
 	function init() {
-		load_plugin_textdomain( 'fpw-fct', false, 'fpw-category-thumbnails/languages/' );
+		load_plugin_textdomain( 'fpw-category-thumbnails', false, 'fpw-category-thumbnails/languages/' );
 		
 		if ( !( 'en_US' == $this->fptLocale ) ) 
 			$this->translationStatus = $this->translationAvailable();
