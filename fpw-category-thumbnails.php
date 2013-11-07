@@ -81,8 +81,8 @@ if ( is_admin() ) {
 	}
 }
 
-$fpw_CT = new fpwCategoryThumbnails( dirname( __FILE__ ), '1.5.8' );
+$fpw_CT = new fpwCategoryThumbnails( dirname( __FILE__ ), '1.5.9' );
 if ( $needFPWPostThumbnailsClass ) {
-	$fpw_PT = new fpwPostThumbnails( dirname( __FILE__ ), '1.5.8' );
+	$fpw_PT = new fpwPostThumbnails( dirname( __FILE__ ), '1.5.9' );
 }
 ?>
