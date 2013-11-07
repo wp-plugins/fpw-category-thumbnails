@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FPW Category Thumbnails 1.5.9\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/fpw-category-thumbnails\n"
-"POT-Creation-Date: 2013-11-07 06:46:37+00:00\n"
+"POT-Creation-Date: 2013-11-07 07:16:05+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Validation failed!"
 msgstr ""
 
-#: ajax/getimageid.php:33 classes/fpw-category-thumbnails-class.php:117
+#: ajax/getimageid.php:30 classes/fpw-category-thumbnails-class.php:117
 #: code/table.php:21
 msgid "Picture"
 msgstr ""
