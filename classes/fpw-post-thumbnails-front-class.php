@@ -11,8 +11,6 @@ class fpwPostThumbnails {
 	public	$pluginPage;
 	public	$wpVersion;
 	public	$fptOptions;
-	public  $fctMap;
-	public  $fctMapOK;
 
 	//	constructor
 	public	function __construct( $path, $version ) {
@@ -32,8 +30,6 @@ class fpwPostThumbnails {
 
 		//	read options
 		$this->fptOptions = get_option( 'fpw_post_thumbnails_options' );
-		$this->fctMap = get_option( 'fpw_category_thumb_map' );
-		$this->fctMapOK = is_array( $this->fctMap );
 
 		add_action( 'after_setup_theme', array( &$this, 'enableThemeSupportForThumbnails' ), 999 );
 		add_action( 'wp_head', array( &$this, 'dynamicThumbnailStyles' ) ); 
@@ -123,18 +119,21 @@ class fpwPostThumbnails {
 
 		$thumbID = get_post_meta( $post->ID, '_thumbnail_id', true );
 		if ( !( '' === $thumbID ) ) {
-			$catName = '';
-			if ( $this->fctMapOK ) {
-				$catIDs = array_keys( $this->fctMap, $thumbID );
-				if ( count( $catIDs ) > 0 )
-					$catName = get_cat_name( $catIDs[0] );
+			$catNames = '';
+            $categories = get_the_category($post->ID);
+			$count = count( $categories );
+			if ( $count > 0 ) {
+				$catNames = $categories[0]->name;
+				for ($i = 1; $i < $count; $i++) {
+					$catNames = $catNames . ', ' . $categories[$i]->name;
+				}
 			}
 			$pic  = '<div class="thumbnail thumb-' . $this->fptOptions[ $type ][ 'position' ] . '">';
 			$pic .= get_the_post_thumbnail( $post->ID,
 											array(  $this->fptOptions[ $type ][ 'width' ],
 													$this->fptOptions[ $type ][ 'height' ] ),
 											array(	'class' => 'wp-post-image-' . $type,
-													'title' => $catName,
+													'title' => $catNames,
 													'alt'	=> 'Featured Image' ) );
 			$pic .=	'</div>';
 		} else {
