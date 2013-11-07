@@ -17,10 +17,10 @@ if ( 'ngg-' == substr( $_REQUEST['id'], 0, 4 ) ) {
 		if ( !$picture ) {
 			$pic =	'' ;
 		} else {
-			$pic = $picture->imageURL;
-			$w = $picture->meta_data['thumbnail']['width'];
-			$h = $picture->meta_data['thumbnail']['height'];
-			$pic = '<img width="' . $w . '" height="' . $h . '" src="' . $pic . '" />';
+			$pic = '<img src="' . $picture->thumbURL . '" />';
+			//$w = $picture->meta_data['thumbnail']['width'];
+			//$h = $picture->meta_data['thumbnail']['height'];
+			//$pic = '<img width="' . $w . '" height="' . $h . '" src="' . $pic . '" />';
 			$map[$cat] = $pid;
 			update_option( 'fpw_category_thumb_map', $map );
 		}
@@ -30,7 +30,7 @@ if ( 'ngg-' == substr( $_REQUEST['id'], 0, 4 ) ) {
 	}
 	echo $pic;
 } elseif ( 'Author' === $_REQUEST['id'] ) {
-	echo '[ ' . __( 'Picture', 'fpw-fct' ) . ' ]';
+	echo '[ ' . __( 'Picture', 'fpw-category-thumbnails' ) . ' ]';
 	$map[$cat] = 'Author';
 	update_option( 'fpw_category_thumb_map', $map );
 } elseif ( '0' == $_REQUEST['id'] ) {

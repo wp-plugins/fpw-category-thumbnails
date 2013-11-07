@@ -52,27 +52,27 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
         //Build row actions
         $actions = array(
             'getid'     => sprintf( '<input name="submit-getid" type="submit" value="' . 
-									__( 'Get ID', 'fpw-fct' ) . '" class="fpw-fs-button" id="b-get-for-' . 
+									__( 'Get ID', 'fpw-category-thumbnails' ) . '" class="fpw-fs-button" id="b-get-for-' .
 									$item['fpwct_cat_id'] . '" title="' . 
-									__( "get thumbnail's picture ID from media library", "fpw-fct" ) . 
+									__( "get thumbnail's picture ID from media library", "fpw-category-thumbnails" ) .
 									'" style="color:navy;border:none;padding:0 0 0 0;cursor:pointer">'),
             'author'    => sprintf( '<input name="submit-author" type="submit" value="' . 
-									__( 'Author', 'fpw-fct' ) . 
+									__( 'Author', 'fpw-category-thumbnails' ) .
 									'" class="fpw-btn-author" title="' . 
-									__( "set author's picture as thumbnail", "fpw-fct" ) . 
+									__( "set author's picture as thumbnail", "fpw-category-thumbnails" ) .
 									'" id="b-author-for-' . $item['fpwct_cat_id'] . 
 									'" style="color:navy;border:none;padding:0 0 0 0;cursor:pointer">'),
             'clear'     => sprintf( '<input name="submit-clear" type="submit" style="color:navy;border:none;padding:0 0 0 0;cursor:pointer" ' . 
 									'class="fpw-btn-clear" id="b-clear-for-' . 
 									$item['fpwct_cat_id'] . '" title="' . 
-									__( 'clear Image ID and Preview fields', 'fpw-fct' ) . 
-									'" value="' . __( 'Clear', 'fpw-fct' ) . '">'),
+									__( 'clear Image ID and Preview fields', 'fpw-category-thumbnails' ) .
+									'" value="' . __( 'Clear', 'fpw-category-thumbnails' ) . '">'),
             'refresh'	=> sprintf( '<input name="submit-refresh" type="submit" style="color:navy;border:none;padding:0 0 0 0;cursor:pointer" '. 
 									'class="fpw-btn-refresh" id="b-refresh-for-' . 
 									$item['fpwct_cat_id'] . '" title="' .
 									__( 'refresh Preview field after manual ' . 
-									'changes to Image ID field', 'fpw-fct' ) .
-									'" value="' . __( 'Refresh', 'fpw-fct' ) . '">'));
+									'changes to Image ID field', 'fpw-category-thumbnails' ) .
+									'" value="' . __( 'Refresh', 'fpw-category-thumbnails' ) . '">'));
 
         //Return the cat_name contents
         return sprintf('<strong>%1$s</strong> (<strong>%2$s</strong>) <span class="hide-if-no-js">%3$s</span>',
@@ -85,9 +85,9 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
 	//	get all columns
     function get_columns(){
         $columns = array(
-            'fpwct_cat_name'	=> __( 'Category (ID)', 'fpw-fct' ),
-            'fpwct_image_id'	=> __( 'Image ID', 'fpw-fct' ),
-            'fpwct_preview'		=> __( 'Preview', 'fpw-fct' ),
+            'fpwct_cat_name'	=> __( 'Category (ID)', 'fpw-category-thumbnails' ),
+            'fpwct_image_id'	=> __( 'Image ID', 'fpw-category-thumbnails' ),
+            'fpwct_preview'		=> __( 'Preview', 'fpw-category-thumbnails' ),
         );
         return $columns;
     }
@@ -139,20 +139,20 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
 
 		if ( $which == 'top' ) {
 			echo '<input title="' . 
-				 __( 'write modified options and mapping to the database', 'fpw-fct' ) . 
-		 	 	 '" id="update" class="button-primary fpw-submit" type="submit" name="submit-update" value="' . __( 'Update', 'fpw-fct' ) . '" /> ';
+				 __( 'write modified options and mapping to the database', 'fpw-category-thumbnails' ) .
+		 	 	 '" id="update" class="button-primary fpw-submit" type="submit" name="submit-update" value="' . __( 'Update', 'fpw-category-thumbnails' ) . '" /> ';
 			echo '<input title="' . 
-	 			 __( 'add post thumbnail to every existing post / page belonging to the category which has thumbnail id mapped to', 'fpw-fct' ) . 
-	 	 	 	 '" id="apply" class="button-primary fpw-submit" type="submit" name="submit-apply" value="' . __( 'Apply Mapping', 'fpw-fct' ) . '" /> ';
+	 			 __( 'add post thumbnail to every existing post / page belonging to the category which has thumbnail id mapped to', 'fpw-category-thumbnails' ) .
+	 	 	 	 '" id="apply" class="button-primary fpw-submit" type="submit" name="submit-apply" value="' . __( 'Apply Mapping', 'fpw-category-thumbnails' ) . '" /> ';
 			echo '<input title="' . 
-				 __( 'remove thumbnails from all existing posts / pages regardless of the category', 'fpw-fct' ) . 
-	 			 '" id="remove" class="button-primary fpw-submit" type="submit" name="submit-remove" value="' . __( 'Remove Thumbnails', 'fpw-fct' ) . '" />';
+				 __( 'remove thumbnails from all existing posts / pages regardless of the category', 'fpw-category-thumbnails' ) .
+	 			 '" id="remove" class="button-primary fpw-submit" type="submit" name="submit-remove" value="' . __( 'Remove Thumbnails', 'fpw-category-thumbnails' ) . '" />';
 			echo '<input id="buttonPressed" type="hidden" value="" name="buttonPressed" />';
 			if ( !( 'en_US' == get_locale() ) && ( ( 'available' == $fpw_CT->translationStatus ) || ( 'not_exist' == $fpw_CT->translationStatus ) ) )  
 				echo ' <input title="' . 
-					 __( 'download language file for current version', 'fpw-fct' ) . 
+					 __( 'download language file for current version', 'fpw-category-thumbnails' ) .
 					 '" id="language" class="button-primary fpw-submit" type="submit" name="submit-language" value="' . 
-					 __( 'Get Language File', 'fpw-fct' ) . '" />';
+					 __( 'Get Language File', 'fpw-category-thumbnails' ) . '" />';
 		} 
 	}
 }

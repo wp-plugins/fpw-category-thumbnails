@@ -3,9 +3,11 @@
 Plugin Name: FPW Category Thumbnails
 Description: Sets post/page thumbnail based on category. Built-in FPW Post Thumbnails.
 Plugin URI: http://fw2s.com/fpw-category-thumbnails-plugin/
-Version: 1.5.8
+Version: 1.5.9
 Author: Frank P. Walentynowicz
 Author URI: http://fw2s.com/
+Text Domain: fpw-category-thumbnails
+Domain Path: /languages
 
 Copyright 2011 Frank P. Walentynowicz (email : frankpw@fw2s.com)
 

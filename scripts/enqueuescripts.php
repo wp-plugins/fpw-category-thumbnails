@@ -12,32 +12,32 @@
 
 			wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(
 				'ajaxurl'			=> admin_url( 'admin-ajax.php', $protocol ),
-				'text_select_file'	=> esc_html( __( 'Get ID', 'fpw-fct' ) ),
-				'apply_line_1_1'	=> esc_html( __( 'This action will add thumbnails based on current settings to', 'fpw-fct' ) ),
-				'apply_line_1_2'	=> esc_html( __( 'ALL', 'fpw-fct' ) ),
-				'apply_line_1_3'	=> esc_html( __( 'existing posts / pages.', 'fpw-fct' ) ),
-				'apply_line_1_4'	=> esc_html( __( 'Option', 'fpw-fct' ) ),
-				'apply_line_1_5'	=> esc_html( __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-fct' ) ),
-				'apply_line_1_6'	=> esc_html( __( 'will be respected.', 'fpw-fct' ) ),
-				'apply_line_2'		=> esc_html( __( 'Are you sure you want to proceed?', 'fpw-fct' ) ),
-				'remove_line_1_1'	=> esc_html( __( 'This action', 'fpw-fct' ) ),
-				'remove_line_1_2'	=> esc_html( __( 'WILL REMOVE', 'fpw-fct' ) ),
-				'remove_line_1_3'	=> esc_html( __( 'thumbnails from', 'fpw-fct' ) ),
-				'remove_line_1_4'	=> esc_html( __( 'ALL', 'fpw-fct' ) ),
-				'remove_line_1_5'	=> esc_html( __( 'existing posts / pages.', 'fpw-fct' ) ),
-				'remove_line_1_6'	=> esc_html( __( 'Option', 'fpw-fct' ) ),
-				'remove_line_1_7'	=> esc_html( __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-fct' ) ),
-				'remove_line_1_8'	=> esc_html( __( 'WILL NOT', 'fpw-fct' ) ),
-				'remove_line_1_9'	=> esc_html( __( 'be respected!', 'fpw-fct' ) ),
-				'clear_line_1'		=> esc_html( __( 'Are you sure you want to clear this ID?', 'fpw-fct' ) ),
-				'tb_show_title'		=> esc_html( __( 'Get Image ID', 'fpw-fct' ) ),
-				'confirm_header'	=> esc_html( __( 'Please confirm', 'fpw-fct' ) ),
-				'wait_msg'			=> esc_html( __( 'Please wait...', 'fpw-fct' ) ),
-				'help_link_text'	=> esc_html( __( 'Help for FPW Category Thumbnails', 'fpw-fct' ) )
+				'text_select_file'	=> esc_html( __( 'Get ID', 'fpw-category-thumbnails' ) ),
+				'apply_line_1_1'	=> esc_html( __( 'This action will add thumbnails based on current settings to', 'fpw-category-thumbnails' ) ),
+				'apply_line_1_2'	=> esc_html( __( 'ALL', 'fpw-category-thumbnails' ) ),
+				'apply_line_1_3'	=> esc_html( __( 'existing posts / pages.', 'fpw-category-thumbnails' ) ),
+				'apply_line_1_4'	=> esc_html( __( 'Option', 'fpw-category-thumbnails' ) ),
+				'apply_line_1_5'	=> esc_html( __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-category-thumbnails' ) ),
+				'apply_line_1_6'	=> esc_html( __( 'will be respected.', 'fpw-category-thumbnails' ) ),
+				'apply_line_2'		=> esc_html( __( 'Are you sure you want to proceed?', 'fpw-category-thumbnails' ) ),
+				'remove_line_1_1'	=> esc_html( __( 'This action', 'fpw-category-thumbnails' ) ),
+				'remove_line_1_2'	=> esc_html( __( 'WILL REMOVE', 'fpw-category-thumbnails' ) ),
+				'remove_line_1_3'	=> esc_html( __( 'thumbnails from', 'fpw-category-thumbnails' ) ),
+				'remove_line_1_4'	=> esc_html( __( 'ALL', 'fpw-category-thumbnails' ) ),
+				'remove_line_1_5'	=> esc_html( __( 'existing posts / pages.', 'fpw-category-thumbnails' ) ),
+				'remove_line_1_6'	=> esc_html( __( 'Option', 'fpw-category-thumbnails' ) ),
+				'remove_line_1_7'	=> esc_html( __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-category-thumbnails' ) ),
+				'remove_line_1_8'	=> esc_html( __( 'WILL NOT', 'fpw-category-thumbnails' ) ),
+				'remove_line_1_9'	=> esc_html( __( 'be respected!', 'fpw-category-thumbnails' ) ),
+				'clear_line_1'		=> esc_html( __( 'Are you sure you want to clear this ID?', 'fpw-category-thumbnails' ) ),
+				'tb_show_title'		=> esc_html( __( 'Get Image ID', 'fpw-category-thumbnails' ) ),
+				'confirm_header'	=> esc_html( __( 'Please confirm', 'fpw-category-thumbnails' ) ),
+				'wait_msg'			=> esc_html( __( 'Please wait...', 'fpw-category-thumbnails' ) ),
+				'help_link_text'	=> esc_html( __( 'Help for FPW Category Thumbnails', 'fpw-category-thumbnails' ) )
 				));
 
 			wp_localize_script( 'fpw-fs-alerts', 'fpw_fs_alerts', array (
-				'text_ok'			=> esc_html( __( 'OK', 'fpw-fct' ) ),
-				'text_cancel'		=> esc_html( __( 'Cancel', 'fpw-fct' ) )
+				'text_ok'			=> esc_html( __( 'OK', 'fpw-category-thumbnails' ) ),
+				'text_cancel'		=> esc_html( __( 'Cancel', 'fpw-category-thumbnails' ) )
 			));
 ?>

@@ -22,14 +22,14 @@
 			$ok = update_option( 'fpw_post_thumbnails_options', $this->fptOptions );
 
 			if ( $ok ) {
-				echo __( 'Changed data saved successfully.', 'fpw-fct' );
+				echo __( 'Changed data saved successfully.', 'fpw-category-thumbnails' );
 				$this->uninstallMaintenance();
 			} else {
-				echo __( 'No changes detected. Nothing to update.', 'fpw-fct' );
+				echo __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' );
 			}
 
 		} else {
-			echo __( 'Validation failed!', 'fpw-fct' ) . ' ' . $resp;
+			echo __( 'Validation failed!', 'fpw-category-thumbnails' ) . ' ' . $resp;
 		}
 
 		echo '</strong></p>';

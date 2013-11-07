@@ -18,7 +18,7 @@
 				if ( '0' == $value ) {
 					echo '';
 				} elseif ( 'Author' === $value ) {
-					echo '[ ' . __( 'Picture', 'fpw-fct' ) . ' ]';
+					echo '[ ' . __( 'Picture', 'fpw-category-thumbnails' ) . ' ]';
 				} else {
 					if ( 'ngg-' == substr( $value, 0, 4 ) ) {
 						if ( class_exists( 'nggdb' ) ) {
@@ -26,24 +26,20 @@
 							$picture = nggdb::find_image($id);
 							if ( !$picture ) {
 								echo 	'<span style="font-size: large; color: red">' . 
-										__( 'NextGen Gallery: picture not found!', 'fpw-fct' ) . '</span>';
+										__( 'NextGen Gallery: picture not found!', 'fpw-category-thumbnails' ) . '</span>';
 							} else {
-								$pic = $picture->imageURL;
-								$w = $picture->meta_data['thumbnail']['width'];
-								$h = $picture->meta_data['thumbnail']['height'];
-								$pic = '<img width="' . $w . '" height="' . $h . '" src="' . $pic . '" />';
-								echo $pic;
+								echo '<img src="' . $picture->thumbURL . '" />';
 							}
 						} else {
 							echo 	'<span style="font-size: large; color: red">' . 
-									__( 'NextGen Gallery: not active!', 'fpw-fct' ) . '</span>';
+									__( 'NextGen Gallery: not active!', 'fpw-category-thumbnails' ) . '</span>';
 						}
 					} else {
 						if ( wp_attachment_is_image( $value ) ) {
 							echo wp_get_attachment_image( $value, $preview_size );
 						} else {
 							echo 	'<span style="font-size: large; color: red">' . 
-									__( 'Media Library: picture not found!', 'fpw-fct' ) . '</span>';
+									__( 'Media Library: picture not found!', 'fpw-category-thumbnails' ) . '</span>';
 						}
 					}
 				}

@@ -5,7 +5,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 3.3
-Tested up to: 3.5
+Tested up to: 3.7.1
 Stable tag: 1.5.8
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
@@ -56,6 +56,14 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 1. FPW Post Thumbnails - Settings - JavaScript off
 
 == Changelog ==
+
+= 1.5.9 =
+* FPW Category Thumbnails: images compatible with Media Library, NextGEN Gallery up to 1.9.13, NextCellent Gallery, and NextGEN Gallery by Photocrati
+* FPW Category Thumbnails: optimized images display to rescale only when necessary
+* FPW Post Thumbnails: optimized images display to rescale only when necessary
+* FPW Post Thumbnails: standarized 'alt' and 'title' attributes of thumbnails
+* FPW Post Thumbnails: changed contextual help
+* text domain changed for compatibility with language packs and automated updates
 
 = 1.5.8 =
 * FPW Category Thumbnails: modified contextual help

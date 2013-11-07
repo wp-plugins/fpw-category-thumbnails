@@ -28,6 +28,6 @@ if ( $map )
 		next($map);
 	}
 
-echo '<p><strong>' . __( 'Applied thumbnails to existing posts / pages successfully.', 'fpw-fct' ) . '</strong></p>'; 
+echo '<p><strong>' . __( 'Applied thumbnails to existing posts / pages successfully.', 'fpw-category-thumbnails' ) . '</strong></p>';
 die();
 ?>

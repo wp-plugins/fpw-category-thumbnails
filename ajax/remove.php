@@ -26,6 +26,6 @@ while ( strlen( key( $assignments ) ) ) {
 	next( $assignments );
 }
 reset( $assignments );
-echo '<p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-fct' ) . '</strong></p>';
+echo '<p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</strong></p>';
 die();
 ?>

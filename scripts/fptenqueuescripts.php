@@ -14,7 +14,7 @@
 
 			wp_localize_script( 'fpw-fpt', 'fpw_fpt', array(
 				'ajaxurl'			=> admin_url( 'admin-ajax.php', $protocol ),
-				'wait_msg'			=> esc_html( __( 'Please wait...', 'fpw-fct' ) ),
-				'help_link_text'	=> esc_html( __( 'Help for FPW Post Thumbnails', 'fpw-fct' ) )
+				'wait_msg'			=> esc_html( __( 'Please wait...', 'fpw-category-thumbnails' ) ),
+				'help_link_text'	=> esc_html( __( 'Help for FPW Post Thumbnails', 'fpw-category-thumbnails' ) )
 			));
 ?>

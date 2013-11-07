@@ -21,9 +21,9 @@ echo '<p><strong>';
 if ( $ok ) {
 	$this->fctOptions = $opt;
 	$this->uninstallMaintenance();
-	echo __( 'Changed data saved successfully.', 'fpw-fct' );
+	echo __( 'Changed data saved successfully.', 'fpw-category-thumbnails' );
 } else {
-	echo __( 'No changes detected. Nothing to update.', 'fpw-fct' );
+	echo __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' );
 }
 
 echo '</strong></p>';

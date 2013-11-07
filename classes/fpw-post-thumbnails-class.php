@@ -111,7 +111,6 @@ class fpwPostThumbnails {
 				'enabled'			=> false,
 				'width'				=> 64,
 				'height'			=> 64,
-				'base'				=> 'width',
 				'position'			=> 'left',
 				'border'			=> false,
 				'border_width'		=> 1,
@@ -131,7 +130,6 @@ class fpwPostThumbnails {
 				'enabled'			=> false,
 				'width'				=> 64,
 				'height'			=> 64,
-				'base'				=> 'width',
 				'position'			=> 'left',
 				'border'			=> false,
 				'border_width'		=> 1,
@@ -177,8 +175,8 @@ class fpwPostThumbnails {
 	
 	//	register admin menu
 	function adminMenu() {
-		$page_title = __( 'FPW Post Thumbnails', 'fpw-fct' );
-		$menu_title = __( 'FPW Post Thumbnails', 'fpw-fct' );
+		$page_title = __( 'FPW Post Thumbnails', 'fpw-category-thumbnails' );
+		$menu_title = __( 'FPW Post Thumbnails', 'fpw-category-thumbnails' );
 		$this->fptPage = add_theme_page( $page_title, $menu_title, 'manage_options', 
 							'fpw-post-thumbnails', array( &$this, 'fptSettings' ) );
 		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueueScripts' ) );
@@ -201,11 +199,11 @@ class fpwPostThumbnails {
 	// 	handle pointer
 	public function custom_print_footer_scripts() {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
-    	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
+    	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "Removed 'hide-if-no-js' class from both 'Copy' buttons", 'fpw-fct' ) ) . '</li>';
+						   esc_js( __( "Removed 'hide-if-no-js' class from both 'Copy' buttons", 'fpw-category-thumbnails' ) ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "Modified plugin's contextual help", 'fpw-fct' ) ) . '</li>';
+						   esc_js( __( "Modified plugin's contextual help", 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -261,12 +259,12 @@ class fpwPostThumbnails {
 			global 	$wp_admin_bar;
 			$main = array(
 				'id' => 'fpw_plugins',
-				'title' => __( 'FPW Plugins', 'fpw-fct' ),
+				'title' => __( 'FPW Plugins', 'fpw-category-thumbnails' ),
 				'href' => '#' );
 			$subm = array(
 				'id' => 'fpw_bar_post_thumbnails',
 				'parent' => 'fpw_plugins',
-				'title' => __( 'FPW Post Thumbnails', 'fpw-fct' ),
+				'title' => __( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ),
 				'href' => get_admin_url() . 'themes.php?page=fpw-post-thumbnails' );
 			$addmain = ( is_array( $wp_admin_bar->get_node( 'fpw_plugins' ) ) ) ? false : true;
 			if ( $addmain )
@@ -311,8 +309,6 @@ class fpwPostThumbnails {
 				( isset( $p[ 'excerpt_' . $ck ] ) ) ? true : false;
 		}
 
-		$this->fptOptions[ 'content' ][ 'base' ] = $p[ 'content_base' ];
-		$this->fptOptions[ 'excerpt' ][ 'base' ] = $p[ 'excerpt_base' ];
 		$this->fptOptions[ 'content' ][ 'position' ] = $p[ 'content_position' ];
 		$this->fptOptions[ 'excerpt' ][ 'position' ] = $p[ 'excerpt_position' ];
 
@@ -331,16 +327,16 @@ class fpwPostThumbnails {
 
 		foreach ( $valuesToCheck as $val ) {
 			if ( !ctype_digit( (string) $p[ 'content_' . $val ] ) ) { 
-				$response = __( 'In Content panel field', 'fpw-fct' ) . ' "' . 
+				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $val ) . '" ' . 
-							__( 'contains non-numeric characters.', 'fpw-fct' );
+							__( 'contains non-numeric characters.', 'fpw-category-thumbnails' );
 				$valid = false;
 				break;
 			}
 			if ( !ctype_digit( (string) $p[ 'excerpt_' . $val ] ) ) {
-				$response = __( 'In Excerpt panel field', 'fpw-fct' ) . ' "' . 
+				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $val ) . '" ' . 
-							__( 'contains non-numeric characters.', 'fpw-fct' );
+							__( 'contains non-numeric characters.', 'fpw-category-thumbnails' );
 				$valid = false;
 				break;
 			}
@@ -352,30 +348,30 @@ class fpwPostThumbnails {
 		foreach( $colorsToCheck as $col ) {
 			if ( !( 7 == strlen( $p[ 'content_' . $col ] ) ) || 
 				 !( '#' == substr( $p[ 'content_' . $col ], 0, 1 ) ) ) {
-				$response = __( 'In Content panel field', 'fpw-fct' ) . ' "' . 
+				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $col ) . '" ' . 
-							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-fct" );
+							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-category-thumbnails" );
 				break;
 			}
 			if ( !( 7 == strlen( $p[ 'excerpt_' . $col ] ) ) || 
 				 !( '#' == substr( $p[ 'excerpt_' . $col ], 0, 1 ) ) ) {
-				$response = __( 'In Excerpt panel field', 'fpw-fct' ) . ' "' . 
+				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $col ) . '" ' . 
-							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-fct" );
+							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-category-thumbnails" );
 				break;
 			}
 			$ac = substr( $p[ 'content_' . $col ], 1, strlen( $p[ 'content_' . $col ] ) - 1 );
 			$ae = substr( $p[ 'excerpt_' . $col ], 1, strlen( $p[ 'excerpt_' . $col ] ) - 1 );
 			if ( !ctype_xdigit( $ac ) ) {
-				$response = __( 'In Content panel field', 'fpw-fct' ) . ' "' . 
+				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $col ) . '" ' . 
-							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-fct" );
+							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-category-thumbnails" );
 				break;
 			}
 			if ( !ctype_xdigit( $ae ) ) {
-				$response = __( 'In Excerpt panel field', 'fpw-fct' ) . ' "' . 
+				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $col ) . '" ' . 
-							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-fct" );
+							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-category-thumbnails" );
 				break;
 			}
 		}
@@ -389,7 +385,7 @@ class fpwPostThumbnails {
 			'enabled',
 			'width',
 			'height',
-			'base',
+//			'base',
 			'position',
 			'border',
 			'border_radius',
@@ -421,19 +417,19 @@ class fpwPostThumbnails {
 			 isset( $_POST[ 'submit-copy-left' ] ) ) {
 			if ( !isset( $_POST[ 'fpw-fpt-nonce' ] ) ) 
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red"><strong>' . 
-					 __( 'You did not send any credentials!', 'fpw-fct' ) . '</strong></p>' );
+					 __( 'You did not send any credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
 			if ( !wp_verify_nonce( $_POST[ 'fpw-fpt-nonce' ], 'fpw-fpt-nonce' ) ) 
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red;"><strong>' . 
-					 __( 'You did not send the right credentials!', 'fpw-fct' ) . '</strong></p>' );
+					 __( 'You did not send the right credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
 			$resp = $this->fptValidateInput( $_POST );
 		}
 
 		//	HTML starts here
 		echo 	'<div class="wrap">';
 		echo	'<div id="icon-themes" class="icon32"></div><h2 id="fpt-settings-title">' . 
-				__( 'FPW Post Thumbnails', 'fpw-fct' ) . ' <span style="font-size: small">- <a href="' . 
+				__( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ) . ' <span style="font-size: small">- <a href="' .
 				get_admin_url() . 'themes.php?page=fpw-category-thumbnails">' . 
-				__( 'FPW Category Thumbnails', 'fpw-fct' ) . '</a></span></h2>';
+				__( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) . '</a></span></h2>';
 
 		//	the form starts here
 		echo '<div>';
@@ -449,13 +445,13 @@ class fpwPostThumbnails {
 		echo '<input type="checkbox" class="fpt-option-group" id="box-clean" name="clean" value="clean"';
 		if ( $this->fptOptions[ 'clean' ] ) 
 			echo ' checked';
-		echo '> ' . __( "Remove plugin's data from database on uninstall", 'fpw-fct' ) . '<br />';
+		echo '> ' . __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . '<br />';
 
 		//	add plugin to admin bar checkbox
 		echo '<input type="checkbox" class="fpt-option-group" id="box-abar" name="abar" value="abar"';
 		if ( $this->fptOptions[ 'abar' ] ) 
 			echo ' checked';
-		echo '> ' . __( 'Add this plugin to the Admin Bar', 'fpw-fct' ) . '<br />';
+		echo '> ' . __( 'Add this plugin to the Admin Bar', 'fpw-category-thumbnails' ) . '<br />';
 
 		//	end of options section
 		echo '</div>';
@@ -469,20 +465,20 @@ class fpwPostThumbnails {
 
 		//	Update button
 		echo	'<input title="' . 
-				__( 'write modified data to the database', 'fpw-fct' ) . 
+				__( 'write modified data to the database', 'fpw-category-thumbnails' ) .
 				'" id="fpt-update" class="button-primary fpt-submit" ' . 
 				'type="submit" name="submit-update" value=" ' . 
-				__( 'Update', 'fpw-fct' ) . ' " /> ';
+				__( 'Update', 'fpw-category-thumbnails' ) . ' " /> ';
 
 		//	Get Language File button
 		if ( !( 'en_US' == $this->fptLocale ) && 
 				( ( 'available' == $this->translationStatus ) || 
 				( 'not_exist' == $this->translationStatus ) ) )  
 			echo	'<input title="' . 
-					__( 'load language file for your version', 'fpw-fct' ) . 
+					__( 'load language file for your version', 'fpw-category-thumbnails' ) .
 					'" id="fpt-language" class="button-primary fpt-submit" ' . 
 					'type="submit" name="submit-language" value=" ' . 
-					__( 'Get Language File', 'fpw-fct' ) . ' " />';
+					__( 'Get Language File', 'fpw-category-thumbnails' ) . ' " />';
         echo	'</div>';
 
 		//	notification division
@@ -491,10 +487,10 @@ class fpwPostThumbnails {
 			if ( '' == $resp ) {
 				$updateOK = update_option( 'fpw_post_thumbnails_options', $this->fptOptions );
 				if ( $updateOK ) {
-					echo __( 'Changed data saved successfully.', 'fpw-fct' );
+					echo __( 'Changed data saved successfully.', 'fpw-category-thumbnails' );
 					$this->uninstallMaintenance();				
 				} else {
-					echo __( 'No changes detected. Nothing to update.', 'fpw-fct' );				
+					echo __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' );
 				}
 			} else {
 				echo $resp;
@@ -504,15 +500,15 @@ class fpwPostThumbnails {
 		
 		if ( isset( $_POST[ 'submit-language' ] ) ) {
 			if ( 'not_exist' == $this->translationStatus ) {
-				$m = __( 'Language file for this version is not yet available.', 'fpw-fct' );
+				$m = __( 'Language file for this version is not yet available.', 'fpw-category-thumbnails' );
 			} elseif ( 'installed' == $this->translationStatus ) {
-				$m = __( 'Language file is already installed. Please reload this page.', 'fpw-fct' );
+				$m = __( 'Language file is already installed. Please reload this page.', 'fpw-category-thumbnails' );
 			} else {
 				$handle = @fopen( $this->translationPath, 'wb' );
 				fwrite( $handle, $this->translationResponse[ 'body' ] );
 				fclose($handle);
 				$this->translationStatus = 'installed';
-				$m = __( 'Language file downloaded successfully. It will be applied as soon as this page is reloaded.', 'fpw-fct' );
+				$m = __( 'Language file downloaded successfully. It will be applied as soon as this page is reloaded.', 'fpw-category-thumbnails' );
 			}
 			echo '<div id="fpt-message" class="updated fade" style="margin-bottom: 10px;"><p><strong>' . $m;
 			echo '</strong></p></div>';
@@ -521,7 +517,7 @@ class fpwPostThumbnails {
 		if ( isset( $_POST[ 'submit-copy-right' ] ) ) { 
 			if ( '' == $resp ) {
 				$this->copyPanels( 'right' );
-				$m = __( 'Values copied from the left to the right panel.', 'fpw-fct' );
+				$m = __( 'Values copied from the left to the right panel.', 'fpw-category-thumbnails' );
 			} else {
 				$m = $resp;			
 			}
@@ -530,7 +526,7 @@ class fpwPostThumbnails {
 		} elseif ( isset( $_POST[ 'submit-copy-left' ] ) ) {
 			if ( '' == $resp ) {
 				$this->copyPanels( 'left' );
-				$m = __( 'Values copied from the right to the left panel.', 'fpw-fct' );
+				$m = __( 'Values copied from the right to the left panel.', 'fpw-category-thumbnails' );
 			} else {
 				$m = $resp;
 			}
@@ -541,27 +537,33 @@ class fpwPostThumbnails {
 		echo	'<div class="metabox-holder" style="width:49%; float:left; margin-right:10px;">';
         echo	'<div class="postbox">';
 		echo	'<h3 style="cursor:default; background-color: #F1F1F1; background-image: -moz-linear-gradient(center top , #F9F9F9, #CCCCCC);">' . 
-				__( 'Content thumbnails enabled:', 'fpw-fct' ) . ' <input type="checkbox" class="fpt-option-group" ' . 
+				__( 'Content thumbnails enabled:', 'fpw-category-thumbnails' ) . ' <input type="checkbox" class="fpt-option-group" ' .
 				'id="box-content-enabled" name="content_enabled" value="content_enabled"';
 		if ( $this->fptOptions[ 'content' ][ 'enabled' ] ) 
 		echo	' checked';
-		echo	'> <input type="submit" title="' . __( 'copy all values to the right panel', 'fpw-fct' ) . 
+		echo	'> <input type="submit" title="' . __( 'copy all values to the right panel', 'fpw-category-thumbnails' ) .
 				'" id="fpt-copy-right" name="submit-copy-right" value="' . 
-				__( 'Copy', 'fpw-fct' ) . ' &raquo;' . 
+				__( 'Copy', 'fpw-category-thumbnails' ) . ' &raquo;' .
 				'" class="button-secondary fpt-submit"> <input alt="#TB_inline?height=300&width=400&inlineId=fptContentPreviev" ' . 
-				'title="' . __( 'Content - Preview', 'fpw-fct' ) . '" class="thickbox button-secondary hide-if-no-js" ' . 
-				'type="button" value="' . __( 'Preview', 'fpw-fct' ) . '" id="content-preview" />' . 
+				'title="' . __( 'Content - Preview', 'fpw-category-thumbnails' ) . '" class="thickbox button-secondary hide-if-no-js" ' .
+				'type="button" value="' . __( 'Preview', 'fpw-category-thumbnails' ) . '" id="content-preview" />' .
 				'</h3>';
 		echo	'<div id="fptContentPreviev" class="thickbox" style="display: none;">';
-		echo	'<div class="entry"><img class="wp-post-image-content" src="' . 
-				$this->fptUrl . '/images/Frank.jpg" /><p style="text-align: justify">Lorem ipsum dolor sit amet consectetuer ' . 
+		echo	'<div id="thumbnail-content">';
+//		if ( 'left' == $this->fptOptions[ 'content' ][ 'position' ] ) {
+//			echo 'style="float: left; margin: 18px 10px 5px 0;">';
+//		} else {
+//			echo 'style="float: right; margin: 18px 0 5px 10px;">';
+//		}
+		echo 	'<img class="wp-post-image-content" src="' .
+				$this->fptUrl . '/images/Frank.jpg" /></div><p style="text-align: justify">Lorem ipsum dolor sit amet consectetuer ' .
 				'nunc enim laoreet pellentesque augue. Vestibulum Vivamus lacus dis ' . 
 				'Nunc semper laoreet platea Pellentesque ultrices metus. Tincidunt ' . 
 				'ridiculus nec Lorem orci metus hac Nam Lorem nascetur orci. Sed et ' . 
 				'quis aliquet urna tortor ut neque nec elit nibh. At justo condimentum ' . 
 				'sit Aenean ac vitae aliquam quis adipiscing dolor. Nibh leo nibh ' . 
 				'aliquam laoreet elit convallis condimentum volutpat id consequat. Ut quis.</p>';
-		echo	'</div></div>';			
+		echo	'</div>';			
 		echo	'<div class="inside" style="padding:0px 6px 0px 6px;">';
 		echo	'<table style="width:100%">';
 		echo	'<tr>';
@@ -579,22 +581,10 @@ class fpwPostThumbnails {
 		echo	'<td style="verical-align: middle">height</td>';
 		echo	'</tr>';
 		echo	'<tr>';
-		echo	'<td style="width: 30%; verical-align: middle"><select name="content_base" id="content-base" style="width: 70px">' . 
-				'<option value="width"';
-		if ( 'width' == $this->fptOptions[ 'content' ][ 'base' ] ) 
-			echo ' selected="selected"'; 
-		echo	'>width</option>' . 
-				'<option value="height"';
-		if ( 'height' == $this->fptOptions[ 'content' ][ 'base' ] ) 
-			echo ' selected="selected"'; 
-		echo 	'>height</option></select></td>'; 
-		echo	'<td style="verical-align: middle">scaling base</td>';
-		echo	'</tr>';
-		echo	'<tr>';
-		echo	'<td style="width: 30%; verical-align: middle"><select name="content_position" id="content-position" style="width: 70px">' . 
+		echo	'<td style="width: 30%; verical-align: middle"><select name="content_position" id="content-position" style="width: 70px">' .
 				'<option value="left"';
-		if ( 'left' == $this->fptOptions[ 'content' ][ 'position' ] ) 
-			echo ' selected="selected"'; 
+		if ( 'left' == $this->fptOptions[ 'content' ][ 'position' ] )
+			echo ' selected="selected"';
 		echo	'>left</option>' . 
 				'<option value="right"';
 		if ( 'right' == $this->fptOptions[ 'content' ][ 'position' ] ) 
@@ -705,23 +695,23 @@ class fpwPostThumbnails {
     	echo	'<div class="metabox-holder" style="width:49%; float:left;">';
         echo	'<div class="postbox">';
 		echo	'<h3 style="cursor:default;background-color: #F1F1F1; background-image: -moz-linear-gradient(center top , #F9F9F9, #CCCCCC);">' . 
-				__( 'Excerpt thumbnails enabled:', 'fpw-fct' ) . ' <input type="checkbox" class="fpt-option-group" ' . 
+				__( 'Excerpt thumbnails enabled:', 'fpw-category-thumbnails' ) . ' <input type="checkbox" class="fpt-option-group" ' .
 				'id="box-excerpt-enabled" name="excerpt_enabled" value="excerpt_enabled"';
 		if ( $this->fptOptions[ 'excerpt' ][ 'enabled' ] ) 
 		echo	' checked';
-		echo	'> <input type="submit" title="' . __( 'copy all values to the left panel', 'fpw-fct' ) . 
+		echo	'> <input type="submit" title="' . __( 'copy all values to the left panel', 'fpw-category-thumbnails' ) .
 				'" id="fpt-copy-left" name="submit-copy-left" value="&laquo; ' . 
-				__( 'Copy', 'fpw-fct' ) . 
+				__( 'Copy', 'fpw-category-thumbnails' ) .
 				'" class="button-secondary fpt-submit"> <input alt="#TB_inline?height=300&width=400&inlineId=fptExcerptPreviev" ' . 
-				'title="' . __( 'Excerpt - Preview', 'fpw-fct' ) . '" class="thickbox button-secondary hide-if-no-js" ' . 
-				'type="button" value="' . __( 'Preview', 'fpw-fct' ) . '" id="excerpt-preview" /></h3>';
+				'title="' . __( 'Excerpt - Preview', 'fpw-category-thumbnails' ) . '" class="thickbox button-secondary hide-if-no-js" ' .
+				'type="button" value="' . __( 'Preview', 'fpw-category-thumbnails' ) . '" id="excerpt-preview" /></h3>';
 		echo	'<div id="fptExcerptPreviev" class="thickbox" style="display: none;">';
-		echo	'<div class="excerpt"><img class="wp-post-image-excerpt" src="' . 
-				$this->fptUrl . '/images/Frank.jpg" /><p style="text-align: justify">Lorem ipsum dolor sit amet consectetuer ' . 
+		echo	'<div id="thumbnail-excerpt"><img class="wp-post-image-excerpt" src="' .
+				$this->fptUrl . '/images/Frank.jpg" /></div><p style="text-align: justify">Lorem ipsum dolor sit amet consectetuer ' .
 				'nunc enim laoreet pellentesque augue. Vestibulum Vivamus lacus dis ' . 
 				'Nunc semper laoreet platea Pellentesque ultrices metus. Tincidunt ' . 
 				'ridiculus nec Lorem orci [...]</p>';
-		echo	'</div></div>';			
+		echo	'</div>';			
 		echo	'<div class="inside" style="padding:0px 6px 0px 6px;">';
 		echo	'<table style="width:100%">';
 		echo	'<tr>';
@@ -737,18 +727,6 @@ class fpwPostThumbnails {
 					$this->fptOptions[ 'excerpt' ][ 'height' ] . '" name="excerpt_height" id="excerpt-height" class="excerpt-height-value" />';
 		echo	' px</td>';
 		echo	'<td style="verical-align: middle">height</td>';
-		echo	'</tr>';
-		echo	'<tr>';
-		echo	'<td style="width: 30%; verical-align: middle"><select name="excerpt_base" id="excerpt-base" style="width: 70px">' . 
-				'<option value="width"';
-		if ( 'width' == $this->fptOptions[ 'excerpt' ][ 'base' ] ) 
-			echo ' selected="selected"'; 
-		echo	'>width</option>' . 
-				'<option value="height"';
-		if ( 'height' == $this->fptOptions[ 'excerpt' ][ 'base' ] ) 
-			echo ' selected="selected"'; 
-		echo 	'>height</option></select></td>'; 
-		echo	'<td style="verical-align: middle">scaling base</td>';
 		echo	'</tr>';
 		echo	'<tr>';
 		echo	'<td style="width: 30%; verical-align: middle"><select name="excerpt_position" id="excerpt-position" style="width: 70px">' . 

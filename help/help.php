@@ -5,118 +5,118 @@
 
 		global	$current_screen;
 
-		$sidebar =	'<p style="font-size: larger">' . __( 'More information', 'fpw-fct' ) . '</p>' . 
-					'<blockquote><a href="http://fw2s.com/fpw-category-thumbnails-plugin/" target="_blank">' . __( "Plugin's site", "fpw-fct" ) . '</a></blockquote>' . 
-					'<p style="font-size: larger">' . __( 'Support', 'fpw-fct' ) . '</p>' . 
+		$sidebar =	'<p style="font-size: larger">' . __( 'More information', 'fpw-category-thumbnails' ) . '</p>' .
+					'<blockquote><a href="http://fw2s.com/fpw-category-thumbnails-plugin/" target="_blank">' . __( "Plugin's site", "fpw-category-thumbnails" ) . '</a></blockquote>' .
+					'<p style="font-size: larger">' . __( 'Support', 'fpw-category-thumbnails' ) . '</p>' .
 					'<blockquote><a href="http://wordpress.org/tags/fpw-category-thumbnails?forum_id=10" target="_blank">WordPress</a><br />' . 
 					'<a href="http://fw2s.com/support/fpw-category-thumbnails-support/" target="_blank">FWSS</a></blockquote>'; 
 
 		$current_screen->set_help_sidebar( $sidebar );
 
-		$intro =	'<p style="font-size: larger">' . __( 'Introduction', 'fpw-fct' ) . '</p>' . 
-					'<blockquote style="text-align: justify">' . __( 'Setting featured images for posts / pages could be very time consuming,', 'fpw-fct' ) . 
-					' ' . __( 'especially when your media library holds hundreds of pictures.', 'fpw-fct' ) . ' ' . 
-					__( 'Very often we select the same thumbnail for posts in particular category.', 'fpw-fct' ) . ' ' . 
-					__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-fct' ) . '</blockquote></p>' . 
-					'<p style="font-size: larger">' . __( 'Note', 'fpw-fct' ) . '</p>' . 
-					'<blockquote style="text-align: justify">' . __( 'Please remember that the active theme must support post thumbnails.', 'fpw-fct' ) . 
+		$intro =	'<p style="font-size: larger">' . __( 'Introduction', 'fpw-category-thumbnails' ) . '</p>' .
+					'<blockquote style="text-align: justify">' . __( 'Setting featured images for posts / pages could be very time consuming,', 'fpw-category-thumbnails' ) .
+					' ' . __( 'especially when your media library holds hundreds of pictures.', 'fpw-category-thumbnails' ) . ' ' .
+					__( 'Very often we select the same thumbnail for posts in particular category.', 'fpw-category-thumbnails' ) . ' ' .
+					__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '</blockquote></p>' .
+					'<p style="font-size: larger">' . __( 'Note', 'fpw-category-thumbnails' ) . '</p>' .
+					'<blockquote style="text-align: justify">' . __( 'Please remember that the active theme must support post thumbnails.', 'fpw-category-thumbnails' ) .
 					'</blockquote>';
 
 		$current_screen->add_help_tab( array(
-   			'title'   => __( 'Introduction', 'fpw-fct' ),
+   			'title'   => __( 'Introduction', 'fpw-category-thumbnails' ),
     		'id'      => 'fpw-fct-help-introduction',
    			'content' => $intro,
 		) );
 
-		$opts =		'<p style="font-size: larger">' . __( 'Available Options', 'fpw-fct' ) . '</p>' . 
-					'<blockquote style="text-align: justify"><strong>' . __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-fct' ) . '</strong> ' . 
-					'( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( 'while the post is being saved the originally set thumbnail will be preserved', 'fpw-fct' ) . '<br />' . 
-					'<strong>' . __( "Remove plugin's data from database on uninstall", 'fpw-fct' ) . '</strong> ' . 
-					'( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( "during uninstall procedure all plugin's information ( options, mappings ) will be removed from the database", "fpw-fct" ) . '<br />' . 
-					'<strong>' . __( 'Add this plugin to the Admin Bar', 'fpw-fct' ) . '</strong> ' . 
-					'( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( "the plugin's link to its settings page will be added to the Admin Bar", "fpw-fct" ) . '<br />' . 
-					'<strong>' . __( "Enable FPW Post Thumbnails", 'fpw-fct' ) . '</strong> ' . 
-					'( ' . __( 'checked', 'fpw-fct' ) . ' ) - ' . __( "activates FPW Post Thumbnails plugin's functionality", "fpw-fct" ) . '</blockquote>';
+		$opts =		'<p style="font-size: larger">' . __( 'Available Options', 'fpw-category-thumbnails' ) . '</p>' .
+					'<blockquote style="text-align: justify"><strong>' . __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-category-thumbnails' ) . '</strong> ' .
+					'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . __( 'while the post is being saved the originally set thumbnail will be preserved', 'fpw-category-thumbnails' ) . '<br />' .
+					'<strong>' . __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . '</strong> ' .
+					'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . __( "during uninstall procedure all plugin's information ( options, mappings ) will be removed from the database", "fpw-category-thumbnails" ) . '<br />' .
+					'<strong>' . __( 'Add this plugin to the Admin Bar', 'fpw-category-thumbnails' ) . '</strong> ' .
+					'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . __( "the plugin's link to its settings page will be added to the Admin Bar", "fpw-category-thumbnails" ) . '<br />' .
+					'<strong>' . __( "Enable FPW Post Thumbnails", 'fpw-category-thumbnails' ) . '</strong> ' .
+					'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . __( "activates FPW Post Thumbnails plugin's functionality", "fpw-category-thumbnails" ) . '</blockquote>';
 
 		$current_screen->add_help_tab( array(
-   			'title'   => __( 'Options', 'fpw-fct' ),
+   			'title'   => __( 'Options', 'fpw-category-thumbnails' ),
     		'id'      => 'fpw-fct-help-options',
 	   		'content' => $opts,
 		) );
 
-		$mapping =	'<p style="font-size: larger">' . __( 'Mapping', 'fpw-fct' ) . '</p><blockquote style="text-align: justify">' . 
-					__( 'Each row of the mapping table represents a category and a thumbnail image ID assigned to it.', 'fpw-fct' ) . ' ' . 
-					__( 'First column holds a category name and its ID.', 'fpw-fct' ) . ' ' . 
-					__( "Second column consists of four elements: Image ID - an input field which holds thumbnail's image ID,", "fpw-fct" ) . ' ' . 
-					__( "Get ID, Clear, and Refresh buttons. Third column holds thumbnail's preview.", "fpw-fct" ) . ' ' . 
-					__( "Image ID can be entered manually ( if you remember it ) or by clicking on 'Get ID' button which will call 'media upload' overlay.", "fpw-fct" ) . 
-					'</blockquote><p style="font-size: larger">' . __( 'Action Buttons', 'fpw-fct' ) . '</p><blockquote>' . 
+		$mapping =	'<p style="font-size: larger">' . __( 'Mapping', 'fpw-category-thumbnails' ) . '</p><blockquote style="text-align: justify">' .
+					__( 'Each row of the mapping table represents a category and a thumbnail image ID assigned to it.', 'fpw-category-thumbnails' ) . ' ' .
+					__( 'First column holds a category name and its ID.', 'fpw-category-thumbnails' ) . ' ' .
+					__( "Second column consists of four elements: Image ID - an input field which holds thumbnail's image ID,", "fpw-category-thumbnails" ) . ' ' .
+					__( "Get ID, Clear, and Refresh buttons. Third column holds thumbnail's preview.", "fpw-category-thumbnails" ) . ' ' .
+					__( "Image ID can be entered manually ( if you remember it ) or by clicking on 'Get ID' button which will call 'media upload' overlay.", "fpw-category-thumbnails" ) .
+					'</blockquote><p style="font-size: larger">' . __( 'Action Buttons', 'fpw-category-thumbnails' ) . '</p><blockquote>' .
 					'<table style="width: 100%;"><tr><td style="text-align: left; vertical-align: middle;">' . 
 					'<tr><td style="text-align: left; vertical-align: middle;">' .
-					'<input class="button-primary" type="button" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' . 
-					__( 'Update', 'fpw-fct' ) . '" /></td><td>' . __( 'saves modified options and mapping to the database', 'fpw-fct' ) .  
+					'<input class="button-primary" type="button" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
+					__( 'Update', 'fpw-category-thumbnails' ) . '" /></td><td>' . __( 'saves modified options and mapping to the database', 'fpw-category-thumbnails' ) .
 					'</td></tr><tr><td style="text-align: left; vertical-align: middle;">' . 
-					'<input class="button-primary" type="button" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' . 
-					__( 'Apply Mapping', 'fpw-fct' ) . '" /></td><td>' . __( 'adds thumbnails to existing posts / pages based on category mapping', 'fpw-fct' ) . 
+					'<input class="button-primary" type="button" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
+					__( 'Apply Mapping', 'fpw-category-thumbnails' ) . '" /></td><td>' . __( 'adds thumbnails to existing posts / pages based on category mapping', 'fpw-category-thumbnails' ) .
 					'</td></tr><tr><td style="text-align: left; vertical-align: middle;">' . 
-					'<input class="button-primary" type="button" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' . 
-					__( 'Remove Thumbnails', 'fpw-fct' ) . '" /></td><td>' . __( 'removes thumbnails from all posts /pages regardless of the category', 'fpw-fct' ) . 
+					'<input class="button-primary" type="button" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
+					__( 'Remove Thumbnails', 'fpw-category-thumbnails' ) . '" /></td><td>' . __( 'removes thumbnails from all posts /pages regardless of the category', 'fpw-category-thumbnails' ) .
 					'<tr><td style="text-align: left; vertical-align: middle;">' .
-					'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' . 
-					__( 'Get ID', 'fpw-fct' ) . '" />' . '</td><td style="text-align: justify; vertical-align: middle;">' .  
-					__( "will call 'media upload' overlay and on return will populate 'Image ID' input box and 'Preview' area ( AJAX - without reloading screen )", "fpw-fct" ) . 
+					'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
+					__( 'Get ID', 'fpw-category-thumbnails' ) . '" />' . '</td><td style="text-align: justify; vertical-align: middle;">' .
+					__( "will call 'media upload' overlay and on return will populate 'Image ID' input box and 'Preview' area ( AJAX - without reloading screen )", "fpw-category-thumbnails" ) .
 					'</td></tr><tr><td style="text-align: left; vertical-align: middle;">' . 
-					'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' .
-					__( 'Author', 'fpw-fct' ) . '" />' . '</td><td style="text-align: justify; vertical-align: middle;">' .
-					__( "will assign author's picture as a thumbnail for the category", "fpw-fct" ) .
+					'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
+					__( 'Author', 'fpw-category-thumbnails' ) . '" />' . '</td><td style="text-align: justify; vertical-align: middle;">' .
+					__( "will assign author's picture as a thumbnail for the category", "fpw-category-thumbnails" ) .
 					'</td></tr><tr><td style="text-align: left; vertical-align: middle;">' .  
-					'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' . 
-					__( 'Clear', 'fpw-fct' ) . '" /></td><td style="text-align: justify; vertical-align: middle;">' . 
-					__( "will enter '0' as image ID and clear 'Preview' area ( AJAX - without reloading screen )", "fpw-fct" ) . 
+					'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
+					__( 'Clear', 'fpw-category-thumbnails' ) . '" /></td><td style="text-align: justify; vertical-align: middle;">' .
+					__( "will enter '0' as image ID and clear 'Preview' area ( AJAX - without reloading screen )", "fpw-category-thumbnails" ) .
 					'</td></tr><tr><td style="text-align: left; vertical-align: middle;">' . 
-					'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-fct' ) . '" value="' . 
-					__( 'Refresh', 'fpw-fct' ) . '" /></td><td style="text-align: justify; vertical-align: middle;">' . 
-					__( "when clicked after entering of an image ID manually it will populate 'Preview' area ( AJAX - without reloading screen )", "fpw-fct" ) . 
+					'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
+					__( 'Refresh', 'fpw-category-thumbnails' ) . '" /></td><td style="text-align: justify; vertical-align: middle;">' .
+					__( "when clicked after entering of an image ID manually it will populate 'Preview' area ( AJAX - without reloading screen )", "fpw-category-thumbnails" ) .
 					'</td></tr></table></blockquote>';
 
 		$current_screen->add_help_tab( array(
-   			'title'   => __( 'Mapping & Actions', 'fpw-fct' ),
+   			'title'   => __( 'Mapping & Actions', 'fpw-category-thumbnails' ),
     		'id'      => 'fpw-fct-help-mapping',
 	   		'content' => $mapping,
 		) );
 
-		$faq =		'<p style="font-size: larger">' . __( 'Frequently Asked Questions', 'fpw-fct' ) . '</p><blockquote style="text-align: justify"><strong>' . 
-					__( 'Question:', 'fpw-fct' ) . '</strong> ' .
-					__( 'I got an ID for the image and assigned it to the category, and the plugin does not display it in posts.', 'fpw-fct' ) . '<br /><strong>' . 
-					__( 'Answer:', 'fpw-fct' ) . '</strong> ' . __( "The plugin does not display thumbnails by itself. This is your theme's role.", "fpw-fct" ) . ' ' . 
-					__( 'Read this article', 'fpw-fct' ) . ' ' . 
+		$faq =		'<p style="font-size: larger">' . __( 'Frequently Asked Questions', 'fpw-category-thumbnails' ) . '</p><blockquote style="text-align: justify"><strong>' .
+					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( 'I got an ID for the image and assigned it to the category, and the plugin does not display it in posts.', 'fpw-category-thumbnails' ) . '<br /><strong>' .
+					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' . __( "The plugin does not display thumbnails by itself. This is your theme's role.", "fpw-category-thumbnails" ) . ' ' .
+					__( 'Read this article', 'fpw-category-thumbnails' ) . ' ' .
 					'<a href="http://markjaquith.wordpress.com/2009/12/23/new-in-wordpress-2-9-post-thumbnail-images/" target="_blank" rel="nofollow">' . 
 					'New in WordPress 2.9 post thumbnail images</a> ' . 
-					__( 'by', 'fpw-fct' ) . ' Mark Jaquith ' . __( "about enabling theme's support for post thumbnails.", "fpw-fct" ) . '<br /><br /><strong>' . 
-					__( 'Question:', 'fpw-fct' ) . '</strong> ' . 
-					__( "I've entered ID of a picture from NextGen Gallery and thumbnail doesn't show.", "fpw-fct" ) . '<br><strong>' . 
-					__( 'Answer:', 'fpw-fct' ) . '</strong> ' . 
-					__( 'IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230.', 'fpw-fct' ) . '<br /><br /><strong>' .
-					__( 'Question:', 'fpw-fct' ) . '</strong> ' . 
-					__( "What is required to use authors' pictures as thumbnails?", "fpw-fct" ) . '<br><strong>' . 
-					__( 'Answer:', 'fpw-fct' ) . '</strong> ' . 
-					__( "Upload authors' pictures into media library or NextGen gallery.", "fpw-fct" ) . ' ' . 
-					__( "File names of authors' pictures in media library must follow this naming convention: 'autor_id.jpg' where 'id' is author's user id.", "fpw-fct" ) . ' ' . 
-					__( "File names of authors' pictures in NextGen gallery must follow this naming convention: 'id.jpg' where 'id' is author's user id.", "fpw-fct" ) . ' ' .
-					__( "The name of NextGen gallery must be 'authors'.", "fpw-fct" ) . '<br /><br /><strong>' . 
-					__( 'Question:', 'fpw-fct' ) . '</strong> ' . 
-					__( "How to use 'fpwCategoryThumbnails::addThumbnailToPost' method?", "fpw-fct" ) . '<br><strong>' . 
-					__( 'Answer:', 'fpw-fct' ) . '</strong> ' . 
-					__( 'Look into', 'fpw-fct' ) . 
+					__( 'by', 'fpw-category-thumbnails' ) . ' Mark Jaquith ' . __( "about enabling theme's support for post thumbnails.", "fpw-category-thumbnails" ) . '<br /><br /><strong>' .
+					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( "I've entered ID of a picture from NextGen Gallery and thumbnail doesn't show.", "fpw-category-thumbnails" ) . '<br><strong>' .
+					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( 'IDs from NextGen Gallery must be entered with ngg- prefix, so ID 230 should be entered as ngg-230.', 'fpw-category-thumbnails' ) . '<br /><br /><strong>' .
+					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( "What is required to use authors' pictures as thumbnails?", "fpw-category-thumbnails" ) . '<br><strong>' .
+					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( "Upload authors' pictures into media library or NextGen gallery.", "fpw-category-thumbnails" ) . ' ' .
+					__( "File names of authors' pictures in media library must follow this naming convention: 'autor_id.jpg' where 'id' is author's user id.", "fpw-category-thumbnails" ) . ' ' .
+					__( "File names of authors' pictures in NextGen gallery must follow this naming convention: 'id.jpg' where 'id' is author's user id.", "fpw-category-thumbnails" ) . ' ' .
+					__( "The name of NextGen gallery must be 'authors'.", "fpw-category-thumbnails" ) . '<br /><br /><strong>' .
+					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( "How to use 'fpwCategoryThumbnails::addThumbnailToPost' method?", "fpw-category-thumbnails" ) . '<br><strong>' .
+					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( 'Look into', 'fpw-category-thumbnails' ) .
 					' <a href="http://fw2s.com/support/fpw-category-thumbnails-documentation/public-method-fpwcategorythumbnailsaddthumbnailtopost/" target="_blank">Public method fpwCategoryThumbnails::addThumbnailToPost</a> ' . 
-					__( 'topic of Documentation.', 'fpw-fct' ) . '<br /><br /><strong>' .
-					__( 'Question:', 'fpw-fct' ) . '</strong> ' . 
-					__( 'Will this plugin work with JavaScript turned off?', 'fpw-fct' ) . '<br /><strong>' .
-					__( 'Answer:', 'fpw-fct' ) . '</strong> ' . 
-					__( 'Yes. This plugin is functional with JavaScript turned off to comply with accessibility regulations.', 'fpw-fct' ) . '</blockquote>'; 
+					__( 'topic of Documentation.', 'fpw-category-thumbnails' ) . '<br /><br /><strong>' .
+					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( 'Will this plugin work with JavaScript turned off?', 'fpw-category-thumbnails' ) . '<br /><strong>' .
+					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( 'Yes. This plugin is functional with JavaScript turned off to comply with accessibility regulations.', 'fpw-category-thumbnails' ) . '</blockquote>';
 
 		$current_screen->add_help_tab( array(
-   			'title'   => __( 'FAQ', 'fpw-fct' ),
+   			'title'   => __( 'FAQ', 'fpw-category-thumbnails' ),
     		'id'      => 'fpw-fct-help-faq',
 	   		'content' => $faq,
 		) );

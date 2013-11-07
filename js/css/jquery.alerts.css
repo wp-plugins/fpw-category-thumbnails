@@ -55,3 +55,8 @@
 #popup_prompt {
 	margin: .5em 0em;
 }
+
+/* Screen Options fix */
+a#show-settings-link {
+	background-color: #FFFFFF !important;
+}

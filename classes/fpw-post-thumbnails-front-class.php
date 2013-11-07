@@ -11,6 +11,8 @@ class fpwPostThumbnails {
 	public	$pluginPage;
 	public	$wpVersion;
 	public	$fptOptions;
+	public  $fctMap;
+	public  $fctMapOK;
 
 	//	constructor
 	public	function __construct( $path, $version ) {
@@ -28,10 +30,14 @@ class fpwPostThumbnails {
 		//	set WP version
 		$this->wpVersion = $wp_version;
 
-		//	read tte options
+		//	read options
 		$this->fptOptions = get_option( 'fpw_post_thumbnails_options' );
+		$this->fctMap = get_option( 'fpw_category_thumb_map' );
+		$this->fctMapOK = is_array( $this->fctMap );
+
 		add_action( 'after_setup_theme', array( &$this, 'enableThemeSupportForThumbnails' ), 999 );
 		add_action( 'wp_head', array( &$this, 'dynamicThumbnailStyles' ) ); 
+
 		if ( is_array( $this->fptOptions ) ) {
 			if ( $this->fptOptions[ 'content' ][ 'enabled' ] )
 				add_filter( 'the_content', array( &$this, 'fptContent' ) );
@@ -52,7 +58,6 @@ class fpwPostThumbnails {
 		?>
 		<style type="text/css">
 		<!--
-		.attachment-thumbnail-content,
 		.wp-post-image-content {
 			float: <?php echo $this->fptOptions[ 'content' ][ 'position' ] ?>;
 			padding-top: <?php echo $this->fptOptions[ 'content' ][ 'padding_top' ] ?>px;
@@ -63,11 +68,6 @@ class fpwPostThumbnails {
     		margin-left: <?php echo $this->fptOptions[ 'content' ][ 'margin_left' ] ?>px;
     		margin-bottom: <?php echo $this->fptOptions[ 'content' ][ 'margin_bottom' ] ?>px;
     		margin-right: <?php echo $this->fptOptions[ 'content' ][ 'margin_right' ] ?>px;
-    		<?php if ( 'width' == $this->fptOptions[ 'content' ][ 'base' ] ) { ?>
-    		width: <?php echo $this->fptOptions[ 'content' ][ 'width' ] ?>px;
-    		<?php } else { ?>
-    		height: <?php echo $this->fptOptions[ 'content' ][ 'height' ] ?>px;
-    		<?php } ?>
 			<?php
     		if ( $this->fptOptions[ 'content' ][ 'border' ] ) {
 			?>
@@ -80,7 +80,6 @@ class fpwPostThumbnails {
 		}
 		?>
 		}
-		.attachment-thumbnail-excerpt,
 		.wp-post-image-excerpt {
     		float: <?php echo $this->fptOptions[ 'excerpt' ][ 'position' ] ?>;
     		padding-top: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_top' ] ?>px;
@@ -91,11 +90,6 @@ class fpwPostThumbnails {
     		margin-left: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_left' ] ?>px;
     		margin-bottom: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_bottom' ] ?>px;
     		margin-right: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_right' ] ?>px;
-    		<?php if ( 'width' == $this->fptOptions[ 'excerpt' ][ 'base' ] ) { ?>
-    		width: <?php echo $this->fptOptions[ 'excerpt' ][ 'width' ] ?>px;
-    		<?php } else { ?>
-    		height: <?php echo $this->fptOptions[ 'excerpt' ][ 'height' ] ?>px;
-    		<?php } ?>
 		<?php
     	if ( $this->fptOptions[ 'excerpt' ][ 'border' ] ) {
 		?>
@@ -115,62 +109,37 @@ class fpwPostThumbnails {
 
 	//	thumbnail for content filter
 	function fptContent( $content ) {
+		return $this->fptThumbnail( $content, 'content' );
+	}
+
+	//	thumbnail for excerpt filter
+	function fptExcerpt( $excerpt ) {
+		return $this->fptThumbnail( $excerpt, 'excerpt' );
+	}
+
+	//  display thumbnail + content / excerpt
+	function fptThumbnail( $content, $type ) {
 		global $post;
+
 		$thumbID = get_post_meta( $post->ID, '_thumbnail_id', true );
 		if ( !( '' === $thumbID ) ) {
-			if ( 'ngg-' == substr( $thumbID, 0, 4 ) ) {
-				if ( class_exists( 'nggdb' ) ) {
-					$id = substr( $thumbID, 4 );
-					$picture = nggdb::find_image( $id );
-					if ( !$picture ) {
-						$pic = '' ;
-					} else {
-						$pic 	= $picture->imageURL;
-						$pic	= '<img class="wp-post-image-content ngg-image-' . $id .  
-									'" src="' . $pic . '" />';
-					}
-				} else {
-					$pic =	'';
-				}
-			} elseif ( wp_attachment_is_image( $thumbID ) ) {
-				$pic = wp_get_attachment_image( $thumbID, 'content-thumbnail', NULL, array( 'class' => 'attachment-thumbnail-content' ) );
-			} else {
-				$pic = '';		
+			$catName = '';
+			if ( $this->fctMapOK ) {
+				$catIDs = array_keys( $this->fctMap, $thumbID );
+				if ( count( $catIDs ) > 0 )
+					$catName = get_cat_name( $catIDs[0] );
 			}
+			$pic  = '<div class="thumbnail thumb-' . $this->fptOptions[ $type ][ 'position' ] . '">';
+			$pic .= get_the_post_thumbnail( $post->ID,
+											array(  $this->fptOptions[ $type ][ 'width' ],
+													$this->fptOptions[ $type ][ 'height' ] ),
+											array(	'class' => 'wp-post-image-' . $type,
+													'title' => $catName,
+													'alt'	=> 'Featured Image' ) );
+			$pic .=	'</div>';
 		} else {
 			$pic = '';
 		}
 		return $pic . $content;
 	}
-
-	//	thumbnail for excerpt filter
-	function fptExcerpt( $excerpt ) {
-		global $post;
-		$thumbID = get_post_meta( $post->ID, '_thumbnail_id', true );
-		if ( !( '' === $thumbID ) ) {
-			if ( 'ngg-' == substr( $thumbID, 0, 4 ) ) {
-				if ( class_exists( 'nggdb' ) ) {
-					$id = substr( $thumbID, 4 );
-					$picture = nggdb::find_image( $id );
-					if ( !$picture ) {
-						$pic = '' ;
-					} else {
-						$pic 	= $picture->imageURL;
-						$pic	= '<img class="wp-post-image-excerpt ngg-image-' . $id .  
-									'" src="' . $pic . '" />';
-					}
-				} else {
-					$pic =	' ';
-				}
-			} elseif ( wp_attachment_is_image( $thumbID ) ) {
-				$pic = wp_get_attachment_image( $thumbID, 'excerpt-thumbnail', NULL, array( 'class' => 'attachment-thumbnail-excerpt' ) );
-			} else {
-				$pic = '';		
-			}
-		} else {
-			$pic = '';
-		}
-		return $pic . $excerpt;
-	}
 }
-?>

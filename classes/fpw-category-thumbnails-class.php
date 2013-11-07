@@ -1,5 +1,5 @@
 <?php
-//	prevent direct access
+//	prevent direct accesss
 if ( preg_match( '#' . basename(__FILE__) . '#', $_SERVER[ 'PHP_SELF' ] ) )  
 	die( "Direct access to this script is forbidden!" );
 
@@ -86,7 +86,7 @@ class fpwCategoryThumbnails {
 	
 	//	set heading for custom column 'Thumbnail' - Categories admin screen
 	function fpw_category_columns_head( $defaults ) {
-		$defaults[ 'thumbnail_column' ]  = __( 'Thumbnail', 'fpw-fct' );
+		$defaults[ 'thumbnail_column' ]  = __( 'Thumbnail', 'fpw-category-thumbnails' );
 		return $defaults;
 	}
 	
@@ -98,34 +98,29 @@ class fpwCategoryThumbnails {
 			if ( array_key_exists( $id, $map ) ) {
     	    	$value = $map[ $id ];
 				$preview_size = 'thumbnail';
-				//ob_start();
-				if ( 'Author' === $value ) {
-					return '[ ' . __( 'Picture', 'fpw-fct' ) . ' ]';
-				} else {
-					if ( 'ngg-' == substr( $value, 0, 4 ) ) {
-						if ( class_exists( 'nggdb' ) ) {
-							$thumbnail_id = substr( $value, 4 );
-							$picture = nggdb::find_image($thumbnail_id);
-							if ( !$picture ) {
-								return 	'<span style="font-size: large; color: red">' . 
-										__( 'NextGen Gallery: picture not found!', 'fpw-fct' ) . '</span>';
-							} else {
-								$pic = $picture->imageURL;
-								$w = $picture->meta_data['thumbnail']['width'];
-								$h = $picture->meta_data['thumbnail']['height'];
-								$pic = '<img width="' . $w . '" height="' . $h . '" src="' . $pic . '" />';
-								return $pic;
-							}
+				if ( 'ngg-' == substr( $value, 0, 4 ) ) {
+					if ( class_exists( 'nggdb' ) ) {
+						$thumbnail_id = substr( $value, 4 );
+						$picture = nggdb::find_image($thumbnail_id);
+						if ( !$picture ) {
+							return 	'<span style="font-size: large; color: red">' .
+									__( 'NextGen Gallery: picture not found!', 'fpw-category-thumbnails' ) . '</span>';
 						} else {
-							return 	'<span style="font-size: large; color: red">' . 
-									__( 'NextGen Gallery: not active!', 'fpw-fct' ) . '</span>';
+							return '<img src="' . $picture->thumbURL . '" />';
 						}
+					} else {
+						return 	'<span style="font-size: large; color: red">' .
+								__( 'NextGen Gallery: not active!', 'fpw-category-thumbnails' ) . '</span>';
+					}
+				} else {
+					if ( 'Author' === $value ) {
+						return '[ ' . __( 'Picture', 'fpw-category-thumbnails' ) . ' ]';
 					} else {
 						if ( wp_attachment_is_image( $value ) ) {
 							return wp_get_attachment_image( $value, $preview_size );
 						} else {
-							return 	'<span style="font-size: large; color: red">' . 
-									__( 'Media Library: picture not found!', 'fpw-fct' ) . '</span>';
+							return 	'<span style="font-size: large; color: red">' .
+								__( 'Media Library: picture not found!', 'fpw-category-thumbnails' ) . '</span>';
 						}
 					}
 				}
@@ -154,7 +149,7 @@ class fpwCategoryThumbnails {
     
 	//	register plugin's textdomain
 	function init() {
-		load_plugin_textdomain( 'fpw-fct', false, 'fpw-category-thumbnails/languages/' );
+		load_plugin_textdomain( 'fpw-category-thumbnails', false, 'fpw-category-thumbnails/languages/' );
 
 		if ( !( 'en_US' == $this->fctLocale ) ) 
 			$this->translationStatus = $this->translationAvailable();
@@ -162,16 +157,17 @@ class fpwCategoryThumbnails {
 
 	//	register admin menu
 	function adminMenu() {
-		$page_title = __( 'FPW Category Thumbnails', 'fpw-fct' );
-		$menu_title = __( 'FPW Category Thumbnails', 'fpw-fct' );
+		$page_title = __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' );
+		$menu_title = __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' );
 		$this->fctPage = add_theme_page( $page_title, $menu_title, 'manage_options', 
 							'fpw-category-thumbnails', array( &$this, 'fctSettings' ) );
 		
-		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueueScripts' ) );
-		add_action( 'load-' . $this->fctPage, array( &$this, 'addScreenOptions' ) );
-	
-		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueuePointerScripts' ) );
 		add_action( 'load-' . $this->fctPage, array( &$this, 'help' ) );
+		add_action( 'load-' . $this->fctPage, array( &$this, 'addScreenOptions' ) );
+
+		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueueScripts' ) );
+
+		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueuePointerScripts' ) );
 	}
 
 	//	register styles, scripts, and localize javascript
@@ -190,7 +186,7 @@ class fpwCategoryThumbnails {
 	// 	AJAX handler for pointer
 	function custom_print_footer_scripts() {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
-    	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-fct' ) ) . '</h3>';
+    	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
 						   esc_js( __( "Modified plugin's contextual help", "fpw-fct" ) ) . '</li>';
     	?>
@@ -218,7 +214,7 @@ class fpwCategoryThumbnails {
 		$option = 'per_page';
  		
 		$args = array(
-			'label'		=> __( 'Categories', 'fpw-fct' ),
+			'label'		=> __( 'Categories', 'fpw-category-thumbnails' ),
 			'default'	=> 10,
 			'option'	=> 'edit_category_per_page',
 		);
@@ -293,7 +289,7 @@ class fpwCategoryThumbnails {
 	
 	//	add link to settings page in plugins list
 	function pluginLinks( $links, $file ) {
-   		$settings_link = '<a href="' . site_url( '/wp-admin/' ) . 'themes.php?page=fpw-category-thumbnails">' . __( 'Settings', 'fpw-fct' ) . '</a>';
+   		$settings_link = '<a href="' . site_url( '/wp-admin/' ) . 'themes.php?page=fpw-category-thumbnails">' . __( 'Settings', 'fpw-category-thumbnails' ) . '</a>';
 		array_unshift( $links, $settings_link );
     	return $links;
 	}
@@ -327,13 +323,13 @@ class fpwCategoryThumbnails {
 			
 			$main = array(
 				'id' => 'fpw_plugins',
-				'title' => __( 'FPW Plugins', 'fpw-fct' ),
+				'title' => __( 'FPW Plugins', 'fpw-category-thumbnails' ),
 				'href' => '#' );
 
 			$subm = array(
 				'id' => 'fpw_bar_category_thumbnails',
 				'parent' => 'fpw_plugins',
-				'title' => __( 'FPW Category Thumbnails', 'fpw-fct' ),
+				'title' => __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ),
 				'href' => get_admin_url() . 'themes.php?page=fpw-category-thumbnails' );
 
 			$addmain = ( is_array( $wp_admin_bar->get_node( 'fpw_plugins' ) ) ) ? false : true;
@@ -366,10 +362,10 @@ class fpwCategoryThumbnails {
 		if ( $anyButtonPressed ) {
 			if ( !isset( $_POST[ 'fpw-fct-nonce' ] ) ) 
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red"><strong>' . 
-					 __( 'You did not send any credentials!', 'fpw-fct' ) . '</strong></p>' );
+					 __( 'You did not send any credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
 			if ( !wp_verify_nonce( $_POST[ 'fpw-fct-nonce' ], 'fpw-fct-nonce' ) ) 
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red;"><strong>' . 
-					 __( 'You did not send the right credentials!', 'fpw-fct' ) . '</strong></p>' );
+					 __( 'You did not send the right credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
 
 			//	check ok - update options
 			$this->fctOptions[ 'clean' ] = ( isset( $_POST[ 'cleanup' ] ) ) ? true : false;
@@ -445,10 +441,10 @@ class fpwCategoryThumbnails {
 		
 		$displayAttr = ( $this->fctOptions[ 'fpt' ] ) ? '' : ' display: none';
 		
-		echo '<div id="icon-themes" class="icon32"></div><h2 id="fct-settings-title">' . __( 'FPW Category Thumbnails', 'fpw-fct' ) . 
+		echo '<div id="icon-themes" class="icon32"></div><h2 id="fct-settings-title">' . __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) .
 			 ' <span id="fpt-link" style="font-size: small;' . $displayAttr . '">- <a href="' . get_admin_url() . 
 			 'themes.php?page=fpw-post-thumbnails">' . 
-			 __( 'FPW Post Thumbnails', 'fpw-fct' ) . '</a></span></h2>';
+			 __( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ) . '</a></span></h2>';
 			 
 		//	check if any of submit buttons was pressed
 		if ( $anyButtonPressed ) {
@@ -457,27 +453,27 @@ class fpwCategoryThumbnails {
 				 	isset( $_POST['submit-clear'] ) || isset( $_POST['submit-refresh'] ) || 
 					isset( $_POST['submit-update'] ) ) {
 				if ( $this->fctMapUpdateOk || $update_options_ok ) { 
-					echo '<div id="message" class="updated fade"><p><strong>' . __( 'Changed data saved successfully.', 'fpw-fct' ) . '</strong></p></div>';
+					echo '<div id="message" class="updated fade"><p><strong>' . __( 'Changed data saved successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
 				} else {
-					echo '<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected. Nothing to update.', 'fpw-fct' ) . '</strong></p></div>';
+					echo '<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
 				}
 			} elseif ( isset( $_POST['submit-apply'] ) ) {
-				echo '<div id="message" class="updated fade"><p><strong>' . __( 'Applied thumbnails to existing posts / pages successfully.', 'fpw-fct' ) . '</strong></p></div>';
+				echo '<div id="message" class="updated fade"><p><strong>' . __( 'Applied thumbnails to existing posts / pages successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
 			} elseif ( isset( $_POST['submit-remove'] ) ) {
-				echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-fct' ) . '</strong></p></div>';
+				echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
 			} elseif ( isset( $_POST['submit-language'] ) ) {
 				if ( 'available' == $this->translationStatus )  
 					$handle = @fopen( $this->translationPath, 'wb' );
 					fwrite( $handle, $this->translationResponse[ 'body' ] );
 					fclose($handle);
-					echo '<div id="message" class="updated"><p><strong>' . __( 'Language file downloaded. Click', 'fpw-fct' ) . 
+					echo '<div id="message" class="updated"><p><strong>' . __( 'Language file downloaded. Click', 'fpw-category-thumbnails' ) .
 						 ' ' . '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">' .
-						 __( 'here', 'fpw-fct' ) . '</a> ' . __( 'to reload page.', 'fpw-fct' ) . '</strong></p></div>';
+						 __( 'here', 'fpw-category-thumbnails' ) . '</a> ' . __( 'to reload page.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
 				if ( 'installed' == $this->translationStatus ) 
-						echo '<div id="message" class="updated fade"><p><strong>' . __( 'Language file already exists.', 'fpw-fct' ) . 
+						echo '<div id="message" class="updated fade"><p><strong>' . __( 'Language file already exists.', 'fpw-category-thumbnails' ) .
 							 '</strong></p></div>';
 				if ( 'not_exist' == $this->translationStatus ) 
-						echo '<div id="message" class="updated fade"><p><strong>' . __( 'Language file is not available.', 'fpw-fct' ) . 
+						echo '<div id="message" class="updated fade"><p><strong>' . __( 'Language file is not available.', 'fpw-category-thumbnails' ) .
 							 '</strong></p></div>';
 			}
 		}
@@ -496,25 +492,25 @@ class fpwCategoryThumbnails {
 		echo '<input type="checkbox" class="option-group" id="box-donotover" name="donotover" value="donotover"';
 		if ( $this->fctOptions[ 'donotover' ] ) 
 			echo ' checked';
-		echo '> ' . __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-fct' ) . '<br />';
+		echo '> ' . __( 'Do not overwrite if post / page has thumbnail assigned already', 'fpw-category-thumbnails' ) . '<br />';
 
 		//	cleanup checkbox
 		echo '<input type="checkbox" class="option-group" id="box-cleanup" name="cleanup" value="cleanup"';
 		if ( $this->fctOptions[ 'clean' ] ) 
 			echo ' checked';
-		echo '> ' . __( "Remove plugin's data from database on uninstall", 'fpw-fct' ) . '<br />';
+		echo '> ' . __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . '<br />';
 
 		//	add plugin to admin bar checkbox
 		echo '<input type="checkbox" class="option-group" id="box-abar" name="abar" value="abar"';
 		if ( $this->fctOptions[ 'abar' ] ) 
 			echo ' checked';
-		echo '> ' . __( 'Add this plugin to the Admin Bar', 'fpw-fct' ) . '<br />';
+		echo '> ' . __( 'Add this plugin to the Admin Bar', 'fpw-category-thumbnails' ) . '<br />';
 
 		//	add plugin to admin bar checkbox
 		echo '<input type="checkbox" class="option-group" id="box-fpt" name="fpt" value="fpt"';
 		if ( $this->fctOptions[ 'fpt' ] ) 
 			echo ' checked';
-		echo '> ' . __( 'Enable FPW Post Thumbnails', 'fpw-fct' ) . '<br />';
+		echo '> ' . __( 'Enable FPW Post Thumbnails', 'fpw-category-thumbnails' ) . '<br />';
 
 		//	end of options section
 		echo '</div>';
