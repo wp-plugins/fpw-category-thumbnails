@@ -201,9 +201,11 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "Removed 'hide-if-no-js' class from both 'Copy' buttons", 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( 'optimized display to rescale images only when necessary', 'fpw-category-thumbnails' ) ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "Modified plugin's contextual help", 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "standardized 'alt' and 'title' attributes of thumbnails", 'fpw-category-thumbnails' ) ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' .
+						   esc_js( __( 'text domain changed for compatibility with language packs and automated updates', 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
