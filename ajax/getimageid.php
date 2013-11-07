@@ -18,9 +18,6 @@ if ( 'ngg-' == substr( $_REQUEST['id'], 0, 4 ) ) {
 			$pic =	'' ;
 		} else {
 			$pic = '<img src="' . $picture->thumbURL . '" />';
-			//$w = $picture->meta_data['thumbnail']['width'];
-			//$h = $picture->meta_data['thumbnail']['height'];
-			//$pic = '<img width="' . $w . '" height="' . $h . '" src="' . $pic . '" />';
 			$map[$cat] = $pid;
 			update_option( 'fpw_category_thumb_map', $map );
 		}
