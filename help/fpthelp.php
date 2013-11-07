@@ -107,7 +107,7 @@
 					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
 					__( 'Can I use this plugin if my theme supports and displays thumbnails?', 'fpw-category-thumbnails' ) . '<br /><strong>' .
 					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .
-					__( "If the theme displays thumbnails for both the content and excerpts I would not recommended it as you would get two thumbnails displayed. However I can imagine one exception. The theme displays thumbnails for full content but not for excerpts or the other way around. The plugin will display thumbnails for the part not being displayed by the theme not adding thumbnails to the other part.", "fpw-category-thumbnails" ) . '<br /><br /><strong>' .
+					__( 'If the theme displays thumbnails for both the content and excerpts I would not recommended it as you would get two thumbnails displayed. However I can imagine one exception. The theme displays thumbnails for full content but not for excerpts or the other way around. The plugin will display thumbnails for the part not being displayed by the theme not adding thumbnails to the other part.', 'fpw-category-thumbnails' ) . '<br /><br /><strong>' .
 					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
 					__( 'Will this plugin work with JavaScript turned off?', 'fpw-category-thumbnails' ) . '<br /><strong>' .
 					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .
