@@ -21,7 +21,6 @@ jQuery( document ).ready( function( $ ) {
 			}).get();
 			vcwidth		= $( "#content-width" ).attr( "value" );
 			vcheight	= $( "#content-height" ).attr( "value" );
-			vcbase		= $( "#content-base" ).find( ":selected" ).text();
 			vcpos		= $( "#content-position" ).find( ":selected" ).text();
 			vcradius	= $( "#content-border-radius" ).attr( "value" );
 			vcbwidth	= $( "#content-border-width" ).attr( "value" );
@@ -37,7 +36,6 @@ jQuery( document ).ready( function( $ ) {
 			vcmr		= $( "#content-margin-right" ).attr( "value" );
 			vewidth		= $( "#excerpt-width" ).attr( "value" );
 			veheight	= $( "#excerpt-height" ).attr( "value" );
-			vebase		= $( "#excerpt-base" ).find( ":selected" ).text();
 			vepos		= $( "#excerpt-position" ).find( ":selected" ).text();
 			veradius	= $( "#excerpt-border-radius" ).attr( "value" );
 			vebwidth	= $( "#excerpt-border-width" ).attr( "value" );
@@ -55,7 +53,6 @@ jQuery( document ).ready( function( $ ) {
 				boxes:						barr,
 				content_width:				vcwidth,
 				content_height:				vcheight,
-				content_base:				vcbase,
 				content_position:			vcpos,
 				content_border_radius:		vcradius,
 				content_border_width:		vcbwidth,
@@ -71,7 +68,6 @@ jQuery( document ).ready( function( $ ) {
 				content_margin_right:		vcmr,
 				excerpt_width:				vewidth,
 				excerpt_height:				veheight,
-				excerpt_base:				vebase,
 				excerpt_position:			vepos,
 				excerpt_border_radius:		veradius,
 				excerpt_border_width:		vebwidth,
@@ -122,7 +118,6 @@ jQuery( document ).ready( function( $ ) {
 			}
 			$( "#excerpt-width" ).val( $( "#content-width" ).attr( "value" ) );
 			$( "#excerpt-height" ).val( $( "#content-height" ).attr( "value" ) );
-			$( "#excerpt-base" ).val( $( "#content-base" ).find( ":selected" ).text() );
 			$( "#excerpt-position" ).val( $( "#content-position" ).find( ":selected" ).text() );
 			$( "#excerpt-border-radius" ).val( $( "#content-border-radius" ).attr( "value" ) );
 			$( "#excerpt-border-width" ).val( $( "#content-border-width" ).attr( "value" ) );
@@ -163,7 +158,6 @@ jQuery( document ).ready( function( $ ) {
 			}
 			$( "#content-width" ).val( $( "#excerpt-width" ).attr( "value" ) );
 			$( "#content-height" ).val( $( "#excerpt-height" ).attr( "value" ) );
-			$( "#content-base" ).val( $( "#excerpt-base" ).find( ":selected" ).text() );
 			$( "#content-position" ).val( $( "#excerpt-position" ).find( ":selected" ).text() );
 			$( "#content-border-radius" ).val( $( "#excerpt-border-radius" ).attr( "value" ) );
 			$( "#content-border-width" ).val( $( "#excerpt-border-width" ).attr( "value" ) );
@@ -191,12 +185,14 @@ jQuery( document ).ready( function( $ ) {
 	//	content Preview button
 	if ( $( "#content-preview" ).length) {
 		$( "#content-preview" ).click( function() {
+			var barr, vcwidth, vcheight, vcpos, vcradius, vcbwidth;
+			var vcbocol, vcbacol, vcpt, vcpl, vcpb, vcpr, vcmt, vcml, vcmb, vcmr;
+			var mt, mr, mb, ml;
 			barr = $( "input:checkbox:checked.fpt-option-group" ).map( function() {
 				return this.value
 			}).get();
 			vcwidth		= $( "#content-width" ).attr( "value" );
 			vcheight	= $( "#content-height" ).attr( "value" );
-			vcbase		= $( "#content-base" ).find( ":selected" ).text();
 			vcpos		= $( "#content-position" ).find( ":selected" ).text();
 			vcradius	= $( "#content-border-radius" ).attr( "value" );
 			vcbwidth	= $( "#content-border-width" ).attr( "value" );
@@ -210,13 +206,15 @@ jQuery( document ).ready( function( $ ) {
 			vcml		= $( "#content-margin-left" ).attr( "value" );
 			vcmb		= $( "#content-margin-bottom" ).attr( "value" );
 			vcmr		= $( "#content-margin-right" ).attr( "value" );
-			if ( vcbase == "width" ) {
-				$( ".wp-post-image-content" ).css( "width", vcwidth );
-				$( ".wp-post-image-content" ).css( "height", "" );
+			mt			= String( vcmt + 18 );
+			mb			= String( vcmb + 5 );
+			if ( vcpos == "left" ) {
+				mr		= String( vcmr + 10 );
+				ml		= "0";
 			} else {
-				$( ".wp-post-image-content" ).css( "width", "" );
-				$( ".wp-post-image-content" ).css( "height", vcheight );
-			}
+				ml		= String( vcml + 10 );
+				mr		= "0";
+			};
 			$( ".wp-post-image-content" ).css( "float", vcpos );
 			if ( isInArray( barr, 'content_border' ) ) {
 				$( ".wp-post-image-content" ).css( "border", "solid " + vcbwidth + "px " + vcbocol );
@@ -227,9 +225,10 @@ jQuery( document ).ready( function( $ ) {
 			} else {
 				$( ".wp-post-image-content" ).css( "border", "none 0px transparent" );
 				$( ".wp-post-image-content" ).css( "background-color", "transparent" );
-			}
+			};
 			$( ".wp-post-image-content" ).css( "padding", vcpt + "px " + vcpr + "px " + vcpb + "px " + vcpl + "px" );
-			$( ".wp-post-image-content" ).css( "margin", vcmt + "px " + vcmr + "px " + vcmb + "px " + vcml + "px" );
+			$( ".wp-post-image-content" ).css( "margin", mt + "px " + mr + "px " + mb + "px " + ml + "px" );
+           	$( ".wp-post-image-content" ).css( "width", vcwidth + "px" );
 			return true;
 		});
 	}
@@ -237,12 +236,14 @@ jQuery( document ).ready( function( $ ) {
 	//	excerpt Preview button - AJAX
 	if ( $( "#excerpt-preview" ).length) {
 		$( "#excerpt-preview" ).click( function() {
+			var barr, vewidth, veheight, vepos, veradius, vebwidth;
+			var vebocol, vebacol, vept, vepl, vepb, vepr, vemt, veml, vemb, vemr;
+			var mt, mr, mb, ml;
 			barr = $( "input:checkbox:checked.fpt-option-group" ).map( function() {
 				return this.value
 			}).get();
 			vewidth		= $( "#excerpt-width" ).attr( "value" );
 			veheight	= $( "#excerpt-height" ).attr( "value" );
-			vebase		= $( "#excerpt-base" ).find( ":selected" ).text();
 			vepos		= $( "#excerpt-position" ).find( ":selected" ).text();
 			veradius	= $( "#excerpt-border-radius" ).attr( "value" );
 			vebwidth	= $( "#excerpt-border-width" ).attr( "value" );
@@ -256,13 +257,15 @@ jQuery( document ).ready( function( $ ) {
 			veml		= $( "#excerpt-margin-left" ).attr( "value" );
 			vemb		= $( "#excerpt-margin-bottom" ).attr( "value" );
 			vemr		= $( "#excerpt-margin-right" ).attr( "value" );
-			if ( vebase == "width" ) {
-				$( ".wp-post-image-excerpt" ).css( "width", vewidth );
-				$( ".wp-post-image-excerpt" ).css( "height", "" );
+			mt	        = String( vemt + 18 );
+			mb			= String( vemb + 5 );
+			if ( vepos == "left" ) {
+				mr		= String( vemr + 10 );
+				ml		= "0";
 			} else {
-				$( ".wp-post-image-excerpt" ).css( "width", "" );
-				$( ".wp-post-image-excerpt" ).css( "height", veheight );
-			}
+				ml		= String( veml + 10 );
+				mr		= "0";
+			};
 			$( ".wp-post-image-excerpt" ).css( "float", vepos );
 			if ( isInArray( barr, 'excerpt_border' ) ) {
 				$( ".wp-post-image-excerpt" ).css( "border", "solid " + vebwidth + "px " + vebocol );
@@ -273,9 +276,10 @@ jQuery( document ).ready( function( $ ) {
 			} else {
 				$( ".wp-post-image-excerpt" ).css( "border", "none 0px transparent" );
 				$( ".wp-post-image-excerpt" ).css( "background-color", "transparent" );
-			}
+			};
 			$( ".wp-post-image-excerpt" ).css( "padding", vept + "px " + vepr + "px " + vepb + "px " + vepl + "px" );
-			$( ".wp-post-image-excerpt" ).css( "margin", vemt + "px " + vemr + "px " + vemb + "px " + veml + "px" );
+			$( ".wp-post-image-excerpt" ).css( "margin", mt + "px " + mr + "px " + mb + "px " + ml + "px" );
+            $( ".wp-post-image-excerpt" ).css( "width", vewidth + "px" );
 			return true;
 		});
 	}
