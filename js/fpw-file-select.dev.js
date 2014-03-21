@@ -67,6 +67,9 @@ jQuery( document ).ready( function( $ ) {
 				}
 				case 'tab-nextgen': {
 					// NextGEN Library
+					$( 'div#media-items' ).css({
+						'clear':				'both'
+					});
 					$( '#media-items .media-item a.toggle' ).remove();
 					$( '#media-items .media-item' ).each( function() {
 						$( this ).prepend( select_button );

@@ -188,11 +188,7 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( 'images compatible with Media Library, NextGEN Gallery up to 1.9.13, NextCellent Gallery, and NextGEN Gallery by Photocrati', 'fpw-category-thumbnails' ) ) . '</li>' .
-						   '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' .
-						   esc_js( __( 'optimized display to rescale images only when necessary', 'fpw-category-thumbnails' ) ) . '</li>' .
-						   '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' .
-						   esc_js( __( 'text domain changed for compatibility with language packs and automated updates', 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( 'fixed Get Image ID malformed dialog since WordPress 3.8 for all flavours of NextGen Gallery', 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
