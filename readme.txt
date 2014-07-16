@@ -5,7 +5,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 3.3
-Tested up to: 3.9-beta2
+Tested up to: 3.9
 Stable tag: 1.6.0
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
@@ -56,6 +56,9 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 1. FPW Post Thumbnails - Settings - JavaScript off
 
 == Changelog ==
+
+= 1.6.1 =
+* FPW Category Thumbnails and FPW Post Thumbnails: fixed version check not working when major versions changes 
 
 = 1.6.0 =
 * FPW Category Thumbnails: fixed Get Image ID malformed dialog since WordPress 3.8 for all flavours of NextGen Gallery
