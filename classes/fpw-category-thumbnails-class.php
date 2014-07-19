@@ -212,9 +212,13 @@ class fpwCategoryThumbnails {
 	//	add screen options
 	function addScreenOptions() {
 		$option = 'per_page';
+		
+		$categories_per_page = get_user_option( 'edit_category_per_page', get_current_user_id() );
+		if ( !$categories_per_page )
+			$categories_per_page = 10;
  		
 		$args = array(
-			'label'		=> __( 'Categories', 'fpw-category-thumbnails' ),
+			'label'		=> _n( 'Category', 'Categories', $categories_per_page, 'fpw-category-thumbnails' ),
 			'default'	=> 10,
 			'option'	=> 'edit_category_per_page',
 		);
