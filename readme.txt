@@ -61,7 +61,7 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 * Fixed translation plurals
 * Added plugin icon 
 
- 1.6.1 =
+= 1.6.1 =
 * FPW Category Thumbnails and FPW Post Thumbnails: fixed version check not working when major versions changes 
 
 = 1.6.0 =
