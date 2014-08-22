@@ -5,8 +5,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 3.3
-Tested up to: 3.9.1
-Stable tag: 1.6.1
+Tested up to: 4.0
+Stable tag: 1.6.2
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
 page when the post is created or updated. Built-in FPW Post Thumbnails.
@@ -57,7 +57,11 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 
 == Changelog ==
 
-= 1.6.1 =
+= 1.6.2 =
+* Fixed translation plurals
+* Added plugin icon 
+
+ 1.6.1 =
 * FPW Category Thumbnails and FPW Post Thumbnails: fixed version check not working when major versions changes 
 
 = 1.6.0 =
