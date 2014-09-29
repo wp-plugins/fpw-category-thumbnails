@@ -57,6 +57,9 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 
 == Changelog ==
 
+= 1.6.3 =
+* CSS improvements
+
 = 1.6.2 =
 * Fixed translation plurals
 * Added plugin icon 

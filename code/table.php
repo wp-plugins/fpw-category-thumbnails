@@ -69,7 +69,10 @@ a#show-settings-link {
 }
 .widefat thead tr th, .widefat tfoot tr th {
     background-color: #F1F1F1;
-    background-image: -moz-linear-gradient(center top , #F9F9F9, #CCCCCC);
+    background-image: -webkit-linear-gradient(top , #F9F9F9, #CCCCCC);
+    background-image: -moz-linear-gradient(top , #F9F9F9, #CCCCCC);
+    background-image: -ms-linear-gradient(top , #F9F9F9, #CCCCCC);
+    background-image: -o-linear-gradient(top , #F9F9F9, #CCCCCC);
 }
 th#fpwct_cat_name {
 	width: 30%;
@@ -79,6 +82,9 @@ th#fpwct_image_id {
 }
 td.fpwct_cat_name, td.fpwct_image_id, td.fpwct_preview {
 	vertical-align: middle;
+}
+.fpw-fs-button, .fpw-btn-author, .fpw-btn-clear, .fpw-btn-refresh {
+	background-color: white;
 }
 -->
 </style>

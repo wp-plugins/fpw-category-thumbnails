@@ -201,7 +201,7 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( 'fixed version check not working when major version changes', 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( 'CSS improvements', 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -534,7 +534,7 @@ class fpwPostThumbnails {
 		
 		echo	'<div class="metabox-holder" style="width:49%; float:left; margin-right:10px;">';
         echo	'<div class="postbox">';
-		echo	'<h3 style="cursor:default; background-color: #F1F1F1; background-image: -moz-linear-gradient(center top , #F9F9F9, #CCCCCC);">' . 
+		echo	'<h3 style="cursor:default; background-color: #F1F1F1; background-image: -webkit-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -moz-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -ms-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -o-linear-gradient(top , #F9F9F9, #CCCCCC);">' . 
 				__( 'Content thumbnails enabled:', 'fpw-category-thumbnails' ) . ' <input type="checkbox" class="fpt-option-group" ' .
 				'id="box-content-enabled" name="content_enabled" value="content_enabled"';
 		if ( $this->fptOptions[ 'content' ][ 'enabled' ] ) 
@@ -692,7 +692,7 @@ class fpwPostThumbnails {
     	echo	'</div>';
     	echo	'<div class="metabox-holder" style="width:49%; float:left;">';
         echo	'<div class="postbox">';
-		echo	'<h3 style="cursor:default;background-color: #F1F1F1; background-image: -moz-linear-gradient(center top , #F9F9F9, #CCCCCC);">' . 
+		echo	'<h3 style="cursor:default;background-color: #F1F1F1; background-image: -webkit-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -moz-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -ms-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -o-linear-gradient(top , #F9F9F9, #CCCCCC);">' . 
 				__( 'Excerpt thumbnails enabled:', 'fpw-category-thumbnails' ) . ' <input type="checkbox" class="fpt-option-group" ' .
 				'id="box-excerpt-enabled" name="excerpt_enabled" value="excerpt_enabled"';
 		if ( $this->fptOptions[ 'excerpt' ][ 'enabled' ] ) 
