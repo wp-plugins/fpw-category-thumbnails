@@ -45,7 +45,10 @@
 					__( "during uninstall procedure all plugin's information will be removed from the database", "fpw-category-thumbnails" ) . '<br /><strong>' .
 					__( 'Add this plugin to the Admin Bar', 'fpw-category-thumbnails' ) . '</strong> ' .
 					'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' .
-					__( "plugin's link to settings page will be added to the Admin Bar", "fpw-category-thumbnails" ) .
+					__( "plugin's link to settings page will be added to the Admin Bar", "fpw-category-thumbnails" ) . '<br /><strong>' . 
+					__( "Hide output of the current theme's", 'fpw-category-thumbnails' ) . ' the_post_thumbnail()</strong> ' .
+					'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . 
+					__( 'hides thumbnails displayed by the current theme', 'fpw-category-thumbnails' ) .
 					'</p></blockquote>' . 
 					'<p style="font-size: larger">' . __( 'Action Buttons', 'fpw-category-thumbnails' ) . '</p><blockquote>' .
 					'<table style="width: 100%;"><tr><td style="text-align: left; vertical-align: middle;">' . 
@@ -80,8 +83,7 @@
 					'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' .
 					__( 'enables thumbnails for excerpts', 'fpw-category-thumbnails' ) . '</p>' .
 					'<p style="text-align: justify;"><strong>width</strong> ' . __( 'and', 'fpw-category-thumbnails' ) . ' <strong>height</strong> - ' .
-					__( 'width and height of thumbnails', 'fpw-category-thumbnails' ) . '<br /><strong>scaling base</strong> - ' .
-					__( 'base dimension for scaling', 'fpw-category-thumbnails' ) . '<br /><strong>float</strong> - ' .
+					__( 'width and height of thumbnails', 'fpw-category-thumbnails' ) . '<br /><strong>float</strong> - ' .
 					__( 'position of thumbnails relative to the content ( excerpt )', 'fpw-category-thumbnails' ) .
 					'</p><p style="text-align: justify;"><strong>border</strong> ' . 
 					'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' .
@@ -107,7 +109,7 @@
 					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
 					__( 'Can I use this plugin if my theme supports and displays thumbnails?', 'fpw-category-thumbnails' ) . '<br /><strong>' .
 					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .
-					__( 'If the theme displays thumbnails for both the content and excerpts I would not recommended it as you would get two thumbnails displayed. However I can imagine one exception. The theme displays thumbnails for full content but not for excerpts or the other way around. The plugin will display thumbnails for the part not being displayed by the theme not adding thumbnails to the other part.', 'fpw-category-thumbnails' ) . '<br /><br /><strong>' .
+					__( 'Yes. There is an option to hide thumbnails displayed by the current theme.', 'fpw-category-thumbnails' ) . '<br /><br /><strong>' .
 					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
 					__( 'Will this plugin work with JavaScript turned off?', 'fpw-category-thumbnails' ) . '<br /><strong>' .
 					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .

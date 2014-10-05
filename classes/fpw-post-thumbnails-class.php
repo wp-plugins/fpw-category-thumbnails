@@ -52,6 +52,10 @@ class fpwPostThumbnails {
 		} else {
 			if ( !isset( $this->fptOptions[ 'clean' ] ) ) 
 				$this->fptOptions[ 'clean' ] = false;
+			if ( !isset( $this->fptOptions[ 'abar' ] ) ) 
+				$this->fptOptions[ 'abar' ] = false;
+			if ( !isset( $this->fptOptions[ 'nothepostthumbnail' ] ) )
+				$this->fptOptions[ 'nothepostthumbnail' ] = false;
 			if ( !isset( $this->fptOptions[ 'content' ][ 'base' ] ) )
 				$this->fptOptions[ 'content' ][ 'base' ] = 'width';
 			if ( !isset( $this->fptOptions[ 'excerpt' ][ 'base' ] ) )
@@ -59,7 +63,6 @@ class fpwPostThumbnails {
 		}
 
 		//	actions and filters
-		add_action( 'after_setup_theme', array( &$this, 'enableThemeSupportForThumbnails' ), 999 ); 
 		add_action( 'init', array( &$this, 'init' ) );
 		register_activation_hook( $this->fptPath . '/fpw-category-thumbnails.php', array( &$this, 'uninstallMaintenance' ) );
 
@@ -96,17 +99,12 @@ class fpwPostThumbnails {
 		}
 	}	
 
-	//	add theme support for thumbnails
-	function enableThemeSupportForThumbnails() {
-		if ( !current_theme_supports( 'post-thumbnails' ) ) 
-			add_theme_support( 'post-thumbnails' );
-	}
-
 	//	build FPW Post Thumbnails options
 	function fptBuildOptions() {
 		$opt = array(
-			'clean'		=> false,
-			'abar'		=> false,
+			'clean'					=> false,
+			'abar'					=> false,
+			'nothepostthumbnail' 	=> false,	//	since 1.6.4 
 			'content' 	=> array(
 				'enabled'			=> false,
 				'width'				=> 64,
@@ -201,7 +199,9 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( 'CSS improvements', 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "Added visibility control for current theme's thumbnails", 'fpw-category-thumbnails' ) ) . '</li>'; 
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
+						   esc_js( __( 'Help modifications', 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -299,7 +299,8 @@ class fpwPostThumbnails {
 	
 		$this->fptOptions[ 'clean' ] = ( isset( $p[ 'clean' ] ) ) ? true : false;
 		$this->fptOptions[ 'abar' ] = ( isset( $p[ 'abar' ] ) ) ? true : false;
-	
+		$this->fptOptions[ 'nothepostthumbnail' ] = ( isset( $p[ 'nothepostthumbnail' ] ) ) ? true : false;
+			
 		foreach ( $checkboxes as $ck ) {
 			$this->fptOptions[ 'content' ][ $ck ] = 
 				( isset( $p[ 'content_' . $ck ] ) ) ? true : false;
@@ -445,24 +446,30 @@ class fpwPostThumbnails {
 			echo ' checked';
 		echo '> ' . __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . '<br />';
 
-		//	add plugin to admin bar checkbox
+		//	add plugin to the admin bar checkbox
 		echo '<input type="checkbox" class="fpt-option-group" id="box-abar" name="abar" value="abar"';
 		if ( $this->fptOptions[ 'abar' ] ) 
 			echo ' checked';
 		echo '> ' . __( 'Add this plugin to the Admin Bar', 'fpw-category-thumbnails' ) . '<br />';
 
+		//	hide current theme's the_post_thumbnail() output checkbox
+		echo '<input type="checkbox" class="fpt-option-group" id="box-nothepostthumbnail" name="nothepostthumbnail" value="nothepostthumbnail"';
+		if ( $this->fptOptions[ 'nothepostthumbnail' ] ) 
+			echo ' checked';
+		echo '> ' . __( "Hide output of the current theme's", 'fpw-category-thumbnails' ) . ' the_post_thumbnail()<br />';
+
 		//	end of options section
-		echo '</div>';
+		echo 	'</div>';
 		echo	'<div style="margin-top: 5px;">';
 		echo	'<div style="display: none; position: relative">';
 
 		//	notification division for AJAX
 		echo 	'<div id="fpt-message" class="updated" style="position: absolute; ' . 
-				'display: none; z-index: 10; margin-top: 40px"><p>&nbsp;</p></div>';
+				'display: none; z-index: 10; margin-top: 60px"><p>&nbsp;</p></div>';
 		echo	'</div>';
 
 		//	Update button
-		echo	'<input title="' . 
+		echo	'&nbsp;&nbsp;<input title="' . 
 				__( 'write modified data to the database', 'fpw-category-thumbnails' ) .
 				'" id="fpt-update" class="button-primary fpt-submit" ' . 
 				'type="submit" name="submit-update" value=" ' . 
@@ -548,11 +555,6 @@ class fpwPostThumbnails {
 				'</h3>';
 		echo	'<div id="fptContentPreviev" class="thickbox" style="display: none;">';
 		echo	'<div id="thumbnail-content">';
-//		if ( 'left' == $this->fptOptions[ 'content' ][ 'position' ] ) {
-//			echo 'style="float: left; margin: 18px 10px 5px 0;">';
-//		} else {
-//			echo 'style="float: right; margin: 18px 0 5px 10px;">';
-//		}
 		echo 	'<img class="wp-post-image-content" src="' .
 				$this->fptUrl . '/images/Frank.jpg" /></div><p style="text-align: justify">Lorem ipsum dolor sit amet consectetuer ' .
 				'nunc enim laoreet pellentesque augue. Vestibulum Vivamus lacus dis ' . 

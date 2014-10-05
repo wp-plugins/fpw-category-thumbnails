@@ -19,8 +19,6 @@ particular category. This plugin automates the process by inserting a
 thumbnail based on category / thumbnail mapping while post / page is
 being created or updated. Now bundled with FPW Post Thumbnails.
 
-Note: please remember that your theme must support post thumbnails.
-
 == Installation ==
 
 1. Upload `fpw-category-thumbnails` folder to the `/wp-content/plugins/` directory
@@ -56,6 +54,11 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 1. FPW Post Thumbnails - Settings - JavaScript off
 
 == Changelog ==
+
+= 1.6.4 =
+* FPW Category Thumbnails: Adds theme support for thumbnails if not provided by the current theme already
+* FPW Post Thumbnails: Added visibility control for current theme's thumbnails
+* Changed help files for both plugins 
 
 = 1.6.3 =
 * CSS improvements
@@ -268,4 +271,4 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 * Updated: translations
 
 = 1.0 =
-* Initial release.
+* Initial release

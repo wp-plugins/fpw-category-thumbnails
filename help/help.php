@@ -17,10 +17,7 @@
 					'<blockquote style="text-align: justify">' . __( 'Setting featured images for posts / pages could be very time consuming,', 'fpw-category-thumbnails' ) .
 					' ' . __( 'especially when your media library holds hundreds of pictures.', 'fpw-category-thumbnails' ) . ' ' .
 					__( 'Very often we select the same thumbnail for posts in particular category.', 'fpw-category-thumbnails' ) . ' ' .
-					__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '</blockquote></p>' .
-					'<p style="font-size: larger">' . __( 'Note', 'fpw-category-thumbnails' ) . '</p>' .
-					'<blockquote style="text-align: justify">' . __( 'Please remember that the active theme must support post thumbnails.', 'fpw-category-thumbnails' ) .
-					'</blockquote>';
+					__( 'This plugin automates the process by inserting a thumbnail based on category / thumbnail mapping while post / page is being created or updated.', 'fpw-category-thumbnails' ) . '</blockquote></p>';
 
 		$current_screen->add_help_tab( array(
    			'title'   => __( 'Introduction', 'fpw-category-thumbnails' ),

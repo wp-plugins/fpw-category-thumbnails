@@ -31,21 +31,32 @@ class fpwPostThumbnails {
 		//	read options
 		$this->fptOptions = get_option( 'fpw_post_thumbnails_options' );
 
-		add_action( 'after_setup_theme', array( &$this, 'enableThemeSupportForThumbnails' ), 999 );
-		add_action( 'wp_head', array( &$this, 'dynamicThumbnailStyles' ) ); 
-
+		add_action( 'after_setup_theme', array( &$this, 'addImageSizes' ) );
+		add_action( 'wp_head', array( &$this, 'dynamicThumbnailStyles' ) );
+		
 		if ( is_array( $this->fptOptions ) ) {
-			if ( $this->fptOptions[ 'content' ][ 'enabled' ] )
+			if ( $this->fptOptions[ 'content' ][ 'enabled' ] ) 
 				add_filter( 'the_content', array( &$this, 'fptContent' ) );
-			if ( $this->fptOptions[ 'excerpt' ][ 'enabled' ] ) 
+			if ( $this->fptOptions[ 'excerpt' ][ 'enabled' ] )  
 				add_filter( 'the_excerpt', array( &$this, 'fptExcerpt' ) );
+			if ( $this->fptOptions[ 'nothepostthumbnail' ] )
+				add_action( 'after_setup_theme', array( &$this, 'fpwModifyPostThumbnailHTML' ) ); 
 		}
 	}
+	
+	function fpwModifyPostThumbnailHTML() {
+		add_filter( 'post_thumbnail_html', array( &$this, 'fpw_post_thumbnail_html' ), 99, 5 );
+	}
 
-	//	enable post thumbnails support and add image sizes
-	function enableThemeSupportForThumbnails() {
-		if ( !current_theme_supports( 'post-thumbnails' ) ) 
-			add_theme_support( 'post-thumbnails' );
+    function fpw_post_thumbnail_html( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
+		$count = 1;
+		if ( !substr_count( $html, 'style="display:none"' ) ) 
+			$html = str_replace( ' ', ' style="display:none" ', $html, $count );
+    	return $html;
+	}
+
+	//	add image sizes
+	function addImageSizes() {
 		add_image_size( 'content-thumbnail', $this->fptOptions[ 'content' ][ 'width' ], $this->fptOptions[ 'content' ][ 'height' ], false );
 		add_image_size( 'excerpt-thumbnail', $this->fptOptions[ 'excerpt' ][ 'width' ], $this->fptOptions[ 'excerpt' ][ 'height' ], false );
 	}
@@ -116,7 +127,8 @@ class fpwPostThumbnails {
 	//  display thumbnail + content / excerpt
 	function fptThumbnail( $content, $type ) {
 		global $post;
-
+		$count = 1;
+		
 		$thumbID = get_post_meta( $post->ID, '_thumbnail_id', true );
 		if ( !( '' === $thumbID ) ) {
 			$catNames = '';
@@ -129,13 +141,15 @@ class fpwPostThumbnails {
 				}
 			}
 			$pic  = '<div class="thumbnail thumb-' . $this->fptOptions[ $type ][ 'position' ] . '">';
-			$pic .= get_the_post_thumbnail( $post->ID,
+			$img  = get_the_post_thumbnail( $post->ID,
 											array(  $this->fptOptions[ $type ][ 'width' ],
 													$this->fptOptions[ $type ][ 'height' ] ),
 											array(	'class' => 'wp-post-image-' . $type,
 													'title' => $catNames,
 													'alt'	=> 'Featured Image' ) );
-			$pic .=	'</div>';
+			if ( substr_count( $img, ' style="display:none"' ) )
+				$img = str_replace( ' style="display:none"', '', $img, $count );
+			$pic = $pic . $img . '</div>';
 		} else {
 			$pic = '';
 		}

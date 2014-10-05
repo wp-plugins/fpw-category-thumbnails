@@ -47,7 +47,8 @@ class fpwCategoryThumbnails {
 		
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
-
+        add_action( 'after_setup_theme', array( &$this, 'addThemeSupportForThumbnails' ) );
+        
 		register_activation_hook( $this->fctPath . '/fpw-category-thumbnails.php', array( &$this, 'uninstallMaintenance' ) );
 		
 		//	actions below are not used in front end
@@ -82,6 +83,12 @@ class fpwCategoryThumbnails {
 			$this->fctOptions[ 'abar' ] = ( isset( $_POST[ 'abar' ] ) ) ? true : false;
 		if ( $this->fctOptions[ 'abar' ] ) 
 			add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
+	}
+	
+	//	add theme support for thumbnails if not provided by current theme already
+	function addThemeSupportForThumbnails() {
+		if ( !current_theme_supports( 'post-thumbnails' ) )
+			add_theme_support( 'post-thumbnails' );
 	}
 	
 	//	set heading for custom column 'Thumbnail' - Categories admin screen
@@ -188,7 +195,9 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( 'CSS improvements', 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( 'Adds theme support for thumbnails if not provided by the current theme already', 'fpw-category-thumbnails' ) ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
+						   esc_js( __( 'Help modifications', 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -510,7 +519,7 @@ class fpwCategoryThumbnails {
 			echo ' checked';
 		echo '> ' . __( 'Add this plugin to the Admin Bar', 'fpw-category-thumbnails' ) . '<br />';
 
-		//	add plugin to admin bar checkbox
+		//	enable FPW Post Thumbnails plugin checkbox
 		echo '<input type="checkbox" class="option-group" id="box-fpt" name="fpt" value="fpt"';
 		if ( $this->fctOptions[ 'fpt' ] ) 
 			echo ' checked';
@@ -521,7 +530,7 @@ class fpwCategoryThumbnails {
 		
 		//	notification division for AJAX
 		echo 	'<div id="message" class="updated" style="position: absolute; ' . 
-				'display: none; z-index: 10;margin-top: 73px;"><p>&nbsp;</p></div>';
+				'display: none; z-index: 10;margin-top: 79px;"><p>&nbsp;</p></div>';
 				
 		require_once $this->fctPath . '/code/table.php';
 
