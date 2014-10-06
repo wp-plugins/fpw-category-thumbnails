@@ -195,7 +195,7 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "FIXED: FPW Post Thumbnails not hiding theme's thumbnails if both Content thumbnails enabled and Excerpt thumbnails enabled</strong> were off", 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "FIXED: FPW Post Thumbnails not hiding theme's thumbnails if both Content thumbnails enabled and Excerpt thumbnails enabled were off", 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
