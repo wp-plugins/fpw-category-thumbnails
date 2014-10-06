@@ -195,9 +195,7 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( 'Adds theme support for thumbnails if not provided by the current theme already', 'fpw-category-thumbnails' ) ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( 'Help modifications', 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "FIXED: FPW Post Thumbnails not hiding theme's thumbnails if both <strong>Content thumbnails enabled</strong> and <strong>Excerpt thumbnails enabled</strong> were off", 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -289,8 +287,8 @@ class fpwCategoryThumbnails {
 			return false;
 		$url = "http://fw2s.com/fpwcatthumbsupdate.txt";
 		$update = wp_remote_fopen( $url );
-		echo '<tr class="plugin-update-tr"><td></td><td></td><td class="plugin-update"><div class="update-message">' . 
-			'<img class="alignleft" src="' . $this->fctUrl . '/images/Thumbs_Up.png" width="64">' . $update . '</div></td></tr>';
+		echo '<tr class="plugin-update-tr"><td colspan="3" class="plugin-update"><div class="update-message">' . 
+			$update . '</div></td></tr>';
 	}
 
 	//	add link to Donation to plugins meta

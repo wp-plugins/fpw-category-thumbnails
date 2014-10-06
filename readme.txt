@@ -55,6 +55,10 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 
 == Changelog ==
 
+= 1.6.4.1 ( maintenance release ) =
+* FIXED: FPW Post Thumbnails not hiding theme's thumbnails if both **Content thumbnails enabled** and **Excerpt thumbnails enabled** were off
+* FIXED: FPW Post Thumbnails dynamic CSS style did not set rounded corners correctly  
+
 = 1.6.4 =
 * FPW Category Thumbnails: Adds theme support for thumbnails if not provided by the current theme already
 * FPW Post Thumbnails: Added visibility control for current theme's thumbnails

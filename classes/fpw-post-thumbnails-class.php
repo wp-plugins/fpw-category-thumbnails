@@ -199,9 +199,7 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "Added visibility control for current theme's thumbnails", 'fpw-category-thumbnails' ) ) . '</li>'; 
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( 'Help modifications', 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "FIXED: dynamic CSS style did not set rounded corners correctly", 'fpw-category-thumbnails' ) ) . '</li>'; 
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
