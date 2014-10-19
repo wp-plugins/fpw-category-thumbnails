@@ -6,7 +6,7 @@ Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 3.3
 Tested up to: 4.0
-Stable tag: 1.6.4.1
+Stable tag: 1.6.5
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
 page when the post is created or updated. Built-in FPW Post Thumbnails.
@@ -54,6 +54,11 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 1. FPW Post Thumbnails - Settings - JavaScript off
 
 == Changelog ==
+
+= 1.6.5 =
+* FPW Category Thumbnails: transfered hiding current theme's thumbnails from FPW Post Thumbnails to improve performance
+* FPW Post Thumbnails: transfered hiding current theme's thumbnails to FPW Category Thumbnails to improve performance
+* FPW Post Thumbnails: removed 'Get Language File' button as FPW Category Thumbnails handles it for both plugins
 
 = 1.6.4.1 ( maintenance release ) =
 * FIXED: FPW Post Thumbnails not hiding theme's thumbnails if both **Content thumbnails enabled** and **Excerpt thumbnails enabled** were off
