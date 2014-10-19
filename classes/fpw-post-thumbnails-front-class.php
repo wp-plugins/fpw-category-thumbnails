@@ -39,22 +39,9 @@ class fpwPostThumbnails {
 				add_filter( 'the_content', array( &$this, 'fptContent' ) );
 			if ( $this->fptOptions[ 'excerpt' ][ 'enabled' ] )  
 				add_filter( 'the_excerpt', array( &$this, 'fptExcerpt' ) );
-			if ( $this->fptOptions[ 'nothepostthumbnail' ] )
-				add_action( 'after_setup_theme', array( &$this, 'fpwModifyPostThumbnailHTML' ) ); 
 		}
 	}
 	
-	function fpwModifyPostThumbnailHTML() {
-		add_filter( 'post_thumbnail_html', array( &$this, 'fpw_post_thumbnail_html' ), 99, 5 );
-	}
-
-    function fpw_post_thumbnail_html( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
-		$count = 1;
-		if ( !substr_count( $html, 'style="display:none"' ) ) 
-			$html = str_replace( ' ', ' style="display:none" ', $html, $count );
-    	return $html;
-	}
-
 	//	add image sizes
 	function addImageSizes() {
 		add_image_size( 'content-thumbnail', $this->fptOptions[ 'content' ][ 'width' ], $this->fptOptions[ 'content' ][ 'height' ], false );

@@ -13,7 +13,7 @@ class fpwCategoryThumbnails {
 	public	$wpVersion;
 
 	//	constructor
-	public	function __construct( $path, $version ) {
+	public	function __construct( $path, $version, $hideThePostThumbnail ) {
 		global $wp_version;
 
 		//	set plugin's path
@@ -30,8 +30,26 @@ class fpwCategoryThumbnails {
 
 		//	hook main action
 		add_action( 'save_post', array( &$this, 'addThumbnailToPost' ), 10, 2 );
-	}	
+		
+		//	hook hide thumbnails action if required
+		if ( $hideThePostThumbnail )
+			add_action( 'after_setup_theme', array( &$this, 'fpwModifyPostThumbnailHTML' ) ); 
+	}
+	
+	/*	-------------------------------------------------------------------
+	Hide thumbnails action - hides current themes the_post_thumbnail output
+	-------------------------------------------------------------------- */
+	function fpwModifyPostThumbnailHTML() {
+		add_filter( 'post_thumbnail_html', array( &$this, 'fpw_post_thumbnail_html' ), 99, 5 );
+	}
 
+    function fpw_post_thumbnail_html( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
+		$count = 1;
+		if ( !substr_count( $html, 'style="display:none"' ) ) 
+			$html = str_replace( ' ', ' style="display:none" ', $html, $count );
+    	return $html;
+	}
+	
 	/*	------------------------------------------------------------------
 	Main action - sets the value of post's _thumbnail_id based on category
 	assignments

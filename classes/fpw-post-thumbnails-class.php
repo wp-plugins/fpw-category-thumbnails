@@ -10,11 +10,6 @@ class fpwPostThumbnails {
 	var	$fptUrl;
 	var $fptVersion;
 	var	$fptPage;
-	var	$fptLocale;
-	var	$translationURL;
-	var	$translationPath;
-	var $translationStatus;
-	var $translationResponse;
 	var	$wpVersion;
 
 	//	constructor
@@ -33,16 +28,6 @@ class fpwPostThumbnails {
 		//	set version
 		$this->fptVersion = $version;
 		define( 'FPW_POST_THUMBNAILS_VERSION', $version );
-
-		//	get locale
-		$this->fptLocale = get_locale();
-		
-		//	set translation URL
-		$this->translationURL = 'http://svn.wp-plugins.org/fpw-category-thumbnails/translations/' . 
-								$this->fptVersion . '/fpw-catgory-thumbnails-' . $this->fptLocale . '.mo';
-
-		//	set translation path
-		$this->translationPath = $this->fptPath . '/languages/fpw-category-thumbnails-' . $this->fptLocale . '.mo';
 
 		//	get post thumbnails options
 		$this->fptOptions = get_option( 'fpw_post_thumbnails_options' );
@@ -71,13 +56,10 @@ class fpwPostThumbnails {
 
 		//	AJAX group of actions
 		add_action( 'wp_ajax_fpw_pt_update', array( &$this, 'fpw_pt_update_ajax' ) );
-		add_action( 'wp_ajax_fpw_pt_language', array( &$this, 'fpw_pt_language_ajax' ) );
 		add_action( 'wp_ajax_fpw_pt_copy_right', array( &$this, 'fpw_pt_copy_right_ajax' ) );
 		add_action( 'wp_ajax_fpw_pt_copy_left', array( &$this, 'fpw_pt_copy_left_ajax' ) );
 
-		$anyButtonPressed =
-			(	isset( $_POST['submit-update'] ) || 
-				isset( $_POST['submit-language'] ) ) ? true : false; 
+		$anyButtonPressed = ( isset( $_POST['submit-update'] ) ) ? true : false; 
 
 		if ( $anyButtonPressed ) 
 			$this->fptOptions[ 'abar' ] = ( isset( $_POST[ 'abar' ] ) ) ? true : false;
@@ -148,27 +130,9 @@ class fpwPostThumbnails {
 		return $opt;
 	}
 	
-	//	check translation file availability
-	function translationAvailable() {
-
-    	//	if language file exist, do not load it again
-		if ( is_readable( $this->translationPath ) ) 
-			return 'installed';
-
-		$this->translationResponse = wp_remote_get( $this->translationURL, array( 'timeout' => 300 ) );
-
-		//	if no translation file exists exit the check
-		if ( is_wp_error( $this->translationResponse ) || $this->translationResponse[ 'response' ][ 'code' ] != '200' )
-			return 'not_exist';
-		return 'available';		
-	}
-
 	//	initialize
 	function init() {
 		load_plugin_textdomain( 'fpw-category-thumbnails', false, 'fpw-category-thumbnails/languages/' );
-		
-		if ( !( 'en_US' == $this->fptLocale ) ) 
-			$this->translationStatus = $this->translationAvailable();
 	}
 	
 	//	register admin menu
@@ -199,7 +163,9 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "FIXED: dynamic CSS style did not set rounded corners correctly", 'fpw-category-thumbnails' ) ) . '</li>'; 
+						   esc_js( __( "transfered hiding current theme's thumbnails to FPW Category Thumbnails to improve performance", 'fpw-category-thumbnails' ) ) . '</li>'; 
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
+						   esc_js( __( "removed 'Get Language File' button as downloading of translations is handled by FPW Category Thumbnails for both plugins", 'fpw-category-thumbnails' ) ) . '</li>'; 
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -229,12 +195,6 @@ class fpwPostThumbnails {
 	function fpw_pt_update_ajax() {
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
 			require_once $this->fptPath . '/ajax/fptupdate.php';
-	}
-	
-	// AJAX wrapper to perform translation file loading
-	function fpw_pt_language_ajax() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
-			require_once $this->fptPath . '/ajax/fptlanguage.php';
 	}
 	
 	// AJAX wrapper to perform options update
@@ -409,7 +369,6 @@ class fpwPostThumbnails {
 
 		//	check if form was submited
 		if ( isset( $_POST[ 'submit-update' ] ) || 
-			 isset( $_POST[ 'submit-language' ] ) || 
 			 isset( $_POST[ 'submit-copy-right' ] ) ||
 			 isset( $_POST[ 'submit-copy-left' ] ) ) {
 			if ( !isset( $_POST[ 'fpw-fpt-nonce' ] ) ) 
@@ -473,15 +432,6 @@ class fpwPostThumbnails {
 				'type="submit" name="submit-update" value=" ' . 
 				__( 'Update', 'fpw-category-thumbnails' ) . ' " /> ';
 
-		//	Get Language File button
-		if ( !( 'en_US' == $this->fptLocale ) && 
-				( ( 'available' == $this->translationStatus ) || 
-				( 'not_exist' == $this->translationStatus ) ) )  
-			echo	'<input title="' . 
-					__( 'load language file for your version', 'fpw-category-thumbnails' ) .
-					'" id="fpt-language" class="button-primary fpt-submit" ' . 
-					'type="submit" name="submit-language" value=" ' . 
-					__( 'Get Language File', 'fpw-category-thumbnails' ) . ' " />';
         echo	'</div>';
 
 		//	notification division
@@ -500,22 +450,6 @@ class fpwPostThumbnails {
 			}
 			echo '</strong></p></div>';
 		} 
-		
-		if ( isset( $_POST[ 'submit-language' ] ) ) {
-			if ( 'not_exist' == $this->translationStatus ) {
-				$m = __( 'Language file for this version is not yet available.', 'fpw-category-thumbnails' );
-			} elseif ( 'installed' == $this->translationStatus ) {
-				$m = __( 'Language file is already installed. Please reload this page.', 'fpw-category-thumbnails' );
-			} else {
-				$handle = @fopen( $this->translationPath, 'wb' );
-				fwrite( $handle, $this->translationResponse[ 'body' ] );
-				fclose($handle);
-				$this->translationStatus = 'installed';
-				$m = __( 'Language file downloaded successfully. It will be applied as soon as this page is reloaded.', 'fpw-category-thumbnails' );
-			}
-			echo '<div id="fpt-message" class="updated fade" style="margin-bottom: 10px;"><p><strong>' . $m;
-			echo '</strong></p></div>';
-		}			
 		
 		if ( isset( $_POST[ 'submit-copy-right' ] ) ) { 
 			if ( '' == $resp ) {
