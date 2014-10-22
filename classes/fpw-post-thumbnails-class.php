@@ -28,24 +28,116 @@ class fpwPostThumbnails {
 		//	set version
 		$this->fptVersion = $version;
 		define( 'FPW_POST_THUMBNAILS_VERSION', $version );
-
+		
 		//	get post thumbnails options
 		$this->fptOptions = get_option( 'fpw_post_thumbnails_options' );
 
 		if ( ! is_array( $this->fptOptions ) ) {
-			$this->fptOptions = $this->fptBuildOptions();
+			$this->fptOptions = $this->fptBuildOptions(); 
 		} else {
-			if ( !isset( $this->fptOptions[ 'clean' ] ) ) 
-				$this->fptOptions[ 'clean' ] = false;
-			if ( !isset( $this->fptOptions[ 'abar' ] ) ) 
-				$this->fptOptions[ 'abar' ] = false;
-			if ( !isset( $this->fptOptions[ 'nothepostthumbnail' ] ) )
-				$this->fptOptions[ 'nothepostthumbnail' ] = false;
-			if ( !isset( $this->fptOptions[ 'content' ][ 'base' ] ) )
-				$this->fptOptions[ 'content' ][ 'base' ] = 'width';
-			if ( !isset( $this->fptOptions[ 'excerpt' ][ 'base' ] ) )
-				$this->fptOptions[ 'excerpt' ][ 'base' ] = 'width';
-		}
+			if ( !array_key_exists ( 'clean' , $this->fptOptions ) )
+				$this->fptOptions[ 'clean' ] = false;						
+			if ( !array_key_exists ( 'abar' , $this->fptOptions ) )
+				$this->fptOptions[ 'abar' ] = false;						
+			if ( !array_key_exists ( 'nothepostthumbnail' , $this->fptOptions ) )
+				$this->fptOptions[ 'nothepostthumbnail' ] = false;						
+			if ( !array_key_exists ( 'content' , $this->fptOptions ) )
+				$this->fptOptions[ 'content' ] = array();
+			if ( !array_key_exists ( 'enabled' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'enabled' ] = false;						
+			if ( !array_key_exists ( 'width' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'width' ] = 64;						
+			if ( !array_key_exists ( 'height' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'height' ] = 64;						
+			if ( !array_key_exists ( 'position' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'position' ] = 'left';						
+			if ( !array_key_exists ( 'border' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'border' ] = false;						
+			if ( !array_key_exists ( 'border_width' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'border_width' ] = 1;						
+			if ( !array_key_exists ( 'border_radius' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'border_radius' ] = 0;						
+			if ( !array_key_exists ( 'border_color' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'border_color' ] = '#000000';						
+			if ( !array_key_exists ( 'background_color' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'background_color' ] = '#FFFFFF';						
+			if ( !array_key_exists ( 'shadow' , $this->fptOptions[ 'content'] ) )
+				$this->fptOptions[ 'content' ][ 'shadow' ] = false;						
+			if ( !array_key_exists ( 'sh_hor_length' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'sh_hor_length' ] = 0;						
+			if ( !array_key_exists ( 'sh_ver_length' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'sh_ver_length' ] = 0;						
+			if ( !array_key_exists ( 'sh_blur_radius' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'sh_blur_radius' ] = 0;						
+			if ( !array_key_exists ( 'sh_color' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'sh_color' ] = '#000000';						
+			if ( !array_key_exists ( 'sh_opacity' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'sh_opacity' ] = 0;						
+			if ( !array_key_exists ( 'padding_top' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'padding_top' ] = 0;						
+			if ( !array_key_exists ( 'padding_left' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'padding_left' ] = 0;						
+			if ( !array_key_exists ( 'padding_bottom' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'padding_bottom' ] = 0;						
+			if ( !array_key_exists ( 'padding_right' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'padding_right' ] = 0;						
+			if ( !array_key_exists ( 'margin_top' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'margin_top' ] = 0;						
+			if ( !array_key_exists ( 'margin_left' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'margin_left' ] = 0;						
+			if ( !array_key_exists ( 'margin_bottom' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'margin_bottom' ] = 0;						
+			if ( !array_key_exists ( 'margin_right' , $this->fptOptions[ 'content' ] ) )
+				$this->fptOptions[ 'content' ][ 'margin_right' ] = 0;						
+			if ( !array_key_exists ( 'excerpt' , $this->fptOptions ) )
+				$this->fptOptions[ 'excerpt' ] = array();
+			if ( !array_key_exists ( 'enabled' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'enabled' ] = false;						
+			if ( !array_key_exists ( 'width' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'width' ] = 64;						
+			if ( !array_key_exists ( 'height' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'height' ] = 64;						
+			if ( !array_key_exists ( 'position' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'position' ] = 'left';						
+			if ( !array_key_exists ( 'border' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'border' ] = false;						
+			if ( !array_key_exists ( 'border_width' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'border_width' ] = 1;						
+			if ( !array_key_exists ( 'border_radius' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'border_radius' ] = 0;						
+			if ( !array_key_exists ( 'border_color' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'border_color' ] = '#000000';						
+			if ( !array_key_exists ( 'background_color' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'background_color' ] = '#FFFFFF';						
+			if ( !array_key_exists ( 'shadow' , $this->fptOptions[ 'excerpt'] ) )
+				$this->fptOptions[ 'excerpt' ][ 'shadow' ] = false;						
+			if ( !array_key_exists ( 'sh_hor_length' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'sh_hor_length' ] = 0;						
+			if ( !array_key_exists ( 'sh_ver_length' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'sh_ver_length' ] = 0;						
+			if ( !array_key_exists ( 'sh_blur_radius' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'sh_blur_radius' ] = 0;						
+			if ( !array_key_exists ( 'sh_color' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'sh_color' ] = '#000000';						
+			if ( !array_key_exists ( 'sh_opacity' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'sh_opacity' ] = 0;						
+			if ( !array_key_exists ( 'padding_top' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'padding_top' ] = 0;						
+			if ( !array_key_exists ( 'padding_left' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'padding_left' ] = 0;						
+			if ( !array_key_exists ( 'padding_bottom' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'padding_bottom' ] = 0;						
+			if ( !array_key_exists ( 'padding_right' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'padding_right' ] = 0;						
+			if ( !array_key_exists ( 'margin_top' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'margin_top' ] = 0;						
+			if ( !array_key_exists ( 'margin_left' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'margin_left' ] = 0;						
+			if ( !array_key_exists ( 'margin_bottom' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'margin_bottom' ] = 0;						
+			if ( !array_key_exists ( 'margin_right' , $this->fptOptions[ 'excerpt' ] ) )
+				$this->fptOptions[ 'excerpt' ][ 'margin_right' ] = 0;						
+		}  
 
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
@@ -97,6 +189,12 @@ class fpwPostThumbnails {
 				'border_radius'		=> 0,
 				'border_color'		=> '#000000',
 				'background_color'	=> '#FFFFFF',
+				'shadow'			=> false,
+				'sh_hor_length'		=> 0,
+				'sh_ver_length'		=> 0,
+				'sh_blur_radius'	=> 0,
+				'sh_color'			=> '#000000',
+				'sh_opacity'		=> 0,   
 				'padding_top'		=> 0,
 				'padding_left'		=> 0,
 				'padding_bottom'	=> 0,
@@ -116,6 +214,12 @@ class fpwPostThumbnails {
 				'border_radius'		=> 0,
 				'border_color'		=> '#000000',
 				'background_color'	=> '#FFFFFF',
+				'shadow'			=> false,
+				'sh_hor_length'		=> 0,
+				'sh_ver_length'		=> 0,
+				'sh_blur_radius'	=> 0,
+				'sh_color'			=> '#000000',
+				'sh_opacity'		=> 0,     
 				'padding_top'		=> 0,
 				'padding_left'		=> 0,
 				'padding_bottom'	=> 0,
@@ -132,7 +236,7 @@ class fpwPostThumbnails {
 	
 	//	initialize
 	function init() {
-		load_plugin_textdomain( 'fpw-category-thumbnails', false, 'fpw-category-thumbnails/languages/' );
+		load_plugin_textdomain( 'fpw-category-thumbnails', 'fpw-category-thumbnails/languages/' );
 	}
 	
 	//	register admin menu
@@ -163,9 +267,7 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "transfered hiding current theme's thumbnails to FPW Category Thumbnails to improve performance", 'fpw-category-thumbnails' ) ) . '</li>'; 
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "removed 'Get Language File' button as downloading of translations is handled by FPW Category Thumbnails for both plugins", 'fpw-category-thumbnails' ) ) . '</li>'; 
+						   esc_js( __( "added shadow support for bordered thumbnails", 'fpw-category-thumbnails' ) ) . '</li>'; 
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -230,6 +332,19 @@ class fpwPostThumbnails {
 	}
 	
 	private function fptValidateInput( $p ) {
+		$plusMinusToCheck = array(
+			'sh_hor_length',
+			'sh_ver_length'
+		);
+		
+		$upperLimitCheck = array(
+			'sh_blur_radius'
+		);
+		
+		$minusOneToOneCheck = array(
+			'sh_opacity'
+		);
+		
 		$valuesToCheck = array( 
 			'width',
 			'height',
@@ -247,12 +362,14 @@ class fpwPostThumbnails {
 	
 		$checkboxes = array(
 			'enabled',
-			'border'
+			'border',
+			'shadow'
 		);
 	
 		$colorsToCheck = array(
 			'border_color',
-			'background_color'
+			'background_color',
+			'sh_color'
 		);
 	
 		$this->fptOptions[ 'clean' ] = ( isset( $p[ 'clean' ] ) ) ? true : false;
@@ -265,10 +382,25 @@ class fpwPostThumbnails {
 			$this->fptOptions[ 'excerpt' ][ $ck ] = 
 				( isset( $p[ 'excerpt_' . $ck ] ) ) ? true : false;
 		}
-
+		
 		$this->fptOptions[ 'content' ][ 'position' ] = $p[ 'content_position' ];
 		$this->fptOptions[ 'excerpt' ][ 'position' ] = $p[ 'excerpt_position' ];
 
+		foreach ( $plusMinusToCheck as $val ) {
+			$this->fptOptions[ 'content' ][ $val ] = $p[ 'content_' . $val ];
+			$this->fptOptions[ 'excerpt' ][ $val ] = $p[ 'excerpt_' . $val ]; 
+		}
+
+		foreach ( $upperLimitCheck as $val ) {
+			$this->fptOptions[ 'content' ][ $val ] = $p[ 'content_' . $val ];
+			$this->fptOptions[ 'excerpt' ][ $val ] = $p[ 'excerpt_' . $val ]; 
+		}
+		
+		foreach ( $minusOneToOneCheck as $val ) {
+			$this->fptOptions[ 'content' ][ $val ] = $p[ 'content_' . $val ];
+			$this->fptOptions[ 'excerpt' ][ $val ] = $p[ 'excerpt_' . $val ]; 
+		}
+		
 		foreach ( $valuesToCheck as $val ) {
 			$this->fptOptions[ 'content' ][ $val ] = $p[ 'content_' . $val ];
 			$this->fptOptions[ 'excerpt' ][ $val ] = $p[ 'excerpt_' . $val ]; 
@@ -282,7 +414,95 @@ class fpwPostThumbnails {
 		$response = '';
 		$valid = true;
 
+		foreach ( $plusMinusToCheck as $val ) {
+			$this->fptOptions[ 'content' ][ $val ] = $p[ 'content_' . $val ];
+			$this->fptOptions[ 'excerpt' ][ $val ] = $p[ 'excerpt_' . $val ]; 
+		}
+
+		foreach ( $upperLimitCheck as $val ) {
+			$this->fptOptions[ 'content' ][ $val ] = $p[ 'content_' . $val ];
+			$this->fptOptions[ 'excerpt' ][ $val ] = $p[ 'excerpt_' . $val ]; 
+		}
+		
+		foreach ( $minusOneToOneCheck as $val ) {
+			$this->fptOptions[ 'content' ][ $val ] = $p[ 'content_' . $val ];
+			$this->fptOptions[ 'excerpt' ][ $val ] = $p[ 'excerpt_' . $val ]; 
+		}
+
 		foreach ( $valuesToCheck as $val ) {
+			if ( $val == 'sh_opacity' ) {
+				if ( !( (float)$p[ 'content_' .$val ] <= 1 ) && ( (float)$p[ 'content_' .$val ] >= 0 ) ) {
+					$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
+								str_replace( '_', '-', $val ) . '" ' . 
+								__( 'is not a number between 0 and 1.', 'fpw-category-thumbnails' );
+					$valid = false;
+					break;
+				}
+				if ( !( (float)$p[ 'excerpt_' .$val ] <= 1 ) && ( (float)$p[ 'excerpt_' .$val ] >= 0 ) ) {
+					$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
+								str_replace( '_', '-', $val ) . '" ' . 
+								__( 'is not a number between 0 and 1.', 'fpw-category-thumbnails' );
+					$valid = false;
+					break;
+				}
+			} else {
+				if ( !ctype_digit( (string) $p[ 'content_' . $val ] ) ) { 
+					$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
+								str_replace( '_', '-', $val ) . '" ' . 
+								__( 'contains non-numeric characters.', 'fpw-category-thumbnails' );
+					$valid = false;
+					break;
+				}
+				if ( !ctype_digit( (string) $p[ 'excerpt_' . $val ] ) ) {
+					$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
+								str_replace( '_', '-', $val ) . '" ' . 
+								__( 'contains non-numeric characters.', 'fpw-category-thumbnails' );
+					$valid = false;
+					break;
+				}
+			}
+		}
+		
+		if ( !$valid )  
+			return $response;
+
+		foreach ( $plusMinusToCheck as $val ) {
+			$v = trim( (string)$p[ 'content_' . $val ], '-' ); 
+			if ( !ctype_digit( (string)$v ) ) { 
+				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
+							str_replace( '_', '-', $val ) . '" ' . 
+							__( 'contains non-numeric characters.', 'fpw-category-thumbnails' );
+				$valid = false;
+				break;
+			}
+			if ( (int)$v > 75 ) {
+				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
+							str_replace( '_', '-', $val ) . '" ' . 
+							__( 'must be a number from -75 to 75', 'fpw-category-thumbnails' );
+				$valid = false;
+				break;
+			}
+			$v = trim( (string)$p[ 'excerpt_' . $val ], '-' ); 
+			if ( !ctype_digit( (string)$v ) ) { 
+				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
+							str_replace( '_', '-', $val ) . '" ' . 
+							__( 'contains non-numeric characters.', 'fpw-category-thumbnails' );
+				$valid = false;
+				break;
+			}
+			if ( (int)$v > 75 ) {
+				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
+							str_replace( '_', '-', $val ) . '" ' . 
+							__( 'must be a number from -75 to 75', 'fpw-category-thumbnails' );
+				$valid = false;
+				break;
+			}
+		}
+
+		if ( !$valid )  
+			return $response;
+
+		foreach ( $upperLimitCheck as $val ) {
 			if ( !ctype_digit( (string) $p[ 'content_' . $val ] ) ) { 
 				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $val ) . '" ' . 
@@ -290,10 +510,44 @@ class fpwPostThumbnails {
 				$valid = false;
 				break;
 			}
+			if ( (int)$p[ 'content_' . $val ] > 30 ) {
+				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
+							str_replace( '_', '-', $val ) . '" ' . 
+							__( 'must be a number from 0 to 30', 'fpw-category-thumbnails' );
+				$valid = false;
+				break;
+			}
 			if ( !ctype_digit( (string) $p[ 'excerpt_' . $val ] ) ) {
 				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $val ) . '" ' . 
 							__( 'contains non-numeric characters.', 'fpw-category-thumbnails' );
+				$valid = false;
+				break;
+			}
+			if ( (int)$p[ 'excerpt_' . $val ] > 30 ) {
+				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
+							str_replace( '_', '-', $val ) . '" ' . 
+							__( 'must be a number from 0 to 30', 'fpw-category-thumbnails' );
+				$valid = false;
+				break;
+			}
+		}
+
+		if ( !$valid )  
+			return $response;
+
+		foreach ( $minusOneToOneCheck as $val ) {
+			if ( !( (float)$p[ 'content_' .$val ] <= 1 ) && ( (float)$p[ 'content_' .$val ] >= 0 ) ) {
+				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
+							str_replace( '_', '-', $val ) . '" ' . 
+							__( 'is not a number between 0 and 1', 'fpw-category-thumbnails' );
+				$valid = false;
+				break;
+			}
+			if ( !( (float)$p[ 'excerpt_' .$val ] <= 1 ) && ( (float)$p[ 'excerpt_' .$val ] >= 0 ) ) {
+				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
+							str_replace( '_', '-', $val ) . '" ' . 
+							__( 'is not a number between 0 and 1', 'fpw-category-thumbnails' );
 				$valid = false;
 				break;
 			}
@@ -308,6 +562,7 @@ class fpwPostThumbnails {
 				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $col ) . '" ' . 
 							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-category-thumbnails" );
+				$valid = false;
 				break;
 			}
 			if ( !( 7 == strlen( $p[ 'excerpt_' . $col ] ) ) || 
@@ -315,6 +570,7 @@ class fpwPostThumbnails {
 				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $col ) . '" ' . 
 							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-category-thumbnails" );
+				$valid = false;
 				break;
 			}
 			$ac = substr( $p[ 'content_' . $col ], 1, strlen( $p[ 'content_' . $col ] ) - 1 );
@@ -323,12 +579,14 @@ class fpwPostThumbnails {
 				$response = __( 'In Content panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $col ) . '" ' . 
 							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-category-thumbnails" );
+				$valid = false;
 				break;
 			}
 			if ( !ctype_xdigit( $ae ) ) {
 				$response = __( 'In Excerpt panel field', 'fpw-category-thumbnails' ) . ' "' .
 							str_replace( '_', '-', $col ) . '" ' . 
 							__( "must start with '#' charcter followed by 6 hexadecimal digits.", "fpw-category-thumbnails" );
+				$valid = false;
 				break;
 			}
 		}
@@ -342,13 +600,18 @@ class fpwPostThumbnails {
 			'enabled',
 			'width',
 			'height',
-//			'base',
 			'position',
 			'border',
 			'border_radius',
 			'border_width',
 			'border_color',
 			'background_color',
+			'shadow',
+			'sh_hor_length',
+			'sh_ver_length',
+			'sh_blur_radius',
+			'sh_color',
+			'sh_opacity',
 			'padding_top',
 			'padding_left',
 			'padding_bottom',
@@ -366,7 +629,6 @@ class fpwPostThumbnails {
 
 	//	FPW Post Thumbnails - settings page
 	function fptSettings() {
-
 		//	check if form was submited
 		if ( isset( $_POST[ 'submit-update' ] ) || 
 			 isset( $_POST[ 'submit-copy-right' ] ) ||
@@ -470,7 +732,6 @@ class fpwPostThumbnails {
 			echo '<div id="fpt-message" class="updated fade" style="margin-bottom: 10px;"><p><strong>' . $m;
 			echo '</strong></p></div>';
 		}
-		
 		echo	'<div class="metabox-holder" style="width:49%; float:left; margin-right:10px;">';
         echo	'<div class="postbox">';
 		echo	'<h3 style="cursor:default; background-color: #F1F1F1; background-image: -webkit-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -moz-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -ms-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -o-linear-gradient(top , #F9F9F9, #CCCCCC);">' . 
@@ -563,6 +824,51 @@ class fpwPostThumbnails {
 		echo	'<div style="position: absolute; z-index: 10" id="colorpicker-content-background-color"></div>';
 		echo	'</div></td>';
 		echo	'<td style="verical-align: middle">background-color</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="checkbox" class="fpt-option-group" id="box-content-shadow" name="content_shadow" value="content_shadow"';
+		if ( $this->fptOptions[ 'content' ][ 'shadow' ] ) 
+			echo	' checked';
+		echo	'></td>';
+		echo	'<td style="verical-align: middle">shadow</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'content' ][ 'sh_hor_length' ] . '" name="content_sh_hor_length" id="content-sh-hor-length" class="content-sh-hor-length-value" />';
+		echo	' px</td>';
+		echo	'<td style="verical-align: middle">shadow-horizontal-length (-75...75)</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'content' ][ 'sh_ver_length' ] . '" name="content_sh_ver_length" id="content-sh-ver-length" class="content-sh-ver-length-value" />';
+		echo	' px</td>';
+		echo	'<td style="verical-align: middle">shadow-vertical-length (-75...75)</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'content' ][ 'sh_blur_radius' ] . '" name="content_sh_blur_radius" id="content-sh-blur-radius" class="content-sh-blur-radius-value" />';
+		echo	' px</td>';
+		echo	'<td style="verical-align: middle">shadow-blur-radius (0...30)</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<div class="color-picker" style="position: relative;">';
+		echo	'<input style="text-transform: uppercase" type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'content' ][ 'sh_color' ] . '" name="content_sh_color" id="content-sh-color" class="content-sh-color-value" />';
+		echo	'<div style="position: absolute; z-index: 10" id="colorpicker-content-sh-color"></div>';
+		echo	'</div></td>';
+		echo	'<td style="verical-align: middle">shadow-color</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'content' ][ 'sh_opacity' ] . '" name="content_sh_opacity" id="content-sh-opacity" class="content-sh-opacity-value" />';
+		echo	'</td>';
+		echo	'<td style="verical-align: middle">shadow-opacity (0...1)</td>';
 		echo	'</tr>';
 		echo	'<tr>';
 		echo	'<td style="width: 30%; verical-align: middle">';
@@ -711,6 +1017,51 @@ class fpwPostThumbnails {
 		echo	'<div style="position: absolute; z-index: 10" id="colorpicker-excerpt-background-color"></div>';
 		echo	'</div></td>';
 		echo	'<td style="verical-align: middle">background-color</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="checkbox" class="fpt-option-group" id="box-excerpt-shadow" name="excerpt_shadow" value="excerpt_shadow"';
+		if ( $this->fptOptions[ 'excerpt' ][ 'shadow' ] ) 
+			echo	' checked';
+		echo	'></td>';
+		echo	'<td style="verical-align: middle">shadow</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'excerpt' ][ 'sh_hor_length' ] . '" name="excerpt_sh_hor_length" id="excerpt-sh-hor-length" class="excerpt-sh-hor-length-value" />';
+		echo	' px</td>';
+		echo	'<td style="verical-align: middle">shadow-horizontal-length (-75...75)</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'excerpt' ][ 'sh_ver_length' ] . '" name="excerpt_sh_ver_length" id="excerpt-sh-ver-length" class="excerpt-sh-ver-length-value" />';
+		echo	' px</td>';
+		echo	'<td style="verical-align: middle">shadow-vertical-length (-75...75)</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'excerpt' ][ 'sh_blur_radius' ] . '" name="excerpt_sh_blur_radius" id="excerpt-sh-blur-radius" class="excerpt-sh-blur-radius-value" />';
+		echo	' px</td>';
+		echo	'<td style="verical-align: middle">shadow-blur-radius (0...30)</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<div class="color-picker" style="position: relative;">';
+		echo	'<input style="text-transform: uppercase" type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'excerpt' ][ 'sh_color' ] . '" name="excerpt_sh_color" id="excerpt-sh-color" class="excerpt-sh-color-value" />';
+		echo	'<div style="position: absolute; z-index: 10" id="colorpicker-excerpt-sh-color"></div>';
+		echo	'</div></td>';
+		echo	'<td style="verical-align: middle">shadow-color</td>';
+		echo	'</tr>';
+		echo	'<tr>';
+		echo	'<td style="width: 30%; verical-align: middle">';
+		echo	'<input type="text" size="7" maxlength="7" value="' . 
+					$this->fptOptions[ 'excerpt' ][ 'sh_opacity' ] . '" name="excerpt_sh_opacity" id="excerpt-sh-opacity" class="excerpt-sh-opacity-value" />';
+		echo	'</td>';
+		echo	'<td style="verical-align: middle">shadow-opacity(0...1)</td>';
 		echo	'</tr>';
 		echo	'<tr>';
 		echo	'<td style="width: 30%; verical-align: middle">';

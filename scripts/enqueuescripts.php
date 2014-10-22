@@ -6,8 +6,13 @@
 			wp_register_style( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/css/jquery.alerts.css' ) );
 			wp_enqueue_style( 'thickbox' );
 			wp_enqueue_style( 'fpw-fs-alerts' );
-			wp_enqueue_script( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/jquery.alerts.js' ), array( 'jquery' ), false, true );
-			wp_enqueue_script( 'fpw-file-select', plugins_url( '/fpw-category-thumbnails/js/fpw-file-select.js' ), array( 'jquery', 'fpw-fs-alerts', 'media-upload', 'thickbox' ), false, true );
+			if ( SCRIPT_DEBUG ) {
+				wp_enqueue_script( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/jquery.alerts.dev.js' ), array( 'jquery' ), false, true );
+				wp_enqueue_script( 'fpw-file-select', plugins_url( '/fpw-category-thumbnails/js/fpw-file-select.dev.js' ), array( 'jquery', 'fpw-fs-alerts', 'media-upload', 'thickbox' ), false, true );
+			} else {
+				wp_enqueue_script( 'fpw-fs-alerts', plugins_url( '/fpw-category-thumbnails/js/jquery.alerts.js' ), array( 'jquery' ), false, true );
+				wp_enqueue_script( 'fpw-file-select', plugins_url( '/fpw-category-thumbnails/js/fpw-file-select.js' ), array( 'jquery', 'fpw-fs-alerts', 'media-upload', 'thickbox' ), false, true );
+			}
 			$protocol = isset( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
 
 			wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(

@@ -42,6 +42,22 @@ class fpwPostThumbnails {
 		}
 	}
 	
+	private function hex2rgb($hex) {
+		$hex = str_replace("#", "", $hex);
+
+		if(strlen($hex) == 3) {
+			$r = hexdec(substr($hex,0,1).substr($hex,0,1));
+			$g = hexdec(substr($hex,1,1).substr($hex,1,1));
+			$b = hexdec(substr($hex,2,1).substr($hex,2,1));
+		} else {
+			$r = hexdec(substr($hex,0,2));
+			$g = hexdec(substr($hex,2,2));
+			$b = hexdec(substr($hex,4,2));
+		}
+		$rgb = array($r, $g, $b);
+		return $rgb; // returns an array with the rgb values
+	}
+		
 	//	add image sizes
 	function addImageSizes() {
 		add_image_size( 'content-thumbnail', $this->fptOptions[ 'content' ][ 'width' ], $this->fptOptions[ 'content' ][ 'height' ], false );
@@ -49,8 +65,9 @@ class fpwPostThumbnails {
 	}
 
 	function dynamicThumbnailStyles() {
+		if ( $this->fptOptions[ 'content' ][ 'enabled' ] ) {
 ?>
-<style type="text/css">
+<style>
 .wp-post-image-content {
 	float: <?php echo $this->fptOptions[ 'content' ][ 'position' ] ?>;
 	padding-top: <?php echo $this->fptOptions[ 'content' ][ 'padding_top' ] ?>px;
@@ -62,17 +79,36 @@ class fpwPostThumbnails {
 	margin-bottom: <?php echo $this->fptOptions[ 'content' ][ 'margin_bottom' ] ?>px;
 	margin-right: <?php echo $this->fptOptions[ 'content' ][ 'margin_right' ] ?>px;
 <?php
-if ( $this->fptOptions[ 'content' ][ 'border' ] ) {
+			if ( $this->fptOptions[ 'content' ][ 'border' ] ) {
 ?>
 	background-color: <?php echo $this->fptOptions[ 'content' ][ 'background_color' ] ?>;
 	border: <?php echo $this->fptOptions[ 'content' ][ 'border_width' ] ?>px solid <?php echo $this->fptOptions[ 'content' ][ 'border_color' ] ?>;
 	-webkit-border-radius: <?php echo $this->fptOptions[ 'content' ][ 'border_radius' ] ?>px !important;
 	-moz-border-radius: <?php echo $this->fptOptions[ 'content' ][ 'border_radius' ] ?>px !important;
 	border-radius: <?php echo $this->fptOptions[ 'content' ][ 'border_radius' ] ?>px !important;
-<?php	
-}
+<?php
+				if ( $this->fptOptions[ 'content' ][ 'shadow' ] ) {
+					$hexColor = $this->fptOptions[ 'content' ][ 'sh_color' ];
+					$rgb = $this->hex2rgb( $hexColor );
+					$hlen = $this->fptOptions[ 'content' ][ 'sh_hor_length' ];
+					$vlen = $this->fptOptions[ 'content' ][ 'sh_ver_length' ];
+					$brad = $this->fptOptions[ 'content' ][ 'sh_blur_radius' ];
+					$opac = $this->fptOptions[ 'content' ][ 'sh_opacity' ];
+?>
+	box-shadow: <?php echo $hlen . 'px ' . $vlen . 'px ' . $brad . 'px 0px rgba(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ',' . $opac . ')' ?> !important;
+	-webkit-box-shadow: <?php echo $hlen . 'px ' . $vlen . 'px ' . $brad . 'px 0px rgba(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ',' . $opac . ')' ?> !important;
+	-moz-box-shadow: <?php echo $hlen . 'px ' . $vlen . 'px ' . $brad . 'px 0px rgba(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ',' . $opac . ')' ?> !important;
+<?php
+				}
+			}
 ?>
 }
+</style>
+<?php
+		}
+		if ( $this->fptOptions[ 'excerpt' ][ 'enabled' ] ) {
+?>
+<style>
 .wp-post-image-excerpt {
 	float: <?php echo $this->fptOptions[ 'excerpt' ][ 'position' ] ?>;
 	padding-top: <?php echo $this->fptOptions[ 'excerpt' ][ 'padding_top' ] ?>px;
@@ -84,19 +120,33 @@ if ( $this->fptOptions[ 'content' ][ 'border' ] ) {
 	margin-bottom: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_bottom' ] ?>px;
 	margin-right: <?php echo $this->fptOptions[ 'excerpt' ][ 'margin_right' ] ?>px;
 <?php
-if ( $this->fptOptions[ 'excerpt' ][ 'border' ] ) {
+			if ( $this->fptOptions[ 'excerpt' ][ 'border' ] ) {
 ?>
 	background-color: <?php echo $this->fptOptions[ 'excerpt' ][ 'background_color' ] ?>;
 	border: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_width' ] ?>px solid <?php echo $this->fptOptions[ 'excerpt' ][ 'border_color' ] ?>;
 	-webkit-border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px !important;
 	-moz-border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px !important;
 	border-radius: <?php echo $this->fptOptions[ 'excerpt' ][ 'border_radius' ] ?>px !important;
-<?php	
-}
+<?php
+				if ( $this->fptOptions[ 'excerpt' ][ 'shadow' ] ) {
+					$hexColor = $this->fptOptions[ 'excerpt' ][ 'sh_color' ];
+					$rgb = $this->hex2rgb( $hexColor );
+					$hlen = $this->fptOptions[ 'excerpt' ][ 'sh_hor_length' ];
+					$vlen = $this->fptOptions[ 'excerpt' ][ 'sh_ver_length' ];
+					$brad = $this->fptOptions[ 'excerpt' ][ 'sh_blur_radius' ];
+					$opac = $this->fptOptions[ 'excerpt' ][ 'sh_opacity' ];
+?>
+	box-shadow: <?php echo $hlen . 'px ' . $vlen . 'px ' . $brad . 'px 0px rgba(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ',' . $opac . ')' ?> !important;
+	-webkit-box-shadow: <?php echo $hlen . 'px ' . $vlen . 'px ' . $brad . 'px 0px rgba(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ',' . $opac . ')' ?> !important;
+	-moz-box-shadow: <?php echo $hlen . 'px ' . $vlen . 'px ' . $brad . 'px 0px rgba(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ',' . $opac . ')' ?> !important;
+<?php
+				}
+			}
 ?>
 }
 </style>
-<?php	
+<?php
+		}
 	}
 
 	//	thumbnail for content filter

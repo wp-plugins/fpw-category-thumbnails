@@ -7,6 +7,15 @@ function isInArray(arr, obj) {
     return false;
 }
 
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
 jQuery( document ).ready( function( $ ) {
 
 	//	replace contextual Help link
@@ -26,6 +35,11 @@ jQuery( document ).ready( function( $ ) {
 			vcbwidth	= $( "#content-border-width" ).attr( "value" );
 			vcbocol		= $( "#content-border-color" ).attr( "value" );
 			vcbacol		= $( "#content-background-color" ).attr( "value" );
+			vcshhlen	= $( "#content-sh-hor-length" ).attr( "value" );
+			vcshvlen	= $( "#content-sh-ver-length" ).attr( "value" );
+			vcshblur	= $( "#content-sh-blur-radius" ).attr( "value" );
+			vcshcol		= $( "#content-sh-color" ).attr( "value" );
+			vcshopa		= $( "#content-sh-opacity" ).attr( "value" );
 			vcpt		= $( "#content-padding-top" ).attr( "value" );
 			vcpl		= $( "#content-padding-left" ).attr( "value" );
 			vcpb		= $( "#content-padding-bottom" ).attr( "value" );
@@ -41,6 +55,11 @@ jQuery( document ).ready( function( $ ) {
 			vebwidth	= $( "#excerpt-border-width" ).attr( "value" );
 			vebocol		= $( "#excerpt-border-color" ).attr( "value" );
 			vebacol		= $( "#excerpt-background-color" ).attr( "value" );
+			veshhlen	= $( "#excerpt-sh-hor-length" ).attr( "value" );
+			veshvlen	= $( "#excerpt-sh-ver-length" ).attr( "value" );
+			veshblur	= $( "#excerpt-sh-blur-radius" ).attr( "value" );
+			veshcol		= $( "#excerpt-sh-color" ).attr( "value" );
+			veshopa		= $( "#excerpt-sh-opacity" ).attr( "value" );
 			vept		= $( "#excerpt-padding-top" ).attr( "value" );
 			vepl		= $( "#excerpt-padding-left" ).attr( "value" );
 			vepb		= $( "#excerpt-padding-bottom" ).attr( "value" );
@@ -58,6 +77,11 @@ jQuery( document ).ready( function( $ ) {
 				content_border_width:		vcbwidth,
 				content_border_color:		vcbocol,
 				content_background_color:	vcbacol,
+				content_sh_hor_length:		vcshhlen,
+				content_sh_ver_length:		vcshvlen,
+				content_sh_blur_radius:		vcshblur,
+				content_sh_color:			vcshcol,
+				content_sh_opacity:			vcshopa,
 				content_padding_top:		vcpt,
 				content_padding_left:		vcpl,
 				content_padding_bottom:		vcpb,
@@ -73,6 +97,11 @@ jQuery( document ).ready( function( $ ) {
 				excerpt_border_width:		vebwidth,
 				excerpt_border_color:		vebocol,
 				excerpt_background_color:	vebacol,
+				excerpt_sh_hor_length:		veshhlen,
+				excerpt_sh_ver_length:		veshvlen,
+				excerpt_sh_blur_radius:		veshblur,
+				excerpt_sh_color:			veshcol,
+				excerpt_sh_opacity:			veshopa,
 				excerpt_padding_top:		vept,
 				excerpt_padding_left:		vepl,
 				excerpt_padding_bottom:		vepb,
@@ -85,19 +114,6 @@ jQuery( document ).ready( function( $ ) {
 				}
 			).delay( 750 );
 			$( "#fpt-message" ).fadeIn( 2500 ).delay( 4e3 ).fadeOut( 1500 );
-			return false;
-		});
-	}
-
-	//	Get Language File button - AJAX
-	if ( $( "#fpt-language" ).length) {
-		$( "#fpt-language" ).click( function() {
-			message_div = $( "#fpt-message" );
-			message_div.html( "<p><strong>" + fpw_fpt.wait_msg + "</strong></p>" ).load( fpw_fpt.ajaxurl, {
-				action:						"fpw_pt_language"
-				}
-			).delay( 750 );
-			$( "#fpt-message" ).fadeIn( 1500 ).delay( 4e3 ).fadeOut( 1500 );
 			return false;
 		});
 	}
@@ -116,6 +132,11 @@ jQuery( document ).ready( function( $ ) {
 			} else {
 				$( "#box-excerpt-border" ).attr( "checked", false );
 			}
+			if ( $( "#box-content-shadow" ).is( ":checked" ) ) {
+				$( "#box-excerpt-shadow" ).attr( "checked", true );
+			} else {
+				$( "#box-excerpt-shadow" ).attr( "checked", false );
+			}
 			$( "#excerpt-width" ).val( $( "#content-width" ).attr( "value" ) );
 			$( "#excerpt-height" ).val( $( "#content-height" ).attr( "value" ) );
 			$( "#excerpt-position" ).val( $( "#content-position" ).find( ":selected" ).text() );
@@ -125,6 +146,12 @@ jQuery( document ).ready( function( $ ) {
 			$( "#excerpt-border-color" ).val( $( "#content-border-color" ).attr( "value" ) );
 			$( "#excerpt-background-color" ).attr( "style", $( "#content-background-color" ).attr( "style" ) );			
 			$( "#excerpt-background-color" ).val( $( "#content-background-color" ).attr( "value" ) );
+			$( "#excerpt-sh-hor-length" ).val( $( "#content-sh-hor-length" ).attr( "value" ) );
+			$( "#excerpt-sh-ver-length" ).val( $( "#content-sh-ver-length" ).attr( "value" ) );
+			$( "#excerpt-sh-blur-radius" ).val( $( "#content-sh-blur-radius" ).attr( "value" ) );
+			$( "#excerpt-sh-color" ).attr( "style", $( "#content-sh-color" ).attr( "style" ) );			
+			$( "#excerpt-sh-color" ).val( $( "#content-sh-color" ).attr( "value" ) );
+			$( "#excerpt-sh-opacity" ).val( $( "#content-sh-opacity" ).attr( "value" ) );
 			$( "#excerpt-padding-top" ).val( $( "#content-padding-top" ).attr( "value" ) );
 			$( "#excerpt-padding-left" ).val( $( "#content-padding-left" ).attr( "value" ) );
 			$( "#excerpt-padding-bottom" ).val( $( "#content-padding-bottom" ).attr( "value" ) );
@@ -156,6 +183,11 @@ jQuery( document ).ready( function( $ ) {
 			} else {
 				$( "#box-content-border" ).attr( "checked", false );
 			}
+			if ( $( "#box-excerpt-shadow" ).is( ":checked" ) ) {
+				$( "#box-content-shadow" ).attr( "checked", true );
+			} else {
+				$( "#box-content-shadow" ).attr( "checked", false );
+			}
 			$( "#content-width" ).val( $( "#excerpt-width" ).attr( "value" ) );
 			$( "#content-height" ).val( $( "#excerpt-height" ).attr( "value" ) );
 			$( "#content-position" ).val( $( "#excerpt-position" ).find( ":selected" ).text() );
@@ -165,6 +197,12 @@ jQuery( document ).ready( function( $ ) {
 			$( "#content-border-color" ).val( $( "#excerpt-border-color" ).attr( "value" ) );
 			$( "#content-background-color" ).attr( "style", $( "#excerpt-background-color" ).attr( "style" ) );			
 			$( "#content-background-color" ).val( $( "#excerpt-background-color" ).attr( "value" ) );
+			$( "#content-sh-hor-length" ).val( $( "#excerpt-sh-hor-length" ).attr( "value" ) );
+			$( "#content-sh-ver-length" ).val( $( "#excerpt-sh-ver-length" ).attr( "value" ) );
+			$( "#content-sh-blur-radius" ).val( $( "#excerpt-sh-blur-radius" ).attr( "value" ) );
+			$( "#content-sh-color" ).attr( "style", $( "#excerpt-sh-color" ).attr( "style" ) );			
+			$( "#content-sh-color" ).val( $( "#excerpt-sh-color" ).attr( "value" ) );
+			$( "#content-sh-opacity" ).val( $( "#excerpt-sh-opacity" ).attr( "value" ) );
 			$( "#content-padding-top" ).val( $( "#excerpt-padding-top" ).attr( "value" ) );
 			$( "#content-padding-left" ).val( $( "#excerpt-padding-left" ).attr( "value" ) );
 			$( "#content-padding-bottom" ).val( $( "#excerpt-padding-bottom" ).attr( "value" ) );
@@ -182,12 +220,12 @@ jQuery( document ).ready( function( $ ) {
 		});
 	}
 
-	//	content Preview button
+	//	content Preview button - AJAX
 	if ( $( "#content-preview" ).length) {
 		$( "#content-preview" ).click( function() {
 			var barr, vcwidth, vcheight, vcpos, vcradius, vcbwidth;
 			var vcbocol, vcbacol, vcpt, vcpl, vcpb, vcpr, vcmt, vcml, vcmb, vcmr;
-			var mt, mr, mb, ml;
+			var vcshhlen, vcshvlen, vcshblur, vcshcol, vcshopa;
 			barr = $( "input:checkbox:checked.fpt-option-group" ).map( function() {
 				return this.value
 			}).get();
@@ -198,6 +236,11 @@ jQuery( document ).ready( function( $ ) {
 			vcbwidth	= $( "#content-border-width" ).attr( "value" );
 			vcbocol		= $( "#content-border-color" ).attr( "value" );
 			vcbacol		= $( "#content-background-color" ).attr( "value" );
+			vcshhlen	= $( "#content-sh-hor-length" ).attr( "value" );
+			vcshvlen	= $( "#content-sh-ver-length" ).attr( "value" );
+			vcshblur	= $( "#content-sh-blur-radius" ).attr( "value" );
+			vcshcol		= $( "#content-sh-color" ).attr( "value" );
+			vcshopa		= $( "#content-sh-opacity" ).attr( "value" );
 			vcpt		= $( "#content-padding-top" ).attr( "value" );
 			vcpl		= $( "#content-padding-left" ).attr( "value" );
 			vcpb		= $( "#content-padding-bottom" ).attr( "value" );
@@ -206,15 +249,6 @@ jQuery( document ).ready( function( $ ) {
 			vcml		= $( "#content-margin-left" ).attr( "value" );
 			vcmb		= $( "#content-margin-bottom" ).attr( "value" );
 			vcmr		= $( "#content-margin-right" ).attr( "value" );
-			mt			= String( vcmt + 18 );
-			mb			= String( vcmb + 5 );
-			if ( vcpos == "left" ) {
-				mr		= String( vcmr + 10 );
-				ml		= "0";
-			} else {
-				ml		= String( vcml + 10 );
-				mr		= "0";
-			};
 			$( ".wp-post-image-content" ).css( "float", vcpos );
 			if ( isInArray( barr, 'content_border' ) ) {
 				$( ".wp-post-image-content" ).css( "border", "solid " + vcbwidth + "px " + vcbocol );
@@ -222,13 +256,21 @@ jQuery( document ).ready( function( $ ) {
 				$( ".wp-post-image-content" ).css( "border-radius", vcradius + "px" );
 				$( ".wp-post-image-content" ).css( "-moz-border-radius", vcradius + "px" );
 				$( ".wp-post-image-content" ).css( "-webkit-border-radius", vcradius + "px" );
+				if ( isInArray ( barr, 'content_shadow' ) ) { 
+					red = hexToRgb( vcshcol ).r;
+					green = hexToRgb( vcshcol ).g;
+					blue = hexToRgb( vcshcol ).b;
+					$( ".wp-post-image-content" ).css( "box-shadow", vcshhlen + "px " + vcshvlen + "px " + vcshblur + "px 0px rgba(" + red + "," + green + "," + blue + "," + vcshopa + ")" );
+					$( ".wp-post-image-content" ).css( "-webkit-box-shadow", vcshhlen + "px " + vcshvlen + "px " + vcshblur + "px 0px rgba(" + red + "," + green + "," + blue + "," + vcshopa + ")" );
+					$( ".wp-post-image-content" ).css( "-moz-box-shadow", vcshhlen + "px " + vcshvlen + "px " + vcshblur + "px 0px rgba(" + red + "," + green + "," + blue + "," + vcshopa + ")" );		
+				};
 			} else {
 				$( ".wp-post-image-content" ).css( "border", "none 0px transparent" );
 				$( ".wp-post-image-content" ).css( "background-color", "transparent" );
 			};
 			$( ".wp-post-image-content" ).css( "padding", vcpt + "px " + vcpr + "px " + vcpb + "px " + vcpl + "px" );
-			$( ".wp-post-image-content" ).css( "margin", mt + "px " + mr + "px " + mb + "px " + ml + "px" );
-           	$( ".wp-post-image-content" ).css( "width", vcwidth + "px" );
+			$( ".wp-post-image-content" ).css( "margin", vcmt + "px " + vcmr + "px " + vcmb + "px " + vcml + "px" );
+            $( ".wp-post-image-content" ).css( "width", vcwidth + "px" );
 			return true;
 		});
 	}
@@ -238,7 +280,7 @@ jQuery( document ).ready( function( $ ) {
 		$( "#excerpt-preview" ).click( function() {
 			var barr, vewidth, veheight, vepos, veradius, vebwidth;
 			var vebocol, vebacol, vept, vepl, vepb, vepr, vemt, veml, vemb, vemr;
-			var mt, mr, mb, ml;
+			var vcshhlen, vcshvlen, vcshblur, vcshcol, vcshopa;
 			barr = $( "input:checkbox:checked.fpt-option-group" ).map( function() {
 				return this.value
 			}).get();
@@ -249,6 +291,11 @@ jQuery( document ).ready( function( $ ) {
 			vebwidth	= $( "#excerpt-border-width" ).attr( "value" );
 			vebocol		= $( "#excerpt-border-color" ).attr( "value" );
 			vebacol		= $( "#excerpt-background-color" ).attr( "value" );
+			veshhlen	= $( "#excerpt-sh-hor-length" ).attr( "value" );
+			veshvlen	= $( "#excerpt-sh-ver-length" ).attr( "value" );
+			veshblur	= $( "#excerpt-sh-blur-radius" ).attr( "value" );
+			veshcol		= $( "#excerpt-sh-color" ).attr( "value" );
+			veshopa		= $( "#excerpt-sh-opacity" ).attr( "value" );
 			vept		= $( "#excerpt-padding-top" ).attr( "value" );
 			vepl		= $( "#excerpt-padding-left" ).attr( "value" );
 			vepb		= $( "#excerpt-padding-bottom" ).attr( "value" );
@@ -257,15 +304,6 @@ jQuery( document ).ready( function( $ ) {
 			veml		= $( "#excerpt-margin-left" ).attr( "value" );
 			vemb		= $( "#excerpt-margin-bottom" ).attr( "value" );
 			vemr		= $( "#excerpt-margin-right" ).attr( "value" );
-			mt	        = String( vemt + 18 );
-			mb			= String( vemb + 5 );
-			if ( vepos == "left" ) {
-				mr		= String( vemr + 10 );
-				ml		= "0";
-			} else {
-				ml		= String( veml + 10 );
-				mr		= "0";
-			};
 			$( ".wp-post-image-excerpt" ).css( "float", vepos );
 			if ( isInArray( barr, 'excerpt_border' ) ) {
 				$( ".wp-post-image-excerpt" ).css( "border", "solid " + vebwidth + "px " + vebocol );
@@ -273,12 +311,20 @@ jQuery( document ).ready( function( $ ) {
 				$( ".wp-post-image-excerpt" ).css( "border-radius", veradius + "px" );
 				$( ".wp-post-image-excerpt" ).css( "-moz-border-radius", veradius + "px" );
 				$( ".wp-post-image-excerpt" ).css( "-webkit-border-radius", veradius + "px" );
+				if ( isInArray ( barr, 'excerpt_shadow' ) ) {
+					red = hexToRgb( veshcol ).r;
+					green = hexToRgb( veshcol ).g;
+					blue = hexToRgb( veshcol ).b;
+					$( ".wp-post-image-excerpt" ).css( "box-shadow", veshhlen + "px " + veshvlen + "px " + veshblur + "px 0px rgba(" + red + "," + green + "," + blue + "," + veshopa + ")" );
+					$( ".wp-post-image-excerpt" ).css( "-webkit-box-shadow", veshhlen + "px " + veshvlen + "px " + veshblur + "px 0px rgba(" + red + "," + green + "," + blue + "," + veshopa + ")" );
+					$( ".wp-post-image-excerpt" ).css( "-moz-box-shadow", veshhlen + "px " + veshvlen + "px " + veshblur + "px 0px rgba(" + red + "," + green + "," + blue + "," + veshopa + ")" );		
+				};
 			} else {
 				$( ".wp-post-image-excerpt" ).css( "border", "none 0px transparent" );
 				$( ".wp-post-image-excerpt" ).css( "background-color", "transparent" );
 			};
 			$( ".wp-post-image-excerpt" ).css( "padding", vept + "px " + vepr + "px " + vepb + "px " + vepl + "px" );
-			$( ".wp-post-image-excerpt" ).css( "margin", mt + "px " + mr + "px " + mb + "px " + ml + "px" );
+			$( ".wp-post-image-excerpt" ).css( "margin", vemt + "px " + vemr + "px " + vemb + "px " + veml + "px" );
             $( ".wp-post-image-excerpt" ).css( "width", vewidth + "px" );
 			return true;
 		});
@@ -315,6 +361,21 @@ jQuery( document ).ready( function( $ ) {
 		});
 	});
 
+	$( "#colorpicker-content-sh-color" ).hide();
+	$( "#colorpicker-content-sh-color" ).farbtastic( "#content-sh-color" );
+	
+	$( "#content-sh-color" ).click( function() {
+		$( "#colorpicker-content-sh-color" ).fadeIn()
+	});
+
+	$( document ).mousedown( function() {
+		$( "#colorpicker-content-sh-color" ).each( function() {
+			var b = $( this ).css( "display" );
+			if ( b== "block" )
+				$( this ).fadeOut()
+		});
+	});
+
 	$( "#colorpicker-excerpt-border-color" ).hide();
 	$( "#colorpicker-excerpt-border-color" ).farbtastic( "#excerpt-border-color" );
 	
@@ -341,6 +402,21 @@ jQuery( document ).ready( function( $ ) {
 		$( "#colorpicker-excerpt-background-color" ).each( function() {
 			var b = $( this ).css( "display" );
 			if ( b == "block" )
+				$( this ).fadeOut()
+		});
+	});
+
+	$( "#colorpicker-excerpt-sh-color" ).hide();
+	$( "#colorpicker-excerpt-sh-color" ).farbtastic( "#excerpt-sh-color" );
+	
+	$( "#excerpt-sh-color" ).click( function() {
+		$( "#colorpicker-excerpt-sh-color" ).fadeIn()
+	});
+
+	$( document ).mousedown( function() {
+		$( "#colorpicker-excerpt-sh-color" ).each( function() {
+			var b = $( this ).css( "display" );
+			if ( b== "block" )
 				$( this ).fadeOut()
 		});
 	});

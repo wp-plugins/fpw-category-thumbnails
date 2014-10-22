@@ -91,11 +91,19 @@
 					'<br /><strong>border-radius</strong> - ' . 
 					__( 'if > 0 then the border will have rounded corners with the radius ' . 
 						'of corners in pixels equal to the specified value', 'fpw-category-thumbnails' ) .
-					'<br /><strong>border-width</strong> - ' . __( 'thickness of the border in pixels', 'fpw-category-thumbnails' ).
+					'<br /><strong>border-width</strong> - ' . __( 'thickness of the border in pixels', 'fpw-category-thumbnails' ) .
 					'<br /><strong>border-color</strong> - ' . __( 'color of the border', 'fpw-category-thumbnails' ) . ' ( ' .
 					__( 'selection with JavaScript Color Wheel', 'fpw-category-thumbnails' ) . ' )' .
 					'<br /><strong>background-color</strong> - ' . __( "thumbnails' background color", "fpw-category-thumbnails" ) . ' ( ' .
 					__( 'selection with JavaScript Color Wheel', 'fpw-category-thumbnails' ) . ' )' .
+					'</p><p style="text-align: justify;"><strong>shadow</strong> ' .
+					'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' .
+					__( 'if border is checked as well, thumbnails will have a shadow and next five parameters will be applied', 'fpw-category-thumbnails') .
+					'<br /><strong>shadow-xxx-length</strong> - ' . __( 'thickness of the shadow in pixels', 'fpw-category-thumbnails' ) .
+					'<br /><strong>shadow-blur-radius</strong> - ' . __( 'blur distance of the shadow in pixels', 'fpw-category-thumbnails' ) .
+					'<br /><strong>shadow-color</strong> - ' . __( 'color of the shadow', 'fpw-category-thumbnails' ) . ' ( ' .
+					__( 'selection with JavaScript Color Wheel', 'fpw-category-thumbnails' ) . ' )' .
+					'<br /><strong>shadow-opacity</strong> - ' . __( 'opacity of the shadow', 'fpw-category-thumbnails' ) .
 					'</p><p style="text-align: justify;"><strong>padding-xxx and margin-xxx</strong> - ' . 
 					__( 'these are standard padding and margin parameters', 'fpw-category-thumbnails' ) . '</p></blockquote>';
 
@@ -110,6 +118,10 @@
 					__( 'Can I use this plugin if my theme supports and displays thumbnails?', 'fpw-category-thumbnails' ) . '<br /><strong>' .
 					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .
 					__( 'Yes. There is an option to hide thumbnails displayed by the current theme.', 'fpw-category-thumbnails' ) . '<br /><br /><strong>' .
+					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( 'I have shadow box checked and shadow does not show. Why?', 'fpw-category-thumbnails' ) . '<br /><strong>' .
+					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .
+					__( 'Shadow applies to bordered Thumbnails only. Make sure that border box is checked as well.', 'fpw-category-thumbnails' ) . '<br /><br /><strong>' .
 					__( 'Question:', 'fpw-category-thumbnails' ) . '</strong> ' .
 					__( 'Will this plugin work with JavaScript turned off?', 'fpw-category-thumbnails' ) . '<br /><strong>' .
 					__( 'Answer:', 'fpw-category-thumbnails' ) . '</strong> ' .

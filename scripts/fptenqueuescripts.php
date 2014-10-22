@@ -8,7 +8,11 @@
 			wp_enqueue_style( 'thickbox' );
 
 			//	load our script in the footer
-			wp_enqueue_script( 'fpw-fpt', plugins_url( '/fpw-category-thumbnails/js/fpw-fpt.js' ), array( 'jquery', 'farbtastic', 'thickbox' ), false, true );
+			if ( SCRIPT_DEBUG ) {
+				wp_enqueue_script( 'fpw-fpt', plugins_url( '/fpw-category-thumbnails/js/fpw-fpt.dev.js' ), array( 'jquery', 'farbtastic', 'thickbox' ), false, true );
+			} else {
+				wp_enqueue_script( 'fpw-fpt', plugins_url( '/fpw-category-thumbnails/js/fpw-fpt.js' ), array( 'jquery', 'farbtastic', 'thickbox' ), false, true );
+			}
 
 			$protocol = isset( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
 

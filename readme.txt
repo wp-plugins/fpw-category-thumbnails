@@ -55,6 +55,9 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 
 == Changelog ==
 
+= 1.6.6 =
+* FPW Post Thumbnails: added shadow support for bordered thumbnails
+
 = 1.6.5 =
 * FPW Category Thumbnails: transfered hiding current theme's thumbnails from FPW Post Thumbnails to improve performance
 * FPW Post Thumbnails: transfered hiding current theme's thumbnails to FPW Category Thumbnails to improve performance
