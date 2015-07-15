@@ -236,7 +236,7 @@ class fpwPostThumbnails {
 	
 	//	initialize
 	function init() {
-		load_plugin_textdomain( 'fpw-category-thumbnails', 'fpw-category-thumbnails/languages/' );
+		load_plugin_textdomain( 'fpw-category-thumbnails', false, 'fpw-category-thumbnails/languages/' );
 	}
 	
 	//	register admin menu
@@ -267,7 +267,7 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "added shadow support for bordered thumbnails", 'fpw-category-thumbnails' ) ) . '</li>'; 
+						   esc_js( __( "fixed deprecated form of load_plugin_textdomain function", 'fpw-category-thumbnails' ) ) . '</li>'; 
     	?>
     	<script type="text/javascript">
     	// <![CDATA[

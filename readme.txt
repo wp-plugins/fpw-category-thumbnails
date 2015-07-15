@@ -55,6 +55,9 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 
 == Changelog ==
 
+= 1.6.7 ==
+* FPW Post Thumbnails: fixed deprecated form of load_plugin_textdomain function
+
 = 1.6.6 =
 * FPW Post Thumbnails: added shadow support for bordered thumbnails
 
