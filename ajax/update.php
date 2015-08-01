@@ -2,8 +2,8 @@
 //	AJAX request to update options
 
 //	prevent direct access
-if ( preg_match( '#' . basename(__FILE__) . '#', $_SERVER[ 'PHP_SELF' ] ) )  
-	die( "Direct access to this script is forbidden!" );
+if ( ! defined( 'ABSPATH' ) )  
+	die( 'Direct access to this script is not allowed!' );
 
 $boxes = $_REQUEST['boxes'];
 $donotover = ( in_array( 'donotover', $boxes ) ) ? true : false;

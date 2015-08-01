@@ -2,8 +2,8 @@
 //	AJAX request to Apply maping
 
 //	prevent direct access
-if ( preg_match( '#' . basename(__FILE__) . '#', $_SERVER[ 'PHP_SELF' ] ) )  
-	die( "Direct access to this script is forbidden!" );
+if ( ! defined( 'ABSPATH' ) )  
+	die( 'Direct access to this script is not allowed!' );
 
 $map = get_option( 'fpw_category_thumb_map' );
 

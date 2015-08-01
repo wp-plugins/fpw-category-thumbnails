@@ -1,7 +1,7 @@
 <?php
 //	prevent direct access
-if ( preg_match( '#' . basename(__FILE__) . '#', $_SERVER[ 'PHP_SELF' ] ) )  
-	die( "Direct access to this script is forbidden!" );
+if ( ! defined( 'ABSPATH' ) )  
+	die( 'Direct access to this script is not allowed!' );
 
 if( !class_exists( 'WP_List_Table' ) )
    	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );

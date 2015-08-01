@@ -5,7 +5,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://fw2s.com/payments-and-donations/
 Tags: category, thumbnail, plugin
 Requires at least: 3.3
-Tested up to: 4.2.3
+Tested up to: 4.3
 Stable tag: 1.6.7
 
 Assigns a thumbnail based on categoryid/thumbnail mapping to a post / 
@@ -54,6 +54,10 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 1. FPW Post Thumbnails - Settings - JavaScript off
 
 == Changelog ==
+
+= 1.6.8 =
+* Fixed few security vulnerabilities
+* Added new format of admin page title introduced in WP 4.3
 
 = 1.6.7 =
 * FPW Post Thumbnails: fixed deprecated form of load_plugin_textdomain function

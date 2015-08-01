@@ -1,7 +1,7 @@
 <?php
 //	prevent direct access
-if ( preg_match( '#' . basename(__FILE__) . '#', $_SERVER[ 'PHP_SELF' ] ) )  
-	die( "Direct access to this script is forbidden!" );
+if ( ! defined( 'ABSPATH' ) )  
+	die( 'Direct access to this script is not allowed!' );
 
 //	plugin's main class
 class fpwPostThumbnails {
@@ -266,8 +266,10 @@ class fpwPostThumbnails {
 	public function custom_print_footer_scripts() {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:10px;list-style:square">' . 
-						   esc_js( __( "fixed deprecated form of load_plugin_textdomain function", 'fpw-category-thumbnails' ) ) . '</li>'; 
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
+						   esc_js( __( "Fixed few security vulnerabilities", 'fpw-category-thumbnails' ) ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
+						   esc_js( __( "Added new format of admin page title introduced in WP 4.3", 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -642,12 +644,14 @@ class fpwPostThumbnails {
 			$resp = $this->fptValidateInput( $_POST );
 		}
 
+		$lt43 = version_compare( $this->wpVersion, '4.3', '<' );
+
 		//	HTML starts here
 		echo 	'<div class="wrap">';
-		echo	'<div id="icon-themes" class="icon32"></div><h2 id="fpt-settings-title">' . 
-				__( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ) . ' <span style="font-size: small">- <a href="' .
+		echo	'<div id="icon-themes" class="icon32"></div><h' . ( $lt43 ? '2' : '1' ) . ' id="fpt-settings-title">' . 
+				__( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ) . ' <a class="' . ( $lt43 ? 'add-new-h2' : 'page-title-action' ) . '" href="' .
 				get_admin_url() . 'themes.php?page=fpw-category-thumbnails">' . 
-				__( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) . '</a></span></h2>';
+				__( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) . '</a></h' . ( $lt43 ? '2' : '1' ) . '>';
 
 		//	the form starts here
 		echo '<div>';

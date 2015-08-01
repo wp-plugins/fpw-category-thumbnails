@@ -1,7 +1,7 @@
 <?php
 //	prevent direct accesss
-if ( preg_match( '#' . basename(__FILE__) . '#', $_SERVER[ 'PHP_SELF' ] ) )  
-	die( "Direct access to this script is forbidden!" );
+if ( ! defined( 'ABSPATH' ) )  
+	die( 'Direct access to this script is not allowed!' );
 
 //	plugin's main class
 class fpwCategoryThumbnails {
@@ -77,10 +77,10 @@ class fpwCategoryThumbnails {
 			(	isset( $_POST['submit-getid'] ) || isset( $_POST['submit-author'] ) || 
 				isset( $_POST['submit-clear'] ) || isset( $_POST['submit-refresh'] ) || 
 				isset( $_POST['submit-update'] ) || isset( $_POST['submit-apply'] ) || 
-				isset( $_POST['submit-remove'] ) || isset( $_POST['submit-language'] ) ) ? true : false; 
+				isset( $_POST['submit-remove'] ) || isset( $_POST['submit-language'] ) ); 
 
 		if ( $anyButtonPressed ) 
-			$this->fctOptions[ 'abar' ] = ( isset( $_POST[ 'abar' ] ) ) ? true : false;
+			$this->fctOptions[ 'abar' ] = ( isset( $_POST[ 'abar' ] ) );
 		if ( $this->fctOptions[ 'abar' ] ) 
 			add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
 	}
@@ -145,7 +145,11 @@ class fpwCategoryThumbnails {
 		if ( is_readable( $this->translationPath ) ) 
 			return 'installed';
 
-		$this->translationResponse = wp_remote_get( $this->translationURL, array( 'timeout' => 300 ) );
+		if ( version_compare( $this->wpVersion, '3.6.0', '<' ) ) {
+			$this->translationResponse = wp_remote_get( $this->translationURL, array( 'timeout' => 300 ) );
+		} else {
+			$this->translationResponse = wp_safe_remote_get( $this->translationURL, array( 'timeout' => 300 ) );
+		}
 
 		//	if no translation file exists exit the check
 		if ( is_wp_error( $this->translationResponse ) || $this->translationResponse[ 'response' ][ 'code' ] != '200' )
@@ -195,7 +199,9 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "no changes", 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "Fixed few security vulnerabilities", 'fpw-category-thumbnails' ) ) . '</li>';
+		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
+						   esc_js( __( "Added new format of admin page title introduced in WP 4.3", 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -368,7 +374,7 @@ class fpwCategoryThumbnails {
 			(	isset( $_POST['submit-getid'] ) || isset( $_POST['submit-author'] ) || 
 				isset( $_POST['submit-clear'] ) || isset( $_POST['submit-refresh'] ) || 
 				isset( $_POST['submit-update'] ) || isset( $_POST['submit-apply'] ) || 
-				isset( $_POST['submit-remove'] ) || isset( $_POST['submit-language'] ) ) ? true : false;
+				isset( $_POST['submit-remove'] ) || isset( $_POST['submit-language'] ) );
 				
 		if ( $anyButtonPressed ) {
 			if ( !isset( $_POST[ 'fpw-fct-nonce' ] ) ) 
@@ -379,10 +385,10 @@ class fpwCategoryThumbnails {
 					 __( 'You did not send the right credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
 
 			//	check ok - update options
-			$this->fctOptions[ 'clean' ] = ( isset( $_POST[ 'cleanup' ] ) ) ? true : false;
-			$this->fctOptions[ 'donotover' ] = ( isset( $_POST[ 'donotover' ] ) ) ? true : false;
-			$this->fctOptions[ 'abar' ] = ( isset( $_POST[ 'abar' ] ) ) ? true : false;
-			$this->fctOptions[ 'fpt'] = ( isset( $_POST[ 'fpt' ] ) ) ? true : false;
+			$this->fctOptions[ 'clean' ] = isset( $_POST[ 'cleanup' ] );
+			$this->fctOptions[ 'donotover' ] = isset( $_POST[ 'donotover' ] );
+			$this->fctOptions[ 'abar' ] = isset( $_POST[ 'abar' ] );
+			$this->fctOptions[ 'fpt'] = isset( $_POST[ 'fpt' ] );
 		
 			$update_options_ok = ( update_option( 'fpw_category_thumb_opt', $this->fctOptions ) );
 		
@@ -451,11 +457,14 @@ class fpwCategoryThumbnails {
 		echo '<div class="wrap">';
 		
 		$displayAttr = ( $this->fctOptions[ 'fpt' ] ) ? '' : ' display: none';
+		$lt43 = version_compare( $this->wpVersion, '4.3', '<' );
 		
-		echo '<div id="icon-themes" class="icon32"></div><h2 id="fct-settings-title">' . __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) .
-			 ' <span id="fpt-link" style="font-size: small;' . $displayAttr . '">- <a href="' . get_admin_url() . 
-			 'themes.php?page=fpw-post-thumbnails">' . 
-			 __( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ) . '</a></span></h2>';
+		echo '<div id="icon-themes" class="icon32"></div><h' . ( $lt43 ? '2' : '1' ) . 
+			 ' id="fct-settings-title">' . __( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) .
+			 ' <span id="fpt-link" style="' . ( $lt43 ? 'font-size: small;' : '' ) . $displayAttr . 
+			 '"><a class="' . ( $lt43 ? 'add-new-h2' : 'page-title-action' ) . '" href="' . get_admin_url() . 
+			 'themes.php?page=fpw-post-thumbnails">' . __( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ) . 
+			 '</a></span></h' . ( $lt43 ? '2' : '1' ) . '>';
 			 
 		//	check if any of submit buttons was pressed
 		if ( $anyButtonPressed ) {
@@ -756,9 +765,5 @@ class fpwCategoryThumbnails {
 		}	
 		return $pic_id;
 	}
-	
-	function fptSettings() {
-	}	
-	 
 }
 ?>
