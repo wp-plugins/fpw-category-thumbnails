@@ -1,31 +1,39 @@
 <?php
-//	AJAX request to Remove thumbnails
+//	AJAX request to Remove all thumbnails
 
 //	prevent direct access
 if ( ! defined( 'ABSPATH' ) )  
 	die( 'Direct access to this script is not allowed!' );
 
-$assignments = $this->getAssignmentsArray( $this->getAllCategories() );
+$deletedThumbnails = array();
 
-while ( strlen( key( $assignments ) ) ) {
-	$catid = key( $assignments );
-	$parg = array(
-		'numberofposts' => -1,
-		'nopaging' => true,
-		'category' => $catid,
-		'post_type' => 'any' );
-	$posts = get_posts( $parg );
+$parg = array(
+	'numberofposts' => -1,
+	'nopaging' => true,
+	'post_type' => 'any' );
 
-	foreach ( $posts as $post ) {
-		$post_id = $post -> ID;
-		//	make sure this is not a revision
-		if ( 'revision' != $post -> post_type )
+$posts = get_posts( $parg );
+
+foreach ( $posts as $post ) {
+	$post_id = absint( $post->ID );
+	//	make sure this is not a revision
+	if ( 'publish' === $post->post_status ) {
+		$value = get_post_meta( $post_id, '_thumbnail_id', true );
+		if ( !empty( $value ) ) {
+			$deletedThumbnails[ $post_id ] = ( string ) $value;
 			delete_post_meta( $post_id, '_thumbnail_id' );
+		}
 	}
-
-	next( $assignments );
 }
-reset( $assignments );
-echo '<p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</strong></p>';
+
+echo '<p><strong>';
+
+if ( 0 !== count( $deletedThumbnails ) ) {
+	update_option( 'fpw_category_thumb_bkp', $deletedThumbnails );
+	echo __( 'Thumbnails removed from all posts successfully. Backup created.', 'fpw-category-thumbnails' );
+} else {
+	echo __( 'No thumbnails to be removed found.', 'fpw-category-thumbnails' );
+}
+
+echo '</strong></p>';
 die();
-?>

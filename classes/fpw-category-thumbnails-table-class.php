@@ -145,15 +145,17 @@ class fpw_Category_Thumbnails_Table extends WP_List_Table {
 	 			 __( 'add post thumbnail to every existing post / page belonging to the category which has thumbnail id mapped to', 'fpw-category-thumbnails' ) .
 	 	 	 	 '" id="apply" class="button-primary fpw-submit" type="submit" name="submit-apply" value="' . __( 'Apply Mapping', 'fpw-category-thumbnails' ) . '" /> ';
 			echo '<input title="' . 
-				 __( 'remove thumbnails from all existing posts / pages regardless of the category', 'fpw-category-thumbnails' ) .
-	 			 '" id="remove" class="button-primary fpw-submit" type="submit" name="submit-remove" value="' . __( 'Remove Thumbnails', 'fpw-category-thumbnails' ) . '" />';
-			echo '<input id="buttonPressed" type="hidden" value="" name="buttonPressed" />';
+				 __( 'remove thumbnails from all existing posts of any type', 'fpw-category-thumbnails' ) .
+	 			 '" id="remove" class="button-primary fpw-submit" type="submit" name="submit-remove" value="' . __( 'Remove Thumbnails', 'fpw-category-thumbnails' ) . '" /> ';
+			echo '<input style="' . ( $fpw_CT->showRestore ? '' : 'display: none;' ) . '" title="' . 
+				 __( 'restore thumbnails from backup created by Remove Thumbnails action', 'fpw-category-thumbnails' ) .
+ 				 '" id="restore" class="button-primary fpw-submit" type="submit" name="submit-restore" value="' . __( 'Restore Thumbnails', 'fpw-category-thumbnails' ) . '" /> ';
 			if ( !( 'en_US' == get_locale() ) && ( ( 'available' == $fpw_CT->translationStatus ) || ( 'not_exist' == $fpw_CT->translationStatus ) ) )  
-				echo ' <input title="' . 
+				echo '<input title="' . 
 					 __( 'download language file for current version', 'fpw-category-thumbnails' ) .
 					 '" id="language" class="button-primary fpw-submit" type="submit" name="submit-language" value="' . 
 					 __( 'Get Language File', 'fpw-category-thumbnails' ) . '" />';
+			echo '<input id="buttonPressed" type="hidden" value="" name="buttonPressed" />';
 		} 
 	}
 }
-?>

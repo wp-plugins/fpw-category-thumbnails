@@ -12,10 +12,6 @@ $o = get_option( 'fpw_category_thumb_opt' );
 if ( is_array( $o ) && $o[ 'clean' ] ) {
 	delete_option( 'fpw_category_thumb_opt' );
 	delete_option( 'fpw_category_thumb_map' );
-}
-
-$o = get_option( 'fpw_post_thumbnails_options' );
-
-if ( is_array( $o ) && $o[ 'clean' ] ) 
+	delete_option( 'fpw_category_thumb_bkp' );
 	delete_option( 'fpw_post_thumbnails_options' );
-?>
+}

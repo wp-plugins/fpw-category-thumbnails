@@ -22,10 +22,9 @@ if ( '' == $resp ) {
 	$ok = update_option( 'fpw_post_thumbnails_options', $this->fptOptions );
 
 	if ( $ok ) {
-		echo __( 'Changed data saved successfully.', 'fpw-category-thumbnails' );
-		$this->uninstallMaintenance();
+		echo __( 'Changes saved successfully.', 'fpw-category-thumbnails' );
 	} else {
-		echo __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' );
+		echo __( 'No changes detected.', 'fpw-category-thumbnails' );
 	}
 
 } else {
@@ -34,4 +33,3 @@ if ( '' == $resp ) {
 
 echo '</strong></p>';
 die();
-?>

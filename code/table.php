@@ -93,4 +93,3 @@ td.fpwct_cat_name, td.fpwct_image_id, td.fpwct_preview {
 		$this->categoryListTable->prepare_items();
 		$this->categoryListTable->display();
 		echo '</div>';
-?>

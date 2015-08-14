@@ -19,4 +19,3 @@ if ( 'not_exist' == $this->translationStatus ) {
 
 echo '<p><strong>' . $m . '</strong></p>';
 die();
-?>

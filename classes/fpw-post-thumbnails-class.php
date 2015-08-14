@@ -35,10 +35,6 @@ class fpwPostThumbnails {
 		if ( ! is_array( $this->fptOptions ) ) {
 			$this->fptOptions = $this->fptBuildOptions(); 
 		} else {
-			if ( !array_key_exists ( 'clean' , $this->fptOptions ) )
-				$this->fptOptions[ 'clean' ] = false;						
-			if ( !array_key_exists ( 'abar' , $this->fptOptions ) )
-				$this->fptOptions[ 'abar' ] = false;						
 			if ( !array_key_exists ( 'nothepostthumbnail' , $this->fptOptions ) )
 				$this->fptOptions[ 'nothepostthumbnail' ] = false;						
 			if ( !array_key_exists ( 'content' , $this->fptOptions ) )
@@ -141,7 +137,6 @@ class fpwPostThumbnails {
 
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
-		register_activation_hook( $this->fptPath . '/fpw-category-thumbnails.php', array( &$this, 'uninstallMaintenance' ) );
 
 		//	actions below are not used in front end
 		add_action( 'admin_menu', array( &$this, 'adminMenu' ) );
@@ -152,32 +147,11 @@ class fpwPostThumbnails {
 		add_action( 'wp_ajax_fpw_pt_copy_left', array( &$this, 'fpw_pt_copy_left_ajax' ) );
 
 		$anyButtonPressed = ( isset( $_POST['submit-update'] ) ) ? true : false; 
-
-		if ( $anyButtonPressed ) 
-			$this->fptOptions[ 'abar' ] = ( isset( $_POST[ 'abar' ] ) ) ? true : false;
-
-		if ( $this->fptOptions[ 'abar' ] ) 
-			add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
 	}
-
-	//	uninstall file maintenance
-	function uninstallMaintenance() {
-		global $fpw_CT;
-
-		if ( $this->fptOptions[ 'clean' ] || $fpw_CT->fctOptions[ 'clean' ] ) {
-			if ( file_exists( $this->fptPath . '/uninstall.txt' ) ) 
-				rename( $this->fptPath . '/uninstall.txt', $this->fptPath . '/uninstall.php' );
-		} else {
-			if ( file_exists( $this->fptPath . '/uninstall.php' ) ) 
-				rename( $this->fptPath . '/uninstall.php', $this->fptPath . '/uninstall.txt' );
-		}
-	}	
 
 	//	build FPW Post Thumbnails options
 	function fptBuildOptions() {
 		$opt = array(
-			'clean'					=> false,
-			'abar'					=> false,
 			'nothepostthumbnail' 	=> false,	//	since 1.6.4 
 			'content' 	=> array(
 				'enabled'			=> false,
@@ -243,7 +217,7 @@ class fpwPostThumbnails {
 	function adminMenu() {
 		$page_title = __( 'FPW Post Thumbnails', 'fpw-category-thumbnails' );
 		$menu_title = __( 'FPW Post Thumbnails', 'fpw-category-thumbnails' );
-		$this->fptPage = add_theme_page( $page_title, $menu_title, 'manage_options', 
+		$this->fptPage = add_submenu_page( null, $page_title, $menu_title, 'manage_options', 
 							'fpw-post-thumbnails', array( &$this, 'fptSettings' ) );
 		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueueScripts' ) );
 		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueuePointerScripts' ) );
@@ -267,9 +241,9 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "Fixed few security vulnerabilities", 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "Removed some options", 'fpw-category-thumbnails' ) ) . '</li>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "Added new format of admin page title introduced in WP 4.3", 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "Modified help to reflect recent changes", 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -313,26 +287,6 @@ class fpwPostThumbnails {
 			require_once $this->fptPath . '/ajax/fptcopyleft.php';
 	}
 	
-	//	add plugin to admin bar	
-	function pluginToAdminBar() {
-		if ( current_user_can( 'manage_options' ) ) {
-			global 	$wp_admin_bar;
-			$main = array(
-				'id' => 'fpw_plugins',
-				'title' => __( 'FPW Plugins', 'fpw-category-thumbnails' ),
-				'href' => '#' );
-			$subm = array(
-				'id' => 'fpw_bar_post_thumbnails',
-				'parent' => 'fpw_plugins',
-				'title' => __( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ),
-				'href' => get_admin_url() . 'themes.php?page=fpw-post-thumbnails' );
-			$addmain = ( is_array( $wp_admin_bar->get_node( 'fpw_plugins' ) ) ) ? false : true;
-			if ( $addmain )
-				$wp_admin_bar->add_menu( $main );
-			$wp_admin_bar->add_menu( $subm );
-		}
-	}
-	
 	private function fptValidateInput( $p ) {
 		$plusMinusToCheck = array(
 			'sh_hor_length',
@@ -374,8 +328,8 @@ class fpwPostThumbnails {
 			'sh_color'
 		);
 	
-		$this->fptOptions[ 'clean' ] = ( isset( $p[ 'clean' ] ) ) ? true : false;
-		$this->fptOptions[ 'abar' ] = ( isset( $p[ 'abar' ] ) ) ? true : false;
+		//$this->fptOptions[ 'clean' ] = ( isset( $p[ 'clean' ] ) ) ? true : false;
+		//$this->fptOptions[ 'abar' ] = ( isset( $p[ 'abar' ] ) ) ? true : false;
 		$this->fptOptions[ 'nothepostthumbnail' ] = ( isset( $p[ 'nothepostthumbnail' ] ) ) ? true : false;
 			
 		foreach ( $checkboxes as $ck ) {
@@ -648,8 +602,8 @@ class fpwPostThumbnails {
 
 		//	HTML starts here
 		echo 	'<div class="wrap">';
-		echo	'<div id="icon-themes" class="icon32"></div><h' . ( $lt43 ? '2' : '1' ) . ' id="fpt-settings-title">' . 
-				__( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ) . ' <a class="' . ( $lt43 ? 'add-new-h2' : 'page-title-action' ) . '" href="' .
+		echo	'<h' . ( $lt43 ? '2' : '1' ) . ' id="fpt-settings-title">' . 
+				__( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ) . ' <a id="fct-link" class="' . ( $lt43 ? 'add-new-h2' : 'page-title-action' ) . '" href="' .
 				get_admin_url() . 'themes.php?page=fpw-category-thumbnails">' . 
 				__( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) . '</a></h' . ( $lt43 ? '2' : '1' ) . '>';
 
@@ -662,18 +616,6 @@ class fpwPostThumbnails {
 
 		//	options section
 		echo '<div id="fpw-fpt-options" style="margin-top: 5px">';
-
-		//	remove plugin's data on uninstall checkbox
-		echo '<input type="checkbox" class="fpt-option-group" id="box-clean" name="clean" value="clean"';
-		if ( $this->fptOptions[ 'clean' ] ) 
-			echo ' checked';
-		echo '> ' . __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . '<br />';
-
-		//	add plugin to the admin bar checkbox
-		echo '<input type="checkbox" class="fpt-option-group" id="box-abar" name="abar" value="abar"';
-		if ( $this->fptOptions[ 'abar' ] ) 
-			echo ' checked';
-		echo '> ' . __( 'Add this plugin to the Admin Bar', 'fpw-category-thumbnails' ) . '<br />';
 
 		//	hide current theme's the_post_thumbnail() output checkbox
 		echo '<input type="checkbox" class="fpt-option-group" id="box-nothepostthumbnail" name="nothepostthumbnail" value="nothepostthumbnail"';
@@ -688,7 +630,7 @@ class fpwPostThumbnails {
 
 		//	notification division for AJAX
 		echo 	'<div id="fpt-message" class="updated" style="position: absolute; ' . 
-				'display: none; z-index: 10; margin-top: 60px"><p>&nbsp;</p></div>';
+				'display: none; z-index: 10; margin-top: 24px"><p>&nbsp;</p></div>';
 		echo	'</div>';
 
 		//	Update button
@@ -700,42 +642,6 @@ class fpwPostThumbnails {
 
         echo	'</div>';
 
-		//	notification division
-		if ( isset( $_POST[ 'submit-update' ] ) ) {
-			echo '<div id="fpt-message" class="updated fade" style="margin-bottom: 10px;"><p><strong>';
-			if ( '' == $resp ) {
-				$updateOK = update_option( 'fpw_post_thumbnails_options', $this->fptOptions );
-				if ( $updateOK ) {
-					echo __( 'Changed data saved successfully.', 'fpw-category-thumbnails' );
-					$this->uninstallMaintenance();				
-				} else {
-					echo __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' );
-				}
-			} else {
-				echo $resp;
-			}
-			echo '</strong></p></div>';
-		} 
-		
-		if ( isset( $_POST[ 'submit-copy-right' ] ) ) { 
-			if ( '' == $resp ) {
-				$this->copyPanels( 'right' );
-				$m = __( 'Values copied from the left to the right panel.', 'fpw-category-thumbnails' );
-			} else {
-				$m = $resp;			
-			}
-			echo '<div id="fpt-message" class="updated fade" style="margin-bottom: 10px;"><p><strong>' . $m;
-			echo '</strong></p></div>';
-		} elseif ( isset( $_POST[ 'submit-copy-left' ] ) ) {
-			if ( '' == $resp ) {
-				$this->copyPanels( 'left' );
-				$m = __( 'Values copied from the right to the left panel.', 'fpw-category-thumbnails' );
-			} else {
-				$m = $resp;
-			}
-			echo '<div id="fpt-message" class="updated fade" style="margin-bottom: 10px;"><p><strong>' . $m;
-			echo '</strong></p></div>';
-		}
 		echo	'<div class="metabox-holder" style="width:49%; float:left; margin-right:10px;">';
         echo	'<div class="postbox">';
 		echo	'<h3 style="cursor:default; background-color: #F1F1F1; background-image: -webkit-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -moz-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -ms-linear-gradient(top , #F9F9F9, #CCCCCC); background-image: -o-linear-gradient(top , #F9F9F9, #CCCCCC);">' . 
@@ -1134,4 +1040,3 @@ class fpwPostThumbnails {
 		echo	'<div style="clear:both;"></div>';
 	}
 }
-?>

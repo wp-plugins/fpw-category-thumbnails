@@ -30,8 +30,6 @@ $opts =		'<p style="font-size: larger">' . __( 'Available Options', 'fpw-categor
 			'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . __( 'while the post is being saved the originally set thumbnail will be preserved', 'fpw-category-thumbnails' ) . '<br />' .
 			'<strong>' . __( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . '</strong> ' .
 			'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . __( "during uninstall procedure all plugin's information ( options, mappings ) will be removed from the database", "fpw-category-thumbnails" ) . '<br />' .
-			'<strong>' . __( 'Add this plugin to the Admin Bar', 'fpw-category-thumbnails' ) . '</strong> ' .
-			'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . __( "the plugin's link to its settings page will be added to the Admin Bar", "fpw-category-thumbnails" ) . '<br />' .
 			'<strong>' . __( "Enable FPW Post Thumbnails", 'fpw-category-thumbnails' ) . '</strong> ' .
 			'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . __( "activates FPW Post Thumbnails plugin's functionality", "fpw-category-thumbnails" ) . '</blockquote>';
 
@@ -58,6 +56,9 @@ $mapping =	'<p style="font-size: larger">' . __( 'Mapping', 'fpw-category-thumbn
 			'</td></tr><tr><td style="text-align: left; vertical-align: middle;">' . 
 			'<input class="button-primary" type="button" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
 			__( 'Remove Thumbnails', 'fpw-category-thumbnails' ) . '" /></td><td>' . __( 'removes thumbnails from all posts /pages regardless of the category', 'fpw-category-thumbnails' ) .
+			'<tr><td style="text-align: left; vertical-align: middle;">' .
+			'<input class="button-primary" type="button" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
+			__( 'Restore Thumbnails', 'fpw-category-thumbnails' ) . '" /></td><td>' . __( 'restores thumbnails backed up by the recent Remove Thumbnails action', 'fpw-category-thumbnails' ) .
 			'<tr><td style="text-align: left; vertical-align: middle;">' .
 			'<input type="button" class="button-secondary" title="' . __( 'Inactive button - presentation only', 'fpw-category-thumbnails' ) . '" value="' .
 			__( 'Get ID', 'fpw-category-thumbnails' ) . '" />' . '</td><td style="text-align: justify; vertical-align: middle;">' .
@@ -117,4 +118,3 @@ $current_screen->add_help_tab( array(
 	'id'      => 'fpw-fct-help-faq',
 	'content' => $faq,
 	) );
-?>

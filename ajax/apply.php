@@ -21,13 +21,12 @@ if ( $map )
 		foreach ( $posts as $post ) {
 			$post_id = $post->ID;
 			//	make sure this is not a revision nor draft
-			if ( ( 'revision' != $post->post_type ) && ( 'draft' != $post->post_status ) )
+			if ( 'publish' === $post->post_status ) 
 				$this->addThumbnailToPost( $post_id, $post );
 		}
 
 		next($map);
 	}
 
-echo '<p><strong>' . __( 'Applied thumbnails to existing posts / pages successfully.', 'fpw-category-thumbnails' ) . '</strong></p>';
+echo '<p><strong>' . __( 'Added thumbnails to existing posts successfully.', 'fpw-category-thumbnails' ) . '</strong></p>';
 die();
-?>

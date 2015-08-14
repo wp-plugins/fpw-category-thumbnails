@@ -40,12 +40,6 @@ $current_screen->add_help_tab( array(
 
 $opts =		'<p style="font-size: larger">' . __( 'Available Options', 'fpw-category-thumbnails' ) . '</p><blockquote>' .
 			'<p style="text-align: justify;"><strong>' . 
-			__( "Remove plugin's data from database on uninstall", 'fpw-category-thumbnails' ) . '</strong> ' .
-			'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' .
-			__( "during uninstall procedure all plugin's information will be removed from the database", "fpw-category-thumbnails" ) . '<br /><strong>' .
-			__( 'Add this plugin to the Admin Bar', 'fpw-category-thumbnails' ) . '</strong> ' .
-			'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' .
-			__( "plugin's link to settings page will be added to the Admin Bar", "fpw-category-thumbnails" ) . '<br /><strong>' . 
 			__( "Hide output of the current theme's", 'fpw-category-thumbnails' ) . ' the_post_thumbnail()</strong> ' .
 			'( ' . __( 'checked', 'fpw-category-thumbnails' ) . ' ) - ' . 
 			__( 'hides thumbnails displayed by the current theme', 'fpw-category-thumbnails' ) .
@@ -133,4 +127,3 @@ $current_screen->add_help_tab( array(
 	'id'      => 'fpw-fpt-help-faq',
 	'content' => $faq,
 	) );
-?>

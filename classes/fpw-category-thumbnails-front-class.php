@@ -146,4 +146,3 @@ class fpwCategoryThumbnails {
 		return $pic_id;
 	}	
 }
-?>

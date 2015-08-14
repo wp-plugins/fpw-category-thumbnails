@@ -15,17 +15,15 @@ $opt[ 'clean' ] = $cleanup;
 $opt[ 'donotover' ]	= $donotover;
 $opt[ 'abar' ] = $abar;
 $opt[ 'fpt' ] = $fpt;
-$ok = ( update_option( 'fpw_category_thumb_opt', $opt ) );
+$ok = update_option( 'fpw_category_thumb_opt', $opt );
 echo '<p><strong>';
 
 if ( $ok ) {
 	$this->fctOptions = $opt;
 	$this->uninstallMaintenance();
-	echo __( 'Changed data saved successfully.', 'fpw-category-thumbnails' );
+	echo __( 'Changes saved successfully.', 'fpw-category-thumbnails' );
 } else {
-	echo __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' );
+	echo __( 'No changes detected.', 'fpw-category-thumbnails' );
 }
-
 echo '</strong></p>';
 die();
-?>

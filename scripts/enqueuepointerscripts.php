@@ -16,4 +16,3 @@ if ( $proceed ) {
 	wp_enqueue_script('wp-pointer');
 	wp_enqueue_script('utils');
 }
-?>

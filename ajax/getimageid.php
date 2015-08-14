@@ -45,7 +45,6 @@ if ( 'ngg-' == substr( $_REQUEST['id'], 0, 4 ) ) {
 	$map[$cat] = $pid;
 	update_option( 'fpw_category_thumb_map', $map );
 } else {
-	echo	'';
+	echo '';
 }
 die();
-?>

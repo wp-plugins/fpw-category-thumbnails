@@ -55,6 +55,11 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 
 == Changelog ==
 
+= 1.6.9 =
+* Removed some options
+* Added backup and restore thumbnails removed by Remove Thumbnails action
+* Modified help to reflect recent changes
+
 = 1.6.8 =
 * Fixed few security vulnerabilities
 * Added new format of admin page title introduced in WP 4.3

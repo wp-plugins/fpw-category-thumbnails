@@ -40,7 +40,6 @@ jQuery( document ).ready( function( $ ) {
 		parent_src_vars = fpw_fs_get_url_vars( parent_src );
 		if ( 'fpw_fs_field' in parent_src_vars ) {
 			current_tab = $( 'ul#sidemenu a.current' ).parent( 'li' ).attr( 'id' );
-			// $( 'ul#sidemenu li#tab-type' ).remove();
 			$( 'ul#sidemenu li#tab-type_url' ).remove();
 			$( 'p.ml-submit' ).remove();
 			switch ( current_tab ) {
@@ -149,10 +148,8 @@ jQuery( document ).ready( function( $ ) {
   			i = $.inArray( 'fpt', barr );
   			if ( i == -1 ) {
 				$( "#fpt-link" ).css( "display", "none" );
-				$( "#wp-admin-bar-fpw_bar_post_thumbnails" ).css( "display", "none" );
 			} else {
 				$( "#fpt-link" ).css( "display", "" );
-				$( "#wp-admin-bar-fpw_bar_post_thumbnails" ).css( "display", "" );
 			}
 			message_div.html( '<p><strong>' + fpw_file_select.wait_msg + '</strong></p>' ).load( fpw_file_select.ajaxurl, {
 				boxes:		barr,
@@ -212,6 +209,38 @@ jQuery( document ).ready( function( $ ) {
 						action:		'fpw_ct_remove'
 					});
   					$('#message').fadeIn(1500).delay(3000).fadeOut(1500);
+					$('#restore').css('display','');
+					return false;
+				} else {
+					return false;
+				}
+			});
+			return false;
+		});
+	}
+
+	// AJAX - Restore Thumbnails button
+	if ( $( '#restore' ).length ) {
+		$( '#restore' ).click( function() {
+			msg = fpw_file_select.restore_line_1_1 + ' <strong>';
+			msg = msg + fpw_file_select.restore_line_1_2 + '</strong> ';
+			msg = msg + fpw_file_select.restore_line_1_3 + ' <strong>';
+			msg = msg + fpw_file_select.restore_line_1_4 + '</strong> ';
+			msg = msg + fpw_file_select.restore_line_1_5 + ' ';
+			msg = msg + fpw_file_select.restore_line_1_6 + ' "<em>';
+			msg = msg + fpw_file_select.restore_line_1_7 + '</em>" <strong>';
+			msg = msg + fpw_file_select.restore_line_1_8 + '</strong> ';
+			msg = msg + fpw_file_select.restore_line_1_9 + '<br /> <br />';
+			msg = msg + fpw_file_select.apply_line_2;
+			jConfirm(msg, fpw_file_select.confirm_header, function(result){
+				if (result) {
+					message_div = jQuery( '#message' );
+					message_div.html( '<p><strong>' + fpw_file_select.wait_msg + '</strong></p>' ).load( fpw_file_select.ajaxurl, {
+						mode:		'restore',
+						action:		'fpw_ct_restore'
+					});
+  					$('#message').fadeIn(1500).delay(3000).fadeOut(1500);
+					$('#restore').css('display','none');
 					return false;
 				} else {
 					return false;
