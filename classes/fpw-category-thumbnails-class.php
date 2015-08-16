@@ -6,7 +6,9 @@ if ( ! defined( 'ABSPATH' ) )
 //	plugin's main class
 class fpwCategoryThumbnails {
 	var	$fctOptions, $fptOptions;
-	var $fctMapUpdateOk;
+	var $formSubmited;
+	var $optionsUpdateOk;
+	var $mapUpdateOk;
 	var	$fctPath;
 	var	$fctUrl;
 	var	$fctVersion;
@@ -20,11 +22,12 @@ class fpwCategoryThumbnails {
 	var $mapArray;
 	var	$categoryListTable;
 	var	$showRestore;
+	var $javaScriptEnabled;
 	
 	//	constructor
 	function __construct( $path, $version ) {
 		global $wp_version;
-
+		
 		//	set plugin's path
 		$this->fctPath = $path;
 		
@@ -48,15 +51,19 @@ class fpwCategoryThumbnails {
 		
 		//	initialize $showRestore
 		$this->showRestore = false;
+
+		//	read plugin's options
+		$this->fctOptions = $this->getOptions();
 		
 		//	actions and filters
 		add_action( 'init', array( &$this, 'init' ) );
         add_action( 'after_setup_theme', array( &$this, 'addThemeSupportForThumbnails' ) );
+		add_action( 'save_post', array( &$this, 'addThumbnailToPost' ), 10, 2 );
+		add_action( 'after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'afterPluginMeta' ), 10, 2 );
+		add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
+		add_action( 'admin_menu', array( &$this, 'adminMenu' ) );
         
 		register_activation_hook( $this->fctPath . '/fpw-category-thumbnails.php', array( &$this, 'uninstallMaintenance' ) );
-		
-		//	actions below are not used in front end
-		add_action( 'admin_menu', array( &$this, 'adminMenu' ) );
 		
 		//	AJAX group of actions
 		add_action( 'wp_ajax_fpw_fs_get_file', array( &$this, 'fpw_fs_get_file_ajax' ) );
@@ -66,19 +73,10 @@ class fpwCategoryThumbnails {
 		add_action( 'wp_ajax_fpw_ct_restore', array( &$this, 'fpw_ct_restore_ajax' ) );
 		add_action( 'wp_ajax_fpw_ct_language', array( &$this, 'fpw_ct_language_ajax' ) );
 
-		add_action( 'save_post', array( &$this, 'addThumbnailToPost' ), 10, 2 );
-		add_action( 'after_plugin_row_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'afterPluginMeta' ), 10, 2 );
-
 		add_filter( 'plugin_action_links_fpw-category-thumbnails/fpw-category-thumbnails.php', array( &$this, 'pluginLinks' ), 10, 2);
 		add_filter( 'plugin_row_meta', array( &$this, 'pluginMetaLinks'), 10, 2 );
-		
 		add_filter('manage_edit-category_columns', array( &$this, 'fpw_category_columns_head' ) );
 		add_filter('manage_category_custom_column', array( &$this, 'fpw_custom_category_column_content' ), 10, 3 );
-		
-		//	read plugin's options
-		$this->fctOptions = $this->getOptions();
-
-		add_action( 'admin_bar_menu', array( &$this, 'pluginToAdminBar' ), 1010 );
 	}
 	
 	//	add theme support for thumbnails if not provided by current theme already
@@ -195,11 +193,7 @@ class fpwCategoryThumbnails {
 		$pointer = 'fpwfct' . str_replace( '.', '', $this->fctVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "Removed some options", 'fpw-category-thumbnails' ) ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "Added backup and restore thumbnails removed by Remove Thumbnails action", 'fpw-category-thumbnails' ) ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "Modified help to reflect recent changes", 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "Added no javascript form submission handler", 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -350,59 +344,157 @@ class fpwCategoryThumbnails {
 		}
 	}
 	
+	private function doApplyMapping() {
+		$map = get_option( 'fpw_category_thumb_map' );
+
+		if ( $map )
+
+			while ( strlen( key( $map ) ) ) {
+				$catid = key($map);
+				$parg = array(
+					'numberofposts' => -1,
+					'nopaging' => true,
+					'category' => $catid,
+					'post_type' => 'any' );
+				$posts = get_posts( $parg );
+
+				foreach ( $posts as $post ) {
+					$post_id = $post->ID;
+					//	make sure this is not a revision nor draft
+					if ( 'publish' === $post->post_status ) 
+						$this->addThumbnailToPost( $post_id, $post );
+				}
+
+				next($map);
+			}	
+	}
+	
+	private function doRemoveThumbnails() {
+		$deletedThumbnails = array();
+
+		$parg = array(
+			'numberofposts' => -1,
+			'nopaging' => true,
+			'post_type' => 'any' );
+
+		$posts = get_posts( $parg );
+
+		foreach ( $posts as $post ) {
+			$post_id = absint( $post->ID );
+			//	make sure this is not a revision
+			if ( 'publish' === $post->post_status ) {
+				$value = get_post_meta( $post_id, '_thumbnail_id', true );
+				if ( !empty( $value ) ) {
+					$deletedThumbnails[ $post_id ] = ( string ) $value;
+					delete_post_meta( $post_id, '_thumbnail_id' );
+				}
+			}
+		}
+
+		if ( 0 !== count( $deletedThumbnails ) ) {
+			update_option( 'fpw_category_thumb_bkp', $deletedThumbnails );
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private function doRestoreThumbnails() {
+		$backedupThumbnails = get_option( 'fpw_category_thumb_bkp', false );
+
+		foreach ( $backedupThumbnails as $key => $value ) {
+			$post = get_post( $key );
+	
+			//	make sure this is not a revision
+			if ( 'publish' === $post->post_status )
+				update_post_meta( $key, '_thumbnail_id', $value );
+		}
+
+		delete_option( 'fpw_category_thumb_bkp' );
+	}
+	
+	private function doGetLanguage() {
+		if ( 'not_exist' == $this->translationStatus ) {
+			$m = __( 'Language file for this version is not yet available.', 'fpw-category-thumbnails' );
+		} elseif ( 'installed' == $this->translationStatus ) {
+			$m = __( 'Language file is already installed.', 'fpw-category-thumbnails' );
+		} else {
+			$handle = @fopen( $this->translationPath, 'wb' );
+			fwrite( $handle, $this->translationResponse[ 'body' ] );
+			fclose($handle);
+			$this->translationStatus = 'installed';
+			$m = __( 'Language file downloaded successfully. It will be applied as soon as this page is reloaded.', 'fpw-category-thumbnails' );
+		}
+		return $m;			
+	}
+
 	//	plugin's Settings page
 	function fctSettings() {
 	
+		$postsFound = false;
+		$langMessage = '';
+	
+		//	get all categories
+		$categories	= $this->getAllCategories();
+		
+		//	get assignments array
+		$assignments = $this->getAssignmentsArray( $categories );
+		$assignments = $this->updateMapping( $assignments );
+		
+		//	check for no JavaScript form submission
+		$this->formSubmited =
+			(	isset( $_POST[ 'submit-update' ] ) || isset( $_POST[ 'submit-apply' ] ) || 
+				isset( $_POST[ 'submit-remove' ] ) || isset( $_POST[ 'submit-restore' ] ) || 
+				isset( $_POST[ 'submit-language' ] ) );
+				
+		if ( $this->formSubmited ) {
+
+			$this->fctOptions[ 'clean' ] = isset( $_POST[ 'cleanup' ] );
+			$this->fctOptions[ 'donotover' ] = isset( $_POST[ 'donotover' ] );
+			$this->fctOptions[ 'fpt'] = isset( $_POST[ 'fpt' ] );
+
+			$this->optionsUpdateOk = update_option( 'fpw_category_thumb_opt', $this->fctOptions );
+
+			//	NO JAVASCRIPT FORM SUBMISSION HANDLER
+				
+			if ( isset( $_POST['submit-update'] ) ) {
+
+				if ( $this->optionsUpdateOk ) 
+					$this->uninstallMaintenance();
+			}
+		
+			if ( isset( $_POST['submit-apply'] ) ) {
+				$this->doApplyMapping();
+			}
+		
+			if ( isset( $_POST['submit-remove'] ) ) {
+				$postsFound = $this->doRemoveThumbnails();
+			}
+		
+			if ( isset( $_POST['submit-restore'] ) ) {
+				$this->doRestoreThumbnails();
+			}
+		
+			if ( isset( $_POST['submit-language'] ) ) {
+				$langMessage = $this->doGetLanguage();
+			}
+		
+			//	END OF NO JAVASCRIPT FORM SUBMISSION HANDLER
+		}
+		
 		//	get removed thumbnails backup
 		$backedupThumbnails = get_option( 'fpw_category_thumb_bkp', false );
 		
 		if ( false != $backedupThumbnails )
 			$this->showRestore = true;
 
-		//	get all categories
-		$categories		= $this->getAllCategories();
-		
-		//	get assignments array
-		$assignments	= $this->getAssignmentsArray( $categories );
-
-		//	initialize update flags
-		$update_options_ok = FALSE;
-		
-		//	check nonce if any of buttons was pressed
-		$anyButtonPressed =
-			(	isset( $_POST['submit-getid'] ) || isset( $_POST['submit-author'] ) || 
-				isset( $_POST['submit-clear'] ) || isset( $_POST['submit-refresh'] ) || 
-				isset( $_POST['submit-update'] ) || isset( $_POST['submit-apply'] ) || 
-				isset( $_POST['submit-remove'] ) || isset( $_POST['submit-restore'] ) || 
-				isset( $_POST['submit-restore'] ) || isset( $_POST['submit-language'] ) );
-				
-		if ( $anyButtonPressed ) {
+		if ( $this->formSubmited ) {
 			if ( !isset( $_POST[ 'fpw-fct-nonce' ] ) ) 
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red"><strong>' . 
 					 __( 'You did not send any credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
 			if ( !wp_verify_nonce( $_POST[ 'fpw-fct-nonce' ], 'fpw-fct-nonce' ) ) 
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red;"><strong>' . 
 					 __( 'You did not send the right credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
-
-			//	check ok - update options
-			$this->fctOptions[ 'clean' ] = isset( $_POST[ 'cleanup' ] );
-			$this->fctOptions[ 'donotover' ] = isset( $_POST[ 'donotover' ] );
-			$this->fctOptions[ 'fpt'] = isset( $_POST[ 'fpt' ] );
-		
-			$update_options_ok = ( update_option( 'fpw_category_thumb_opt', $this->fctOptions ) );
-		
-			// 	if any changes to options then check uninstall file's extension
-			if ( $update_options_ok ) 
-				$this->uninstallMaintenance();
-
-			//	check if translation button was pressed
-			if ( isset( $_POST['submit-language'] ) ) {
-				if ( 'available' == $translationStatus ) {
-					$handle = @fopen( $this->translationPath, 'wb');
-					fwrite( $handle, $this->response[ 'body' ] );
-					fclose($handle);
-				}
-			}
 		} 
 
 		/*	------------------------------
@@ -422,36 +514,27 @@ class fpwCategoryThumbnails {
 			 '</a></h' . ( $lt43 ? '2' : '1' ) . '>';
 			 
 		//	check if any of submit buttons was pressed
-		if ( $anyButtonPressed ) {
-			$assignments = $this->updateMapping( $assignments );
-			if (	isset( $_POST['submit-getid'] ) || isset( $_POST['submit-author'] ) || 
-				 	isset( $_POST['submit-clear'] ) || isset( $_POST['submit-refresh'] ) || 
-					isset( $_POST['submit-update'] ) ) {
-				if ( $this->fctMapUpdateOk || $update_options_ok ) { 
-					echo '<div id="message" class="updated fade"><p><strong>' . __( 'Changed data saved successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
+		if ( $this->formSubmited ) {
+			if ( isset( $_POST['submit-update'] ) ) {
+				if ( $this->optionsUpdateOk || $this->mapUpdateOk ) { 
+					echo '<div id="message" class="updated fade"><p><strong>' . __( 'Changes saved successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
 				} else {
-					echo '<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected. Nothing to update.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
+					echo '<div id="message" class="updated fade"><p><strong>' . __( 'No changes detected.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
 				}
 			} elseif ( isset( $_POST['submit-apply'] ) ) {
-				echo '<div id="message" class="updated fade"><p><strong>' . __( 'Applied thumbnails to existing posts / pages successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
+				echo '<div id="message" class="updated fade"><p><strong>' . __( 'Added thumbnails to existing posts successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
 			} elseif ( isset( $_POST['submit-remove'] ) ) {
-				echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails removed successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
+				echo '<div id="message" class="updated fade"><p><strong>';
+				if ( $postsFound ) {
+					echo __( 'Thumbnails removed from all posts successfully. Backup created.', 'fpw-category-thumbnails' );
+				} else {
+					echo __( 'No thumbnails to be removed found.', 'fpw-category-thumbnails' );
+				}
+				echo '</strong></p></div>';
 			} elseif ( isset( $_POST['submit-restore'] ) ) {
-				echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails restored successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
+				echo '<div id="message" class="updated fade"><p><strong>' . __( 'All thumbnails restored from the backup successfully.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
 			} elseif ( isset( $_POST['submit-language'] ) ) {
-				if ( 'available' == $this->translationStatus )  
-					$handle = @fopen( $this->translationPath, 'wb' );
-					fwrite( $handle, $this->translationResponse[ 'body' ] );
-					fclose($handle);
-					echo '<div id="message" class="updated"><p><strong>' . __( 'Language file downloaded. Click', 'fpw-category-thumbnails' ) .
-						 ' ' . '<a href="/wp-admin/options-general.php?page=fpw-category-thumbnails">' .
-						 __( 'here', 'fpw-category-thumbnails' ) . '</a> ' . __( 'to reload page.', 'fpw-category-thumbnails' ) . '</strong></p></div>';
-				if ( 'installed' == $this->translationStatus ) 
-						echo '<div id="message" class="updated fade"><p><strong>' . __( 'Language file already exists.', 'fpw-category-thumbnails' ) .
-							 '</strong></p></div>';
-				if ( 'not_exist' == $this->translationStatus ) 
-						echo '<div id="message" class="updated fade"><p><strong>' . __( 'Language file is not available.', 'fpw-category-thumbnails' ) .
-							 '</strong></p></div>';
+				echo '<div id="message" class="updated"><p><strong>' . $langMessage . '</strong></p></div>';
 			}
 		}
 		
@@ -514,7 +597,7 @@ class fpwCategoryThumbnails {
 		foreach( $map as $key => $value ) 
    			if( $value != '0' ) 
        			$map_filtered[ $key ] = $value;
-       	$this->fctMapUpdateOk = ( update_option( 'fpw_category_thumb_map', $map_filtered ) );
+       	$this->mapUpdateOk = ( update_option( 'fpw_category_thumb_map', $map_filtered ) );
 		return $a;
 	}
 	

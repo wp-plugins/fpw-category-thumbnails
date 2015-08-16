@@ -48,7 +48,7 @@ wp_localize_script( 'fpw-file-select', 'fpw_file_select', array(
 	'tb_show_title'		=> esc_html( __( 'Get Image ID', 'fpw-category-thumbnails' ) ),
 	'confirm_header'	=> esc_html( __( 'Please confirm', 'fpw-category-thumbnails' ) ),
 	'wait_msg'			=> esc_html( __( 'Please wait...', 'fpw-category-thumbnails' ) ),
-	'help_link_text'	=> esc_html( __( 'Help for FPW Category Thumbnails', 'fpw-category-thumbnails' ) )
+	'help_link_text'	=> esc_html( __( 'Help', 'fpw-category-thumbnails' ) )
 	));
 
 wp_localize_script( 'fpw-fs-alerts', 'fpw_fs_alerts', array (

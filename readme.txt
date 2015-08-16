@@ -55,6 +55,9 @@ Yes. Both plugins are functional with JavaScript turned off to comply with acces
 
 == Changelog ==
 
+= 1.7.0 =
+* Added no javascript form submission handler
+
 = 1.6.9 =
 * Removed some options
 * Added backup and restore thumbnails removed by Remove Thumbnails action

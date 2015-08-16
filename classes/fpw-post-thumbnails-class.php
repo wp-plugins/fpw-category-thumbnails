@@ -11,6 +11,7 @@ class fpwPostThumbnails {
 	var $fptVersion;
 	var	$fptPage;
 	var	$wpVersion;
+	var $formSubmited;
 
 	//	constructor
 	function __construct( $path, $version ) {
@@ -146,7 +147,8 @@ class fpwPostThumbnails {
 		add_action( 'wp_ajax_fpw_pt_copy_right', array( &$this, 'fpw_pt_copy_right_ajax' ) );
 		add_action( 'wp_ajax_fpw_pt_copy_left', array( &$this, 'fpw_pt_copy_left_ajax' ) );
 
-		$anyButtonPressed = ( isset( $_POST['submit-update'] ) ) ? true : false; 
+		$this->formSubmited = false;
+		//$anyButtonPressed = ( isset( $_POST['submit-update'] ) ) ? true : false; 
 	}
 
 	//	build FPW Post Thumbnails options
@@ -241,9 +243,7 @@ class fpwPostThumbnails {
 		$pointer = 'fpwfpt' . str_replace( '.', '', $this->fptVersion );
     	$pointerContent  = '<h3>' . esc_js( __( "What's new in this version?", 'fpw-category-thumbnails' ) ) . '</h3>';
 		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "Removed some options", 'fpw-category-thumbnails' ) ) . '</li>';
-		$pointerContent .= '<li style="margin-left:25px;margin-top:20px;margin-right:25px;list-style:square">' . 
-						   esc_js( __( "Modified help to reflect recent changes", 'fpw-category-thumbnails' ) ) . '</li>';
+						   esc_js( __( "Added no javascript form submission handler", 'fpw-category-thumbnails' ) ) . '</li>';
     	?>
     	<script type="text/javascript">
     	// <![CDATA[
@@ -582,9 +582,38 @@ class fpwPostThumbnails {
 		foreach ( $valuesToCopy as $value )
 			$this->fptOptions[ $to ][ $value ] = $this->fptOptions[ $from ][ $value ];
 	}
+	
+	private function doFormUpdate() {
+		$p = $_POST;
+
+		if ( isset( $_POST[ 'boxes' ] ) ) { 
+			$boxes = $_POST[ 'boxes' ];
+
+			foreach ( $boxes as $b ) 
+				$p[ $b ] = $b;
+
+		}
+
+		$resp = $this->fptValidateInput( $p );
+		
+		if ( '' == $resp ) { 
+			$ok = update_option( 'fpw_post_thumbnails_options', $this->fptOptions );
+
+			if ( $ok ) {
+				$message = __( 'Changes saved successfully.', 'fpw-category-thumbnails' );
+			} else {
+				$message = __( 'No changes detected.', 'fpw-category-thumbnails' );
+			}
+		} else {
+			$message = __( 'Validation failed!', 'fpw-category-thumbnails' ) . ' ' . $resp;
+		}
+		return $message;
+	}
 
 	//	FPW Post Thumbnails - settings page
 	function fptSettings() {
+		$message = '';
+		
 		//	check if form was submited
 		if ( isset( $_POST[ 'submit-update' ] ) || 
 			 isset( $_POST[ 'submit-copy-right' ] ) ||
@@ -596,6 +625,26 @@ class fpwPostThumbnails {
 				die( '<br />&nbsp;<br /><p style="padding-left: 20px; color: red;"><strong>' . 
 					 __( 'You did not send the right credentials!', 'fpw-category-thumbnails' ) . '</strong></p>' );
 			$resp = $this->fptValidateInput( $_POST );
+			$this->formSubmited = true;
+			
+			//	NO JAVASCRIPT FORM SUBMISSION HANDLER
+			
+			if ( isset( $_POST[ 'submit-update' ] ) ) {
+				$message = $this->doFormUpdate();
+			}
+			
+			if ( isset( $_POST[ 'submit-copy-right' ] ) ) {
+				$this->copyPanels( 'right' );
+				$message = __( 'Values copied from the left to the right panel.', 'fpw-category-thumbnails' );
+			}
+			
+			if ( isset( $_POST[ 'submit-copy-left' ] ) ) {
+				$this->copyPanels( 'left' );
+				$message = __( 'Values copied from the right to the left panel.', 'fpw-category-thumbnails' );
+			}
+			
+			//	END OF NO JAVASCRIPT FORM SUBMISSION HANDLER
+
 		}
 
 		$lt43 = version_compare( $this->wpVersion, '4.3', '<' );
@@ -606,6 +655,9 @@ class fpwPostThumbnails {
 				__( 'FPW Post Thumbnails', 'fpw-category-thumbnails' ) . ' <a id="fct-link" class="' . ( $lt43 ? 'add-new-h2' : 'page-title-action' ) . '" href="' .
 				get_admin_url() . 'themes.php?page=fpw-category-thumbnails">' . 
 				__( 'FPW Category Thumbnails', 'fpw-category-thumbnails' ) . '</a></h' . ( $lt43 ? '2' : '1' ) . '>';
+				
+		if ( $this->formSubmited ) 
+			echo '<div id="message" class="updated fade"><p><strong>' . $message . '</strong></p></div>';
 
 		//	the form starts here
 		echo '<div>';
